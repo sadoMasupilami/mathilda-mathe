@@ -1,0 +1,55 @@
+<style>
+  .r-titel { justify-content: space-between; align-items: center; text-align: center; padding-top: 20mm; padding-bottom: 16mm; }
+  .r-titel .ober { font-family: var(--text); font-weight: 800; font-size: 13pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--akzent); }
+  .r-titel h1 { font-family: var(--text); font-weight: 1000; font-size: 46pt; line-height: 1.02; margin: 4mm 0 0 0; color: var(--tinte); }
+  .r-titel h1 span { color: var(--akzent); }
+  .r-titel .unter { font-family: var(--text); font-size: 14pt; color: var(--grau); margin-top: 6mm; line-height: 1.4; }
+  .r-titel .buehne { position: relative; width: 170mm; height: 112mm; }
+  .r-titel .buehne > * { position: absolute; }
+  .r-titel .band { display: inline-block; background: var(--akzent); color: white; font-family: var(--text); font-weight: 900; font-size: 13pt; border-radius: 30mm; padding: 2.5mm 8mm; }
+  .r-titel .fuer { font-family: var(--kind); font-size: 15pt; margin-top: 5mm; }
+  .r-titel .stand { font-family: var(--text); font-size: 9pt; color: var(--grau); margin-top: 4mm; }
+  .r-vorlagen-deck { justify-content: center; align-items: center; text-align: center; gap: 8mm; }
+  .r-vorlagen-deck h1 { font-family: var(--text); font-weight: 1000; font-size: 34pt; margin: 0; line-height: 1.05; }
+  .r-vorlagen-deck h1 span { color: var(--akzent); }
+  .r-vorlagen-deck .hinweis { font-family: var(--text); font-size: 12pt; max-width: 130mm; line-height: 1.5; color: var(--tinte); }
+  .r-vorlagen-deck .hinweis b { color: var(--akzent); }
+</style>
+
+<section class="seite r-titel nur-buch" id="titel" data-block="A">
+  <div>
+    <div class="ober">Rechnen im Kopf und am Papier</div>
+    <h1>Mathildas<br><span>Rechen-Werkstatt</span></h1>
+    <div class="unter">mit Spielen, Bewegung und Basteln<br>für Mathilda und Mama oder Papa</div>
+  </div>
+
+  <div class="buehne" aria-hidden="true">
+    <m-bild name="einhorn" gr="44" style="left: 4mm; top: 40mm"></m-bild>
+    <m-bild name="drache" gr="46" style="right: 2mm; top: 36mm"></m-bild>
+    <m-bild name="fee" gr="30" style="left: 70mm; top: 0mm"></m-bild>
+    <m-bild name="zauberstab" gr="22" style="left: 34mm; top: 6mm"></m-bild>
+    <m-bild name="mond" gr="18" style="right: 34mm; top: 4mm"></m-bild>
+    <m-bild name="stern" gr="9" style="left: 112mm; top: 26mm"></m-bild>
+    <m-bild name="stern" gr="7" style="left: 18mm; top: 26mm"></m-bild>
+    <m-bild name="stern" gr="6" style="right: 18mm; top: 22mm"></m-bild>
+    <m-zehnerfeld n="7" farben="5,2" zelle="11" symbol="stern" style="left: 57mm; top: 44mm"></m-zehnerfeld>
+    <m-wuerfel n="5" gr="16" style="left: 50mm; top: 82mm"></m-wuerfel>
+    <m-wuerfel n="3" gr="13" style="left: 70mm; top: 92mm"></m-wuerfel>
+    <m-bild name="edelstein" gr="13" style="left: 96mm; top: 88mm"></m-bild>
+    <m-bild name="krone" gr="16" style="left: 115mm; top: 84mm"></m-bild>
+  </div>
+
+  <div>
+    <div class="band">Block A · Einheiten 1–5 · Zahlen bis 20</div>
+    <div class="fuer">Diese Werkstatt gehört Mathilda.</div>
+    <div class="stand">Stand: Oktober 2026 · Anleitung und Kopiervorlagen · A4 in Originalgröße drucken</div>
+  </div>
+</section>
+
+<section class="seite r-vorlagen-deck nur-vorlagen" id="vorlagen-deckblatt" data-block="A">
+  <m-bild name="zauberstab" gr="30"></m-bild>
+  <h1>Mathildas<br><span>Rechen-Werkstatt</span></h1>
+  <div class="band" style="display:inline-block;background:var(--akzent);color:white;font-family:var(--text);font-weight:900;font-size:13pt;border-radius:30mm;padding:2.5mm 8mm">Kopiervorlagen · Einheiten 1–5</div>
+  <p class="hinweis">Hier sind nur Mathildas Seiten: „Hallo Mathilda“, der <b>Sammelpass</b> und alle <b>Blätter</b> der Einheiten 1–5. Die Anleitungen und Lösungen stehen im großen PDF.</p>
+  <p class="hinweis">Beim Drucken <b>„Tatsächliche Größe“ bzw. 100 %</b> wählen, nicht „An Seite anpassen“. Dann sind die Rechenheft-Kästchen in den Antwortfeldern genau 1 cm groß.</p>
+</section>

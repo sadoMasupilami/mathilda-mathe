@@ -1,0 +1,129 @@
+<!--
+  MUSTER-EINHEIT: zeigt alle Bausteine. Nicht Teil des Buchs.
+  Bauen und ansehen:  ./baue.sh --nur 00 --png
+-->
+<section class="anleitung" data-einheit="0" data-titel="Muster-Einheit (alle Bausteine)">
+
+  <div class="kasten ziel">
+    <p>Mathilda lernt, wie die Bausteine aussehen. Ein Satz mit Rechnung im Text wird automatisch geprüft: 8 + 5 = 13 und 13 − 5 = 8, auch 3 · 4 = 12 und 12 : 3 = 4.</p>
+  </div>
+
+  <div class="kasten material">
+    <ul>
+      <li>1 Würfel, 1 Spielkartenpaket (Rommé- oder Pokerkarten)</li>
+      <li>Blatt <a class="blattref" href="#blatt-0-1"></a> ausdrucken</li>
+    </ul>
+  </div>
+
+  <h2>Ablauf Schritt für Schritt</h2>
+  <ol class="ablauf">
+    <li data-min="5"><span class="schritt-titel">Aufwärmen</span>Kurze Kopfrechnungen im Stehen.</li>
+    <li data-min="10"><span class="schritt-titel">Spiel</span>Ein Spiel zu zweit.</li>
+    <li data-min="10"><span class="schritt-titel">Blatt</span>Mathilda arbeitet am Blatt.</li>
+  </ol>
+
+  <div class="sag">
+    <p class="du">„Mathilda, wie viele Punkte siehst du, ohne zu zählen?“</p>
+    <p class="sie">„Sieben! Oben fünf und unten zwei.“</p>
+    <p class="dann">Lob für den Rechenweg, nicht nur für das Ergebnis.</p>
+  </div>
+
+  <div class="kasten spiel" data-titel="Muster-Spiel">
+    <p class="spiel-meta">2 Personen · ca. 10 Minuten · 1 Würfel</p>
+    <ol class="regeln"><li>Würfeln.</li><li>Verdoppeln.</li></ol>
+  </div>
+
+  <div class="zwei">
+    <div class="kasten bewegung" data-titel="Hüpfen"><p>Text</p></div>
+    <div class="kasten basteln" data-titel="Eierkarton"><p>Text</p></div>
+  </div>
+
+  <div class="kasten stolper"><p>Text</p></div>
+  <div class="zwei">
+    <div class="kasten leichter"><p>Text</p></div>
+    <div class="kasten schwerer"><p>Text</p></div>
+  </div>
+  <div class="kasten bonus"><p>Text</p></div>
+  <div class="kasten warum"><p>Text</p></div>
+  <div class="kasten tipp"><p>Text</p></div>
+
+  <p>Bausteine in der Anleitung (kleiner): <m-aufgabe>8 + 5 = _</m-aufgabe> und <m-rechenweg luecken="keine">8 + 5</m-rechenweg></p>
+
+  <h2>Bilder zum Anmalen</h2>
+  <div class="reihe">
+    <m-bild name="drache" gr="20"></m-bild><m-bild name="einhorn" gr="20"></m-bild><m-bild name="fee" gr="20"></m-bild>
+    <m-bild name="zauberstab" gr="15"></m-bild><m-bild name="krone" gr="15"></m-bild><m-bild name="mond" gr="15"></m-bild>
+    <m-bild name="schloss" gr="15"></m-bild><m-bild name="trank" gr="15"></m-bild><m-bild name="zauberhut" gr="15"></m-bild>
+    <m-bild name="edelstein" gr="15"></m-bild><m-bild name="eule" gr="15"></m-bild>
+  </div>
+  <h2>Lösungen</h2>
+  <m-loesungen einheit="0"></m-loesungen>
+  <div class="kasten loesung"><p>Text-Lösung für offene Aufgaben.</p></div>
+</section>
+
+<section class="blatt" data-einheit="0" data-titel="Alle Bausteine 1">
+  <div class="aufg">
+    <p class="anw">Mathilda, rechne!</p>
+    <div class="raster s3">
+      <m-aufgabe>8 + 5 = _</m-aufgabe>
+      <m-aufgabe>13 − _ = 8</m-aufgabe>
+      <m-aufgabe>7 + 5 [>] 11</m-aufgabe>
+      <m-aufgabe>6 [+] 6 = 12</m-aufgabe>
+      <m-aufgabe>_ + 7 = 15</m-aufgabe>
+      <m-aufgabe>99 + 1 = _</m-aufgabe>
+    </div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Rechenweg: Über die Zehn springen.</p>
+    <div class="reihe">
+      <m-rechenweg>8 + 5</m-rechenweg>
+    </div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Zehnerfeld, Zwanzigerfeld, Zehnerfelder.</p>
+    <div class="reihe">
+      <m-zehnerfeld n="7"></m-zehnerfeld>
+      <m-zehnerfeld n="3" zeichne="4" farben="3,0"></m-zehnerfeld>
+      <m-zwanzigerfeld n="13" farben="10,3"></m-zwanzigerfeld>
+    </div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Wie viele? <m-feld l="7"></m-feld></p>
+    <div class="reihe">
+      <m-punkte n="7" art="haufen" rahmen gr="26"></m-punkte>
+      <m-punkte n="8" art="fuenfer" symbol="stern"></m-punkte>
+      <m-punkte n="6" art="paare" symbol="herz"></m-punkte>
+      <m-wuerfel n="5"></m-wuerfel>
+    </div>
+  </div>
+  <div class="profi">
+    <p>Profi: Was passt? <m-aufgabe>20 − _ = 12</m-aufgabe></p>
+  </div>
+</section>
+
+<section class="blatt" data-einheit="0" data-titel="Alle Bausteine 2" data-art="Spielplan">
+  <div class="reihe">
+    <m-zahlenhaus dach="10" zeilen="3 _ ; _ 6 ; [5] [5]"></m-zahlenhaus>
+    <m-zahlenmauer reihen="_ ; _ _ ; 3 4 5"></m-zahlenmauer>
+    <m-zahlenmauer reihen="[20] ; 9 _ ; _ _ 6" ></m-zahlenmauer>
+  </div>
+  <m-zehnerfelder n="34"></m-zehnerfelder>
+  <m-zahlenstrahl von="0" bis="20" luecken="7,13" spruenge="8>10>13"></m-zahlenstrahl>
+  <m-rechenstrich start="8" spruenge="+2 +3" luecken="zwischen,ziel"></m-rechenstrich>
+  <m-rechenstrich start="13" spruenge="−3 −2" luecken="spruenge,ziel"></m-rechenstrich>
+  <div class="knobel"><p>Knobel: Wie viele Beine haben 2 Drachen? <m-feld l="8"></m-feld></p><p class="lsg-nur">Jeder Drache hat 4 Beine.</p></div>
+</section>
+
+<section class="blatt" data-einheit="0" data-titel="Karten und Spielplan" data-art="Karten">
+  <div class="reihe"><m-rechenweg luecken="ergebnis" schritte>13 − 5</m-rechenweg> <m-kaestchen b="6" h="2"></m-kaestchen></div>
+  <m-karten spalten="4" zeilen="1" hoehe="45" breite="176">
+    <div><m-zehnerfeld n="7" zelle="6"></m-zehnerfeld></div>
+    <div><span class="gross">3</span></div>
+    <div><m-punkte n="5" art="wuerfel" gr="24"></m-punkte></div>
+    <div><span class="mittel">3 + 7</span></div>
+  </m-karten>
+  <m-spielfeld von="0" bis="20" spalten="7" extra="7:stern,13:drache"></m-spielfeld>
+
+
+  <div class="knobel"><p>Mathilda, findest du den Weg?</p></div>
+</section>

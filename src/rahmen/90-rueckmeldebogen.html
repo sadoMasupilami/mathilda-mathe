@@ -1,0 +1,52 @@
+<style>
+  .r-rueck h1 { font-family: var(--text); font-weight: 900; font-size: 24pt; margin: 0 0 2mm 0; }
+  .r-rueck h2 { font-family: var(--text); font-weight: 900; font-size: 13.5pt; color: var(--akzent); margin: 5mm 0 2mm 0; break-after: avoid; }
+  .r-rueck p { margin: 0 0 2mm 0; }
+  .r-rueck table { border-collapse: collapse; width: 100%; font-size: 9pt; }
+  .r-rueck th, .r-rueck td { border: 0.35mm solid var(--linie); padding: 1.5mm 1.8mm; vertical-align: top; text-align: left; }
+  .r-rueck th { background: var(--akzent-hell); font-weight: 800; }
+  .r-rueck tr.e { height: 34mm; break-inside: avoid; }
+  .r-rueck .nr { font-weight: 900; font-size: 11pt; }
+  .r-rueck .kl { font-size: 8pt; color: var(--grau); display: block; margin-top: 1mm; }
+  .r-rueck .wahl { display: flex; flex-direction: column; gap: 1.6mm; white-space: nowrap; }
+  .r-rueck .box { display: inline-block; width: 3.6mm; height: 3.6mm; border: 0.35mm solid var(--tinte); border-radius: 0.8mm; vertical-align: -0.6mm; margin-right: 1.2mm; }
+  .r-rueck .sterne { display: flex; gap: 0.5mm; line-height: 0; }
+  .r-rueck .frage { display: grid; grid-template-columns: 62mm 1fr; gap: 2mm 4mm; align-items: baseline; margin-bottom: 3mm; break-inside: avoid; }
+  .r-rueck .frage .opts { display: flex; gap: 5mm; flex-wrap: wrap; }
+  .r-rueck .linien { border-bottom: 0.3mm solid var(--linie); height: 8mm; }
+</style>
+
+<section class="fliess nur-buch r-rueck" id="rueckmeldebogen" data-toc="Rückmeldebogen (nach jeder Einheit ausfüllen)" style="page: anleitung; break-before: page" data-block="A">
+  <h1>Rückmeldebogen</h1>
+  <p>Am besten direkt nach jeder Einheit kurz ausfüllen (2 Minuten). Die Sterne aus Mathildas Sammelpass helfen bei „Spaß“. Wenn alle 5 Einheiten fertig sind: abfotografieren oder abtippen und zurückmelden. Danach werden Plan, Schwierigkeit, Stil und Länge angepasst.</p>
+
+  <h2>Pro Einheit</h2>
+  <table>
+    <tr>
+      <th style="width: 23mm">Einheit</th>
+      <th style="width: 27mm">Spaß</th>
+      <th style="width: 27mm">Schwierigkeit</th>
+      <th style="width: 15mm">Dauer</th>
+      <th>Was war super?</th>
+      <th>Was hat nicht funktioniert?</th>
+    </tr>
+    <tr class="e"><td><span class="nr">1</span><span class="kl">Blitzblick</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">2</span><span class="kl">Zehnerfreunde</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">3</span><span class="kl">Doppelt &amp; halb</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">4</span><span class="kl">Über die Zehn springen (Plus)</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">5</span><span class="kl">Zurück über die Zehn (Minus)</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+  </table>
+
+  <h2 style="break-before: page">Allgemein</h2>
+  <div class="frage"><b>Tempo insgesamt</b><span class="opts"><span><i class="box"></i>langsamer</span><span><i class="box"></i>passt</span><span><i class="box"></i>schneller</span></span></div>
+  <div class="frage"><b>Anleitung</b><span class="opts"><span><i class="box"></i>zu lang</span><span><i class="box"></i>passt</span><span><i class="box"></i>mehr Details</span></span></div>
+  <div class="frage"><b>Blätter</b><span class="opts"><span><i class="box"></i>zu viele Aufgaben</span><span><i class="box"></i>passt</span><span><i class="box"></i>mehr</span></span></div>
+  <div class="frage"><b>Profi-Aufgaben und „Schwerer machen“</b><span class="opts"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span><span><i class="box"></i>kaum gemacht</span></span></div>
+  <div class="frage"><b>Lieblingsspiel von Mathilda</b><span class="linien"></span></div>
+  <div class="frage"><b>Was soll öfter vorkommen?</b><span class="opts"><span><i class="box"></i>Bewegung</span><span><i class="box"></i>Basteln</span><span><i class="box"></i>Zaubertricks</span><span><i class="box"></i>Knobeln</span><span><i class="box"></i>Kartenspiele</span><span><i class="box"></i>Würfelspiele</span></span></div>
+  <div class="frage"><b>Was soll weg?</b><span class="linien"></span></div>
+  <div class="frage"><b>Funktionieren Sammelpass und Sterne als Motivation?</b><span class="opts"><span><i class="box"></i>ja, sehr</span><span><i class="box"></i>geht so</span><span><i class="box"></i>nein</span></span></div>
+  <div class="frage"><b>„Nebenbei einschätzen“ in Einheit 1: Welche der 8 Mini-Fragen konnte sie sicher?</b><span class="linien"></span></div>
+  <div class="frage"><b>Benutzt die Schule andere Wörter?</b><span class="linien"></span></div>
+  <div class="frage" style="align-items: start"><b style="padding-top: 3mm">Sonst noch etwas?</b><div><div class="linien"></div><div class="linien"></div><div class="linien"></div><div class="linien"></div></div></div>
+</section>

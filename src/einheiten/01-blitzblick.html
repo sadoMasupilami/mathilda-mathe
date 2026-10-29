@@ -1,0 +1,337 @@
+<!--
+  Einheit 1: Blitzblick (Block A, Zahlen bis 20)
+  Mengen auf einen Blick erkennen, Kraft der 5, Zehnerfeld, Zwanzigerfeld.
+  Blätter: 1-1 Blitzblick-Karten, 1-2 Zwanzigerfeld-Karten, 1-3 Blitzblick-Training
+-->
+<style>
+  .e01-ablauf > li { break-inside: avoid; }
+  /* „Schwerer machen“ darf auch innerhalb eines Punktes umbrechen; jedes Teilstück bekommt einen eigenen Rand */
+  .e01-ganz > li { break-inside: auto; orphans: 2; widows: 2; }
+  .kasten.e01-schwerer { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .e01-paar { display: flex; flex-direction: column; align-items: center; gap: 3mm; }
+  .e01-mal { display: flex; align-items: center; justify-content: center; gap: 2mm; }
+  .e01-zahl { font-size: 26pt; font-weight: 700; min-width: 7mm; text-align: center; }
+  .e01-hinweis { margin: 0 0 3mm 0; }
+  .e01-fragen { display: flex; flex-direction: column; gap: 2.5mm; }
+  .e01-fragen > p { margin: 0; }
+  .e01-knobel-reihe { display: flex; align-items: center; gap: 8mm; flex-wrap: wrap; }
+  .e01-neben { display: flex; align-items: center; justify-content: center; gap: 3mm; }
+  .e01-kae-anw { margin: 3mm 0 2mm 0; }
+  .e01-feen { display: inline-flex; align-items: center; gap: 2mm; margin-left: auto; }
+  .e01-tab td:first-child { width: 31%; }
+  .e01-tab td:nth-child(2) { width: 34%; }
+  /* Lösungen: die drei verkleinerten Blätter und der Text-Kasten in einem Raster */
+  .e01-loes { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 4mm; align-items: start; margin: 2mm 0 4mm 0; }
+  .e01-loes m-loesungen, .e01-loes .loesungen-raster { display: contents; }
+  .e01-loes > .kasten.loesung { margin: 5mm 0 0 0; font-size: 9.5pt; }
+  .e01-loes > .kasten.loesung p { margin-bottom: 1.6mm; }
+</style>
+
+<section class="anleitung" data-einheit="1" data-titel="Blitzblick">
+
+  <div class="kasten ziel">
+    <p>Mathilda lernt den <span class="begriff">Blitzblick</span>: eine Menge ansehen und sofort wissen, wie viele es sind, ohne einzeln zu zählen. Das Werkzeug dafür ist die <span class="begriff">Kraft der 5</span>: 7 ist „5 und 2“, 9 ist „5 und 4“. Dazu lernt sie das <span class="begriff">Zehnerfeld</span> (2 Reihen à 5 Kästchen) und das <span class="begriff">Zwanzigerfeld</span> (2 Reihen à 10) kennen. Beide begleiten euch durch alle weiteren Einheiten. Nebenbei bekommst du ein Gefühl dafür, wo Mathilda gerade steht.</p>
+  </div>
+
+  <div class="kasten tipp" data-titel="Die erste Einheit: So läuft eine Einheit">
+    <ul>
+      <li><b>Vorher (10 Minuten für dich):</b> Anleitung lesen, Blätter ausdrucken, Material hinlegen. Mathildas Blätter folgen nach der Anleitung, die Lösungen stehen am Ende der Anleitung.</li>
+      <li><b>Bastelrunde am Tag davor (etwa 30 Minuten, gemeinsam):</b> Eierkarton-Zehnerfeld basteln und die Karten ausschneiden. Das ist nur bei Einheit 1 nötig und zählt schon als Mathe: Frag beim Ausschneiden „Wie viele Punkte sind auf dieser Karte?“.</li>
+      <li><b>Der Ablauf (20–30 Minuten)</b> ist ein Vorschlag. Läuft ein Spiel gut, bleibt dabei. Das Blatt darf auch an einem anderen Tag fertig werden.</li>
+      <li><b>Zu leicht?</b> Dann sofort in den Kasten „Schwerer machen“ springen. Mathilda ist schnell, dafür sind diese Kästen da.</li>
+      <li><b>Zum Schluss</b> stempelt oder beklebt Mathilda im Sammelpass (vorne im Heft) das Feld „Einheit&nbsp;1“ und malt 1 bis 3 Sterne an: Wie hat es dir gefallen?</li>
+    </ul>
+  </div>
+
+  <div class="kasten material">
+    <ul>
+      <li><a class="blattref" href="#blatt-1-1"></a> und <a class="blattref" href="#blatt-1-2"></a> (Karten) ausdrucken, am besten auf dickerem Papier (160&nbsp;g). Normales Papier vor dem Ausschneiden auf Karton kleben (z. B. eine leere Müslischachtel), sonst scheinen die Punkte durch. <b>Die Karten im Kuvert aufheben:</b> Das Blitzblick-Duell passt jederzeit als Aufwärmspiel vor einer späteren Einheit.</li>
+      <li><a class="blattref" href="#blatt-1-3"></a> (Arbeitsblatt) ausdrucken, dazu Bunt- oder Filzstifte (mindestens Blau und Rot).</li>
+      <li><b>1 oder 2 leere 10er-Eierkartons</b> (2 Reihen à 5) und <b>20 kleine Dinge in 2 Farben</b>, am besten 10 blaue und 10 rote: Muggelsteine, Pompons, Knöpfe oder Kugeln aus Krepppapier. Wir nennen sie <span class="begriff">Kugeln</span>. Zum Verzieren: Schere, Kleber, Sticker.</li>
+      <li>Platz zum Hüpfen (Gang, Wohnzimmer, Garten) und ein Stempel oder Sticker für den Sammelpass.</li>
+      <li><b>Bastelrunde:</b> <span class="begriff">Eierkarton-Zehnerfeld</span> basteln (etwa 15 Minuten, Kasten „Basteln“) und Karten ausschneiden (etwa 15 Minuten). Diese Zeit ist im Ablauf nicht mitgerechnet.</li>
+    </ul>
+  </div>
+
+  <h2>Ablauf Schritt für Schritt</h2>
+  <ol class="ablauf e01-ablauf">
+    <li data-min="4"><span class="schritt-titel">Zahlen-Aufwärmen</span>Im Stehen, ganz locker: Raketen-Countdown von 20 bis 0 (bei „0“ hochspringen), Riesenschritte in Zehnerschritten bis 100, dann „Welche Zahl kommt nach 39?“. Das sind die Mini-Fragen 1 bis 3 aus dem Kasten „Nebenbei einschätzen“.</li>
+    <li data-min="7"><span class="schritt-titel">Blitz-Deckel mit dem Eierkarton</span>Du füllst heimlich Kugeln in den Eierkarton, <b>obere Reihe zuerst, von links nach rechts</b>. Deckel 2 Sekunden auf („einundzwanzig, zweiundzwanzig“), wieder zu. Mathilda sagt die Zahl und erklärt, wie sie es gesehen hat. Dabei führst du die Wörter <b>Zehnerfeld</b> und <b>Kraft der 5</b> ein. Dann tauscht ihr. Als Spiel: Jede richtige Zahl gibt einen Strich, wer zuerst 3 Striche hat, gewinnt (Profi-Regel: auch die leeren Plätze nennen, „6 und 4 leer“).</li>
+    <li data-min="4"><span class="schritt-titel">Blitzblick-Hüpfen</span>Mit den Karten von <a class="blattref" href="#blatt-1-1"></a>: Karte 2 Sekunden zeigen, umdrehen, Mathilda hüpft die Anzahl (Kasten „Bewegung“).</li>
+    <li data-min="6"><span class="schritt-titel">Blitzblick-Duell</span>Das Hauptspiel mit denselben Karten. Läuft es gut, spielt eine zweite Runde mit einer Variante.</li>
+    <li data-min="6"><span class="schritt-titel">Blatt „Blitzblick-Training“</span><a class="blattref" href="#blatt-1-3"></a>. Mathilda liest die Anweisungen selbst. Für Aufgabe 3 braucht sie einen roten Stift. <b>Vor Aufgabe 4 das Zwanzigerfeld zeigen:</b> 13 Kugeln legen, ein Karton voll und 3 Kugeln in den zweiten Karton (hast du nur einen, leg die 3 daneben). Dann die 13er-Karte von <a class="blattref" href="#blatt-1-2"></a> zeigen: obere Reihe voll, unten 3. Beides ist 10 und 3, also 13. Bei Aufgabe 5 malt Mathilda ihr eigenes Blitzbild mit 7 Punkten ins Kästchenpapier. Frag danach: „Warum sieht man das so schnell?“ Die Profi-Aufgabe ist freiwillig, aber genau das Richtige, wenn bis dahin alles leicht war.</li>
+    <li data-min="2"><span class="schritt-titel">Sammelpass</span>Feld „Einheit&nbsp;1“ stempeln oder bekleben, Sterne anmalen. Frag kurz: „Was war heute am lustigsten?“ Die Antwort passt gut in den Rückmeldebogen.</li>
+  </ol>
+
+  <h3>Beispielsätze</h3>
+  <div class="sag">
+    <p class="du">„Ich mach den Deckel nur ganz kurz auf. Nicht zählen, nur blitzschnell schauen! … Wie viele waren es?“</p>
+    <p class="sie">„Sieben! Oben war alles voll, das sind fünf. Und unten noch zwei.“</p>
+    <p class="du">„Super! Und wie viele Plätze sind noch leer?“</p>
+    <p class="sie">„Drei. Unten sind noch drei frei.“</p>
+    <p class="dann">Genau das ist die Kraft der 5. Sag es laut: „Oben voll ist immer 5. 5 und 2, also 5 plus 2 ist 7.“ Sagt Mathilda „Ich hab gezählt“, ist das in Ordnung: Mach den Deckel beim nächsten Mal noch kürzer auf. Dann geht Zählen nicht mehr, und sie entdeckt die Reihen von selbst. Die Frage nach den leeren Plätzen kommt auf dem Blatt wieder und bereitet die Zehnerfreunde in Einheit 2 vor (7 und 3 sind zusammen 10).</p>
+  </div>
+  <div class="sag">
+    <p class="du">(vor Aufgabe 4 auf Blatt 1-3, zeigt die 13er-Karte von Blatt 1-2) „Das ist ein Zwanzigerfeld. Wie viele Punkte sind es?“</p>
+    <p class="sie">„Dreizehn! Oben ist alles voll, das sind zehn. Und unten drei.“</p>
+    <p class="dann">Sagt sie „drei“ oder „acht“ (sie sieht nur die linke Hälfte: 5 und 3), fahr mit dem Finger die ganze obere Reihe entlang: „Wie viele sind in dieser Reihe?“ Im Zwanzigerfeld ist eine volle Reihe 10, im Zehnerfeld 5.</p>
+  </div>
+
+  <div class="kasten einschaetzung">
+    <p>Diese Mini-Fragen sind <b>kein Test</b>. Verteile sie auf Aufwärmen, Spiel und das nächste Abendessen, nie mehr als drei auf einmal. Wichtig ist nicht nur, <i>ob</i> das Ergebnis stimmt, sondern <i>wie</i> sie es findet: Zählt sie (Finger, Lippen, Kopfnicken) oder hat sie einen Weg?</p>
+    <table class="tab e01-tab">
+      <tr><th>So fragst du</th><th>Worauf achten</th><th>Was es fürs Tempo heißt</th></tr>
+      <tr><td><b>1. Raketen-Countdown:</b> „Zähl von 20 rückwärts bis 0!“</td><td>Flüssig ohne Stocken? Kritisch ist die Stelle 11, 10, 9.</td><td>Flüssig: Einheit 5 (Minus) wird leicht. Stockt sie: dort öfter rückwärts hüpfen.</td></tr>
+      <tr><td><b>2. Riesenschritte:</b> „Zähl in Zehnerschritten bis 100!“ Profi: zurück.</td><td>Kennt sie die Zehnerzahlen der Reihe nach, auch rückwärts?</td><td>Sicher: Block B (bis 100) kann früher kommen.</td></tr>
+      <tr><td><b>3. Was kommt danach?</b> „Nach 39? Nach 59? Nach 99?“</td><td>Richtig: 40, 60, 100. Typischer Fehler: „dreißig-zehn“.</td><td>Sicher: Der Zahlenraum bis 100 ist schon da. Unsicher: Einheit 7 wird wichtig.</td></tr>
+      <tr><td><b>4. Zählt sie oder rechnet sie?</b> „Wie viel ist 7 + 8?“</td><td>15. Zählt sie weiter? Oder hat sie einen Weg: 7 + 7 = 14 und 1 dazu, oder 8 + 2 = 10 und noch 5?</td><td>Rechenweg: In Einheit 3 und 4 gleich die Schwerer-Teile nutzen. Zählt sie: diese Einheiten in Ruhe.</td></tr>
+      <tr><td><b>5. Zehnerfreunde:</b> „Wie viel fehlt bis 10? 3, 6, 1, 8, 4.“</td><td>7, 4, 9, 2, 6. Kommt es sofort (unter 2 Sekunden)?</td><td>Alles sofort: Einheit 2 straffen, Profi-Teil zur Hauptsache machen.</td></tr>
+      <tr><td><b>6. Zahlen lesen:</b> 47, 74, 16, 61, 100 aufschreiben und vorlesen lassen. Profi: 108, 250.</td><td>Verdreht sie 47 und 74 oder 16 und 61?</td><td>Zahlendreher: In Einheit 7 Zeit für Zehner und Einer. Liest sie Dreistelliges: Extra „Zahlen bis 1000“.</td></tr>
+      <tr><td><b>7. Zehnerfeld blitzschnell:</b> Karten 6, 8, 9 je 1 Sekunde zeigen.</td><td>Erkennt sie die Zahl ohne Zählen? Sagt sie „5 und …“?</td><td>Sicher: Heute schnell zum Zwanzigerfeld und zu „Schwerer machen“.</td></tr>
+      <tr><td><b>8. Verdoppeln:</b> „4 + 4? 6 + 6? 8 + 8?“</td><td>8, 12, 16. Auswendig oder gerechnet?</td><td>Auswendig: Einheit 3 straffen.</td></tr>
+    </table>
+    <p><b>So nutzt du das Ergebnis:</b> Trag im Rückmeldebogen (Teil „Allgemein“) in das Feld „Nebenbei einschätzen in Einheit 1“ ein, welche Fragen Mathilda sicher konnte, z. B. „Fragen 1, 2, 5, 7“. Diese Notiz hilft, den Plan ab Einheit 6 anzupassen. Schafft sie 6 oder mehr Fragen sicher und mit einem Weg, ist das geplante Tempo zu langsam: Dann nimm in den nächsten Einheiten die Schwerer-Kästen als Hauptteil und kreuze im Rückmeldebogen bei Einheit 1 „zu leicht“ an.</p>
+  </div>
+
+  <h2>Spiele, Bewegung und Basteln</h2>
+
+  <div class="kasten spiel" data-titel="Blitzblick-Duell">
+    <p class="spiel-meta">2 Personen · 5–10 Minuten · die 20 Karten von Blatt 1-1 (je zwei Karten für jede Zahl von 1 bis 10)</p>
+    <ol class="regeln">
+      <li><b>Vorbereitung:</b> Karten mischen. Ihr bekommt je 10 Karten als verdeckten Stapel. Daneben ist Platz für den eigenen Gewinnstapel.</li>
+      <li><b>Ein Zug:</b> Gemeinsam sagt ihr „Eins, zwei, Blitz!“. Bei „Blitz“ dreht ihr beide gleichzeitig eure oberste Karte um.</li>
+      <li><b>Wer ruft zuerst?</b> Gerufen wird nur die Zahl der Karte mit <b>mehr</b> Punkten, egal wem sie gehört. Wer sie zuerst richtig ruft, bekommt beide Karten auf den Gewinnstapel. Wer falsch ruft, verliert die Runde: Beide Karten gehen an das Gegenüber.</li>
+      <li><b>Gleich viele</b> (z. B. Zehnerfeld-7 und Sterne-7): Wer zuerst „Zwillinge!“ ruft, bekommt beide Karten.</li>
+      <li><b>Mama-oder-Papa-Bremse:</b> Du rufst erst, wenn du im Kopf langsam „einundzwanzig“ gesagt hast. Gewinnt Mathilda zu leicht, lass die Bremse weg. Gewinnst du zu oft, sag zweimal „einundzwanzig“.</li>
+      <li><b>Ende:</b> Nach 10 Runden sind die Stapel leer. Wer mehr Karten auf dem Gewinnstapel hat, gewinnt. Habt ihr gleich viele (10 zu 10), gibt es eine Revanche.</li>
+    </ol>
+    <p><b>Varianten:</b></p>
+    <ul>
+      <li><b>Zwanzigerfeld-Duell (schwerer):</b> Die 10 Karten von Blatt 1-2 kommen dazu: 30 Karten, ihr bekommt je 15, es gibt 15 Runden.</li>
+      <li><b>Zusammen-Duell:</b> Gerufen wird, wie viele Punkte <b>beide</b> Karten zusammen haben. Bei 7 und 5 ruft man „12“.</li>
+      <li><b>Unterschied-Duell:</b> Gerufen wird, wie viele <b>mehr</b> die größere Karte hat. Bei 9 und 6 ruft man „3“, bei Zwillingen „0“.</li>
+      <li><b>Ohne ausgeschnittene Karten:</b> Rommé- oder Pokerkarten, Ass (zählt 1) bis 10 von zwei Farben, z. B. Herz und Pik, ohne Bildkarten und Joker. Das sind auch 20 Karten, je zwei für jede Zahl von 1 bis 10. Achtung: In den Ecken steht die Zahl. Wer nur auf die Ecke schaut, macht keinen Blitzblick. Spielt damit lieber das Zusammen-Duell, da wird trotzdem gerechnet. Mit UNO-Karten geht das auch: von zwei Farben je die Karten 0 bis 9.</li>
+    </ul>
+  </div>
+
+  <div class="sag">
+    <p class="du">„Eins, zwei, Blitz!“ (Du hast die Zehnerfeld-6, Mathilda die Zehnerfeld-8.)</p>
+    <p class="sie">„Acht!“</p>
+    <p class="du">„Stimmt, deine 8 hat mehr. Wie viele mehr als meine 6?“</p>
+    <p class="sie">„Zwei. Bei mir sind unten 3 Punkte, bei dir nur 1.“</p>
+    <p class="dann">So eine Nachfrage ab und zu macht aus dem Duell nebenbei eine Rechenübung. Nicht nach jeder Runde fragen, das Tempo ist das Lustige am Spiel.</p>
+  </div>
+
+  <div class="kasten bewegung" data-titel="Blitzblick-Hüpfen">
+    <p>Zeig eine Karte von Blatt 1-1 für 2 Sekunden und dreh sie um. Mathilda hüpft so oft, wie Punkte drauf waren, und zählt laut mit. Dann aufdecken: Hat es gestimmt? Nach 5 Karten tauscht ihr. Wenn du hüpfst, mach ab und zu absichtlich einen Fehler. Mathilda liebt es, dich zu erwischen.</p>
+    <ul>
+      <li><b>Tier-Hüpfen:</b> Froschsprünge, Hampelmänner, Einbein-Hüpfer, Drachen-Stampfer.</li>
+      <li><b>Eins mehr:</b> immer 1 mehr hüpfen (bei der 7 also 8-mal). <b>Bis zur 10 auffüllen:</b> so oft hüpfen, wie bis 10 fehlen (bei der 7 also 3-mal).</li>
+      <li><b>Riesensprung (Blatt 1-2):</b> Die volle obere Reihe ist ein Riesensprung, jeder Punkt unten ein kleiner Hüpfer. Bei 14 also 1 Riesensprung und 4 Hüpfer: 14 ist 10 und 4.</li>
+    </ul>
+  </div>
+
+  <div class="kasten basteln" data-titel="Eierkarton-Zehnerfeld">
+    <ol>
+      <li>Ein 10er-Eierkarton hat 2 Reihen à 5 Mulden, genau wie das Zehnerfeld. <b>Deckel dranlassen!</b> Er wird für den Blitz-Deckel gebraucht.</li>
+      <li>Mathilda verziert den Karton außen: als Drachenhöhle, Feen-Schatzkiste oder Einhorn-Stall. Ihr Name kommt auf den Deckel.</li>
+      <li>Innen kommt ein Sticker in die Mulde <b>oben links</b>: der Startplatz. Merksatz: „Zuerst die obere Reihe von links nach rechts, dann die untere.“ Die 20 Kugeln kommen in ein Glas oder Sackerl.</li>
+      <li><b>Wenn möglich, gleich einen zweiten Karton basteln.</b> Mit zwei Kartons kommt ihr bis 20 (erst ist einer voll, dann kommt der zweite dran), und in Einheit 4 („Volltanken“) braucht ihr beide.</li>
+    </ol>
+    <p><b>Kein 10er-Karton da?</b> Von einem 12er-Karton (2 Reihen à 6) an einem Ende 2 Mulden abschneiden und den Deckel genauso kürzen, dann bleiben 2 Reihen à 5.</p>
+  </div>
+
+  <h2>Wenn es hakt oder zu leicht ist</h2>
+
+  <div class="kasten stolper">
+    <ul>
+      <li><b>Sie zählt doch einzeln</b> (tippt, nickt mit dem Kopf): kürzer zeigen, dann geht Zählen nicht. Frag: „Wie viele sind oben? Und unten?“ Lob jeden Satz mit „5 und …“.</li>
+      <li><b>Sie malt Punkte irgendwo ins Zehnerfeld:</b> an den Startplatz erinnern. Nur mit der Ordnung „oben links anfangen“ funktioniert der Blitzblick. Stimmt die Anzahl, ist die Aufgabe trotzdem richtig.</li>
+      <li><b>Sie verwechselt „Wie viele sind da?“ und „Wie viele fehlen?“</b> (sagt bei 7 Punkten „7“ statt „3“): die leeren Kästchen mit dem Finger antippen lassen.</li>
+      <li><b>Beim Zwanzigerfeld liest sie nur die untere Reihe</b> („3“ statt „13“): auf die volle obere Reihe zeigen: „Wie viele sind in dieser Reihe?“</li>
+      <li><b>Sie schreibt 31 statt 13:</b> Mit 6 Jahren normal, wir sprechen ja „drei-zehn“. Frag: „Lies mir vor, was du geschrieben hast.“ Meist korrigiert sie sich selbst.</li>
+      <li><b>Die Haufen-Karte (9 Punkte durcheinander) ist schwer:</b> Absicht! Frag: „Warum ist gerade diese Karte so schwer?“ So entdeckt Mathilda: Ordnung hilft.</li>
+      <li><b>Sie ruft beim Duell ihre eigene Zahl</b> statt der größeren, oder die Zahl, die sie zuerst erkannt hat: Regel kurz wiederholen. Ein paar Runden langsam spielen: erst beide Zahlen sagen, dann zeigen, welche Karte mehr hat, dann rufen.</li>
+      <li><b>Frust beim Duell:</b> Bremse für dich verlängern oder als Team gegen die Eieruhr spielen.</li>
+    </ul>
+  </div>
+
+  <div class="zwei">
+    <div class="kasten leichter">
+      <ul>
+        <li>Nur bis 6: zuerst die Würfelbilder und die Zehnerfelder 1 bis 6.</li>
+        <li>Karten länger zeigen (3 bis 4 Sekunden) oder offen liegen lassen.</li>
+        <li>Duell nur mit den 10 Zehnerfeld-Karten (je 5 Karten, 5 Runden).</li>
+        <li>Beim Blitz-Deckel die Kugeln zuerst antippen lassen, dann Deckel zu.</li>
+        <li>Blatt: Aufgabe 1 und 2 reichen. Aufgabe 3 bis 5 an einem anderen Tag.</li>
+      </ul>
+    </div>
+    <div class="kasten bonus" data-titel="Bonus-Knobelei">
+      <p class="klein"><i>Für zwischendurch: im Auto, im Wartezimmer, beim Abendessen.</i></p>
+      <p><b>Finger-Zauber:</b> „Zeig mir 7 Finger mit beiden Händen. Auf wie viele Arten geht das? Links 5 und rechts 2 ist eine andere Art als links 2 und rechts 5.“</p>
+      <p><b>Eierkarton im Kopf:</b> „Im 10er-Eierkarton liegen 6 Eier. Ich nehme 2 heraus, du legst 5 dazu. Wie viele Plätze sind noch frei?“</p>
+      <p><b>Für Profis:</b> „Im Zwanzigerfeld ist die obere Reihe voll, unten sind 4 Kästchen leer. Welche Zahl ist es?“</p>
+      <p class="klein"><b>Kurz-Lösungen:</b> 4 Arten; 1 Platz frei; 16. Erklärungen bei den Lösungen am Ende.</p>
+    </div>
+  </div>
+
+  <div class="kasten schwerer darf-brechen e01-schwerer">
+    <p>Wenn die ersten Karten ohne Zögern klappen, wähle hier aus. Das ist kein Zusatz „für später“, sondern ein vollwertiger Hauptteil.</p>
+    <ol class="e01-ganz">
+      <li><b>Blinzel-Blick:</b> Karte nur 1 Sekunde oder kürzer zeigen. Klappt dann auch die Haufen-Karte?</li>
+      <li><b>Zwanzigerfeld blitzschnell:</b> Blitzblick-Hüpfen und Duell mit den Karten von Blatt 1-2. Danach: „Wie viele Kästchen sind leer?“ Bei 17 Punkten sind 3 Kästchen leer, denn 20 − 17 = 3. Bei 12 sind es 8.</li>
+      <li><b>Zwei Karten auf einmal:</b> Zeig zwei Zehnerfeld-Karten gleichzeitig, z. B. 7 und 5: „Wie viele zusammen?“ Ein Profi-Weg: „Von der 5 schiebe ich 3 zur 7, dann ist sie voll. 10 plus 2 ist 12.“ Das ist schon die Idee von Einheit 4: über die Zehn springen.</li>
+      <li><b>Zehnerfelder bis 50:</b> Leg drei volle Zehner hin (die Zehnerfeld-Karte mit 10, die Edelstein-Karte mit 10 und einen vollen Eierkarton) und dazu die Zehnerfeld-Karte mit 4. „Wie viele sind das?“ Es sind 34. „Wie viele fehlen auf 50?“ Es fehlen 16: erst 6 bis 40, dann noch 10.</li>
+      <li><b>Gedächtnis-Blitz:</b> Karte 2 Sekunden zeigen. Mathilda malt sie danach aus dem Kopf auf Kästchenpapier, an dieselben Plätze. Beim Zehnerfeld ist das leicht, bei der Haufen-Karte fast unmöglich. Warum?</li>
+      <li><b>Eigene Blitzbilder erfinden:</b> Wie Aufgabe 5 auf Blatt 1-3: Mathilda malt ein Bild mit 8 Punkten, das du blitzschnell erkennen sollst. Was macht ein Bild schnell? (Reihen, Paare, „5 und …“.) Danach ein Bild für 26.</li>
+      <li><b>Bis 100:</b> „Stell dir 10 Eierkartons vor. 7 sind voll. Wie viele Kugeln sind das? Wie viele fehlen auf 100?“ 70 Kugeln, es fehlen 30.</li>
+      <li><b>Alle Karten zusammen</b> (Profi-Aufgabe auf Blatt 1-1): Die Zehnerfeld-Karten 1 bis 10 haben zusammen 55 Punkte. Wer Paare zu 10 legt (1 und 9, 2 und 8, 3 und 7, 4 und 6), muss gar nicht zählen.</li>
+      <li><b>Riesen-Summe (über 100):</b> „Wie viele Punkte sind auf allen 30 Karten?“ Auf Blatt 1-1 kommt jede Zahl von 1 bis 10 zweimal vor: 55 + 55 = 110. Auf Blatt 1-2 stehen 11 bis 20. Profi-Trick: 11&nbsp;+&nbsp;19, 12&nbsp;+&nbsp;18, 13&nbsp;+&nbsp;17 und 14&nbsp;+&nbsp;16 sind je 30, zusammen 120. Dazu 15 und 20: 120&nbsp;+&nbsp;15&nbsp;+&nbsp;20&nbsp;=&nbsp;155. Alle 30 Karten: 110 + 155 = 265. Zwischenergebnisse darf Mathilda aufschreiben.</li>
+      <li><b>Schätzen und ordnen:</b> Schütte 30 bis 40 Nudeln oder Muggelsteine auf den Tisch. „Wie viele sind das? Schätz!“ Dann ordnet ihr sie in Zehner: in die Eierkartons und daneben als Zehnerfelder (2 Reihen à 5). Jetzt geht der Blitzblick: 3 volle Zehner und 7 sind 37. Wer hat näher geschätzt? Das bereitet das Bündeln in Einheit 7 vor.</li>
+    </ol>
+  </div>
+
+  <h2>Hintergrund</h2>
+  <div class="kasten warum">
+    <p>Kleine Mengen bis etwa 4 erkennt jeder Mensch auf einen Blick. Ab 5 klappt das nur, wenn die Menge eine Ordnung hat: Dann sieht man Teile und setzt sie im Kopf zusammen, 7 als „5 und 2“. Die 5 ist dafür ideal, denn eine Hand hat 5 Finger und eine Reihe im Zehnerfeld 5 Kästchen. Wer 8 als „5 und 3“ sieht, muss nicht zählen und sieht gleichzeitig, dass bis 10 noch 2 fehlen.</p>
+    <p>Darauf bauen die nächsten Einheiten auf: Zehnerfreunde (Einheit 2), über die Zehn springen (Einheit 4: 8 + 5 = 8 + 2 + 3) und Zehner und Einer (Block B). Das Zwanzigerfeld zeigt schon jetzt: 14 ist „ein Zehner und 4“. Kinder, die lange einzeln weiterzählen, rechnen später langsam und fehleranfällig. Kinder, die Mengen geordnet sehen, können Ergebnisse ableiten.</p>
+  </div>
+
+  <h2>Lösungen</h2>
+  <div class="e01-loes">
+    <m-loesungen einheit="1" skala="0.39"></m-loesungen>
+    <div class="kasten loesung">
+      <p><b>Blatt 1-1, Profi:</b> Paare zu 10: 1 und 9, 2 und 8, 3 und 7, 4 und 6. Dazu ist die 10er-Karte schon voll. Das sind 5 volle Zehnerfelder. Übrig bleibt die Karte mit 5 Punkten. 5 volle Zehnerfelder sind 50, also 50 + 5 = 55. Kontrolle: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 = 55.</p>
+      <p><b>Blatt 1-2, Knobel-Ecke:</b> Lila hat 11, Rosa 9 Sterne. Probe: 11 + 9 = 20, und 11 ist 2 mehr als 9. Diese Rechnung kommt auch in die Kästchen, jede Ziffer und jedes Zeichen in ein eigenes Kästchen wie im Rechenheft. Ein guter Weg: erst gerecht teilen (10 und 10), dann gibt Rosa 1 Stern an Lila. Typischer Fehler: 12 und 8. Dann hätte Lila aber 4 mehr. Zum Nachlegen eignen sich zwei Eierkartons.</p>
+      <p><b>Blatt 1-3:</b> Bei Aufgabe 2 und 3 zählt die richtige Anzahl. Sind die Punkte nicht oben links begonnen, kurz die Ordnung besprechen. Aufgabe 5: Mehrere Lösungen möglich, z. B. 5 Punkte in einer Reihe und 2 darunter oder ein Würfelbild 4 neben einem Würfelbild 3. Richtig ist jedes Bild mit 7 Punkten, das man ohne Zählen erkennt. Profi: 3 volle Zehnerfelder sind 30, also 30 + 4 = 34 Goldstücke. Auf 50 fehlen 16: erst 6 bis 40, dann ein ganzes Zehnerfeld. 6 + 10 = 16.</p>
+      <p><b>Bonus Finger-Zauber:</b> 4 Arten: 5 und 2, 4 und 3, 3 und 4, 2 und 5. Mit 1 Finger an einer Hand geht es nicht, sonst bräuchte die andere Hand 6. Weiterdenken: 10 Finger gehen nur auf 1 Art (5 und 5), 5 Finger mit beiden Händen auf 4 Arten (1 und 4, 2 und 3, 3 und 2, 4 und 1). Darf eine Hand leer bleiben, kommen 0 und 5 sowie 5 und 0 dazu, das sind 6 Arten.</p>
+      <p><b>Bonus Eierkarton:</b> 6 − 2 + 5 = 9 Eier, im 10er-Karton ist also 1 Platz frei. <b>Für Profis:</b> Unten sind 6 Kästchen voll (10 Kästchen, 4 leer). Oben 10 und unten 6 sind 16.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- Blatt 1-1: Blitzblick-Karten (Zehnerfelder und Punktbilder 1–10)  -->
+<!-- =============================================================== -->
+<section class="blatt" data-einheit="1" data-titel="Blitzblick-Karten" data-art="Karten">
+  <p class="e01-hinweis">Mathilda, das sind deine Blitzblick-Karten. Schneide sie aus!</p>
+  <m-karten spalten="4" zeilen="5" hoehe="28" breite="176">
+    <div><m-zehnerfeld n="1" zelle="7"></m-zehnerfeld></div>
+    <div><m-zehnerfeld n="2" zelle="7"></m-zehnerfeld></div>
+    <div><m-zehnerfeld n="3" zelle="7"></m-zehnerfeld></div>
+    <div><m-zehnerfeld n="4" zelle="7"></m-zehnerfeld></div>
+    <div><m-zehnerfeld n="5" zelle="7"></m-zehnerfeld></div>
+    <div><m-zehnerfeld n="6" zelle="7"></m-zehnerfeld></div>
+    <div><m-zehnerfeld n="7" zelle="7"></m-zehnerfeld></div>
+    <div><m-zehnerfeld n="8" zelle="7"></m-zehnerfeld></div>
+    <div><m-zehnerfeld n="9" zelle="7"></m-zehnerfeld></div>
+    <div><m-zehnerfeld n="10" zelle="7"></m-zehnerfeld></div>
+    <div><m-wuerfel n="1" gr="26"></m-wuerfel></div>
+    <div><m-punkte n="2" art="paare" symbol="herz" gr="58"></m-punkte></div>
+    <div><m-punkte n="3" art="reihe" symbol="stern" gr="54"></m-punkte></div>
+    <div><m-wuerfel n="4" gr="26"></m-wuerfel></div>
+    <div><m-punkte n="5" art="paare" symbol="edelstein" gr="46"></m-punkte></div>
+    <div><m-wuerfel n="6" gr="26"></m-wuerfel></div>
+    <div><m-punkte n="7" art="fuenfer" symbol="stern" farben="5,2" gr="39"></m-punkte></div>
+    <div><m-punkte n="8" art="paare" symbol="herz" gr="36"></m-punkte></div>
+    <div><m-punkte n="9" art="haufen" saat="3" gr="27"></m-punkte></div>
+    <div><m-punkte n="10" art="fuenfer" symbol="edelstein" farben="5,5" gr="39"></m-punkte></div>
+  </m-karten>
+  <div class="profi" data-titel="Profi-Aufgabe: Zehner-Zauber">
+    <p>Mathilda, nimm die 10 Karten mit Zehnerfeld. Leg immer 2 Karten zusammen. Zusammen sollen sie 10 Punkte haben, zum Beispiel 1 und 9. Die Karte mit 10 ist schon voll.</p>
+    <div class="e01-fragen">
+      <p>Wie viele volle Zehnerfelder hast du dann? <m-feld l="5"></m-feld></p>
+      <p>Eine Karte bleibt übrig. Wie viele Punkte hat sie? <m-feld l="5"></m-feld></p>
+      <p>Wie viele Punkte sind auf den 10 Zehnerfeld-Karten? <m-feld l="55"></m-feld></p>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- Blatt 1-2: Zwanzigerfeld-Karten 11–20                            -->
+<!-- =============================================================== -->
+<section class="blatt" data-einheit="1" data-titel="Zwanzigerfeld-Karten" data-art="Karten">
+  <p class="e01-hinweis">Mathilda, das sind Karten für große Zahlen. Schneide sie aus!</p>
+  <m-karten spalten="2" zeilen="5" hoehe="28" breite="176">
+    <div><m-zwanzigerfeld n="11" farben="10,1" zelle="7.5"></m-zwanzigerfeld></div>
+    <div><m-zwanzigerfeld n="12" farben="10,2" zelle="7.5"></m-zwanzigerfeld></div>
+    <div><m-zwanzigerfeld n="13" farben="10,3" zelle="7.5"></m-zwanzigerfeld></div>
+    <div><m-zwanzigerfeld n="14" farben="10,4" zelle="7.5"></m-zwanzigerfeld></div>
+    <div><m-zwanzigerfeld n="15" farben="10,5" zelle="7.5"></m-zwanzigerfeld></div>
+    <div><m-zwanzigerfeld n="16" farben="10,6" zelle="7.5"></m-zwanzigerfeld></div>
+    <div><m-zwanzigerfeld n="17" farben="10,7" zelle="7.5"></m-zwanzigerfeld></div>
+    <div><m-zwanzigerfeld n="18" farben="10,8" zelle="7.5"></m-zwanzigerfeld></div>
+    <div><m-zwanzigerfeld n="19" farben="10,9" zelle="7.5"></m-zwanzigerfeld></div>
+    <div><m-zwanzigerfeld n="20" farben="10,10" zelle="7.5"></m-zwanzigerfeld></div>
+  </m-karten>
+  <div class="knobel" data-titel="Knobel-Ecke: Sternen-Feen">
+    <p>Die Feen Lila und Rosa haben zusammen 20 Sterne. Lila hat 2 Sterne mehr als Rosa. Wie viele Sterne hat jede Fee?</p>
+    <div class="e01-knobel-reihe">
+      <span>Lila: <m-feld l="11"></m-feld></span>
+      <span>Rosa: <m-feld l="9"></m-feld></span>
+      <span class="e01-feen"><m-bild name="fee" gr="25"></m-bild><m-stern gr="9"></m-stern><m-bild name="fee" gr="25"></m-bild></span>
+    </div>
+    <p class="e01-kae-anw">Schreib die Rechnung „Lila plus Rosa“ in die Kästchen.</p>
+    <m-kaestchen b="9" h="1"></m-kaestchen>
+    <p class="lsg-nur">11 + 9 = 20, und 11 ist 2 mehr als 9.</p>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- Blatt 1-3: Blitzblick-Training (Arbeitsblatt)                    -->
+<!-- =============================================================== -->
+<section class="blatt" data-einheit="1" data-titel="Blitzblick-Training" data-art="Arbeitsblatt" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, wie viele Punkte? Nicht zählen, nur schauen!</p>
+    <div class="raster s4">
+      <div class="e01-paar"><m-zehnerfeld n="6" zelle="7.5"></m-zehnerfeld><m-feld l="6"></m-feld></div>
+      <div class="e01-paar"><m-zehnerfeld n="9" zelle="7.5"></m-zehnerfeld><m-feld l="9"></m-feld></div>
+      <div class="e01-paar"><m-zehnerfeld n="4" zelle="7.5"></m-zehnerfeld><m-feld l="4"></m-feld></div>
+      <div class="e01-paar"><m-zehnerfeld n="7" zelle="7.5"></m-zehnerfeld><m-feld l="7"></m-feld></div>
+    </div>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Male die Punkte ins Zehnerfeld. Fang oben links an.</p>
+    <div class="raster s3">
+      <div class="e01-mal"><span class="e01-zahl">8</span><m-zehnerfeld n="0" zeichne="8" zelle="9"></m-zehnerfeld></div>
+      <div class="e01-mal"><span class="e01-zahl">3</span><m-zehnerfeld n="0" zeichne="3" zelle="8.5"></m-zehnerfeld></div>
+      <div class="e01-mal"><span class="e01-zahl">6</span><m-zehnerfeld n="0" zeichne="6" zelle="8.5"></m-zehnerfeld></div>
+    </div>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Wie viele fehlen auf 10? Male sie rot dazu. Schreib die Zahl auf.</p>
+    <div class="raster s3">
+      <div class="e01-neben"><m-zehnerfeld n="7" zeichne="3" zelle="8"></m-zehnerfeld><m-feld l="3" art="k"></m-feld></div>
+      <div class="e01-neben"><m-zehnerfeld n="1" zeichne="9" zelle="8"></m-zehnerfeld><m-feld l="9" art="k"></m-feld></div>
+      <div class="e01-neben"><m-zehnerfeld n="4" zeichne="6" zelle="8"></m-zehnerfeld><m-feld l="6" art="k"></m-feld></div>
+    </div>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Das sind Zwanzigerfelder. Wie viele Punkte sind es?</p>
+    <div class="raster s2">
+      <div class="e01-neben"><m-zwanzigerfeld n="14" farben="10,4" zelle="6"></m-zwanzigerfeld><m-feld l="14"></m-feld></div>
+      <div class="e01-neben"><m-zwanzigerfeld n="19" farben="10,9" zelle="6"></m-zwanzigerfeld><m-feld l="19"></m-feld></div>
+    </div>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Male 7 Punkte in die Kästchen. Man soll sie blitzschnell sehen!</p>
+    <m-kaestchen b="18" h="2"></m-kaestchen>
+    <p class="lsg-nur">Mehrere Lösungen möglich, z. B. oben 5 Punkte in einer Reihe und darunter 2 (Kraft der 5).</p>
+  </div>
+
+  <div class="profi" data-titel="Profi-Aufgabe: Drachen-Schatz">
+    <p>Mathilda, der Drache sammelt Goldstücke. Ein volles Zehnerfeld hat 10. Wie viele hat er?</p>
+    <div class="e01-knobel-reihe">
+      <m-zehnerfelder n="34" zelle="5.5" proreihe="5"></m-zehnerfelder>
+      <m-bild name="drache" gr="16"></m-bild>
+    </div>
+    <div class="e01-knobel-reihe" style="margin-top: 3mm">
+      <span>Goldstücke: <m-feld l="34"></m-feld></span>
+      <span>Wie viele fehlen auf 50? <m-feld l="16"></m-feld></span>
+    </div>
+  </div>
+</section>

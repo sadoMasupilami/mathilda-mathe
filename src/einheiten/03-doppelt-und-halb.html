@@ -1,0 +1,343 @@
+<!--
+  Einheit 3: Doppelt & halb (Block A)
+  Verdoppeln und Halbieren bis 20, Fast-Verdoppeln, Nachbaraufgabe, Spiegelbild.
+  Bauen und ansehen:  ./baue.sh --nur 03 --png
+  Die Schmetterlinge auf Blatt 3-1 sind Inline-SVG (viewBox 80 · 58). Punkte der linken Seite: class="p1",
+  die gespiegelten Punkte der rechten Seite: class="p2 lsg" (nur in der Lösungsansicht sichtbar, x gespiegelt: 80 − x).
+-->
+<style>
+  .e03-zelle { display: flex; flex-direction: column; align-items: center; gap: 2mm; }
+  .e03-zelle svg, .e03-knobel svg { display: block; overflow: visible; }
+  .e03-knobel { display: flex; gap: 5mm; align-items: center; }
+  .e03-knobel > div { flex: 1; }
+  .e03-knobel p { margin: 0 0 3mm 0; display: flex; align-items: center; gap: 4mm; }
+  .e03-knobel p:last-child { margin: 0; }
+  .e03-knobel p > span { flex: 1; }
+  .e03-kette { font-size: 22pt; line-height: 1; display: flex; align-items: center; gap: 1.2mm; margin: 0 0 3mm 0; white-space: nowrap; }
+  .e03-pfeil { color: var(--akzent); font-weight: 700; }
+  .e03-nw { white-space: nowrap; }
+  .e03-kopf { font-family: var(--text); font-weight: 900; font-size: 14pt; color: var(--akzent); text-align: left; padding-left: 1mm; }
+  .e03-gross { font-size: 22pt; }
+  .e03-trick { display: flex; align-items: center; gap: 8mm; background: var(--akzent-hell); border-radius: 4mm; padding: 3mm 5mm; }
+  .e03-trick p { margin: 0 0 2mm 0; }
+  .e03-trick p:last-child { margin: 0; }
+  .e03-trick .spalte { gap: 2.5mm; }
+  .e03-unten { align-items: end; }
+  .e03-teilen { display: flex; flex-direction: column; align-items: flex-start; gap: 2mm; }
+  .e03-ra > m-aufgabe { display: block; width: 55mm; }
+  .e03-ra > m-aufgabe > .aufgabe { display: flex; justify-content: flex-end; }
+  .e03-ra > .e03-kopf { width: 55mm; text-align: right; padding: 0 22mm 0 0; box-sizing: border-box; }
+  .e03-hl { display: inline-block; min-width: 58mm; margin-right: 2mm; }
+  .e03-halb { gap: 2mm 6mm; }
+  .e03-raetsel p { margin: 0; line-height: 1.3; }
+  .e03-profi-zeile { margin: 2mm 0 0 0 !important; }
+  .e03-paare { display: block; overflow: visible; }
+  .e03-spiegel { display: flex; align-items: center; gap: 6mm; }
+  .e03-spiegel > .e03-rechts { flex: 1; }
+  .e03-gitter { position: relative; display: inline-block; line-height: 0; }
+  .e03-gitter > svg { position: absolute; left: 0; top: 0; overflow: visible; }
+  .e03-rechts { display: flex; flex-direction: column; align-items: center; gap: 4mm; }
+  .e03-tipp { margin: 0; text-align: center; }
+  .e03-a1 { display: flex; align-items: center; justify-content: space-between; gap: 4mm; }
+  .e03-a1 .aufgabe { gap: 1.6mm; }
+  .e03-eigene { width: 60.4mm; display: flex; flex-direction: column; gap: 2mm; }
+  .e03-eigene > p { margin: 0; }
+  .e03-gitter > .e03-lsg-hinweis { position: absolute; left: 1.5mm; top: 0; margin: 0; line-height: 10mm; font-size: 14pt; }
+</style>
+
+<section class="anleitung" data-einheit="3" data-titel="Doppelt &amp; halb">
+
+  <div class="kasten ziel">
+    <p>Heute geht es ums <span class="begriff">Verdoppeln</span>, also um die Aufgaben, die Kinder am schnellsten auswendig können: die Verdoppel-Aufgaben von 1 + 1 bis 10 + 10. Mathilda soll sie am Ende blitzschnell wissen und mit einem Bild erklären können (Finger, Spiegel, Klecksbild). Dazu kommt das Gegenteil, das <span class="begriff">Halbieren</span>: Die Hälfte von 14 ist 7, weil 7 + 7 = 14.</p>
+    <p>Der eigentliche Trick der Einheit: Aus einer Verdoppel-Aufgabe bekommt man die <span class="begriff">Nachbaraufgaben</span> fast geschenkt. 6 + 7 = 6 + 6 + 1 = 13. Das heißt <span class="begriff">Fast-Verdoppeln</span>. So kann Mathilda viele Plus-Aufgaben bis 20 lösen, ohne zu zählen.</p>
+  </div>
+
+  <div class="kasten material">
+    <ul>
+      <li>Blätter <a class="blattref" href="#blatt-3-1"></a>, <a class="blattref" href="#blatt-3-2"></a> und <a class="blattref" href="#blatt-3-3"></a> ausdrucken</li>
+      <li>2 normale Würfel, 2 Zettel und 2 Stifte für das Spiel Doppel-Würfeln (für die Variante Doppel-Karten: Rommé- oder Pokerkarten)</li>
+      <li>Für das Klecksbild: 2–3 Blatt Papier (Zeichenpapier ist ideal, Druckerpapier geht auch), Fingerfarbe, Temperafarbe oder dick angerührte Wasserfarbe, Wattestäbchen oder Pinsel, alte Zeitung als Unterlage, ein feuchtes Tuch</li>
+      <li>ein Handspiegel (Taschenspiegel) für den Spiegel-Zauber; 20 Zuckerl, Rosinen oder Muggelsteine zum Teilen</li>
+      <li>2 Eierkarton-Zehnerfelder aus Einheit 1 mit Kugeln (für Spiegel-Zauber, Stolpersteine und „Leichter machen“)</li>
+    </ul>
+    <p><b>Vorbereitung (5 Minuten):</b> Bastelplatz mit Zeitung abdecken, Farbe in einen Deckel geben, ein Blatt Papier einmal in der Mitte falten und wieder aufklappen. Das Klecksbild kommt früh dran, damit es bis zum Schluss trocknen kann.</p>
+  </div>
+
+  <h2>Ablauf Schritt für Schritt</h2>
+  <ol class="ablauf">
+    <li data-min="2"><span class="schritt-titel">Spiegel-Turnen und Finger-Spiegel</span>Ihr steht euch gegenüber und spiegelt euch gegenseitig (Kasten „Bewegung“). Dann zeigt Mathilda auf einer Hand 3 Finger, du zeigst mit deiner Hand das Spiegelbild: „3 plus 3 ist 6.“ Doppel-Hüpfen ist ein Extra, wenn Mathilda Bewegung braucht.</li>
+    <li data-min="8"><span class="schritt-titel">Klecksbild-Zauber</span>Mathilda malt einen halben Schmetterling und tupft Punkte hinein. Ihr ratet, wie viele es nach dem Zuklappen sind, dann wird gezaubert und gezählt (Kasten „Basteln“). Ein Bild reicht. Das zweite Bild mit dem Zauber-Punkt auf der Falte ist ein Extra, wenn noch Lust da ist.</li>
+    <li data-min="5"><span class="schritt-titel">Spiegel-Zauber am Blatt</span>Auf <a class="blattref" href="#blatt-3-1"></a> malt Mathilda die fehlenden Punkte auf die rechten Flügel und schreibt die Verdoppel-Aufgabe dazu. Mit dem Handspiegel auf der gestrichelten Linie kontrolliert sie selbst. In Aufgabe 2 spiegelt sie im Kästchen: gleich weit von der Linie weg. Die Knobel-Ecke (ein Punkt in der Mitte) ist der Anlass für das Gespräch „Das geht nicht gerecht auf“.</li>
+    <li data-min="5"><span class="schritt-titel">Spiel: Doppel-Würfeln</span>Eine Runde. Du verdoppelst ab und zu absichtlich falsch, Mathilda passt als Rechenkontrolle auf.</li>
+    <li data-min="5"><span class="schritt-titel">Halbieren: gerecht teilen</span>Zuerst mit echten Zuckerl: 12 Stück, „eins für dich, eins für mich“. Dann <a class="blattref" href="#blatt-3-2"></a>. Die Profi-Aufgabe mit der Zauber-Verdoppelkette ist für Mathilda wahrscheinlich der Höhepunkt.</li>
+    <li data-min="5"><span class="schritt-titel">Fast-Verdoppeln</span>Auf <a class="blattref" href="#blatt-3-3"></a> lest ihr zuerst gemeinsam den Trick oben am Blatt und spielt ihn mit den Fingern nach: Mathilda zeigt 6 Finger, du zeigst 7. Legt Fingerspitze an Fingerspitze: 6 Paare, und bei dir bleibt 1 Finger übrig. 6 + 6 + 1 = 13. Dann rechnet Mathilda allein. Ins Kästchen schreibt sie eigene Aufgaben, wie im Rechenheft ein Zeichen pro Kästchen. <b>Plan B:</b> Ist die Zeit schon um, wird Blatt 3-3 das Aufwärmen für Einheit 4. Es bereitet ohnehin auf das Springen über die Zehn vor. Zum Schluss schreibt Mathilda die Rechnung zum trockenen Klecksbild.</li>
+  </ol>
+
+  <h3>Beispielsätze</h3>
+  <div class="sag">
+    <p class="du">„Mathilda, du hast 5 Punkte gemalt. Was glaubst du: Wie viele sind es, wenn wir zuklappen?“</p>
+    <p class="sie">„Zehn! Weil auf der anderen Seite auch fünf hinkommen.“</p>
+    <p class="dann">Sagt sie „sechs“, nicht korrigieren: zuklappen, zählen lassen, dann fragen: „Warum sind es 10 geworden?“ Ziel ist der Satz „Die Punkte sind doppelt.“</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Ich hab 14 Zuckerl. Wir teilen gerecht. Wie viele bekommst du?“</p>
+    <p class="sie">„Sieben. Weil 7 und 7 sind 14.“</p>
+    <p class="dann">Halbieren ist Verdoppeln rückwärts. Weiß sie es nicht, teilt ihr wirklich aus: „Eins für dich, eins für mich.“</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Und wenn ich 9 Zuckerl habe?“</p>
+    <p class="sie">„Dann krieg ich 5!“ oder: „Das geht nicht, eins bleibt übrig.“</p>
+    <p class="dann">Nachteilen: 4 für dich, 4 für mich, 1 bleibt übrig. „Bei 9 geht es nicht gerecht auf.“ Halbe Zuckerl kommen erst in Einheit 15.</p>
+  </div>
+  <div class="sag">
+    <p class="du">„6 + 7. Kennst du eine Verdoppel-Aufgabe, die fast gleich ist?“</p>
+    <p class="sie">„6 + 6 ist 12, und dann noch 1. Dreizehn!“ oder: „7 + 7 ist 14, eins weniger, also 13.“</p>
+    <p class="dann">Beide Wege loben. 6 + 6 + 1 ist Fast-Verdoppeln, 7 + 7 − 1 geht genauso. Wichtig ist nur, dass sie nicht von 6 aus weiterzählt.</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Wie viele Punkte hat dein Schmetterling, wenn auf einer Seite 8 sind?“</p>
+    <p class="sie">„Sechzehn. 8 + 8 = 16.“</p>
+    <p class="dann">Frag nach: „Woher weißt du das so schnell?“ Mögliche Antwort: „5 und 5 sind 10, 3 und 3 sind 6, zusammen 16.“ Das ist die Kraft der 5 aus Einheit 1, ein starker Rechenweg.</p>
+  </div>
+
+  <h2>Spiele, Bewegung und Basteln</h2>
+
+  <div class="kasten tipp" data-titel="Spiegel-Zauber mit dem Handspiegel">
+    <p>Stell einen Handspiegel senkrecht auf die gestrichelte Linie eines Schmetterlings auf <a class="blattref" href="#blatt-3-1"></a>: Der Schmetterling ist plötzlich ganz, und Mathilda kontrolliert selbst, ob sie richtig gespiegelt hat. Am Eierkarton-Zehnerfeld zaubert der Spiegel aus 4 Kugeln 8 (Spiegel an die kurze Seite stellen). Profi-Frage: „Stell den Spiegel neben eine Ziffer. Welche Ziffern sehen im Spiegel gleich aus?“ (0 und 8.) „Und wenn der Spiegel unter der Ziffer steht?“ (0, 3 und 8.) Die 1 sieht in beiden Spiegeln nur dann gleich aus, wenn sie ein einfacher Strich ist.</p>
+  </div>
+
+  <div class="kasten spiel" data-titel="Doppel-Würfeln">
+    <p class="spiel-meta">2 Personen · 5–10 Minuten · 2 Würfel, 2 Zettel, 2 Stifte</p>
+    <p><b>Vorbereitung:</b> Jede und jeder schreibt groß auf den eigenen Zettel: <span class="beispiel">2 4 6 8 10 12</span>. Frag Mathilda vorher: „Welche Zahlen können herauskommen, wenn man einen Würfel verdoppelt?“ Sie darf die Reihe selbst finden (1 bis 6, jeweils verdoppelt).</p>
+    <p><b>Ziel:</b> Als Erste oder Erster alle sechs Zahlen auf dem eigenen Zettel durchstreichen.</p>
+    <ol class="regeln">
+      <li><b>Würfeln:</b> Wer dran ist, würfelt mit beiden Würfeln. Mathilda beginnt.</li>
+      <li><b>Verdoppeln:</b> Jeden Würfel einzeln laut verdoppeln: „4, doppelt 8! 1, doppelt 2!“</li>
+      <li><b>Durchstreichen:</b> Beide verdoppelten Zahlen auf dem eigenen Zettel durchstreichen. Ist eine schon durchgestrichen, hat man bei dieser Zahl Pech.</li>
+      <li><b>Pasch:</b> Zeigen beide Würfel dieselbe Zahl (zum Beispiel 3 und 3), ruft man „<span class="begriff">Pasch</span>!“. Man streicht das Doppelte durch (hier die 6) und darf zusätzlich eine Zahl seiner Wahl durchstreichen (Zauber-Joker).</li>
+      <li><b>Rechenkontrolle:</b> Die andere Person passt auf. Wer falsch verdoppelt und erwischt wird, streicht in diesem Zug nichts durch.</li>
+      <li><b>Ende:</b> Wer zuerst alle sechs Zahlen durchgestrichen hat, ruft „Doppelt fertig!“ und gewinnt. Weil Mathilda beginnt, bekommst du noch einen letzten Zug, wenn sie zuerst fertig ist. Schaffst du es damit auch, ist es unentschieden.</li>
+    </ol>
+    <p><b>Gut zu wissen:</b> Ein Pasch kommt ungefähr bei jedem sechsten Wurf (6 von 36 Möglichkeiten). Eine Runde dauert meistens 4 bis 9 Züge pro Person. Am Ende fehlt oft nur noch eine Zahl, dann hilft der Pasch-Joker.</p>
+  </div>
+
+  <div class="kasten spiel darf-brechen" data-titel="Varianten zu Doppel-Würfeln">
+    <p class="spiel-meta">gleiches Material · für Karten: Rommé- oder Pokerkarten statt der Würfel</p>
+    <ul>
+      <li><b>Doppel-Doppel (schwerer):</b> Jeder Würfel wird zweimal verdoppelt, aus 3 wird 6 und dann 12. Auf den Zettel kommen <span class="beispiel">4 8 12 16 20 24</span>.</li>
+      <li><b>Fast-Pasch (passt zu Blatt 3-3):</b> Zeigen die Würfel Nachbarzahlen (zum Beispiel 4 und 5), ruft man „Fast-Pasch!“ und rechnet laut mit dem Trick: 4 + 5 = 4 + 4 + 1 = 9. Stimmt es, darf man zusätzlich eine Zahl seiner Wahl durchstreichen. Nachbarzahlen kommen in 10 von 36 Würfen. Die Runde wird kürzer (meistens 3 bis 6 Züge pro Person).</li>
+      <li><b>Doppel-Karten (bis 20, schwerer):</b> Statt der Würfel Rommé- oder Pokerkarten: pro Farbe Ass (= 1) bis 10, also 40 Karten. Bildkarten und Joker beiseitelegen. Verdeckt mischen, Stapel in die Mitte. Auf die Zettel kommt <span class="beispiel">2 4 6 8 10 12 14 16 18 20</span>. Wer dran ist, deckt 2 Karten auf, verdoppelt jede und streicht beide Ergebnisse durch. Zwei gleiche Karten zählen wie ein Pasch, Nachbarzahlen wie ein Fast-Pasch (zum Beispiel 7 + 8 = 7 + 7 + 1 = 15): Beide bringen den Zauber-Joker. Aufgedeckte Karten kommen auf einen Ablagestapel. Ist der Stapel leer, wird die Ablage gemischt. Ende wie im Grundspiel. Dauert länger: meistens 6 bis 11 Züge pro Person.</li>
+      <li><b>Punkte-Zauber (schwerer):</b> Nicht durchstreichen, sondern Punkte sammeln. Beide Würfel verdoppeln und zusammenzählen: Bei 5 und 2 sind es 10 + 4 = 14 Punkte. Bei einem Pasch wird die Punktzahl des Zuges noch einmal verdoppelt: Bei 4 und 4 sind es 8 + 8 = 16 Punkte, mit Pasch also 32. Jede und jeder schreibt den eigenen Punktestand mit. Das Zusammenzählen rechnest du anfangs mit Mathilda gemeinsam, Zehner und Einer getrennt: 38 + 24 sind 30 + 20 = 50 und 8 + 4 = 12, zusammen 62. Das ist eine schöne Vorschau auf Block B. Wer zuerst 50 Punkte hat, gewinnt. Hat Mathilda zuerst 50, bekommst du noch einen letzten Zug. Dann gewinnt, wer mehr Punkte hat (gleich viele: unentschieden). Eine Runde ist schnell vorbei (meistens 3 bis 5 Züge), also gleich mehrere spielen.</li>
+    </ul>
+  </div>
+
+  <div class="kasten bewegung" data-titel="Spiegel-Turnen und Doppel-Hüpfen">
+    <p><b>Spiegel-Turnen (1 Minute):</b> Ihr steht euch gegenüber. Mathilda macht langsam Bewegungen vor (Arm hoch, Bein zur Seite, Grimasse), du bist ihr <span class="begriff">Spiegelbild</span> und machst alles genau gespiegelt mit: Hebt sie den rechten Arm, hebst du den linken. Dann wird getauscht.</p>
+    <p><b>Doppel-Hüpfen:</b> Du zeigst mit den Fingern eine Zahl von 1 bis 10. Mathilda ruft das Doppelte und hüpft so oft, laut mitzählend. Bei 7 Fingern ruft sie „14!“ und hüpft 14-mal.</p>
+    <p><b>Halbier-Hüpfen:</b> Du rufst eine Zahl bis 20, Mathilda hüpft die Hälfte. Bei „16!“ hüpft sie 8-mal. Rufst du eine Zahl, die nicht gerecht aufgeht (zum Beispiel 9), ruft Mathilda „Geht nicht gerecht!“, hüpft 4-mal und dreht sich für den Rest einmal im Kreis: 4 + 4, und 1 bleibt übrig.</p>
+    <p>Bei Regen im Gang: statt Hüpfen Kniebeugen oder Klatschen.</p>
+  </div>
+
+  <div class="kasten basteln darf-brechen" data-titel="Klecksbild-Zauber">
+    <ol>
+      <li>Papier in der Mitte falten (kurze Kante auf kurze Kante), fest streichen und wieder aufklappen. Die Falte ist wie ein Spiegel: Was auf einer Seite ist, erscheint auf der anderen Seite als Spiegelbild.</li>
+      <li>Mathilda malt mit Farbe auf <b>eine</b> Hälfte einen halben Schmetterling, einen halben Drachen oder einen halben Feenflügel. Der Körper beginnt direkt an der Falte.</li>
+      <li>Mit dem Wattestäbchen tupft sie dicke Farbpunkte in den Flügel, zum Beispiel 5. Wichtig: genug Farbe und etwas Abstand zwischen den Punkten, sonst verschmieren sie.</li>
+      <li><b>Raten:</b> „Wie viele Punkte sind es, wenn wir zuklappen?“ Erst die Vermutung, dann wird gezaubert.</li>
+      <li>Zuklappen, mit der flachen Hand fest darüberstreichen, langsam aufklappen. Gemeinsam zählen: 10 Punkte. Wenn das Bild trocken ist, schreibt Mathilda die Rechnung dazu: 5 + 5 = 10.</li>
+      <li><b>Zweites Bild mit Zauber-Punkt:</b> 3 Punkte in den Flügel und 1 Punkt genau auf die Falte. Nach dem Aufklappen sind es 7 Punkte, nicht 8! Der Punkt auf der Falte ist sein eigenes Spiegelbild: 3 + 3 + 1 = 7.</li>
+    </ol>
+    <p><b>Profi-Zauber (vierfach):</b> Papier einmal längs und einmal quer falten und wieder aufklappen. Punkte nur in ein Viertel tupfen. Zuerst längs zuklappen und drücken, aufklappen, gleich danach quer zuklappen und drücken, solange die Farbe noch nass ist. Aus 3 Punkten werden 6 und dann 12. Die zweiten Abdrücke sind blasser, zählen aber mit.</p>
+  </div>
+
+  <h2>Wenn es hakt oder zu leicht ist</h2>
+
+  <div class="kasten stolper darf-brechen">
+    <ul>
+      <li><b>Verdoppeln heißt nicht „plus 2“.</b> Manche Kinder sagen: „Das Doppelte von 5 ist 7.“ Zeig 5 Finger und dann die zweite Hand: „Noch einmal genauso viele.“ Das Wort „doppelt“ immer mit „noch einmal so viele“ verbinden.</li>
+      <li><b>Halbieren heißt nicht „ein bisschen weniger“.</b> „Die Hälfte von 8 ist 6“? Dann wirklich teilen: 8 Zuckerl, eins für dich, eins für mich. Danach nachprüfen: 4 plus 4 ist 8.</li>
+      <li><b>Verdoppeln über 10 durch Zählen.</b> Bei 7 + 7 oder 8 + 8 zählen Kinder gern an den Fingern weiter. Besser mit der Kraft der 5: 7 ist 5 und 2. Doppelt heißt 5 + 5 = 10 und 2 + 2 = 4, zusammen 14. Mit zwei Eierkartons sieht man das sofort: in jedem 7 Kugeln, oben 5 und unten 2. Die zwei vollen oberen Reihen sind 10, unten 2 + 2 = 4, zusammen 14.</li>
+      <li><b>Fast-Verdoppeln mit der falschen Zahl.</b> „6 + 7? Das ist 7 + 7 und 1 dazu, also 15.“ Frag: „Welche Zahl hast du verdoppelt? Ist 7 + 7 mehr oder weniger als 6 + 7?“ Faustregel: die kleinere Zahl verdoppeln und 1 dazu, oder die größere verdoppeln und 1 weg.</li>
+      <li><b>Kopiert statt gespiegelt.</b> Auf Blatt 3-1 malt Mathilda die Punkte vielleicht irgendwo in den rechten Flügel. Für die Rechnung reicht das, es zählt die Anzahl. Wer genau spiegelt, darf einen Extra-Stern auf den Schmetterling malen. Der Handspiegel zeigt, wo die Punkte hingehören.</li>
+      <li><b>Klecksbild-Pannen.</b> Zu wenig Farbe: Nichts kommt hinüber. Zu viel: Alles verläuft. Dicke Farbe, kleine Tupfen, fest streichen. Und vorher sagen, dass Klecksbilder nie ganz genau werden. Das gehört zum Zauber.</li>
+    </ul>
+  </div>
+
+  <div class="kasten leichter">
+    <ul>
+      <li>Nur Verdoppeln bis 5 + 5 mit den Fingern: Eine Hand zeigt die Zahl, die andere Hand ist der Spiegel.</li>
+      <li>Zwei Eierkarton-Zehnerfelder nebeneinander, in jedem 4 Kugeln (obere Reihe von links). Die Verdoppel-Aufgabe sieht man als zwei gleiche Kartons.</li>
+      <li>Halbieren nur mit echten Dingen (Zuckerl, Muggelsteine), noch nicht im Kopf.</li>
+      <li>Blatt 3-3 auf ein anderes Mal verschieben und Fast-Verdoppeln zuerst nur mündlich mit kleinen Zahlen üben: 2 + 3, 3 + 4, 4 + 5.</li>
+    </ul>
+  </div>
+
+  <div class="kasten schwerer darf-brechen">
+    <p>Mathilda ist schnell. Wenn die Verdoppel-Aufgaben bis 10 + 10 sitzen, geht es so weiter (ruhig mehrere Einheiten lang immer wieder zwischendurch):</p>
+    <ul>
+      <li><b>Verdoppeln über 20.</b> 12 + 12, 15 + 15, 25 + 25, 50 + 50. Der Trick: Zehner und Einer getrennt verdoppeln. 13 doppelt: 10 doppelt ist 20, 3 doppelt ist 6, zusammen 26. Dann: „Was ist das Doppelte von 34?“ (60 und 8, also 68.) Noch kniffliger, wenn die Einer über die Zehn springen: 17 doppelt ist 20 und 14, also 34. 28 doppelt ist 40 und 16, also 56.</li>
+      <li><b>Halbieren größerer Zahlen.</b> „Was ist die Hälfte von 30?“ 30 ist 20 und 10. Die Hälfte von 20 ist 10, die Hälfte von 10 ist 5, zusammen 15. Genauso: die Hälfte von 34 ist 17 (15 und 2), die Hälfte von 50 ist 25, die Hälfte von 100 ist 50. Und die Hälfte von 70? 70 ist 60 und 10, die Hälften sind 30 und 5, also 35. Die Hälfte von 90 ist 45.</li>
+      <li><b>Die Zauber-Verdoppelkette weiter.</b> 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1 024. „Wie oft musst du ab 1 verdoppeln, bis du über 1 000 kommst?“ (10-mal.) Rückwärts halbieren: 64, 32, 16, 8, 4, 2, 1. Und 100, 50, 25 … und dann? 25 geht nicht gerecht: 12 und 12 und 1 übrig.</li>
+      <li><b>Der Mittel-Trick.</b> 6 + 8 ist dasselbe wie 7 + 7, weil die 8 der 6 eins abgibt: 6 + 8 = 7 + 7 = 14. Ebenso 7 + 9 = 8 + 8 = 16 und 5 + 9 = 7 + 7 = 14 (hier gibt die 9 zwei ab). Mit zwei Händen zeigen: Ein Finger wandert hinüber.</li>
+      <li><b>Doppel-Doppel.</b> Zweimal verdoppeln: 3, 6, 12 oder 5, 10, 20. „Ein Drache hat 4 Beine. Wie viele Beine haben 2 Drachen? Und 4 Drachen?“ (8 und 16.) Am Klecksbild mit zwei Falten sieht man das (Kasten „Basteln“).</li>
+      <li><b>Zaubertrick zum Vorführen.</b> „Denk dir eine Zahl bis 10. Verdopple sie. Zähl 10 dazu. Halbiere. Nimm deine gedachte Zahl weg. Du hast 5!“ Es kommt immer 5 heraus. Beispiel mit 7: Das Doppelte ist 14, mit 10 dazu 24, die Hälfte davon 12, ohne die 7 bleiben 5. Mathilda übt den Trick mit dir und führt ihn dann der Familie vor. Warum er klappt: Die gedachte Zahl wird verdoppelt und wieder halbiert, übrig bleibt nur die Hälfte von 10.</li>
+      <li><b>Rollen tauschen.</b> Mathilda erfindet Fast-Verdoppel-Aufgaben für dich und prüft deinen Rechenweg. Mach ab und zu absichtlich Fehler. Dazu passen die Spiel-Varianten „Doppel-Karten“, „Doppel-Doppel“ und „Punkte-Zauber“ (Kasten „Varianten zu Doppel-Würfeln“).</li>
+    </ul>
+  </div>
+
+  <div class="kasten bonus">
+    <ul>
+      <li><b>Die Zauberbohne:</b> „Eine Zauberbohne verdoppelt sich jede Nacht. Am Montag liegt 1 Bohne da. Wie viele sind es am Freitag?“ <i>Lösung: Montag 1, Dienstag 2, Mittwoch 4, Donnerstag 8, Freitag 16.</i></li>
+      <li><b>Beine zählen:</b> „Im Stall stehen 2 Hühner und 2 Katzen. Wie viele Beine sind das?“ <i>Lösung: 2 Hühner haben 4 Beine, 2 Katzen haben 8 Beine, zusammen 12.</i></li>
+      <li><b>Gerecht teilen:</b> „Kann man 11 Kekse gerecht zwischen dir und mir teilen, ohne einen zu brechen?“ <i>Lösung: Nein. Wir bekommen beide 5, und 1 bleibt übrig.</i></li>
+      <li><b>Der Feenteich (für Profis):</b> „Im Feenteich verdoppeln sich die Seerosen jeden Tag. Am 10. Tag ist der Teich ganz voll. An welchem Tag war er halb voll?“ <i>Lösung: am 9. Tag, denn von halb voll bis ganz voll verdoppelt es sich nur noch einmal. Viele Erwachsene sagen zuerst „am 5. Tag“.</i></li>
+    </ul>
+  </div>
+
+  <h2>Hintergrund</h2>
+  <div class="kasten warum">
+    <p>Verdoppel-Aufgaben merken sich Kinder besonders leicht, weil es ein Bild dazu gibt: zwei Hände, der Spiegel, der Pasch, zwei gleiche Eierkartons. Darum lernt man diese wenigen Aufgaben sicher auswendig und leitet viele andere daraus ab. Aus 6 + 6 = 12 folgen sofort die Nachbaraufgaben 6 + 7 = 13 und 6 + 5 = 11. Rechnet man alle Plus-Aufgaben mit zwei Zahlen von 1 bis 10 (das sind 100), dann sind 10 davon Verdoppel-Aufgaben und 18 Fast-Verdoppel-Aufgaben, bei denen sich die Zahlen um 1 unterscheiden. Mehr als ein Viertel aller Aufgaben ist damit ohne Zählen erledigt.</p>
+    <p>Halbieren ist die Umkehrung: Wer 7 + 7 = 14 weiß, weiß auch, dass die Hälfte von 14 die 7 ist. Zahlen, bei denen das ohne Rest aufgeht, nennt man gerade Zahlen. Ungerade Zahlen sind immer „verdoppelt und 1 dazu“ (9 = 4 + 4 + 1), genau wie der Punkt auf der Falte beim Klecksbild. Das Wort „gerade“ braucht Mathilda noch nicht, das Thema kommt im Extra E7 wieder.</p>
+    <p>Symmetrie macht das Verdoppeln sichtbar: Ein Spiegel macht aus jeder Sache genau zwei. Später hilft Verdoppeln beim Einmaleins (die 2er-Reihe ist Verdoppeln, die 4er-Reihe ist Doppel-Doppel), und Halbieren ist der erste Schritt zum Teilen (Einheit 15).</p>
+  </div>
+
+  <h2>Lösungen</h2>
+  <div class="kasten loesung">
+    <p><b>Blatt 3-1, Knobel-Ecke:</b> Schmetterling mit dem Zauber-Punkt: 4 + 4 + 1 = 9, denn der Punkt auf der Falte wird nicht verdoppelt. Schmetterling mit 11 Punkten: 11 − 1 = 10, die Hälfte von 10 ist 5, also 5 Punkte auf jeder Seite.</p>
+    <p><b>Blatt 3-2, Profi-Aufgabe:</b> Jede Zahl ist das Doppelte der Zahl davor, zuletzt 32 + 32 = 64. Gerade Zehnerzahlen halbiert man wie Einer: 6 Zehner halbiert sind 3 Zehner, also 30. Die 30 ist kniffliger: 30 ist 20 und 10, die Hälften sind 10 und 5, also 15.</p>
+    <p><b>Blatt 3-3, Aufgabe 1:</b> Gemeint ist der Trick 7 + 7 + 1 = 15 und 6 + 6 + 1 = 13 (bei 7 + 6 die kleinere Zahl verdoppeln). Schreibt Mathilda eine andere Zerlegung mit richtigem Ergebnis, gilt sie auch. Dann fragen: „Geht es auch mit einer Verdoppel-Aufgabe?“ Kästchen: mehrere Lösungen möglich, z.&nbsp;B. <span class="rechnung">8 + 9 = 17</span>.</p>
+    <p><b>Blatt 3-3, Knobel-Ecke:</b> 7 (denn 7 + 7 + 1 = 15) und 9 (denn 9 + 9 − 1 = 17). Beide Rätsel haben genau eine Lösung. Profi: 25 + 26 = 25 + 25 + 1 = 51.</p>
+  </div>
+  <m-loesungen einheit="3" skala="0.39"></m-loesungen>
+</section>
+
+<!-- ============================ Blatt 3-1 ============================ -->
+<section class="blatt" data-einheit="3" data-titel="Spiegel-Zauber" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, die Zauber-Schmetterlinge sind nur halb fertig. Male die Punkte rechts dazu, genau wie im Spiegel. Dann rechne.</p>
+    <div class="raster s2">
+      <div class="e03-zelle"><svg class="e03-falter" xmlns="http://www.w3.org/2000/svg" width="52mm" height="37.7mm" viewBox="0 0 80 58"><path class="rahmen" d="M38 25 C34 9, 15 0, 6 5 C-1 9, 2 25, 12 29 C20 32, 32 31, 38 29 Z"/><path class="rahmen" d="M38 32 C30 32, 13 34, 10 44 C8 53, 18 57, 26 53 C33 49, 36 42, 38 35 Z"/><g transform="translate(80 0) scale(-1 1)"><path class="rahmen" d="M38 25 C34 9, 15 0, 6 5 C-1 9, 2 25, 12 29 C20 32, 32 31, 38 29 Z"/><path class="rahmen" d="M38 32 C30 32, 13 34, 10 44 C8 53, 18 57, 26 53 C33 49, 36 42, 38 35 Z"/></g><path class="duenn" d="M39 11.6 Q36 4 31 2.5 M41 11.6 Q44 4 49 2.5"/><path d="M27 -1.1 L27.7 0.8 L29.6 1.5 L27.7 2.2 L27 4.1 L26.3 2.2 L24.4 1.5 L26.3 0.8 Z M53 -1.1 L53.7 0.8 L55.6 1.5 L53.7 2.2 L53 4.1 L52.3 2.2 L50.4 1.5 L52.3 0.8 Z M33.5 -2.7 L33.95 -1.65 L35 -1.2 L33.95 -0.75 L33.5 0.3 L33.05 -0.75 L32 -1.2 L33.05 -1.65 Z M46.5 -2.7 L46.95 -1.65 L48 -1.2 L46.95 -0.75 L46.5 0.3 L46.05 -0.75 L45 -1.2 L46.05 -1.65 Z" fill="var(--gold)" stroke="var(--tinte)" stroke-width="0.25"/><ellipse class="rahmen" cx="40" cy="32" rx="2.8" ry="15"/><circle class="rahmen" cx="40" cy="14.5" r="3.2"/><line x1="40" y1="0.5" x2="40" y2="57.5" stroke="var(--akzent)" stroke-width="0.5" stroke-dasharray="2 1.5"/><circle class="p1" cx="19" cy="8" r="2.3"/><circle class="p1" cx="23" cy="21" r="2.3"/><circle class="p1" cx="25" cy="39" r="2.3"/><circle class="p2 lsg" cx="61" cy="8" r="2.3"/><circle class="p2 lsg" cx="57" cy="21" r="2.3"/><circle class="p2 lsg" cx="55" cy="39" r="2.3"/></svg><m-aufgabe>[3] + [3] = [6]</m-aufgabe></div>
+      <div class="e03-zelle"><svg class="e03-falter" xmlns="http://www.w3.org/2000/svg" width="52mm" height="37.7mm" viewBox="0 0 80 58"><path class="rahmen" d="M38 25 C34 9, 15 0, 6 5 C-1 9, 2 25, 12 29 C20 32, 32 31, 38 29 Z"/><path class="rahmen" d="M38 32 C30 32, 13 34, 10 44 C8 53, 18 57, 26 53 C33 49, 36 42, 38 35 Z"/><g transform="translate(80 0) scale(-1 1)"><path class="rahmen" d="M38 25 C34 9, 15 0, 6 5 C-1 9, 2 25, 12 29 C20 32, 32 31, 38 29 Z"/><path class="rahmen" d="M38 32 C30 32, 13 34, 10 44 C8 53, 18 57, 26 53 C33 49, 36 42, 38 35 Z"/></g><path class="duenn" d="M39 11.6 Q36 4 31 2.5 M41 11.6 Q44 4 49 2.5"/><path d="M27 -1.1 L27.7 0.8 L29.6 1.5 L27.7 2.2 L27 4.1 L26.3 2.2 L24.4 1.5 L26.3 0.8 Z M53 -1.1 L53.7 0.8 L55.6 1.5 L53.7 2.2 L53 4.1 L52.3 2.2 L50.4 1.5 L52.3 0.8 Z M33.5 -2.7 L33.95 -1.65 L35 -1.2 L33.95 -0.75 L33.5 0.3 L33.05 -0.75 L32 -1.2 L33.05 -1.65 Z M46.5 -2.7 L46.95 -1.65 L48 -1.2 L46.95 -0.75 L46.5 0.3 L46.05 -0.75 L45 -1.2 L46.05 -1.65 Z" fill="var(--gold)" stroke="var(--tinte)" stroke-width="0.25"/><ellipse class="rahmen" cx="40" cy="32" rx="2.8" ry="15"/><circle class="rahmen" cx="40" cy="14.5" r="3.2"/><line x1="40" y1="0.5" x2="40" y2="57.5" stroke="var(--akzent)" stroke-width="0.5" stroke-dasharray="2 1.5"/><circle class="p1" cx="11" cy="11" r="2.3"/><circle class="p1" cx="27" cy="13" r="2.3"/><circle class="p1" cx="23" cy="21" r="2.3"/><circle class="p1" cx="16" cy="42" r="2.3"/><circle class="p1" cx="31" cy="44" r="2.3"/><circle class="p2 lsg" cx="69" cy="11" r="2.3"/><circle class="p2 lsg" cx="53" cy="13" r="2.3"/><circle class="p2 lsg" cx="57" cy="21" r="2.3"/><circle class="p2 lsg" cx="64" cy="42" r="2.3"/><circle class="p2 lsg" cx="49" cy="44" r="2.3"/></svg><m-aufgabe>[5] + [5] = [10]</m-aufgabe></div>
+      <div class="e03-zelle"><svg class="e03-falter" xmlns="http://www.w3.org/2000/svg" width="52mm" height="37.7mm" viewBox="0 0 80 58"><path class="rahmen" d="M38 25 C34 9, 15 0, 6 5 C-1 9, 2 25, 12 29 C20 32, 32 31, 38 29 Z"/><path class="rahmen" d="M38 32 C30 32, 13 34, 10 44 C8 53, 18 57, 26 53 C33 49, 36 42, 38 35 Z"/><g transform="translate(80 0) scale(-1 1)"><path class="rahmen" d="M38 25 C34 9, 15 0, 6 5 C-1 9, 2 25, 12 29 C20 32, 32 31, 38 29 Z"/><path class="rahmen" d="M38 32 C30 32, 13 34, 10 44 C8 53, 18 57, 26 53 C33 49, 36 42, 38 35 Z"/></g><path class="duenn" d="M39 11.6 Q36 4 31 2.5 M41 11.6 Q44 4 49 2.5"/><path d="M27 -1.1 L27.7 0.8 L29.6 1.5 L27.7 2.2 L27 4.1 L26.3 2.2 L24.4 1.5 L26.3 0.8 Z M53 -1.1 L53.7 0.8 L55.6 1.5 L53.7 2.2 L53 4.1 L52.3 2.2 L50.4 1.5 L52.3 0.8 Z M33.5 -2.7 L33.95 -1.65 L35 -1.2 L33.95 -0.75 L33.5 0.3 L33.05 -0.75 L32 -1.2 L33.05 -1.65 Z M46.5 -2.7 L46.95 -1.65 L48 -1.2 L46.95 -0.75 L46.5 0.3 L46.05 -0.75 L45 -1.2 L46.05 -1.65 Z" fill="var(--gold)" stroke="var(--tinte)" stroke-width="0.25"/><ellipse class="rahmen" cx="40" cy="32" rx="2.8" ry="15"/><circle class="rahmen" cx="40" cy="14.5" r="3.2"/><line x1="40" y1="0.5" x2="40" y2="57.5" stroke="var(--akzent)" stroke-width="0.5" stroke-dasharray="2 1.5"/><circle class="p1" cx="11" cy="11" r="2.3"/><circle class="p1" cx="27" cy="13" r="2.3"/><circle class="p1" cx="14" cy="20" r="2.3"/><circle class="p1" cx="32" cy="22" r="2.3"/><circle class="p1" cx="25" cy="39" r="2.3"/><circle class="p1" cx="22" cy="49" r="2.3"/><circle class="p2 lsg" cx="69" cy="11" r="2.3"/><circle class="p2 lsg" cx="53" cy="13" r="2.3"/><circle class="p2 lsg" cx="66" cy="20" r="2.3"/><circle class="p2 lsg" cx="48" cy="22" r="2.3"/><circle class="p2 lsg" cx="55" cy="39" r="2.3"/><circle class="p2 lsg" cx="58" cy="49" r="2.3"/></svg><m-aufgabe>[6] + [6] = [12]</m-aufgabe></div>
+      <div class="e03-zelle"><svg class="e03-falter" xmlns="http://www.w3.org/2000/svg" width="52mm" height="37.7mm" viewBox="0 0 80 58"><path class="rahmen" d="M38 25 C34 9, 15 0, 6 5 C-1 9, 2 25, 12 29 C20 32, 32 31, 38 29 Z"/><path class="rahmen" d="M38 32 C30 32, 13 34, 10 44 C8 53, 18 57, 26 53 C33 49, 36 42, 38 35 Z"/><g transform="translate(80 0) scale(-1 1)"><path class="rahmen" d="M38 25 C34 9, 15 0, 6 5 C-1 9, 2 25, 12 29 C20 32, 32 31, 38 29 Z"/><path class="rahmen" d="M38 32 C30 32, 13 34, 10 44 C8 53, 18 57, 26 53 C33 49, 36 42, 38 35 Z"/></g><path class="duenn" d="M39 11.6 Q36 4 31 2.5 M41 11.6 Q44 4 49 2.5"/><path d="M27 -1.1 L27.7 0.8 L29.6 1.5 L27.7 2.2 L27 4.1 L26.3 2.2 L24.4 1.5 L26.3 0.8 Z M53 -1.1 L53.7 0.8 L55.6 1.5 L53.7 2.2 L53 4.1 L52.3 2.2 L50.4 1.5 L52.3 0.8 Z M33.5 -2.7 L33.95 -1.65 L35 -1.2 L33.95 -0.75 L33.5 0.3 L33.05 -0.75 L32 -1.2 L33.05 -1.65 Z M46.5 -2.7 L46.95 -1.65 L48 -1.2 L46.95 -0.75 L46.5 0.3 L46.05 -0.75 L45 -1.2 L46.05 -1.65 Z" fill="var(--gold)" stroke="var(--tinte)" stroke-width="0.25"/><ellipse class="rahmen" cx="40" cy="32" rx="2.8" ry="15"/><circle class="rahmen" cx="40" cy="14.5" r="3.2"/><line x1="40" y1="0.5" x2="40" y2="57.5" stroke="var(--akzent)" stroke-width="0.5" stroke-dasharray="2 1.5"/><circle class="p1" cx="11" cy="11" r="2.3"/><circle class="p1" cx="19" cy="8" r="2.3"/><circle class="p1" cx="27" cy="13" r="2.3"/><circle class="p1" cx="14" cy="20" r="2.3"/><circle class="p1" cx="23" cy="21" r="2.3"/><circle class="p1" cx="32" cy="22" r="2.3"/><circle class="p1" cx="16" cy="42" r="2.3"/><circle class="p1" cx="31" cy="44" r="2.3"/><circle class="p2 lsg" cx="69" cy="11" r="2.3"/><circle class="p2 lsg" cx="61" cy="8" r="2.3"/><circle class="p2 lsg" cx="53" cy="13" r="2.3"/><circle class="p2 lsg" cx="66" cy="20" r="2.3"/><circle class="p2 lsg" cx="57" cy="21" r="2.3"/><circle class="p2 lsg" cx="48" cy="22" r="2.3"/><circle class="p2 lsg" cx="64" cy="42" r="2.3"/><circle class="p2 lsg" cx="49" cy="44" r="2.3"/></svg><m-aufgabe>[8] + [8] = [16]</m-aufgabe></div>
+    </div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Male die Punkte wie im Spiegel dazu. Wie viele sind es dann?</p>
+    <div class="e03-spiegel">
+      <div class="e03-gitter"><m-kaestchen b="8" h="3"></m-kaestchen><svg xmlns="http://www.w3.org/2000/svg" width="80.4mm" height="30.4mm" viewBox="0 0 80.4 30.4"><line x1="40.2" y1="-1.5" x2="40.2" y2="31.9" stroke="var(--akzent)" stroke-width="0.9"/><circle class="p1" cx="15.2" cy="5.2" r="3"/><circle class="p1" cx="35.2" cy="5.2" r="3"/><circle class="p1" cx="5.2" cy="15.2" r="3"/><circle class="p1" cx="25.2" cy="15.2" r="3"/><circle class="p1" cx="35.2" cy="15.2" r="3"/><circle class="p1" cx="15.2" cy="25.2" r="3"/><circle class="p1" cx="25.2" cy="25.2" r="3"/><circle class="p2 lsg" cx="65.2" cy="5.2" r="3"/><circle class="p2 lsg" cx="45.2" cy="5.2" r="3"/><circle class="p2 lsg" cx="75.2" cy="15.2" r="3"/><circle class="p2 lsg" cx="55.2" cy="15.2" r="3"/><circle class="p2 lsg" cx="45.2" cy="15.2" r="3"/><circle class="p2 lsg" cx="65.2" cy="25.2" r="3"/><circle class="p2 lsg" cx="55.2" cy="25.2" r="3"/></svg></div>
+      <div class="e03-rechts">
+        <m-aufgabe>[7] + [7] = [14]</m-aufgabe>
+        <p class="e03-tipp">Tipp: Stell einen Spiegel<br>auf die Linie!</p>
+      </div>
+    </div>
+  </div>
+  <div class="knobel" data-titel="Knobel-Ecke: Der Zauber-Punkt">
+    <div class="e03-knobel">
+      <svg class="e03-falter" xmlns="http://www.w3.org/2000/svg" width="50mm" height="36.3mm" viewBox="0 0 80 58"><path class="rahmen" d="M38 25 C34 9, 15 0, 6 5 C-1 9, 2 25, 12 29 C20 32, 32 31, 38 29 Z"/><path class="rahmen" d="M38 32 C30 32, 13 34, 10 44 C8 53, 18 57, 26 53 C33 49, 36 42, 38 35 Z"/><g transform="translate(80 0) scale(-1 1)"><path class="rahmen" d="M38 25 C34 9, 15 0, 6 5 C-1 9, 2 25, 12 29 C20 32, 32 31, 38 29 Z"/><path class="rahmen" d="M38 32 C30 32, 13 34, 10 44 C8 53, 18 57, 26 53 C33 49, 36 42, 38 35 Z"/></g><path class="duenn" d="M39 11.6 Q36 4 31 2.5 M41 11.6 Q44 4 49 2.5"/><path d="M27 -1.1 L27.7 0.8 L29.6 1.5 L27.7 2.2 L27 4.1 L26.3 2.2 L24.4 1.5 L26.3 0.8 Z M53 -1.1 L53.7 0.8 L55.6 1.5 L53.7 2.2 L53 4.1 L52.3 2.2 L50.4 1.5 L52.3 0.8 Z M33.5 -2.7 L33.95 -1.65 L35 -1.2 L33.95 -0.75 L33.5 0.3 L33.05 -0.75 L32 -1.2 L33.05 -1.65 Z M46.5 -2.7 L46.95 -1.65 L48 -1.2 L46.95 -0.75 L46.5 0.3 L46.05 -0.75 L45 -1.2 L46.05 -1.65 Z" fill="var(--gold)" stroke="var(--tinte)" stroke-width="0.25"/><ellipse class="rahmen" cx="40" cy="32" rx="2.8" ry="15"/><circle class="rahmen" cx="40" cy="14.5" r="3.2"/><line x1="40" y1="0.5" x2="40" y2="57.5" stroke="var(--akzent)" stroke-width="0.5" stroke-dasharray="2 1.5"/><circle class="p1" cx="11" cy="11" r="2.3"/><circle class="p1" cx="23" cy="21" r="2.3"/><circle class="p1" cx="16" cy="42" r="2.3"/><circle class="p1" cx="31" cy="44" r="2.3"/><circle class="p1" cx="40" cy="32" r="2.3"/><circle class="p2 lsg" cx="69" cy="11" r="2.3"/><circle class="p2 lsg" cx="57" cy="21" r="2.3"/><circle class="p2 lsg" cx="64" cy="42" r="2.3"/><circle class="p2 lsg" cx="49" cy="44" r="2.3"/></svg>
+      <div>
+        <p><span>Ein Punkt sitzt in der Mitte. Male die rechte Seite. Wie viele Punkte sind es?</span><m-feld l="9"></m-feld></p>
+        <p><span>Ein anderer Schmetterling hat 11 Punkte. 1&nbsp;Punkt sitzt in der Mitte. Wie viele Punkte sind auf jeder Seite?</span><m-feld l="5"></m-feld></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Blatt 3-2 ============================ -->
+<section class="blatt" data-einheit="3" data-titel="Doppelt und halb" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, verdopple!</p>
+    <div class="raster s3 e03-ra">
+      <m-aufgabe>3 + 3 = _</m-aufgabe>
+      <m-aufgabe>5 + 5 = _</m-aufgabe>
+      <m-aufgabe>2 + 2 = _</m-aufgabe>
+      <m-aufgabe>4 + 4 = _</m-aufgabe>
+      <m-aufgabe>7 + 7 = _</m-aufgabe>
+      <m-aufgabe>9 + 9 = _</m-aufgabe>
+      <m-aufgabe>6 + 6 = _</m-aufgabe>
+      <m-aufgabe>8 + 8 = _</m-aufgabe>
+      <m-aufgabe>10 + 10 = _</m-aufgabe>
+    </div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Teile gerecht mit Mama oder Papa. Beide bekommen gleich viel. Wie viele bekommst du?</p>
+    <div class="raster s2 e03-unten">
+      <div class="e03-teilen"><m-punkte n="12" art="paare" symbol="edelstein" gr="40"></m-punkte> <span>Du bekommst <m-feld l="6"></m-feld></span></div>
+      <div class="e03-teilen"><m-punkte n="16" art="paare" symbol="stern" gr="37"></m-punkte> <span>Du bekommst <m-feld l="8"></m-feld></span></div>
+    </div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Halbiere!</p>
+    <div class="raster s2">
+      <span><span class="e03-hl">Die Hälfte von 10 ist</span><m-feld l="5"></m-feld></span>
+      <span><span class="e03-hl">Die Hälfte von 6 ist</span><m-feld l="3"></m-feld></span>
+      <span><span class="e03-hl">Die Hälfte von 14 ist</span><m-feld l="7"></m-feld></span>
+      <span><span class="e03-hl">Die Hälfte von 20 ist</span><m-feld l="10"></m-feld></span>
+      <span><span class="e03-hl">Die Hälfte von 18 ist</span><m-feld l="9"></m-feld></span>
+      <span><span class="e03-hl">Die Hälfte von 8 ist</span><m-feld l="4"></m-feld></span>
+    </div>
+  </div>
+  <div class="profi" data-titel="Profi-Aufgabe: Die Zauber-Verdoppelkette">
+    <p>Jede Zahl ist das Doppelte der Zahl davor. Wie geht es weiter?</p>
+    <div class="e03-kette">1 <span class="e03-pfeil">→</span> 2 <span class="e03-pfeil">→</span> 4 <span class="e03-pfeil">→</span> 8 <span class="e03-pfeil">→</span> <m-feld l="16"></m-feld> <span class="e03-pfeil">→</span> <m-feld l="32"></m-feld> <span class="e03-pfeil">→</span> <m-feld l="64"></m-feld></div>
+    <p>Halbiere die Zehnerzahlen.</p>
+    <div class="raster s2 e03-halb">
+      <span><span class="e03-hl">Die Hälfte von 20 ist</span><m-feld l="10"></m-feld></span>
+      <span><span class="e03-hl">Die Hälfte von 60 ist</span><m-feld l="30"></m-feld></span>
+      <span><span class="e03-hl">Die Hälfte von 100 ist</span><m-feld l="50"></m-feld></span>
+      <span><span class="e03-hl">Die Hälfte von 30 ist</span><m-feld l="15"></m-feld></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ Blatt 3-3 ============================ -->
+<section class="blatt" data-einheit="3" data-titel="Fast-Verdoppeln" data-verteilt>
+  <div class="e03-trick">
+    <div class="spalte">
+      <svg class="e03-paare" xmlns="http://www.w3.org/2000/svg" width="55mm" height="18mm" viewBox="0 0 49 16"><g class="duenn" stroke-dasharray="1 0.7"><rect x="0.4" y="0.4" width="5.8" height="15.2" rx="2.9"/><rect x="7" y="0.4" width="5.8" height="15.2" rx="2.9"/><rect x="13.6" y="0.4" width="5.8" height="15.2" rx="2.9"/><rect x="20.2" y="0.4" width="5.8" height="15.2" rx="2.9"/><rect x="26.8" y="0.4" width="5.8" height="15.2" rx="2.9"/><rect x="33.4" y="0.4" width="5.8" height="15.2" rx="2.9"/></g><circle class="p1" cx="3.3" cy="4.2" r="2.1"/><circle class="p1" cx="9.9" cy="4.2" r="2.1"/><circle class="p1" cx="16.5" cy="4.2" r="2.1"/><circle class="p1" cx="23.1" cy="4.2" r="2.1"/><circle class="p1" cx="29.7" cy="4.2" r="2.1"/><circle class="p1" cx="36.3" cy="4.2" r="2.1"/><circle class="p1" cx="3.3" cy="11.8" r="2.1"/><circle class="p1" cx="9.9" cy="11.8" r="2.1"/><circle class="p1" cx="16.5" cy="11.8" r="2.1"/><circle class="p1" cx="23.1" cy="11.8" r="2.1"/><circle class="p1" cx="29.7" cy="11.8" r="2.1"/><circle class="p1" cx="36.3" cy="11.8" r="2.1"/><circle cx="45.2" cy="11.8" r="2.3" fill="white" stroke="var(--rot)" stroke-width="1"/><text class="zahl" x="45.2" y="4.4" font-size="5.2" font-weight="700" fill="var(--rot)">+1</text></svg>
+    </div>
+    <div>
+      <p><b>Der Trick:</b> 6 + 7 ist fast 6 + 6. Rechne 6 + 6 und dann noch 1 dazu.</p>
+      <p class="e03-gross">6 + 7 = 6 + 6 + 1 = 13</p>
+    </div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Mathilda, rechne mit dem Trick.</p>
+    <div class="e03-a1">
+      <div class="spalte">
+        <m-aufgabe>4 + 5 = 4 + 4 + [1] = _</m-aufgabe>
+        <m-aufgabe>5 + 6 = 5 + 5 + [1] = _</m-aufgabe>
+        <m-aufgabe>7 + 8 = [7] + [7] + 1 = _</m-aufgabe>
+        <m-aufgabe>7 + 6 = [6] + [6] + 1 = _</m-aufgabe>
+      </div>
+      <div class="e03-eigene">
+        <p>Jetzt du! Erfinde eigene Aufgaben mit dem Trick.</p>
+        <div class="e03-gitter"><m-kaestchen b="6" h="3"></m-kaestchen><svg xmlns="http://www.w3.org/2000/svg" width="60.4mm" height="30.4mm" viewBox="0 0 60.4 30.4"><text class="zahl lsg" x="5.2" y="15.2" font-size="7">8</text><text class="zahl lsg" x="15.2" y="15.2" font-size="7">+</text><text class="zahl lsg" x="25.2" y="15.2" font-size="7">9</text><text class="zahl lsg" x="35.2" y="15.2" font-size="7">=</text><text class="zahl lsg" x="45.2" y="15.2" font-size="7">1</text><text class="zahl lsg" x="55.2" y="15.2" font-size="7">7</text><text class="zahl lsg" x="5.2" y="25.2" font-size="7">3</text><text class="zahl lsg" x="15.2" y="25.2" font-size="7">+</text><text class="zahl lsg" x="25.2" y="25.2" font-size="7">4</text><text class="zahl lsg" x="35.2" y="25.2" font-size="7">=</text><text class="zahl lsg" x="45.2" y="25.2" font-size="7">7</text></svg><p class="lsg-nur e03-lsg-hinweis">Zum Beispiel:</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Rechne erst doppelt, dann die Nachbaraufgaben.</p>
+    <div class="raster s3 e03-ra">
+      <div class="e03-kopf">doppelt</div>
+      <div class="e03-kopf">1 mehr</div>
+      <div class="e03-kopf">1 weniger</div>
+      <m-aufgabe>6 + 6 = _</m-aufgabe>
+      <m-aufgabe>6 + 7 = _</m-aufgabe>
+      <m-aufgabe>6 + 5 = _</m-aufgabe>
+      <m-aufgabe>8 + 8 = _</m-aufgabe>
+      <m-aufgabe>8 + 9 = _</m-aufgabe>
+      <m-aufgabe>8 + 7 = _</m-aufgabe>
+      <m-aufgabe>9 + 9 = _</m-aufgabe>
+      <m-aufgabe>9 + 10 = _</m-aufgabe>
+      <m-aufgabe>9 + 8 = _</m-aufgabe>
+    </div>
+  </div>
+  <div class="knobel" data-titel="Knobel-Ecke: Zauberzahlen">
+    <div class="raster s2 e03-raetsel">
+      <p>Ich bin eine Zauberzahl.<br>Verdopple mich. Zähl 1 dazu.<br>Dann kommt 15 heraus.<br>Wer bin ich? <m-feld l="7"></m-feld></p>
+      <p>Ich bin eine Zauberzahl.<br>Verdopple mich. Nimm 1 weg.<br>Dann kommt 17 heraus.<br>Wer bin ich? <m-feld l="9"></m-feld></p>
+    </div>
+    <p class="e03-profi-zeile">Für Profis: <m-aufgabe>25 + 26 = _</m-aufgabe></p>
+  </div>
+</section>

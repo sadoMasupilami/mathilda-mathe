@@ -1,0 +1,4 @@
+Nunito: Copyright 2014 The Nunito Project Authors (https://github.com/googlefonts/nunito)
+Lizenz: SIL Open Font License 1.1 (Text siehe OFL-Andika.txt, identische Lizenz)
+
+Andika: Copyright SIL International, SIL Open Font License 1.1 (OFL-Andika.txt)

@@ -1,0 +1,13 @@
+{
+  "name": "mathildas-rechen-werkstatt",
+  "private": true,
+  "type": "module",
+  "description": "Druckbarer Rechen-Guide für Mathilda (HTML/CSS → PDF)",
+  "scripts": {
+    "build": "node build.mjs",
+    "png": "node build.mjs --png"
+  },
+  "dependencies": {
+    "playwright-core": "^1.56.0"
+  }
+}
