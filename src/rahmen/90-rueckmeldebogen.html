@@ -5,7 +5,9 @@
   .r-rueck table { border-collapse: collapse; width: 100%; font-size: 9pt; }
   .r-rueck th, .r-rueck td { border: 0.35mm solid var(--linie); padding: 1.5mm 1.8mm; vertical-align: top; text-align: left; }
   .r-rueck th { background: var(--akzent-hell); font-weight: 800; }
-  .r-rueck tr.e { height: 34mm; break-inside: avoid; }
+  .r-rueck tr.e { height: 25mm; break-inside: avoid; }
+  .r-rueck tr.blk td { background: #f6f7fb; font-weight: 900; font-size: 9.5pt; padding: 1.2mm 1.8mm; }
+  .r-rueck thead { display: table-header-group; }
   .r-rueck .nr { font-weight: 900; font-size: 11pt; }
   .r-rueck .kl { font-size: 8pt; color: var(--grau); display: block; margin-top: 1mm; }
   .r-rueck .wahl { display: flex; flex-direction: column; gap: 1.6mm; white-space: nowrap; }
@@ -18,23 +20,44 @@
 
 <section class="fliess nur-buch r-rueck" id="rueckmeldebogen" data-toc="Rückmeldebogen (nach jeder Einheit ausfüllen)" style="page: anleitung; break-before: page" data-block="A">
   <h1>Rückmeldebogen</h1>
-  <p>Am besten direkt nach jeder Einheit kurz ausfüllen (2 Minuten). Die Sterne aus Mathildas Sammelpass helfen bei „Spaß“. Wenn alle 5 Einheiten fertig sind: abfotografieren oder abtippen und zurückmelden. Danach werden Plan, Schwierigkeit, Stil und Länge angepasst.</p>
+  <p>Am besten direkt nach jeder Einheit kurz ausfüllen (2 Minuten). Die Sterne aus Mathildas Sammelpass helfen bei „Spaß“. Zurückmelden kannst du jederzeit, am besten nach Einheit 5 und dann nach jedem Block: abfotografieren oder abtippen und schicken. Danach werden Plan, Schwierigkeit, Stil und Länge der folgenden Einheiten angepasst.</p>
 
   <h2>Pro Einheit</h2>
   <table>
-    <tr>
+    <thead><tr>
       <th style="width: 23mm">Einheit</th>
       <th style="width: 27mm">Spaß</th>
       <th style="width: 27mm">Schwierigkeit</th>
       <th style="width: 15mm">Dauer</th>
       <th>Was war super?</th>
       <th>Was hat nicht funktioniert?</th>
-    </tr>
+    </tr></thead>
+    <tbody>
+    <tr class="blk"><td colspan="6">Block A: Zahlen bis 20</td></tr>
     <tr class="e"><td><span class="nr">1</span><span class="kl">Blitzblick</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
     <tr class="e"><td><span class="nr">2</span><span class="kl">Zehnerfreunde</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
     <tr class="e"><td><span class="nr">3</span><span class="kl">Doppelt &amp; halb</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
     <tr class="e"><td><span class="nr">4</span><span class="kl">Über die Zehn springen (Plus)</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
     <tr class="e"><td><span class="nr">5</span><span class="kl">Zurück über die Zehn (Minus)</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">6</span><span class="kl">Zahlenfamilien &amp; Detektiv</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="blk"><td colspan="6">Block B: Zahlenraum bis 100</td></tr>
+    <tr class="e"><td><span class="nr">7</span><span class="kl">Bündeln wie ein Profi</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">8</span><span class="kl">Die Hundertertafel</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">9</span><span class="kl">Große Sprünge</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">10</span><span class="kl">Über die Zehner springen</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">11</span><span class="kl">Untereinander rechnen: Plus</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">12</span><span class="kl">Untereinander rechnen: Minus</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="blk"><td colspan="6">Block C: Mal &amp; Geteilt</td></tr>
+    <tr class="e"><td><span class="nr">13</span><span class="kl">Hüpfen in Sprüngen</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">14</span><span class="kl">Punktefelder &amp; Malreihen</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">15</span><span class="kl">Gerecht teilen</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="blk"><td colspan="6">Block D: Knobeln, Geometrie, Zaubertricks</td></tr>
+    <tr class="e"><td><span class="nr">16</span><span class="kl">Zahlenmauern &amp; Rechendreiecke</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">17</span><span class="kl">Magische Quadrate &amp; Zahlenrätsel</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">18</span><span class="kl">Formen, Spiegel &amp; Tangram</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">19</span><span class="kl">Zahlen-Zaubertricks</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    <tr class="e"><td><span class="nr">20</span><span class="kl">Das große Rechen-Fest</span></td><td><div class="sterne"><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern><m-stern gr="7"></m-stern></div></td><td><div class="wahl"><span><i class="box"></i>zu leicht</span><span><i class="box"></i>passt</span><span><i class="box"></i>zu schwer</span></div></td><td><span class="kl">Min</span></td><td></td><td></td></tr>
+    </tbody>
   </table>
 
   <h2 style="break-before: page">Allgemein</h2>
