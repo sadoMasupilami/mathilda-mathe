@@ -182,10 +182,10 @@ Stellenwerttafel: je Zeile ein Eintrag pro Spalte, dann optional `= Zahl`. `[5]`
 <m-schriftlich>63 − 27</m-schriftlich>                         <!-- Ergänzungsverfahren, „1 weiter“ -->
 <m-schriftlich>28 + 37 + 16</m-schriftlich>                    <!-- bis zu 4 Zahlen -->
 <m-schriftlich luecken="frei">86 − 42</m-schriftlich>          <!-- Ergebnis ohne Kästchenrahmen -->
-<m-schriftlich uebertrag="nein">4[7] + 3[5] = 82</m-schriftlich> <!-- Ziffernrätsel: [7] ist eine Lücke -->
+<m-schriftlich uebertrag="nein">4[7] + [3]5 = 82</m-schriftlich> <!-- Ziffernrätsel: [7] und [3] sind Lücken -->
 <m-schriftlich zelle="7" luecken="keine" uebertrag="zeigen">63 − 27</m-schriftlich>  <!-- kleiner, für die Anleitung -->
 ```
-Echte 1-cm-Kästchen wie im Rechenheft. Einer unter Einer, das Rechenzeichen steht links in der letzten Zeile, der Übertrag klein in der Zeile direkt über dem Strich (bei Minus: das „1 weiter“ in der nächsten Spalte). `uebertrag`: `luecke` (Standard: Mathilda schreibt ihn selbst, Lösung rot), `zeigen`, `nein`. Mit `= Ergebnis` am Ende ist das Ergebnis vorgegeben; einzelne Ziffern in `[ ]` sind dann die Lücken. Alles wird nachgerechnet, auch die Überträge. Braucht (Zahlen + 2) cm Höhe.
+Echte 1-cm-Kästchen wie im Rechenheft. Einer unter Einer, das Rechenzeichen steht links in der letzten Zeile, der Übertrag klein in der Zeile direkt über dem Strich (bei Minus: das „1 weiter“ in der nächsten Spalte). `uebertrag`: `luecke` (Standard: Mathilda schreibt ihn selbst, Lösung rot), `zeigen`, `nein`. Mit `= Ergebnis` am Ende ist das Ergebnis vorgegeben; einzelne Ziffern in `[ ]` sind dann die Lücken. Alles wird nachgerechnet, auch die Überträge. **Eindeutigkeit von Ziffernrätseln prüft der Baustein nicht:** Bei `4[7] + 3[5] = 82` passt jedes Ziffernpaar mit der Summe 12. Höchstens eine Lücke pro Spalte, dann ist das Rätsel eindeutig. Braucht (Zahlen + 2) cm Höhe. Leere Rechenschemas (Spielpläne) und absichtlich falsche Rechnungen (Kobold Klecks) kann der Baustein nicht; dafür inline-SVG im gleichen 1-cm-Raster verwenden (Beispiele: Einheit 11 und 12).
 
 ### Mal und Geteilt
 ```html
@@ -214,6 +214,16 @@ Rechendreieck: Jede Außenzahl ist die Summe der zwei Innenzahlen an ihrer Seite
 <m-zauberkarte wert="4" bis="31" spalten="4"></m-zauberkarte> <!-- Gedankenlese-Karte: alle Zahlen mit der 4 drin -->
 ```
 Tangram-Teile (Quadrat 4 · 4 Einheiten): 1 und 2 große Dreiecke, 3 und 5 kleine Dreiecke, 4 Quadrat, 6 mittleres Dreieck, 7 Parallelogramm. Die Eckpunkte stehen in `window.__tangram`, damit man Legefiguren aus echten Teilen zusammensetzen kann. Volle Würfelnetze werden geprüft (Gegenseiten ergeben 7). Zauberkarten: `wert` 1, 2, 4, 8, 16 (32, 64); die erste Zahl jeder Karte ist fett, sie ist der „Schlüssel“ des Tricks.
+
+### Grenzen der Bausteine (so haben es die Einheiten 6–20 gelöst)
+- `m-rechenstrich` braucht pro Sprung mindestens 24 mm plus 18 mm Rand (2 Sprünge ab 66 mm Breite).
+- `m-aufgabe feld="k"` gilt für alle Lücken einer Rechnung. Einstellige Lücken mit zweistelligem Ergebnis: `feld="k"` und das letzte Feld per CSS auf 20 mm verbreitern (Einheit 4, 13, 14).
+- Absichtlich falsche Tafelstücke, Quadrate oder Rechnungen (Kobold Klecks) rechnen die Bausteine immer richtig. Dafür eigenes SVG oder HTML (Einheit 8, 12, 17).
+- `m-zahlenmauer` kann keine leeren Vorlagen und keine einzeln hervorgehobenen Steine (Einheit 16 löst das mit SVG bzw. CSS).
+- `m-wuerfelnetz` zeigt für leere Felder keine Lösung; Lösung als deckungsgleiches SVG darüberlegen (Einheit 19).
+- Inhalt in `m-karten` wird bei zu viel Text still abgeschnitten: nur im Seitenbild sichtbar.
+- Ein `<p class="lsg-nur">` wird selbst von der Textprüfung gelesen; Rechnungen mit ☐ darin in `keine-pruefung` setzen.
+- CSS mit `stroke` oder `fill` auf einem Container vererbt sich in die SVGs der Bausteine. Klassennamen deshalb mit `eNN-` eindeutig halten und solche Eigenschaften nur gezielt setzen.
 
 ### Urkunden
 Die zwei Urkunden sind eigene Seiten in `src/rahmen/` (`id="urkunde-1"` nach Einheit 10, `id="urkunde-2"` nach Einheit 20) und kommen auch in die Kopiervorlagen. Verweis aus der Anleitung: `<a class="blattref" href="#urkunde-1">Urkunde 1</a>`. Für den Teil-Build dann `./baue.sh --nur 10,urkunde --png`.

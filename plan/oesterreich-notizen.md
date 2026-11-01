@@ -41,6 +41,8 @@ Ergebnis 82. Kontrolle: 47 + 35 = 82.
 
 Ohne Übertrag, z. B. 23 + 45: „3 plus 5 gleich 8, 8 an. 2 plus 4 gleich 6, 6 an.“ Ergebnis 68.
 
+Übertrag in eine neue Stelle, z. B. 63 + 51: „3 plus 1 gleich 4, 4 an. 6 plus 5 gleich 11. 1 an, 1 weiter.“ Die kleine 1 steht über dem Strich in der Hunderterspalte: „1 an.“ Ergebnis 114. (Manche Lehrerinnen sagen bei den Zehnern gleich „11 an“; dann so übernehmen.)
+
 ## Schriftliche Subtraktion mit dem Ergänzungsverfahren (ab Einheit 12)
 
 Man fragt in jeder Spalte: **„Untere Zahl plus wie viel ist gleich obere Zahl?“** Die gesuchte Zahl wird „angeschrieben“.
@@ -68,6 +70,10 @@ Mit Übertrag (Erweiterungstechnik), 63 − 27:
 Ergebnis 36. Probe: 36 + 27 = 63.
 
 Noch ein Beispiel, 52 − 18: „8 plus wie viel ist 12? 4 an, 1 weiter. 1 plus 1 gleich 2, 2 plus wie viel ist 5? 3 an.“ Ergebnis 34. Probe: 34 + 18 = 52.
+
+In der Werkstatt (Baustein `m-schriftlich`) wird nur das „1 weiter“ unten klein über dem Strich geschrieben; die 10 Einer oben werden dazugedacht. Schreibt Mathildas Lehrerin oben eine kleine 1 vor die Ziffer, kann man das beim Vorrechnen dazuschreiben.
+
+Das Abziehverfahren mit „Borgen“ wird in der Werkstatt nicht verwendet (höchstens für Erwachsene als Gegenbeispiel), damit Mathilda die Verfahren nicht mischt.
 
 Warum „erweitern“? Oben und unten wird gleich viel dazugegeben (oben 10 Einer, unten 1 Zehner = 10). Der Unterschied bleibt gleich, aber man muss nie „borgen“.
 

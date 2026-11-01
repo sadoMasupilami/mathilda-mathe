@@ -196,6 +196,8 @@ Spalte „So sagen wir“ ist der Begriff, der in Anleitung und Blättern verwen
 | **bündeln** | 10 Einer zu 1 Zehner zusammenfassen (Gummiringerl) | – | 7 |
 | **Hundertertafel** | 10 · 10 Tafel mit den Zahlen 1–100 | Hunderterfeld (das ist das Punktefeld) | 8 |
 | **Nachbarzahlen** (Vorgänger, Nachfolger) | die Zahl davor und danach | – | 8 |
+| **Nachbarzehner** | die Zehnerzahlen davor und danach: 40 < 47 < 50 | – | 8 |
+| **Zahlendreher** | Zahlen mit vertauschten Ziffern: 34 und 43 | – | 7 |
 | **Punktefeld** | rechteckige Anordnung von Punkten für Malaufgaben | Array | 14 |
 
 ### Rechnen
@@ -206,7 +208,7 @@ Spalte „So sagen wir“ ist der Begriff, der in Anleitung und Blättern verwen
 | **ist gleich** / **ist** | = („8 plus 5 ist 13“) | „macht“, „gibt“ | 1 |
 | **Ergebnis** | was herauskommt | Summe, Differenz (erst ab Block B für Erwachsene) | 1 |
 | **Aufgabe**, **Rechnung** | z. B. 8 + 5 = 13 | Term, Gleichung | 1 |
-| **Lücke** | leeres Kästchen in einer Rechnung (7 + ☐ = 15) | Platzhalter (nur in der Anleitung) | 2 |
+| **Lücke** | leeres Kästchen in einer Rechnung (7 + ☐ = 15) | Platzhalter (nur in der Anleitung) | 6 (vorher nur in der Anleitung) |
 | **zerlegen** | eine Zahl in zwei Teile teilen: 7 = 5 + 2 | aufspalten | 2 |
 | **Zehnerfreunde** | zwei Zahlen, die zusammen 10 ergeben (3 und 7) | verliebte Zahlen, Zehnerpartner | 2 |
 | **Zwanzigerfreunde**, **Hunderterfreunde** (Profi) | zusammen 20 bzw. 100 (13 und 7; 30 und 70) | – | 2 |
@@ -214,7 +216,7 @@ Spalte „So sagen wir“ ist der Begriff, der in Anleitung und Blättern verwen
 | **verdoppeln**, **halbieren** | 6 + 6 = 12; die Hälfte von 12 ist 6 | – | 3 |
 | **Verdoppel-Aufgabe** | Aufgabe mit zwei gleichen Zahlen: 6 + 6 | Doppelaufgabe | 3 |
 | **Fast-Verdoppeln** | 6 + 7 = 6 + 6 + 1 (Verdoppeln und 1 dazu) | Nachbaraufgabe (die ist allgemeiner) | 3 |
-| **Nachbaraufgabe** | Aufgabe, die sich nur um 1 unterscheidet (6 + 6 → 6 + 7) | – | 3 |
+| **Nachbaraufgabe** | Aufgabe, die sich nur um 1 unterscheidet (6 + 6 → 6 + 7); beim Mal eine Reihe mehr oder weniger (6 · 5 = 5 · 5 + 5, „Nachbar-Trick“, ab 14) | – | 3 |
 | **Pasch** | beide Würfel zeigen dieselbe Zahl | Doppel | 3 |
 | **über die Zehn springen** | Zehnerüberschreitung beim Plus (8 + 5) | „über den Zehner rechnen“ | 4 |
 | **zurück über die Zehn springen** | Zehnerunterschreitung beim Minus (13 − 5) | – | 5 |
@@ -226,12 +228,23 @@ Spalte „So sagen wir“ ist der Begriff, der in Anleitung und Blättern verwen
 | **ergänzen** | „Wie viel fehlt von 9 bis 13?“ | – | 5 |
 | **Aufgabenfamilie** | 4 Aufgaben aus 3 Zahlen | Zahlenfamilie (nur als Titel) | 6 |
 | **größer als**, **kleiner als** | > und < | „Krokodil frisst die größere Zahl“ (darf als Merkhilfe vorkommen) | 6 |
+| **Zehnerzahl** | 10, 20, 30 … 100 | volle Zehner (geht auch) | 9 |
 | **Analogie** / „Schwesteraufgabe“ | 3 + 4 → 30 + 40; 8 + 5 → 28 + 5 | – | 4 (Profi), 9 |
 | **untereinander rechnen** | schriftliches Rechnen (Kästchen, Stellen untereinander) | schriftliches Verfahren | 11 |
 | **Übertrag**, „**… an, 1 weiter**“ | österreichische Sprechweise (siehe `oesterreich-notizen.md`) | „1 gemerkt“ | 11 |
 | **Ergänzungsverfahren** | Minus untereinander: „4 plus wie viel ist 6? 2 an.“ | Abziehverfahren, Borgen | 12 |
-| **Malaufgabe**, **Malreihe** (2er-Reihe …) | 3 · 4; die Aufgaben 1 · 2 bis 10 · 2 | Einmaleins-Reihe (geht auch), „mal“ als „x“ | 13 |
-| **verteilen**, **aufteilen**, **Rest** | Geteiltaufgaben | – | 15 |
+| **mal**, **Malaufgabe**, **Gruppen** | 3 · 4 heißt „3-mal die 4“ = 4 + 4 + 4: 3 gleich große Gruppen mit je 4, 3 Sprünge zu je 4 | „mal“ als „x“ | 13 |
+| **Malreihe** (2er-Reihe …) | die Aufgaben 1 · 2 bis 10 · 2 | Einmaleins-Reihe (geht auch) | 14 |
+| **durch**, **Geteiltaufgabe** | 12 : 3 = 4 (Umkehraufgabe von 3 · 4 = 12) | „÷“ | 15 |
+| **verteilen**, **aufteilen**, **Rest** | verteilen: 12 Zuckerl an 3 Kinder; aufteilen: je 3 in ein Sackerl; Schreibweise mit Rest: „13 : 3 = 4 Rest 1“ (falls die Schule „R“ schreibt, hier ändern) | – | 15 |
+| **Halbe**, **Viertel** | ein Ganzes in 2 bzw. 4 gleich große Teile geteilt | Bruch | 15 |
+| **Grundstein**, **Deckstein** | unterste und oberste Steine der Zahlenmauer | – | 16 |
+| **Rechendreieck** | außen steht, was die zwei Innenzahlen an dieser Seite zusammen sind (in der Anleitung: Innenzahl, Außenzahl) | – | 16 |
+| **magisches Quadrat** | jede Reihe, Spalte und Schräge ergibt dieselbe Zahl (auf den Blättern: „magische Zahl“, „Linie“, „Schräge“) | Diagonale (nur in der Anleitung) | 17 |
+| **Muster** | was sich wiederholt oder regelmäßig wächst (Zahlenfolgen heißen auf den Blättern „Zahlen-Kette“) | Folge | 17 |
+| **Dreieck**, **Viereck**, **Quadrat**, **Rechteck**, **Kreis**, **Ecke**, **Seite** | Formen; vor Einheit 18 nur umgangssprachlich (z. B. „Rechteck-Erobern“ in Einheit 14) | – | 18 |
+| **Gegenseite** | beim Würfel liegen sich 1 und 6, 2 und 5, 3 und 4 gegenüber und ergeben immer 7 | – | 19 |
+| **Trick** | ein Rechen-Zaubertrick, der immer funktioniert und den man erklären kann | – | 19 |
 
 ### Rund um die Werkstatt
 
