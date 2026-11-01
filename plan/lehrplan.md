@@ -288,22 +288,27 @@ Volksschule, Klasse, Lehrerin, Hausübung, Schultasche, Federpennal, Jänner, Fe
 | Finger-, Tempera- oder Wasserfarbe, Papier, kleiner Handspiegel | Klecksbild, Spiegel-Zauber | 3 |
 | 20 Zuckerl, Rosinen oder Muggelsteine | gerecht teilen (halbieren) | 3 |
 | Straßenkreide in 2 Farben, Maßband oder Meterstab (Regen: Malerkrepp und Filzstift) | Kreide-Zahlenstrahl | 4 |
-| Zahnstocher, Gummiringerl, Glas | Bündeln, Schätzglas | 7 |
-| Spielgeld (oder echtes Kleingeld) | Kaufladen | 9 |
+| etwa 100 Zahnstocher, 10–12 Gummiringerl, Glas mit 40–90 Nudeln oder Bohnen | Bündeln, Schätzglas, Stellenwerttafel, Übertrag | 7 |
+| Spielgeld von Blatt 9-3 (12 Zehn-Euro-Scheine, 20 Euro-Münzen) oder echtes Kleingeld, Schuhschachtel als Kassa | Kaufladen, Wechselgeld | 9 |
+| 2 Spielfiguren (Knöpfe oder Kugeln) | Hunderter-Rennen | 10 |
+| kleine Teller, Sackerl, 4 Kuscheltiere | Gruppen, verteilen und aufteilen | 13 |
+| quadratisches Faltpapier, eine quadratische Brotscheibe | Halbe und Viertel | 15 |
+| 6–10 gleiche Becher, Malerkrepp | Becher-Mauer | 16 |
+| 3 gleiche Würfel, 2 undurchsichtige Becher | Würfel-Trick, Becher-Beweis | 19 |
 | Stempel oder Sticker | Sammelpass | 1 |
 
 ---
 
 ## 8. Nach der Rückmeldung: so wird angepasst
 
-Der Rückmeldebogen (letzte Seite im PDF) fragt pro Einheit Spaß, Schwierigkeit, Dauer und was gut oder schlecht war. Daraus folgt:
+Der Rückmeldebogen (letzte Seiten im PDF) fragt pro Einheit Spaß, Schwierigkeit, Dauer und was gut oder schlecht war. Die Einheiten 6–20 sind schon ausformuliert; sie werden nach der Rückmeldung überarbeitet, nicht neu geplant. Daraus folgt:
 
-| Rückmeldung | Anpassung ab Einheit 6 |
+| Rückmeldung | Anpassung der Einheiten 6–20 |
 |---|---|
-| meist „zu leicht“ | Block A ab Einheit 6 straffen, schneller in Block B; Profi-Aufgaben zur Hauptaufgabe machen; schriftliches Rechnen früher |
+| meist „zu leicht“ | Einheit 6 straffen oder überspringen, schneller in Block B; Profi-Aufgaben zur Hauptaufgabe machen; untereinander rechnen (E11/E12) früher |
 | „passt“ | Plan wie oben |
 | meist „zu schwer“ | Einheit 6 als Wiederholungs-Einheit (Spiele aus 1–5), Profi-Teile kürzer |
-| Dauer > 30 Min | weniger Aufgaben pro Blatt, Ablauf mit 3 statt 5 Schritten |
+| Dauer > 30 Min | weniger Aufgaben pro Blatt, Ablauf mit 3 statt 5 Schritten; die Anleitungen der Einheiten 6–20 (meist 9–11 Seiten) kürzen |
 | Lieblingsspiel | in späteren Einheiten Varianten davon einbauen |
 | „mehr Bewegung / Basteln / Zaubertricks“ | Zaubertricks (E19) vorziehen und verteilen, Extras einschieben |
 | Sammelpass motiviert nicht | andere Belohnung (z. B. Sticker-Leiste, Zauberlehrling-Ränge) |
