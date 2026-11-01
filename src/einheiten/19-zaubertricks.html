@@ -1,0 +1,404 @@
+<!--
+  Einheit 19: Zahlen-Zaubertricks (Block D)
+  Drei echte Rechen-Tricks: Gedankenlese-Karten 1–31 (dicke Zahlen 1, 2, 4, 8, 16 zusammenzählen),
+  Würfel-Trick (Gegenseiten ergeben 7, Würfelturm: versteckt sind 21 minus die Zahl oben),
+  5er-Zauber „Denk dir eine Zahl“ (verdoppeln, plus 10, halbieren, minus Startzahl → immer 5).
+  Spiel: Kipp-Würfel bis 31. Bewegung: Würfelnetz-Hüpfen. Basteln: Zauberhut, Zauberstab, Karten, eigener Würfel.
+  Bauen:  ./baue.sh --nur 19 --png --dpi 110
+  Würfeltürme auf Blatt 19-2: Inline-SVG (Würfel schräg von vorne, a = 13, Tiefe 7 · 6,5; nur die Deckfläche hat Augen).
+  Würfelnetz-Profi auf Blatt 19-2: <m-wuerfelnetz gr="16"> mit Lösungs-Overlay (class="p2 lsg", gleiche Koordinaten).
+-->
+<section class="anleitung" data-einheit="19" data-titel="Zahlen-Zaubertricks">
+
+  <div class="kasten ziel">
+    <p>Heute wird Mathilda zur Rechen-Zauberin. Sie lernt drei echte Zahlen-Zaubertricks: Mit fünf Gedankenlese-Karten errät sie jede Zahl von 1 bis 31. Beim Würfelturm sagt sie voraus, wie viel fünf versteckte Würfelseiten zusammen ergeben. Und beim „Denk dir eine Zahl“ kommt immer 5 heraus, egal womit man anfängt. Ein <span class="begriff">Trick</span> ist hier weder Glück noch Schwindel: Er klappt jedes Mal, weil Rechnen dahintersteckt. Für den Würfel-Trick braucht sie die <span class="begriff">Gegenseite</span>, also die Seite, die unten liegt, wenn eine Zahl oben ist. Oben und unten ergeben beim Würfel zusammen immer 7.</p>
+    <p>Nebenbei übt Mathilda eine ganze Menge: mehrere Zahlen zusammenzählen (16 + 8 + 4 + 1), die Zerlegungen der 7, Rechnungen wie <span class="rechnung">21 − 4 = 17</span>, Verdoppeln und Halbieren aus Einheit 3 und das Rückwärtsrechnen mit der Umkehraufgabe. Das Wichtigste ist aber das Warum. Ein Zauberer verrät seine Tricks nicht, eine Rechen-Zauberin versteht sie. Zum Schluss plant Mathilda eine kleine Zaubershow und führt ihre Tricks der Familie vor.</p>
+  </div>
+
+  <div class="kasten material">
+    <ul>
+      <li><b>Ausdrucken:</b> die <a class="blattref" href="#blatt-19-1">Gedankenlese-Karten 19-1</a>, am besten auf dickeres Papier (160 g), sonst nach dem Ausschneiden auf Karton (Müslischachtel) kleben. Dazu Blatt <a class="blattref" href="#blatt-19-2"></a> und Blatt <a class="blattref" href="#blatt-19-3"></a>.</li>
+      <li><b>3 gleich große Würfel</b> mit Augen. Kurz prüfen, ob oben und unten zusammen 7 ergeben (bei fast allen Würfeln ist das so). Habt ihr nur 2, borgt euch einen aus einem anderen Spiel.</li>
+      <li><b>Für den Becher-Beweis:</b> 2 gleiche, undurchsichtige Becher (Joghurtbecher oder Häferl) und die 20 Kugeln aus Einheit 1.</li>
+      <li>Schere, Kleber, Buntstifte, Bleistift, Zettel, Sammelpass. Schön, aber nicht nötig: ein Geschirrtuch als Zaubertuch, Straßenkreide fürs Würfelnetz-Hüpfen (bei Regen Malerkrepp) und ein Wandkalender für „Schwerer machen“.</li>
+      <li><b>Zum Basteln</b> (auch an einem anderen Tag): dunkles Tonpapier (A3), Tixo, Alufolie oder Goldpapier, ein Essstäbchen oder ein gerader Ast, Kästchenpapier aus dem Rechenheft.</li>
+    </ul>
+    <p><b>Vorbereitung (10 Minuten, ohne Mathilda):</b> Schneide die sechs Karten von Blatt 19-1 aus. Mathilda soll sie vor deinem ersten Auftritt nicht sehen, denn zuerst darf sie staunen. <b>Die Karte „So zauberst du“ und den Rest des Blattes mit der Knobel-Ecke legst du beiseite</b>, beide verraten den Trick. Mathilda bekommt sie erst in Schritt 2. Probiere jeden Trick einmal allein aus, damit dein Auftritt sitzt.</p>
+  </div>
+
+  <h2>Ablauf Schritt für Schritt</h2>
+  <ol class="ablauf">
+    <li data-min="4"><span class="schritt-titel">Zauber-Auftakt: Ich lese deine Gedanken</span>Du führst den Kartentrick zwei- oder dreimal vor, mit Zaubertuch und großer Geste (siehe Beispielsätze). Mathilda darf rätseln, wie es geht. Verrate es noch nicht.</li>
+    <li data-min="6"><span class="schritt-titel">Das Geheimnis der dicken Zahlen</span>Gemeinsam lüftet ihr das Geheimnis: Man zählt die dicken Zahlen oben links auf den Karten zusammen, auf denen die gedachte Zahl steht. Dann Rollentausch: Mathilda zaubert, du denkst dir Zahlen (erst kleine wie 5 und 12, dann große wie 23 und 30). Zum Schluss die Knobel-Ecke von Blatt <a class="blattref" href="#blatt-19-1"></a>.</li>
+    <li data-min="6"><span class="schritt-titel">Würfel-Zauber</span>Mit einem Würfel entdeckt Mathilda die Gegenseiten. Dann führst du den Würfelturm vor (siehe Beispielsätze), und ihr findet gemeinsam heraus, warum er klappt. Danach Blatt <a class="blattref" href="#blatt-19-2"></a>, Aufgaben 1 und 2.</li>
+    <li data-min="5"><span class="schritt-titel">Spiel: Kipp-Würfel</span>Eine Runde bis 31 (Regeln unten). Der Würfel wird nur gekippt, und die Gegenseite kann dabei nie nach oben kommen. Genau das macht das Spiel knifflig. Wird die Zeit knapp, spielt ihr Kipp-Würfel lieber an einem anderen Tag in Ruhe.</li>
+    <li data-min="6"><span class="schritt-titel">Der 5er-Zauber</span>Du zauberst mündlich, Mathilda rechnet laut mit. Kennt sie den Trick schon aus Einheit 3 („Schwerer machen“), führt sie ihn dir vor. Dann der Becher-Beweis und Blatt <a class="blattref" href="#blatt-19-3"></a>, Aufgaben 1 und 2. Knobel-Ecke und Profi-Aufgabe passen gut an einen zweiten, kurzen Termin.</li>
+    <li data-min="3"><span class="schritt-titel">Zaubershow planen</span>Mathilda sucht sich ihre Tricks aus und übt die Ansage einmal mit dir. Die Show ist am schönsten beim Abendessen oder am Wochenende (Kasten „Die große Zaubershow“). Zum Schluss: Sammelpass stempeln, Sterne anmalen.</li>
+  </ol>
+
+  <h3>Beispielsätze</h3>
+  <div class="e19-zusammen">
+  <p>Beim ersten Kartentrick (die Karten liegen offen vor Mathilda):</p>
+  <div class="sag">
+    <p class="du">„Mathilda, ich kann Gedanken lesen. Denk dir eine Zahl von 1 bis 31, aber verrate sie mir nicht! Schau dir jede Karte an und gib mir alle Karten, auf denen deine Zahl steht.“</p>
+    <p class="sie">„Diese drei hier.“ (Sie gibt dir die Stern-, die Edelstein- und die Trank-Karte.)</p>
+    <p class="du">(Karten an die Stirn, Augen zu.) „Hmmm … ich sehe eine 13!“</p>
+    <p class="sie">„Woher weißt du das?!“</p>
+    <p class="dann">Mach den Trick noch ein- oder zweimal. Sagt Mathilda „Du hast geschummelt!“, freu dich: Sie sucht nach dem Trick. Beim dritten Mal gibst du einen Hinweis: „Schau dir die erste Zahl auf jeder Karte ganz genau an.“</p>
+  </div>
+  </div>
+  <div class="e19-zusammen">
+  <p>Beim Lüften des Geheimnisses:</p>
+  <div class="sag">
+    <p class="du">„Die 13 stand auf der Stern-, der Edelstein- und der Trank-Karte. Welche dicken Zahlen stehen dort oben links?“</p>
+    <p class="sie">„1, 4 und 8. … 8 plus 4 ist 12, plus 1 ist 13! Man muss nur die dicken Zahlen zusammenzählen!“</p>
+    <p class="dann">Lass sie alle dicken Zahlen vorlesen: 1, 2, 4, 8, 16. „Kennst du diese Zahlen?“ Es ist die Zauber-Verdoppelkette von Blatt 3-2: Jede Zahl ist das Doppelte der vorigen. Tipp fürs Kopfrechnen: mit der größten dicken Zahl anfangen, bei 16, 8 und 2 also 16 + 8 = 24 und 24 + 2 = 26.</p>
+  </div>
+  </div>
+  <div class="e19-zusammen">
+  <p>Wenn das Publikum eine Karte vergisst (spiel das ruhig einmal absichtlich):</p>
+  <div class="sag">
+    <p class="du">(Du denkst dir 7, gibst ihr aber nur die Stern- und die Edelstein-Karte.)</p>
+    <p class="sie">„1 plus 4 … deine Zahl ist 5!“</p>
+    <p class="du">„Leider nein. Ich hatte 7.“</p>
+    <p class="sie">„Dann hast du eine Karte vergessen! Es fehlen 2. Die Mond-Karte!“</p>
+    <p class="dann">So eine Antwort ist ein Glanzstück: Sie rechnet rückwärts und findet den Fehler des Publikums. Kommt sie nicht selbst darauf, frag: „Wie viel fehlt von 5 bis 7? Welche Karte hat diese dicke Zahl?“ Für die Show heißt das: langsam vorführen und bei jeder Karte einzeln fragen, „Ja oder nein?“.</p>
+  </div>
+  </div>
+  <div class="e19-zusammen">
+  <p>Beim Entdecken der Gegenseiten (ein Würfel liegt auf dem Tisch):</p>
+  <div class="sag">
+    <p class="du">„Oben liegt eine 6. Was glaubst du, liegt unten?“</p>
+    <p class="sie">(Sie dreht den Würfel um.) „Eine 1.“</p>
+    <p class="du">„Und wenn oben die 2 liegt? Und bei der 3?“</p>
+    <p class="sie">„Dann unten die 5. Und bei der 3 die 4. … Das sind ja immer zusammen 7!“</p>
+    <p class="dann">Jetzt den Begriff geben: „Die Seite genau gegenüber heißt Gegenseite. Beim Würfel ergeben Gegenseiten immer 7.“ Profi-Frage: „Warum gibt es nur drei Paare?“ (1 und 6, 2 und 5, 3 und 4. Jede Zahl hat genau eine Gegenseite.)</p>
+  </div>
+  </div>
+  <div class="e19-zusammen">
+  <p>Beim Würfelturm:</p>
+  <div class="sag">
+    <p class="du">(Du drehst dich um.) „Bau einen Turm aus den drei Würfeln, ganz wie du willst. Sag ‚fertig‘.“ … (Ein kurzer Blick, oben liegt die 4.) „Alle versteckten Seiten in deinem Turm ergeben zusammen 17.“</p>
+    <p class="sie">(Sie hebt die Würfel nacheinander ab und dreht jeden um.) „3 … und 2 und 5 … und 6 und 1. Wirklich 17! Wie geht das?“</p>
+    <p class="dann">Versteckt sind 5 Seiten: die Unterseite des obersten Würfels und oben und unten an den zwei Würfeln darunter, im Beispiel <span class="rechnung">3 + 2 + 5 + 6 + 1 = 17</span>. Die Erklärung findet ihr gemeinsam: „Jeder Würfel hat oben und unten zusammen 7. Drei Würfel sind 7 + 7 + 7 = 21. Davon siehst du nur die oberste Zahl: 21 − 4 = 17.“ Beim Nachzählen hilft es, paarweise zu rechnen: 2 und 5 sind 7, 6 und 1 sind 7.</p>
+  </div>
+  </div>
+  <div class="e19-zusammen">
+  <p>Beim 5er-Zauber:</p>
+  <div class="sag">
+    <p class="du">„Denk dir eine Zahl bis 10. Verdopple sie. Zähl 10 dazu. Halbiere das Ergebnis. Und jetzt zieh die Zahl ab, die du dir am Anfang gedacht hast. … Du hast 5!“</p>
+    <p class="sie">„Ja! Ich hatte 8. Dann 16, dann 26, dann 13, und 13 minus 8 ist 5. Woher weißt du das?“</p>
+    <p class="dann">Probiert es gleich mit einer anderen Zahl. Kommt wieder 5 heraus, fragt Mathilda meist von selbst: „Kommt immer 5 heraus?“ Dann ist der Becher-Beweis dran. Bekommt sie ein anderes Ergebnis, rechnet ihr die Kette auf einem Zettel nach. Meistens lag es am Halbieren (26 halbiert ist 13) oder sie hat 10 statt ihrer Zahl abgezogen.</p>
+  </div>
+  </div>
+
+  <div class="kasten tipp darf-brechen" data-titel="Warum immer 5? Der Becher-Beweis">
+    <p>Leg heimlich unter beide Becher gleich viele Kugeln, höchstens 5 (zum Beispiel je 3). Die Kugeln unter einem Becher sind die gedachte Zahl, niemand weiß, wie viele es sind. Dann spielt ihr den Trick mit Material nach:</p>
+    <ol>
+      <li><b>„Denk dir eine Zahl“:</b> 1 Becher steht auf dem Tisch.</li>
+      <li><b>„Verdopple“:</b> Der zweite Becher kommt dazu, darunter liegen genauso viele Kugeln.</li>
+      <li><b>„Zähl 10 dazu“:</b> 10 Kugeln offen neben die Becher legen.</li>
+      <li><b>„Halbiere“:</b> Alles gerecht teilen, auf jede Seite 1 Becher und 5 Kugeln. Eine Hälfte kommt weg.</li>
+      <li><b>„Zieh deine Zahl ab“:</b> Der Becher kommt weg, denn darunter war genau die gedachte Zahl.</li>
+    </ol>
+    <p>Übrig bleiben 5 Kugeln, egal wie viele unter dem Becher lagen. Jetzt darf Mathilda nachschauen: „Es waren 3. Mit 4 wäre es genauso gegangen!“ Der Satz, auf den du hinauswillst: „Die gedachte Zahl wird verdoppelt, halbiert und am Ende weggenommen. Übrig bleibt nur die Hälfte von 10.“</p>
+  </div>
+
+  <h2>Spiele, Bewegung und Basteln</h2>
+
+  <div class="kasten spiel darf-brechen" data-titel="Kipp-Würfel">
+    <p class="spiel-meta">2 Personen · ca. 5 Minuten pro Runde · 1 Würfel · Zettel und Stift</p>
+    <p><b>Idee:</b> Der Würfel wird nur einmal am Anfang geworfen, danach immer nur gekippt. Die Zahl, die nach dem Kippen oben liegt, kommt zum Stand dazu. Wer genau 31 erreicht, gewinnt. Wer über 31 kommt, verliert.</p>
+    <p><b>Vorbereitung:</b> Zettel und Stift in die Mitte, den Würfel daneben auf eine glatte Unterlage (Tisch, Brett). Mathilda beginnt, in der nächsten Runde du.</p>
+    <ol class="regeln">
+      <li><b>Start:</b> Mathilda würfelt einmal. Die Zahl oben ist der Startstand. Sie schreibt sie auf den Zettel, zum Beispiel 5.</li>
+      <li><b>Kippen:</b> Jetzt bist du dran. Du würfelst nicht, sondern kippst den Würfel genau einmal über eine Kante: Finger oben auf den Würfel, und er fällt auf die Nachbarseite. Die neue Zahl oben zählst du zum Stand dazu, sagst laut „5 plus 3 ist 8“ und schreibst 8 auf. Dann kippt Mathilda, dann wieder du, immer abwechselnd.</li>
+      <li><b>Was geht, was nicht?</b> Beim Kippen kommt immer eine der vier Seitenflächen nach oben. Die Zahl, die gerade oben liegt, und ihre Gegenseite unten kann man nie bekommen. Liegt oben die 5, sind die 5 und die 2 unmöglich. Möglich sind 1, 3, 4 und 6.</li>
+      <li><b>Gewonnen:</b> Wer den Stand genau auf 31 bringt, gewinnt sofort.</li>
+      <li><b>Verloren:</b> Wer über 31 kommt, verliert. Gekippt werden muss immer, auch wenn alle vier Möglichkeiten über 31 führen.</li>
+      <li><b>Sonderfälle:</b> Rollt der Würfel weiter oder liegt er schief, wird er zurückgelegt und noch einmal gekippt. Drehen oder Hochheben gilt nicht. Wer sich verrechnet, wird verbessert, dann geht es normal weiter.</li>
+    </ol>
+    <p><b>Beispielrunde:</b> Mathilda würfelt eine 5, der Stand ist 5. Du kippst auf die 3, Stand 8. Mathilda kippt auf die 6, Stand 14 (die 3 und die 4 waren unmöglich). Du kippst auf die 5, Stand 19. Mathilda kippt auf die 4, Stand 23. Du kippst auf die 2, Stand 25. Jetzt braucht Mathilda genau 6. Oben liegt die 2, unmöglich sind also nur die 2 und die 5. Sie kippt auf die 6: <span class="rechnung">25 + 6 = 31</span>. Gewonnen!</p>
+    <p><b>Gut zu wissen:</b> Eine Runde dauert meistens 7 bis 10 Kipp-Züge und endet sicher, weil der Stand mit jedem Zug um mindestens 1 wächst. Ab etwa 22 lohnt es sich, vor jedem Kippen nachzudenken. Eine typische Falle: Steht es 30 und oben liegt die 1 oder die 6, verliert, wer dran ist. Die nötige 1 bekommt man nicht (bei der 1 oben ist sie unmöglich, bei der 6 oben ist sie die Gegenseite), und alles andere geht über 31.</p>
+    <p><b>Varianten:</b></p>
+    <ul>
+      <li><b>Kipp-Würfel bis 20 am Kreide-Zahlenstrahl (leichter, mit Bewegung):</b> Auf dem Kreide-Zahlenstrahl 0–20 aus Einheit 4 ist Mathilda die Spielfigur. Sie steht immer auf dem aktuellen Stand und hüpft nach jedem Kippen, egal wer gekippt hat, so viele Hüpfer weiter, wie oben liegt. Wer genau auf die 20 kippt, gewinnt, wer darüber kippt, verliert.</li>
+      <li><b>Rückwärts-Kippen:</b> Von 31 wird schon die Startzahl abgezogen, dann jede gekippte Zahl. Wer genau 0 erreicht, gewinnt, wer unter 0 käme, verliert. Gute Übung für zurück über die Zehn.</li>
+      <li><b>Kipp-Würfel bis 50 (Profi):</b> Das Ziel ist 50. Dabei kommen viele Rechnungen über den Zehner vor, zum Beispiel <span class="rechnung">38 + 5 = 43</span>.</li>
+    </ul>
+  </div>
+
+  <div class="kasten bewegung darf-brechen" data-titel="Würfelnetz-Hüpfen">
+    <div class="e19-netz-anl">
+      <div>
+        <p><b>Bauen:</b> Zeichne mit Kreide ein großes Würfelnetz in Kreuzform: 4 Quadrate untereinander (je etwa 40 cm groß), dazu links und rechts neben dem zweiten Quadrat je ein weiteres. Male die Augen hinein wie auf der Skizze: in der langen Reihe von oben 1, 2, 6, 5, links neben der 2 die 3, rechts die 4. Bei Regen: Malerkrepp im Gang und Zettel mit den Zahlen.</p>
+        <p><b>Das Geheimnis des Netzes:</b> Gegenseiten liegen im Netz nie nebeneinander, zwischen ihnen liegt immer genau ein Feld. Die 1 und die 6 haben die 2 zwischen sich, die 2 und die 5 die 6, die 3 und die 4 die 2.</p>
+      </div>
+      <m-wuerfelnetz gr="11" augen="1 2 6 5 3 4"></m-wuerfelnetz>
+    </div>
+    <ul>
+      <li><b>Gegenseiten-Sprung:</b> Du rufst eine Zahl. Mathilda springt auf das Feld und dann mit einem großen Sprung über ein Feld hinweg auf die Gegenseite. Dabei ruft sie zum Beispiel: „2 und 5 sind 7!“ (Bei der 3 springt sie über die 2 auf die 4, bei der 1 über die 2 auf die 6.)</li>
+      <li><b>Oben oder unten?</b> Du würfelst mit einem echten Würfel und rufst „oben“ oder „unten“. Bei „oben“ springt Mathilda auf die gewürfelte Zahl, bei „unten“ auf ihre Gegenseite. Bei einer 2 und „unten“ landet sie also auf der 5.</li>
+      <li><b>Nachbarn finden:</b> „Stell dich auf die 2. Welche Zahlen sind am echten Würfel deine Nachbarn?“ (1, 3, 4 und 6, also alle außer der 5. Im Netz berühren genau diese vier Felder die 2.) Dann Rollentausch: Mathilda ruft, du springst und irrst dich ab und zu absichtlich.</li>
+    </ul>
+  </div>
+
+  <div class="kasten basteln darf-brechen" data-titel="Zauberkarten, Zauberhut und Zauberstab">
+    <ul>
+      <li><b>Zauberkarten:</b> Mathilda klebt die sechs Karten von Blatt 19-1 auf Karton und malt die Bilder an. Alle Rückseiten bemalt sie gleich (zum Beispiel mit Sternen), dann sehen sie aus wie echte Zauberkarten. Für die Riesen-Karten bis 63 („Schwerer machen“) bleiben die Rückseiten frei. Aufbewahren in einem Kuvert mit Zauberhut drauf.</li>
+      <li><b>Zauberhut:</b> Den dunklen Bogen zu einem spitzen Stanitzel rollen, das auf Mathildas Kopf passt, mit Tixo festkleben und unten gerade abschneiden. Sterne und einen Mond aus Alufolie oder Goldpapier aufkleben.</li>
+      <li><b>Zauberstab:</b> Essstäbchen oder Ast mit dunklem Papier umwickeln, an die Spitze Alufolie oder einen Stern aus Goldpapier kleben.</li>
+      <li><b>Eigener Zauberwürfel (für Profis):</b> Auf Kästchenpapier ein Würfelnetz in Kreuzform zeichnen wie beim Würfelnetz-Hüpfen, jedes Feld 4 Kästchen breit und 4 Kästchen hoch. Mathilda malt die Augen selbst hinein, sodass Gegenseiten 7 ergeben. Ausschneiden, an den Linien falten, mit Tixo zukleben. Probe: Würfeln und umdrehen, ergeben oben und unten 7?</li>
+    </ul>
+    <p>Dauer: etwa 30 Minuten, mit Zauberwürfel 45, am besten an einem Nachmittag vor der Show.</p>
+  </div>
+
+  <div class="kasten tipp darf-brechen" data-titel="Die große Zaubershow: Ansage, Üben, Vorführen">
+    <p><b>Ansage:</b> Mathilda überlegt sich einen Zauberinnen-Namen („Die große Mathilda“) und eine Begrüßung: „Meine Damen und Herren, liebe Kuscheltiere! Heute lese ich eure Gedanken!“ Dazu ein Zauberspruch: „Abrakadabra, eins, zwei, drei, die Zahl ist schon dabei!“</p>
+    <p><b>Üben:</b> Jeden Trick zwei- bis dreimal mit dir als Publikum. Mach dabei typische Publikumsfehler (eine Karte vergessen, falsch halbieren), damit Mathilda lernt, einen Trick zu retten. Gute Reihenfolge: Kartentrick, Würfelturm und als Finale der 5er-Zauber mit allen Zuschauern gleichzeitig. Jeder denkt sich eine Zahl, alle rechnen still, und auf „drei“ rufen alle: „Fünf!“</p>
+    <p><b>Vorführen:</b> Zaubertuch, Hut, Zauberstab, nach jedem Trick eine Verbeugung. Zwei Zauberer-Regeln: Den 5er-Zauber führt man jeder Person nur einmal vor, sonst merkt sie, dass immer 5 herauskommt (für ein zweites Mal: plus 8 statt plus 10, dann kommt 4 heraus). Und ob Mathilda nach der Show ein Geheimnis verrät, entscheidet sie selbst. Die Show darf auch nur für dich und ein paar Kuscheltiere sein.</p>
+  </div>
+
+  <h2>Wenn es hakt oder zu leicht ist</h2>
+
+  <div class="kasten stolper darf-brechen">
+    <ul>
+      <li><b>Sie zählt beim Kartentrick die falschen Zahlen zusammen,</b> zum Beispiel alle Zahlen der ersten Reihe. Zeig noch einmal: „Nur die dicke Zahl oben links zählt. Die anderen Zahlen sind für das Publikum zum Suchen da.“ Die dicken Zahlen darf sie mit Farbe nachmalen.</li>
+      <li><b>Vier oder fünf dicke Zahlen sind zu viel für den Kopf.</b> Mit der größten anfangen und Schritt für Schritt weiter: 16 + 8 = 24, 24 + 2 = 26, 26 + 1 = 27. In der Show darf sie die Karten nebeneinanderlegen und mit dem Finger tippen.</li>
+      <li><b>Das Publikum übersieht seine Zahl.</b> Dann stimmt das Ergebnis nicht, und Mathilda ist enttäuscht. Erkläre ihr, dass nicht der Trick schuld ist. Gegenmittel: jede Karte einzeln zeigen und fragen „Ja oder nein?“</li>
+      <li><b>Gegenseite und Nachbarseite verwechselt.</b> Lass sie den Würfel zwischen Daumen und Zeigefinger halten, einen Finger oben, einen unten: „Die zwei Seiten, die deine Finger berühren, sind Gegenseiten.“</li>
+      <li><b>Beim Würfelturm zählt sie die oberste Zahl mit</b> oder vergisst die Unterseite des untersten Würfels. Beim Nachzählen jeden Würfel einzeln hochheben und umdrehen. Versteckt sind genau 5 Seiten, sichtbar ist nur die oberste.</li>
+      <li><b><span class="rechnung">21 − 4</span> macht Mühe.</b> Das ist ein Sprung zurück über die 20, wie in Einheit 5 zurück über die Zehn: erst 21 − 1 = 20, dann 20 − 3 = 17. Oder ergänzen: Von 4 bis 21 sind es 17.</li>
+      <li><b>Beim 5er-Zauber kommt nicht 5 heraus.</b> Meistens ging beim Halbieren etwas schief (26 halbiert ist 13), oder sie hat 10 statt ihrer gedachten Zahl abgezogen. Kette aufschreiben und die Startzahl einkreisen: „Die eingekreiste Zahl kommt am Ende weg.“ Für die Show gilt außerdem: „Denk dir eine Zahl bis 10.“ Mit großen Zahlen klappt es auch, aber man verrechnet sich leichter.</li>
+      <li><b>Beim Kipp-Würfel dreht sie den Würfel auf die Zahl, die sie braucht.</b> Zeig das Kippen langsam: ein Finger oben, und der Würfel fällt auf die Nachbarseite. Dass man nicht jede Zahl bekommt, ist ja gerade der Witz.</li>
+    </ul>
+  </div>
+
+  <div class="kasten leichter darf-brechen">
+    <ul>
+      <li><b>Weniger Karten:</b> Nur mit Stern-, Mond- und Edelstein-Karte zaubern. Dann denkt sich das Publikum eine Zahl von 1 bis 7, und Mathilda zählt höchstens 1 + 2 + 4 zusammen, gern mit Kugeln. Mit der Trank-Karte dazu geht es bis 15.</li>
+      <li><b>Würfelturm aus 2 Würfeln:</b> Versteckt sind 7 + 7 = 14 minus die Zahl oben, bei der 5 oben also 9. Die drei Paare der Gegenseiten (1 und 6, 2 und 5, 3 und 4) dürfen auf einem Zettel neben den Würfeln liegen.</li>
+      <li><b>Echter Würfel dazu:</b> Bei Blatt 19-2, Aufgabe 1 legt Mathilda einen Würfel mit der Zahl oben hin, dreht ihn um und schaut nach.</li>
+      <li>Den 5er-Zauber nur mit Zahlen von 1 bis 5 und mit den Bechern spielen, Blatt 19-3 an einem anderen Tag. Kipp-Würfel nur bis 20 spielen.</li>
+    </ul>
+  </div>
+
+  <div class="kasten schwerer darf-brechen">
+    <p class="e19-vorrat">Mathilda ist schnell, darum hier ein ganzer Vorrat. Sucht aus, was Spaß macht. Die Lösungen stehen in Klammern.</p>
+    <ol>
+      <li><div class="e19-karte32"><m-zauberkarte wert="32" bis="63" spalten="8" gr="10"></m-zauberkarte></div><b>Riesen-Karten bis 63.</b> Eine 6. Karte mit der dicken 32: Darauf stehen alle Zahlen von 32 bis 63 (rechts). Damit auch die anderen fünf Karten bis 63 reichen, schreibt Mathilda auf ihre Rückseite jede Zahl der Vorderseite plus 32. Auf der Stern-Karte wird aus 1 die 33, aus 3 die 35 und so weiter bis <span class="rechnung">31 + 32 = 63</span>. Eine lange, aber lohnende Rechenarbeit (30 dazu, dann 2 dazu). Das Publikum sucht dann auf beiden Seiten. Danach errät sie jede Zahl bis 63. (<span class="rechnung">45 = 32 + 8 + 4 + 1</span>, also Riesen-, Trank-, Edelstein- und Stern-Karte. <span class="rechnung">50 = 32 + 16 + 2</span>. Die 63 steht auf allen sechs Karten.)</li>
+      <li><b>Gedanken lesen ohne Karten.</b> „Auf welchen Karten steht die 20?“ (Auf der Drachen- und der Edelstein-Karte, denn 16 + 4 = 20.) Weiter mit 11 (Trank, Mond und Stern: 8 + 2 + 1), 27 (<span class="rechnung">16 + 8 + 2 + 1</span>) und 30 (<span class="rechnung">16 + 8 + 4 + 2</span>). Trick: Immer die größte dicke Zahl nehmen, die noch hineinpasst, und mit dem Rest weitermachen. Forscherfrage: „Welche Zahlen stehen auf nur einer einzigen Karte?“ (1, 2, 4, 8 und 16, die dicken Zahlen selbst.)</li>
+      <li><b>Warum ergeben Gegenseiten 7?</b> „Wie viele Augen hat ein Würfel insgesamt?“ (<span class="rechnung">1 + 2 + 3 + 4 + 5 + 6 = 21</span>.) „Kann man die sechs Seiten auch anders in drei Paare mit derselben Summe einteilen?“ (Nein. 21 auf drei gleiche Paare heißt: jedes Paar ist 7. Dann muss die 6 zur 1, die 5 zur 2 und die 4 zur 3.)</li>
+      <li><b>Größere Türme.</b> Turm aus 4 Würfeln: versteckt sind 28 minus die Zahl oben, denn <span class="rechnung">7 + 7 + 7 + 7 = 28</span>. Turm aus 5 Würfeln: 35 minus oben. „Und bei 10 Würfeln?“ (70 minus oben.) Das ist ein Vorgeschmack auf die 7er-Reihe: 4 · 7 = 28, 5 · 7 = 35, 10 · 7 = 70. Aufgabe: „Turm aus 5 Würfeln, oben liegt die 2.“ (33.)</li>
+      <li><b>Würfel-Röntgenblick.</b> Mathilda würfelt mit 3 Würfeln und sagt sofort, wie viel alle Unterseiten zusammen ergeben: 21 minus alle Oberseiten. (Oben 2, 5 und 6, zusammen 13. Unten also <span class="rechnung">21 − 13 = 8</span>. Probe: Die Unterseiten sind 5, 2 und 1, und <span class="rechnung">5 + 2 + 1 = 8</span>.)</li>
+      <li><b>Eigene Rechenketten-Tricks.</b> „Was passiert, wenn man statt 10 eine andere Zahl dazuzählt?“ (Plus 8 ergibt am Ende 4, plus 20 ergibt 10, plus 6 ergibt 3: immer die Hälfte der dazugezählten Zahl.) „Was musst du dazuzählen, damit 7 herauskommt?“ (14.) „Warum geht plus 7 nicht?“ (Dann kann man nicht mehr gerecht halbieren, es bleibt 1 übrig.) Noch ein Trick zum Vorführen: Denk dir eine Zahl, zähl 4 dazu, verdopple, zieh 6 ab, halbiere, zieh deine Zahl ab. (Es kommt immer 1 heraus. Mit 5 geht es 9, 18, 12, 6, 1.)</li>
+      <li><b>Gedankenlesen rückwärts.</b> „Denk dir eine Zahl. Verdopple sie. Zähl 3 dazu. Sag mir das Ergebnis.“ Mathilda rechnet rückwärts: zuerst 3 weg, dann halbieren. (17 ergibt 7, 25 ergibt 11, 13 ergibt 5, 43 ergibt 20.) Rückwärts wird auch die Reihenfolge umgedreht. Bei der Profi-Aufgabe auf Blatt 19-3 ist es genau andersherum, dort wird zuerst halbiert.</li>
+      <li><b>Kalender-Trick.</b> „Kreis im Kalender zwei Tage genau untereinander ein und sag mir nur, wie viel sie zusammen sind.“ Auf einem Monatsblatt mit einer Zeile pro Woche ist der untere Tag genau 7 Tage später. Mathilda rechnet: Summe minus 7, dann halbieren, das ist der obere Tag, der untere ist 7 mehr. (Summe 25 ergibt 25 − 7 = 18, die Hälfte ist 9, also der 9. und der 16. Summe 39 ergibt 39 − 7 = 32, also der 16. und der 23.) Profi mit Geteilt: Bei drei Tagen untereinander ist die Summe durch 3 der mittlere Tag. (Summe 36 ergibt 36 : 3 = 12, also der 5., 12. und 19.)</li>
+      <li><b>Kipp-Würfel-Rätsel.</b> Würfel hinlegen und ausprobieren: „Stand 27, oben liegt die 2. Kannst du sofort gewinnen?“ (Ja: Die 4 ist möglich, 27 + 4 = 31.) „Stand 27, oben liegt die 3?“ (Nein, die 4 ist die Gegenseite der 3, und 5 oder 6 gehen über 31. Du verlierst sogar sicher: Kippst du die 1, steht es 28 und ich kippe die 3 zur 31. Kippst du die 2, steht es 29, ich kippe die 1, und du stehst bei 30 mit der 1 oben: Jetzt musst du über 31.) „Stand 30: Bei welchen Zahlen oben verliert, wer dran ist?“ (Bei der 1 und der 6.)</li>
+    </ol>
+  </div>
+
+  <div class="kasten bonus">
+    <ol>
+      <li><b>Zwei Würfel:</b> „Ich habe zwei Würfel übereinandergestellt. Oben sehe ich eine 6. Wie viel ergeben die drei versteckten Seiten zusammen?“ <i>(Lösung: 8. Unter der 6 liegt die 1, und der untere Würfel hat oben und unten zusammen 7: <span class="rechnung">1 + 7 = 8</span>. Kurz: <span class="rechnung">14 − 6 = 8</span>.)</i></li>
+      <li><b>Zahl gesucht:</b> „Ich denke mir eine Zahl, verdopple sie und zähle 10 dazu. Jetzt habe ich 30. Welche Zahl habe ich gedacht?“ <i>(Lösung: 10. Rückwärts: <span class="rechnung">30 − 10 = 20</span>, die Hälfte von 20 ist 10.)</i></li>
+      <li><b>Dicke Zahlen:</b> „Die dicken Zahlen der Gedankenlese-Karten sind 1, 2, 4, 8 und 16. Jemand gibt dir die Karten mit der 16 und der 1. Welche Zahl ist es? Und welche Karten bekommst du für die 10?“ <i>(Lösung: 17. Für die 10 die Karten mit der 8 und der 2.)</i></li>
+    </ol>
+  </div>
+
+  <h2>Hintergrund</h2>
+
+  <div class="kasten warum darf-brechen">
+    <p><b>Gedankenlese-Karten:</b> Jede Zahl von 1 bis 31 lässt sich auf genau eine Weise aus verschiedenen Zahlen der Reihe 1, 2, 4, 8, 16 zusammensetzen, zum Beispiel <span class="rechnung">13 = 8 + 4 + 1</span>. Auf jeder Karte stehen genau die Zahlen, in deren Zerlegung die dicke Zahl vorkommt. Wer verrät, auf welchen Karten die Zahl steht, verrät also ihre Bausteine, und die muss man nur noch zusammenzählen. Das ist das Zweiersystem, mit dem jeder Computer rechnet: Jede Karte ist eine Ja-Nein-Frage, und fünf solche Fragen unterscheiden <span class="rechnung">2 · 2 · 2 · 2 · 2 = 32</span> Fälle (0 bis 31). Mit der sechsten Karte sind es 64.</p>
+    <p><b>Würfel:</b> Bei üblichen Würfeln ergeben Gegenseiten 7. Das ist alter Brauch, und weil die Augenzahlen zusammen 21 sind, ist es auch die einzige Einteilung in drei Paare mit gleicher Summe. Im Turm aus drei Würfeln liegen drei solche Paare übereinander, zusammen <span class="rechnung">3 · 7 = 21</span>. Sichtbar ist nur die oberste Zahl. Die Seitenflächen spielen keine Rolle, darum darf der Turm beliebig gedreht sein.</p>
+    <p><b>5er-Zauber:</b> Nennen wir die gedachte Zahl „Becher“. Verdoppelt sind es 2 Becher, plus 10 sind es 2 Becher und 10, halbiert 1 Becher und 5, ohne den Becher bleibt 5. Die gedachte Zahl hebt sich auf. Der Becher-Beweis ist Mathildas erste Begegnung mit einer Variablen, ganz ohne Buchstaben: Man rechnet mit einer Zahl, die niemand kennt.</p>
+    <p><b>Kipp-Würfel:</b> Weil man nie die obere Zahl und ihre Gegenseite bekommt, muss man vorausdenken. Durchgerechnet gilt: Wer den Stand auf 22 bringt, kann bei klugem Weiterspielen immer gewinnen, ebenso auf 13 oder 4 (immer 9 Abstand). Der richtige Zug danach hängt davon ab, was oben liegt. Vielleicht entdeckt Mathilda nach vielen Runden selbst, dass die 22 eine gute Zahl ist.</p>
+  </div>
+
+  <h2>Lösungen</h2>
+  <div class="e19-loes">
+  <m-loesungen einheit="19" skala="0.38"></m-loesungen>
+  <div class="kasten loesung">
+    <p>Schwerer-Ideen und Bonus-Knobeleien: Lösungen dort in Klammern.</p>
+    <p><b>Blatt 19-1, Knobel-Ecke:</b> <span class="rechnung">1 + 4 + 8 = 13</span> und <span class="rechnung">2 + 16 = 18</span>. Auf allen fünf Karten steht die 31, denn <span class="rechnung">16 + 8 + 4 + 2 + 1 = 31</span>.</p>
+    <p><b>Blatt 19-2, Profi-Aufgabe:</b> Unten kommt die 6 hin (gegenüber der 1, dazwischen die 2), ganz unten die 5 (gegenüber der 2, dazwischen die 6), rechts die 4 (gegenüber der 3, dazwischen die 2). Augen malen oder Zahl schreiben, beides ist richtig. Turm aus 4 Würfeln: <span class="rechnung">28 − 3 = 25</span>.</p>
+    <p><b>Blatt 19-3, Aufgabe 2:</b> Mehrere Lösungen möglich. Am Ende steht immer 5, zum Beispiel 8, 16, 26, 13, 5. Erfindet Mathilda eigene Schritte (etwa plus 8 statt plus 10, dann kommt 4 heraus), ist das auch richtig, solange jede Rechnung stimmt.</p>
+    <p><b>Blatt 19-3, Knobel-Ecke:</b> Einkreisen: die 12 nach „halb“. Klecks hat falsch halbiert: Die Hälfte von 22 ist 11. Richtig ist 6, 12, 22, 11, 5.</p>
+    <p><b>Blatt 19-3, Profi-Aufgabe:</b> 6. Rückwärts mit umgedrehter Reihenfolge: zuerst halbieren (18 halbiert ist 9), dann 3 weg (<span class="rechnung">9 − 3 = 6</span>). Probe: <span class="rechnung">6 + 3 = 9</span>, verdoppelt 18. Wer zuerst 3 abzieht, bekommt 15, und 15 lässt sich nicht gerecht halbieren: ein Zeichen, dass die Reihenfolge nicht stimmt.</p>
+  </div>
+  </div>
+
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 19-1: Gedankenlese-Karten                                    -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="19" data-titel="Gedankenlese-Karten" data-art="Karten">
+  <div class="aufg ohne-nr">
+    <p class="anw">Mathilda, das sind deine Zauberkarten! Klebe sie auf Karton. Male die Bilder an.</p>
+  </div>
+  <m-karten spalten="2" zeilen="3" hoehe="53" breite="176">
+    <div><span class="e19-zk-kopf"><m-bild name="stern" gr="8"></m-bild>Stern-Karte</span><m-zauberkarte wert="1" spalten="4" gr="18"></m-zauberkarte></div>
+    <div><span class="e19-zk-kopf"><m-bild name="mond" gr="8"></m-bild>Mond-Karte</span><m-zauberkarte wert="2" spalten="4" gr="18"></m-zauberkarte></div>
+    <div><span class="e19-zk-kopf"><m-bild name="edelstein" gr="8"></m-bild>Edelstein-Karte</span><m-zauberkarte wert="4" spalten="4" gr="18"></m-zauberkarte></div>
+    <div><span class="e19-zk-kopf"><m-bild name="trank" gr="8"></m-bild>Trank-Karte</span><m-zauberkarte wert="8" spalten="4" gr="18"></m-zauberkarte></div>
+    <div><span class="e19-zk-kopf"><m-bild name="drache" gr="8"></m-bild>Drachen-Karte</span><m-zauberkarte wert="16" spalten="4" gr="18"></m-zauberkarte></div>
+    <div class="e19-spick">
+      <span class="e19-zk-kopf"><m-bild name="zauberhut" gr="9"></m-bild>So zauberst du</span>
+      <p>Sag: „Denk dir eine Zahl von 1 bis 31. Gib mir alle Karten mit deiner Zahl.“</p>
+      <p>Zähl dann heimlich die dicken Zahlen zusammen. Abrakadabra!</p>
+    </div>
+  </m-karten>
+  <div class="knobel" data-titel="Knobel-Ecke: Gedanken lesen">
+    <p>Mathilda, Papa hat dir diese Karten gegeben. Welche Zahl hat er gedacht?</p>
+    <div class="e19-lesen">
+      <span class="e19-mini"><m-bild name="stern" gr="7"></m-bild><b>1</b></span><span class="e19-mini"><m-bild name="edelstein" gr="7"></m-bild><b>4</b></span><span class="e19-mini"><m-bild name="trank" gr="7"></m-bild><b>8</b></span><span class="e19-pf">→</span><m-feld l="13"></m-feld>
+      <span class="e19-abst"></span>
+      <span class="e19-mini"><m-bild name="mond" gr="7"></m-bild><b>2</b></span><span class="e19-mini"><m-bild name="drache" gr="7"></m-bild><b>16</b></span><span class="e19-pf">→</span><m-feld l="18"></m-feld>
+    </div>
+    <p class="e19-alle">Welche Zahl steht auf allen fünf Karten? <m-feld l="31"></m-feld></p>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 19-2: Würfel-Trick                                           -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="19" data-titel="Würfel-Trick" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, oben und unten sind beim Würfel zusammen immer 7. Die Seite unten heißt Gegenseite. Welche Zahl liegt unten?</p>
+    <div class="e19-gegen">
+      <span class="e19-lab">oben</span>
+      <m-wuerfel n="6" gr="15"></m-wuerfel><m-wuerfel n="3" gr="15"></m-wuerfel><m-wuerfel n="5" gr="15"></m-wuerfel><m-wuerfel n="1" gr="15"></m-wuerfel><m-wuerfel n="4" gr="15"></m-wuerfel>
+      <span class="e19-lab">unten</span>
+      <m-feld l="1" art="k"></m-feld><m-feld l="4" art="k"></m-feld><m-feld l="2" art="k"></m-feld><m-feld l="6" art="k"></m-feld><m-feld l="3" art="k"></m-feld>
+    </div>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Würfelturm-Zauber! Wie viel ergeben alle versteckten Seiten?</p>
+    <p class="e19-satz">3 Würfel haben oben und unten zusammen <m-aufgabe>7 + 7 + 7 = _</m-aufgabe></p>
+    <p class="e19-satz">Du siehst nur die Zahl oben. Rechne 21 minus diese Zahl.</p>
+    <div class="e19-tuerme">
+      <div class="e19-turmzelle"><svg class="e19-turm" xmlns="http://www.w3.org/2000/svg" width="20.3mm" height="47.8mm" viewBox="0 0 20.3 47.8"><rect x="0.4" y="34.4" width="13" height="13" rx="1.2" fill="white" stroke="var(--tinte)" stroke-width="0.5"/><polygon points="13.4,35 19.9,27 19.9,38.8 13.4,46.8" fill="#e6e8f2" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><rect x="0.4" y="21.4" width="13" height="13" rx="1.2" fill="white" stroke="var(--tinte)" stroke-width="0.5"/><polygon points="13.4,22 19.9,14 19.9,25.8 13.4,33.8" fill="#e6e8f2" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><rect x="0.4" y="8.4" width="13" height="13" rx="1.2" fill="white" stroke="var(--tinte)" stroke-width="0.5"/><polygon points="13.4,9 19.9,1 19.9,12.8 13.4,20.8" fill="#e6e8f2" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><polygon points="1,8.4 7.5,0.4 19.9,0.4 13.4,8.4" fill="white" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><ellipse cx="8.66" cy="2.56" rx="1.25" ry="0.82" fill="var(--punkt)"/><ellipse cx="14.64" cy="2.56" rx="1.25" ry="0.82" fill="var(--punkt)"/><ellipse cx="5.67" cy="6.24" rx="1.25" ry="0.82" fill="var(--punkt)"/><ellipse cx="11.65" cy="6.24" rx="1.25" ry="0.82" fill="var(--punkt)"/></svg><m-aufgabe feld="k">21 − [4] = _</m-aufgabe></div>
+      <div class="e19-turmzelle"><svg class="e19-turm" xmlns="http://www.w3.org/2000/svg" width="20.3mm" height="47.8mm" viewBox="0 0 20.3 47.8"><rect x="0.4" y="34.4" width="13" height="13" rx="1.2" fill="white" stroke="var(--tinte)" stroke-width="0.5"/><polygon points="13.4,35 19.9,27 19.9,38.8 13.4,46.8" fill="#e6e8f2" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><rect x="0.4" y="21.4" width="13" height="13" rx="1.2" fill="white" stroke="var(--tinte)" stroke-width="0.5"/><polygon points="13.4,22 19.9,14 19.9,25.8 13.4,33.8" fill="#e6e8f2" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><rect x="0.4" y="8.4" width="13" height="13" rx="1.2" fill="white" stroke="var(--tinte)" stroke-width="0.5"/><polygon points="13.4,9 19.9,1 19.9,12.8 13.4,20.8" fill="#e6e8f2" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><polygon points="1,8.4 7.5,0.4 19.9,0.4 13.4,8.4" fill="white" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><ellipse cx="8.66" cy="2.56" rx="1.25" ry="0.82" fill="var(--punkt)"/><ellipse cx="11.65" cy="6.24" rx="1.25" ry="0.82" fill="var(--punkt)"/></svg><m-aufgabe feld="k">21 − [2] = _</m-aufgabe></div>
+      <div class="e19-turmzelle"><svg class="e19-turm" xmlns="http://www.w3.org/2000/svg" width="20.3mm" height="47.8mm" viewBox="0 0 20.3 47.8"><rect x="0.4" y="34.4" width="13" height="13" rx="1.2" fill="white" stroke="var(--tinte)" stroke-width="0.5"/><polygon points="13.4,35 19.9,27 19.9,38.8 13.4,46.8" fill="#e6e8f2" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><rect x="0.4" y="21.4" width="13" height="13" rx="1.2" fill="white" stroke="var(--tinte)" stroke-width="0.5"/><polygon points="13.4,22 19.9,14 19.9,25.8 13.4,33.8" fill="#e6e8f2" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><rect x="0.4" y="8.4" width="13" height="13" rx="1.2" fill="white" stroke="var(--tinte)" stroke-width="0.5"/><polygon points="13.4,9 19.9,1 19.9,12.8 13.4,20.8" fill="#e6e8f2" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><polygon points="1,8.4 7.5,0.4 19.9,0.4 13.4,8.4" fill="white" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/><ellipse cx="8.98" cy="2.16" rx="1.25" ry="0.82" fill="var(--punkt)"/><ellipse cx="14.96" cy="2.16" rx="1.25" ry="0.82" fill="var(--punkt)"/><ellipse cx="7.16" cy="4.4" rx="1.25" ry="0.82" fill="var(--punkt)"/><ellipse cx="13.14" cy="4.4" rx="1.25" ry="0.82" fill="var(--punkt)"/><ellipse cx="5.34" cy="6.64" rx="1.25" ry="0.82" fill="var(--punkt)"/><ellipse cx="11.32" cy="6.64" rx="1.25" ry="0.82" fill="var(--punkt)"/></svg><m-aufgabe feld="k">21 − [6] = _</m-aufgabe></div>
+    </div>
+  </div>
+
+  <div class="profi" data-titel="Profi-Aufgabe: Würfel-Profi">
+    <div class="e19-profi2">
+      <span class="e19-netz"><m-wuerfelnetz gr="16" augen="1 2 0 0 3 0"></m-wuerfelnetz><svg class="e19-netz-lsg" xmlns="http://www.w3.org/2000/svg" width="49.2mm" height="68.72mm" viewBox="0 0 49.2 68.72"><circle class="p2 lsg" cx="20.92" cy="36.12" r="1.28"/><circle class="p2 lsg" cx="28.28" cy="36.12" r="1.28"/><circle class="p2 lsg" cx="20.92" cy="40.6" r="1.28"/><circle class="p2 lsg" cx="28.28" cy="40.6" r="1.28"/><circle class="p2 lsg" cx="20.92" cy="45.08" r="1.28"/><circle class="p2 lsg" cx="28.28" cy="45.08" r="1.28"/><circle class="p2 lsg" cx="20.6" cy="52.6" r="1.28"/><circle class="p2 lsg" cx="28.6" cy="52.6" r="1.28"/><circle class="p2 lsg" cx="24.6" cy="56.6" r="1.28"/><circle class="p2 lsg" cx="20.6" cy="60.6" r="1.28"/><circle class="p2 lsg" cx="28.6" cy="60.6" r="1.28"/><circle class="p2 lsg" cx="36.92" cy="20.92" r="1.28"/><circle class="p2 lsg" cx="44.28" cy="20.92" r="1.28"/><circle class="p2 lsg" cx="36.92" cy="28.28" r="1.28"/><circle class="p2 lsg" cx="44.28" cy="28.28" r="1.28"/></svg></span>
+      <div class="e19-profi-text">
+        <p>Würfelnetz: Male die fehlenden Augen. Gegenseiten ergeben 7.</p>
+        <p class="e19-tipp">Tipp: Zwischen zwei Gegenseiten liegt im Netz immer ein Feld.</p>
+        <p>Ein Turm aus 4 Würfeln. Oben liegt die 3. Wie viel ist versteckt?</p>
+        <m-aufgabe>7 + 7 + 7 + 7 − 3 = _</m-aufgabe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 19-3: Denk dir eine Zahl (Rechenketten)                      -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="19" data-titel="Der 5er-Zauber" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, zaubere! Rechne die Zauberketten.</p>
+    <div class="e19-ketten">
+      <div class="e19-kette"><span class="e19-start">3</span><span class="e19-pfeil"><span>doppelt</span></span><m-feld l="6"></m-feld><span class="e19-pfeil"><span>+ 10</span></span><m-feld l="16"></m-feld><span class="e19-pfeil"><span>halb</span></span><m-feld l="8"></m-feld><span class="e19-pfeil"><span>− 3</span></span><m-feld l="5"></m-feld></div>
+      <div class="e19-kette"><span class="e19-start">7</span><span class="e19-pfeil"><span>doppelt</span></span><m-feld l="14"></m-feld><span class="e19-pfeil"><span>+ 10</span></span><m-feld l="24"></m-feld><span class="e19-pfeil"><span>halb</span></span><m-feld l="12"></m-feld><span class="e19-pfeil"><span>− 7</span></span><m-feld l="5"></m-feld></div>
+      <div class="e19-kette"><span class="e19-start">10</span><span class="e19-pfeil"><span>doppelt</span></span><m-feld l="20"></m-feld><span class="e19-pfeil"><span>+ 10</span></span><m-feld l="30"></m-feld><span class="e19-pfeil"><span>halb</span></span><m-feld l="15"></m-feld><span class="e19-pfeil"><span>− 10</span></span><m-feld l="5"></m-feld></div>
+    </div>
+    <p class="e19-satz e19-immer">Was kommt immer heraus? <m-feld l="5"></m-feld></p>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Jetzt du! Nimm deine eigene Startzahl. Schreib die Zauberkette in die Kästchen.</p>
+    <p class="e19-tipp e19-heft-tipp">In jedes Kästchen kommt eine Ziffer oder ein Pfeil.</p>
+    <div class="e19-heft">
+      <m-kaestchen b="17" h="2"></m-kaestchen>
+      <div class="lsg-nur e19-heft-lsg"><span style="grid-row:1;grid-column:1">8</span><span style="grid-row:1;grid-column:2">→</span><span style="grid-row:1;grid-column:3">1</span><span style="grid-row:1;grid-column:4">6</span><span style="grid-row:1;grid-column:5">→</span><span style="grid-row:1;grid-column:6">2</span><span style="grid-row:1;grid-column:7">6</span><span style="grid-row:1;grid-column:8">→</span><span style="grid-row:1;grid-column:9">1</span><span style="grid-row:1;grid-column:10">3</span><span style="grid-row:1;grid-column:11">→</span><span style="grid-row:1;grid-column:12">5</span><span class="e19-heft-hinweis" style="grid-row:2;grid-column:1 / span 17">Mehrere Lösungen möglich. Am Ende steht immer 5.</span></div>
+    </div>
+  </div>
+
+  <div class="knobel e19-knobel-k" data-titel="Knobel-Ecke: Kobold Klecks zaubert">
+    <svg class="e19-klecks" xmlns="http://www.w3.org/2000/svg" width="24mm" height="24mm" viewBox="0 0 100 100" aria-label="Kobold Klecks"><path fill="white" stroke="#1f2340" stroke-width="3.2" stroke-linejoin="round" d="M50 14 C60 12 64 22 72 24 C84 26 90 36 85 46 C81 54 90 60 86 70 C82 82 69 80 61 86 C53 92 43 90 37 84 C29 78 16 82 13 70 C10 60 19 54 15 44 C12 34 21 25 32 25 C41 25 40 16 50 14 Z"/><circle fill="white" stroke="#1f2340" stroke-width="3.2" cx="89" cy="18" r="4"/><circle fill="white" stroke="#1f2340" stroke-width="3.2" cx="10" cy="89" r="3.5"/><circle fill="white" stroke="#1f2340" stroke-width="3" cx="40" cy="48" r="8"/><circle fill="#1f2340" cx="42" cy="50" r="3.5"/><circle fill="white" stroke="#1f2340" stroke-width="3" cx="61" cy="48" r="8"/><circle fill="#1f2340" cx="63" cy="50" r="3.5"/><path fill="none" stroke="#1f2340" stroke-width="3.2" stroke-linecap="round" d="M38 66 Q50 76 63 66"/></svg>
+    <p class="e19-klecks-p">Kobold Klecks hat gezaubert. Es kommt nicht 5 heraus! Wo hat er sich verrechnet? Kreis die falsche Zahl ein.</p>
+    <div class="e19-kette e19-kette-fertig"><span class="e19-start">6</span><span class="e19-pfeil"><span>doppelt</span></span><span class="e19-zahl">12</span><span class="e19-pfeil"><span>+ 10</span></span><span class="e19-zahl">22</span><span class="e19-pfeil"><span>halb</span></span><span class="e19-zahl e19-falsch">12</span><span class="e19-pfeil"><span>− 6</span></span><span class="e19-zahl">6</span></div>
+    <p class="e19-richtig">Welche Zahl ist dort richtig? <m-feld l="11"></m-feld></p>
+  </div>
+
+  <div class="profi" data-titel="Profi-Aufgabe: Gedankenlesen rückwärts">
+    <p>Papa denkt sich eine Zahl. Er zählt 3 dazu und verdoppelt. Er sagt: „18“.</p>
+    <p class="e19-satz">Welche Zahl hat Papa gedacht? <m-feld l="6"></m-feld> <span class="e19-hinweis">Rechne rückwärts!</span></p>
+  </div>
+</section>
+
+<style>
+  .e19-zusammen { break-inside: avoid; }
+  /* Lösungen: drei verkleinerte Blätter und der Text-Kasten in einem Raster */
+  .e19-loes { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 4mm; align-items: start; margin: 2mm 0 4mm 0; }
+  .e19-loes m-loesungen, .e19-loes .loesungen-raster { display: contents; }
+  .e19-loes > .kasten.loesung { margin: 5mm 0 0 0; font-size: 9pt; line-height: 1.35; }
+  .e19-loes > .kasten.loesung p { margin-bottom: 1.4mm; }
+  .e19-vorrat { break-after: avoid; }
+  .e19-vorrat + ol > li:first-child { break-inside: avoid; }
+  .e19-karte32 { float: right; margin: 1mm 0 1mm 4mm; padding: 1.5mm 2.5mm; border: 0.35mm dashed var(--grau); border-radius: 2mm; background: white; }
+  .e19-netz-anl { display: flex; gap: 5mm; align-items: flex-start; }
+  .e19-netz-anl > div { flex: 1; }
+
+  /* Blatt 19-1: Karten */
+  .e19-zk-kopf { display: inline-flex; align-items: center; gap: 2mm; font-family: var(--text); font-weight: 800; font-size: 14pt; line-height: 1; }
+  .e19-zk-kopf svg { display: block; }
+  .karte.e19-spick { align-items: flex-start; justify-content: center; text-align: left; padding: 0 6mm; gap: 2mm; }
+  .e19-spick p { margin: 0; font-size: 14pt; line-height: 1.25; }
+  .e19-lesen { display: flex; align-items: center; gap: 2mm; flex-wrap: nowrap; margin: 1mm 0 3mm 0; }
+  .e19-mini { display: inline-flex; align-items: center; gap: 1.2mm; border: 0.5mm solid var(--tinte); border-radius: 2mm; padding: 1mm 2mm; background: white; line-height: 1; }
+  .e19-mini svg { display: block; }
+  .e19-mini b { font-size: 18pt; color: var(--akzent); }
+  .e19-pf { font-size: 20pt; color: var(--akzent); font-weight: 700; padding: 0 1mm; }
+  .e19-abst { flex: 1; }
+  .knobel > p.e19-alle { margin: 0; display: flex; align-items: center; gap: 3mm; }
+
+  /* Blatt 19-2: Würfel */
+  .e19-gegen { display: grid; grid-template-columns: 22mm repeat(5, 1fr); align-items: center; justify-items: center; gap: 3mm 4mm; }
+  .e19-lab { justify-self: start; color: var(--grau); }
+  .e19-satz { margin: 0 0 3mm 0; display: flex; align-items: center; gap: 3mm; flex-wrap: wrap; }
+  .e19-tuerme { display: flex; justify-content: space-around; margin-top: 2mm; }
+  .e19-turmzelle { display: flex; flex-direction: column; align-items: center; gap: 2.5mm; }
+  .e19-turmzelle svg.e19-turm { display: block; overflow: visible; width: 23mm; height: auto; }
+  .e19-turmzelle .aufgabe { font-size: 19pt; gap: 1.3mm; }
+  /* Ergebnis zweistellig: zwei Kästchen wie im Rechenheft */
+  .e19-turmzelle m-aufgabe .feld.k:last-child { width: 20mm; min-width: 20mm; }
+  .e19-profi2 { display: flex; align-items: center; gap: 8mm; }
+  .e19-netz { position: relative; display: inline-block; line-height: 0; flex: none; }
+  .e19-netz > svg.e19-netz-lsg { position: absolute; left: 0; top: 0; overflow: visible; }
+  .e19-profi-text { flex: 1; }
+  .e19-profi-text p { margin: 0 0 2mm 0; }
+  .e19-tipp { color: var(--grau); }
+  .e19-heft-tipp { margin: -1mm 0 2.5mm 0; }
+
+  /* Blatt 19-3: Rechenketten */
+  .e19-ketten { display: flex; flex-direction: column; gap: 3mm; }
+  .e19-kette { display: flex; align-items: center; gap: 1.2mm; padding-top: 6mm; }
+  .e19-start, .e19-zahl { display: inline-flex; align-items: center; justify-content: center; width: 20mm; height: 10mm; border-radius: 1.2mm; font-size: 20pt; line-height: 1; box-sizing: border-box; flex: none; }
+  .e19-start { border: 0.55mm solid var(--akzent); background: var(--akzent-hell); font-weight: 700; }
+  .e19-zahl { border: 0.4mm dashed var(--grau); background: white; }
+  .loesungsmodus .e19-falsch { border: 0.8mm solid var(--rot); border-radius: 50%; }
+  .e19-pfeil { position: relative; display: inline-block; width: 15mm; height: 10mm; flex: none; }
+  .e19-pfeil::after { content: ""; position: absolute; left: 1mm; right: 2.4mm; top: 50%; border-top: 0.6mm solid var(--akzent); }
+  .e19-pfeil::before { content: ""; position: absolute; right: 0.8mm; top: calc(50% - 1.6mm); border-left: 2.4mm solid var(--akzent); border-top: 1.6mm solid transparent; border-bottom: 1.6mm solid transparent; }
+  .e19-pfeil > span { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 14pt; line-height: 1; color: var(--akzent); font-weight: 700; padding-bottom: 0.5mm; }
+  .e19-immer { margin: 4mm 0 0 0; }
+  .e19-heft { position: relative; display: inline-block; line-height: 0; }
+  .e19-heft m-kaestchen { display: block; }
+  .loesungsmodus .lsg-nur.e19-heft-lsg { display: grid; }
+  .e19-heft-lsg { position: absolute; left: 0.2mm; top: 0.2mm; grid-template-columns: repeat(17, 10mm); grid-auto-rows: 10mm; font-size: 20pt; line-height: 1; margin: 0; }
+  .e19-heft-lsg span { display: flex; align-items: center; justify-content: center; }
+  .e19-heft-lsg span.e19-heft-hinweis { justify-content: flex-start; padding-left: 2mm; font-size: 14pt; }
+  .e19-knobel-k > svg.e19-klecks { position: absolute; right: 5mm; top: 2.5mm; }
+  .knobel > p.e19-klecks-p { margin: 0 26mm 0 0; }
+  .e19-kette-fertig { margin-bottom: 2mm; padding-top: 5.5mm; }
+  .knobel > p.e19-richtig { display: flex; align-items: center; gap: 3mm; margin: 0; }
+  .e19-hinweis { color: var(--grau); margin-left: 4mm; }
+</style>

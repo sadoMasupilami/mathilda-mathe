@@ -1,0 +1,384 @@
+<!--
+  Einheit 15: Gerecht teilen (Block C)
+  Geteilt als Verteilen und Aufteilen, Rest, Umkehraufgabe Mal ↔ Geteilt, Halbe und Viertel.
+  Bauen und ansehen:  ./baue.sh --nur 15 --png --dpi 110
+  Rest-Rechnungen („13 : 4 = 3 Rest 1“) stehen immer in <span class="keine-pruefung">, weil die Textprüfung sie sonst als falsch meldet.
+  Zeichnungen (Zuckerl, Teller, Kekse, Formen) sind Inline-SVG. Was nur in der Lösungsansicht erscheinen soll, hat class="lsg".
+  Überlagerungen (.e15-stapel > .e15-ueber) liegen genau über einem Baustein:
+    – Blatt 15-1, Aufgabe 2: m-punkte n="15" art="reihe" gr="50" → Punktabstand 9,75 mm, Breite 146,25 mm
+    – Blatt 15-2, Aufgabe 2: m-zahlenstrahl 0–20, breite="170" → x = 5 + 8 · Zahl, Linie bei y = 15
+    – Blatt 15-3, Aufgabe 3: m-kaestchen b="16" h="4" → 1-cm-Raster, Quadrate bei x = 0, 60, 120
+-->
+<style>
+  .e15-bild { display: block; overflow: visible; }
+  svg .e15-z { fill: white; stroke: var(--tinte); stroke-width: 0.4; stroke-linejoin: round; }
+  svg .e15-keks { fill: #fbecc8; stroke: var(--tinte); stroke-width: 0.4; }
+  svg .e15-schlaufe { fill: none; stroke: var(--rot); stroke-width: 0.6; }
+  svg .e15-rot-kreis { fill: none; stroke: var(--rot); stroke-width: 0.7; }
+  svg .e15-bogen { fill: none; stroke: var(--rot); stroke-width: 0.6; }
+  svg .e15-pfeil { fill: var(--rot); }
+  svg .e15-teil { fill: #f8c4d1; stroke: none; }
+  .e15-stapel { position: relative; display: inline-block; line-height: 0; }
+  .e15-stapel > .e15-ueber { position: absolute; left: 0; top: 0; overflow: visible; }
+  /* Anleitung */
+  .e15-bilder { display: flex; justify-content: center; gap: 12mm; margin: 2mm 0 2.5mm 0; }
+  .e15-fig { margin: 0; display: flex; flex-direction: row; align-items: center; gap: 3mm; }
+  .e15-fig figcaption { font-size: 9pt; text-align: left; line-height: 1.3; }
+  .e15-vorrat { break-after: avoid; }
+  .e15-vorrat + ol > li:first-child { break-inside: avoid; }
+  .e15-loes { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 4mm; align-items: start; margin: 2mm 0 4mm 0; }
+  .e15-loes m-loesungen, .e15-loes .loesungen-raster { display: contents; }
+  .e15-loes > .kasten.loesung { margin: 5mm 0 0 0; font-size: 9pt; line-height: 1.35; }
+  .e15-loes > .kasten.loesung p { margin-bottom: 1.4mm; }
+  /* Blätter */
+  .e15-verteilen { display: flex; align-items: center; justify-content: space-between; gap: 6mm; }
+  .e15-gaeste { display: flex; gap: 4mm; }
+  .e15-gast { display: flex; flex-direction: column; align-items: center; gap: 0.5mm; }
+  .e15-ergebnis { margin-top: 3mm; gap: 4mm 12mm; }
+  .e15-reihe-steine { margin: 2mm 0 3mm 1mm; }
+  .e15-paare { gap: 4mm 4mm; }
+  .e15-paare .spalte { gap: 3mm; }
+  .e15-familie { display: flex; align-items: center; gap: 9mm; }
+  .e15-fam-aufg { gap: 3mm 8mm; flex: 1; }
+  .e15-rest { gap: 1.8mm; }
+  .e15-rest .e15-wort { font-size: 18pt; padding: 0 1mm; }
+  .e15-rest-raster { display: grid; grid-template-columns: auto auto; gap: 4mm 16mm; justify-content: start; }
+  .e15-raetsel { display: flex; align-items: center; gap: 6mm; }
+  .e15-raetsel p { margin: 0; line-height: 1.35; }
+  .e15-formen { justify-content: space-between; flex-wrap: nowrap; gap: 2mm; }
+  .e15-viertel { justify-content: space-between; padding: 0 2mm; }
+  .e15-zeile { margin-top: 3mm; }
+  .e15-hv { display: flex; flex-direction: column; gap: 2.5mm; }
+  .e15-hv p { margin: 0; }
+  .e15-hv .e15-l { display: inline-block; min-width: 18mm; }
+  .e15-profi { display: flex; align-items: center; justify-content: space-between; gap: 6mm; }
+</style>
+
+<section class="anleitung" data-einheit="15" data-titel="Gerecht teilen">
+
+  <div class="kasten ziel">
+    <p>Heute lernt Mathilda das vierte Rechenzeichen kennen: den Doppelpunkt, gesprochen <span class="begriff">durch</span>. Eine <span class="begriff">Geteiltaufgabe</span> wie 12 : 3 = 4 erzählt eine von zwei Geschichten. Beim <span class="begriff">Verteilen</span> bekommen 3 Kinder zusammen 12 Zuckerl, und jedes bekommt gleich viel: 4. Beim <span class="begriff">Aufteilen</span> kommen immer 3 Zuckerl in ein Sackerl, und man fragt, wie viele Sackerl es werden: wieder 4. Zwei Geschichten, eine Rechnung. Wer die Malaufgabe 3 · 4 = 12 aus den Einheiten 13 und 14 kennt, hat die Geteiltaufgabe gleich dazu: Sie ist ihre Umkehraufgabe.</p>
+    <p>Nicht immer geht es gerecht auf. Bei 13 Zuckerl und 3 Kindern bekommt jedes 4, und 1 Zuckerl bleibt übrig: der <span class="begriff">Rest</span>. Das kennt Mathilda schon aus Einheit 3 (9 Zuckerl für zwei, eines bleibt übrig); dort stand: „Halbe Zuckerl kommen erst in Einheit 15.“ Heute ist es so weit. Mit Faltpapier und Jausenbrot entdeckt sie <span class="begriff">Halbe</span> und <span class="begriff">Viertel</span>: zwei oder vier <b>gleich große</b> Teile von einem Ganzen. Ein Viertel ist die Hälfte von der Hälfte.</p>
+  </div>
+
+  <div class="kasten material">
+    <ul>
+      <li><b>Ausdrucken:</b> Blatt <a class="blattref" href="#blatt-15-1"></a>, Blatt <a class="blattref" href="#blatt-15-2"></a> und Blatt <a class="blattref" href="#blatt-15-3"></a>. Schwarz-weiß genügt, Mathilda malt selbst an.</li>
+      <li><b>20 Zuckerl</b> (oder die 20 Kugeln aus Einheit 1, Muggelsteine, Rosinen, Knöpfe). Am Schluss werden sie gerecht geteilt: 20 : 2 = 10.</li>
+      <li><b>4 Kuscheltiere</b> als Gäste für die Zuckerl-Party und <b>6 kleine Teller</b> (Untertassen, Papier-Muffinförmchen oder einfach 6 Zettel). Die Teller braucht ihr auch im Spiel.</li>
+      <li><b>4–5 Sackerl</b> (Gefriersackerl, Papiersackerl) oder Eierbecher und Häferl zum Aufteilen.</li>
+      <li><b>1 Würfel</b> und eine Schüssel als Schatztruhe für das Spiel „Rest-Schatz“ (2 Würfel für die Variante „Drachen-Wahl“).</li>
+      <li><b>Für den Falt-Zauber:</b> 4–6 quadratische Blätter (Faltpapier, oder aus A4 geschnitten, siehe Kasten „Basteln“), Buntstifte, eine Kinderschere. Für den Viertel-Stern dünnes Papier (Druckerpapier).</li>
+      <li><b>Für die Jause:</b> eine quadratische Brotscheibe (Toast oder Schwarzbrot) und ein Apfel, Messer und Brett. Du schneidest, Mathilda zeigt, wo.</li>
+      <li><b>Wenn vorhanden:</b> der Kreide-Zahlenstrahl aus Einheit 4 (oder Malerkrepp im Gang) für das Känguru-Teilen.</li>
+    </ul>
+    <p><b>Vorbereitung (5 Minuten):</b> 20 Zuckerl abzählen, die Kuscheltiere an den Tisch setzen, zwei oder drei Quadrate schneiden. Wenn es sich einrichten lässt, legt die Einheit vor die Jause: Dann geht der Falt-Zauber am Ende direkt ins gerechte Teilen des Jausenbrots über, und das Ergebnis wird aufgegessen.</p>
+  </div>
+
+  <h2>Ablauf Schritt für Schritt</h2>
+  <ol class="ablauf">
+    <li data-min="4"><span class="schritt-titel">Zuckerl-Party: verteilen</span>Setz 3 Kuscheltiere an den Tisch, vor jedes einen Teller. Mathilda verteilt 12 Zuckerl: „Eins für dich, eins für dich, eins für dich …“, immer reihum, bis keines mehr da ist. Jedes Kuscheltier hat 4. Schreib dazu groß auf einen Zettel: 12 : 3 = 4, und lies vor: „12 durch 3 ist 4.“ Dann kommt das vierte Kuscheltier dazu: alle Zuckerl zurück und neu verteilen (12 : 4 = 3). Zum Schluss setzt ihr euch beide mit an den Tisch, das sind 6 Gäste: 12 : 6 = 2.</li>
+    <li data-min="6"><span class="schritt-titel">Sackerl packen: aufteilen</span>Jetzt packt ihr Party-Sackerl mit je 3 Zuckerl. Wie viele Sackerl werden voll? (4.) Es ist wieder 12 : 3 = 4, nur zählt die 4 diesmal Sackerl. Legt die 4 Sackerl nebeneinander: 4-mal die 3, also 4 · 3 = 12. Mal und durch gehören zusammen. Danach Blatt <a class="blattref" href="#blatt-15-1"></a>, Aufgaben 1 bis 3 (die Profi-Aufgabe für Schnelle). Tipp: Verteilte Zuckerl durchstreichen.</li>
+    <li data-min="7"><span class="schritt-titel">Spiel: Rest-Schatz</span>Würfelspiel mit 15 Kugeln (Kasten unten). Hier erlebt Mathilda, dass es oft nicht aufgeht, und der Rest gehört ihr. Nach jedem Zug sagt, wer dran war, die Geteiltaufgabe laut: „15 durch 4 ist 3, Rest 3.“ Mathilda verteilt anfangs bei jedem Zug, auch bei deinen.</li>
+    <li data-min="4"><span class="schritt-titel">Rest am Blatt</span>Blatt <a class="blattref" href="#blatt-15-2"></a>, Aufgaben 1 und 2. Die Kugeln bleiben als Hilfe liegen. Liegt der Kreide-Zahlenstrahl noch, hüpft sie Aufgabe 2 vorher als Känguru (Kasten „Bewegung“). Aufgabe 3 und die Knobel-Ecke passen in einen zweiten, kurzen Termin (etwa 15 Minuten).</li>
+    <li data-min="7"><span class="schritt-titel">Falt-Zauber: Halbe und Viertel</span>Ein Quadrat halbieren, auf zwei Arten, dann vierteln (Kasten „Basteln“). Danach Blatt <a class="blattref" href="#blatt-15-3"></a>, Aufgaben 1 und 2; Aufgabe 3, die Profi-Aufgabe und der Viertel-Stern kommen in den zweiten Termin. Wenn Jausenzeit ist, wird jetzt das Brot geviertelt: Mathilda zeigt, wo du schneidest (Kasten „Jause teilen“). Mit dieser Einheit ist Block C geschafft, Mal und Geteilt. Zum Schluss: Sammelpass stempeln, Sterne anmalen.</li>
+  </ol>
+
+  <div class="kasten tipp" data-titel="Zwei Geschichten, eine Rechnung">
+    <p><b>Verteilen:</b> Man weiß, wie viele Kinder es sind, und fragt: „Wie viele bekommt jedes?“ <b>Aufteilen:</b> Man weiß, wie viele in ein Sackerl kommen, und fragt: „Wie viele Sackerl werden es?“ Beide Male rechnet man 12 : 3 = 4. Im Punktefeld ist jede Reihe ein Kind (links) oder ein Sackerl (rechts): dasselbe Feld, nur gedreht, wie bei der Tauschaufgabe aus Einheit 14.</p>
+    <div class="e15-bilder">
+      <figure class="e15-fig"><m-punktefeld reihen="3" spalten="4" abstand="6"></m-punktefeld><figcaption><b>verteilen:</b> 12 Zuckerl an 3 Kinder<br>3 Reihen mit je 4, also 3 · 4 = 12</figcaption></figure>
+      <figure class="e15-fig"><m-punktefeld reihen="4" spalten="3" abstand="6"></m-punktefeld><figcaption><b>aufteilen:</b> je 3 Zuckerl in ein Sackerl<br>4 Reihen mit je 3, also 4 · 3 = 12</figcaption></figure>
+    </div>
+    <p>Mathilda muss die zwei Wörter nicht auswendig unterscheiden. Wichtig ist, dass sie zu einer Geteiltaufgabe beide Geschichten erzählen kann und weiß, wie man prüft: <span class="rechnung">12 : 3 = 4</span> stimmt, weil <span class="rechnung">3 · 4 = 12</span>. Weiß sie eine Geteiltaufgabe nicht, hilft die Frage „3 mal wie viel ist 12?“.</p>
+  </div>
+
+  <div class="sag">
+    <p class="du">„Mathilda, unsere drei Gäste bekommen zusammen 12 Zuckerl. Jeder soll gleich viele haben. Wie machen wir das?“</p>
+    <p class="sie">„Ich geb jedem eins, dann wieder jedem eins … Jetzt hat jeder 4!“ oder: „Jeder kriegt 4, weil 4 und 4 und 4 sind 12.“</p>
+    <p class="dann">Beide Wege sind super, der zweite ist schon Mal-Denken. Jetzt den Begriff geben: „Du hast die Zuckerl gerecht verteilt. Das ist eine Geteiltaufgabe. Man schreibt 12 : 3 = 4 und sagt: 12 durch 3 ist 4.“ Zeig dabei auf die drei Zahlen: 12 Zuckerl, 3 Gäste, 4 für jeden.</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Jetzt packen wir Sackerl. In jedes kommen genau 3 Zuckerl. Wie viele Sackerl brauchen wir für die 12 Zuckerl?“</p>
+    <p class="sie">„Eins, zwei, drei: ein Sackerl. Eins, zwei, drei: noch eins … Vier Sackerl!“</p>
+    <p class="dann">Frag: „Welche Rechnung passt?“ Sagt sie „12 : 3 = 4“, ist das richtig, auch wenn die 4 diesmal Sackerl sind und nicht Zuckerl. Sagt sie „12 minus 3 minus 3 minus 3 minus 3“, hat sie genau richtig gedacht: Aufteilen heißt, immer wieder gleich viele wegnehmen. Dann: „Das kann man kürzer schreiben: 12 : 3 = 4.“</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Du weißt, dass 3 · 4 = 12 ist. Weißt du dann auch, was 12 : 3 ist?“</p>
+    <p class="sie">„4! Weil 3-mal die 4 sind 12.“</p>
+    <p class="dann">Genau das ist der Trick für alle Geteiltaufgaben: „Mal und durch gehören zusammen wie plus und minus. Die Malaufgabe ist die Umkehraufgabe.“ Bei 20 : 5 fragst du also: „5 mal wie viel ist 20?“ Die 5er-Reihe aus Einheit 14 hilft.</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Und wenn wir 13 Zuckerl an die drei Gäste verteilen?“</p>
+    <p class="sie">„Jeder kriegt 4. Und eins bleibt übrig. Das ess ich!“</p>
+    <p class="dann">Das übrige Zuckerl bekommt einen Namen: „Das ist der Rest. 13 durch 3 ist 4, Rest 1.“ Aufschreiben: <span class="keine-pruefung rechnung">13 : 3 = 4 Rest 1</span>. Und ja: Im Spiel „Rest-Schatz“ gehört der Rest wirklich ihr.</p>
+  </div>
+  <div class="sag">
+    <p class="du">„14 Zuckerl an 3 Gäste. Wie viele bekommt jeder?“</p>
+    <p class="sie">„Jeder 3, und 5 bleiben übrig.“</p>
+    <p class="dann">Nicht „falsch“ sagen, sondern fragen: „Kannst du mit den 5 übrigen noch einmal jedem eins geben?“ – „Ja … dann hat jeder 4, und 2 bleiben übrig.“ Merksatz: „Der Rest ist immer kleiner als die Anzahl der Kinder. Sonst geht noch eine Runde.“ (<span class="keine-pruefung rechnung">14 : 3 = 4 Rest 2</span>.)</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Falte das Blatt so, dass wir zwei Halbe bekommen.“</p>
+    <p class="sie">„Fertig! Zwei Teile.“ (Die Kanten liegen nicht aufeinander.)</p>
+    <p class="dann">„Leg die zwei Teile genau aufeinander. Sind sie gleich groß?“ Schaut ein Rand über, ist es noch nicht gerecht. Halbe heißt: zwei gleich große Teile. „Die größere Hälfte“, wie man im Alltag sagt, gibt es in der Mathematik nicht.</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Wie machst du aus einem Halben ein Viertel? Und was ist mehr, ein Halbes oder ein Viertel?“</p>
+    <p class="sie">„Ich falte noch einmal in der Mitte! Ein Viertel ist mehr, weil 4 mehr ist als 2.“</p>
+    <p class="dann">Das Falten stimmt: „Ein Viertel ist die Hälfte von der Hälfte.“ Die zweite Antwort ist der häufigste Denkfehler bei Bruchzahlen. Leg ein Halbes und ein Viertel übereinander und frag: „Wenn sich 4 Kinder eine Palatschinke teilen, ist dein Stück dann größer oder kleiner, als wenn ihr nur zu zweit seid?“</p>
+  </div>
+
+  <h2>Spiele, Bewegung und Basteln</h2>
+
+  <div class="kasten spiel darf-brechen" data-titel="Rest-Schatz">
+    <p class="spiel-meta">2 Personen · ca. 7 Minuten · 15 Kugeln (oder Zuckerl) · 1 Würfel (2 für „Drachen-Wahl“) · 6 Teller (Untertassen, Muffinförmchen oder Zettel) · 1 Schüssel als Schatztruhe</p>
+    <p><b>Idee:</b> In der Schatztruhe liegen 15 Edelsteine. Der Würfel sagt, wie viele Drachenkinder zu Besuch kommen. Alle Edelsteine werden gerecht an die Drachenkinder verteilt. Was übrig bleibt, ist der Rest, und der Rest gehört dir! Wer am Ende den größeren Schatz hat, gewinnt.</p>
+    <p><b>Vorbereitung:</b> 15 Kugeln in die Schüssel. Die 6 Teller in einer Reihe auf den Tisch. Jede Person hat neben sich einen Platz für den eigenen Schatz. Mathilda beginnt.</p>
+    <ol class="regeln">
+      <li><b>Würfeln:</b> Die Zahl sagt, wie viele Drachenkinder kommen. Bei einer 4 werden die ersten 4 Teller gedeckt.</li>
+      <li><b>Raten:</b> Vor dem Verteilen sagt man: „Ich glaube, es bleibt etwas übrig“ oder „Ich glaube, es geht genau auf.“</li>
+      <li><b>Verteilen:</b> Alle Kugeln aus der Schatztruhe reihum auf die gedeckten Teller legen, immer eine auf jeden Teller, Runde für Runde. Reicht es nicht mehr für eine ganze Runde, hört man auf.</li>
+      <li><b>Rest nehmen:</b> Laut sagen, zum Beispiel: „15 durch 4 ist 3, Rest 3.“ Die übrigen Kugeln kommen in den eigenen Schatz.</li>
+      <li><b>Zurück in die Truhe:</b> Die Kugeln von den Tellern kommen zurück in die Schatztruhe. Die andere Person ist dran.</li>
+    </ol>
+    <p><b>Sonderfälle:</b></p>
+    <ul>
+      <li><b>Es geht genau auf (Rest 0):</b> Beide rufen „Gerecht!“. Es gibt nichts, die andere Person ist dran.</li>
+      <li><b>Der Würfel zeigt 1:</b> Ein einziges Drachenkind bekäme alles, und es bliebe nie etwas übrig. Darum gilt: Glückskugel! Man nimmt sich 1 Kugel aus der Truhe.</li>
+      <li><b>Weniger Kugeln als Drachenkinder</b> (zum Beispiel 3 Kugeln und 5 Drachenkinder): Es reicht nicht einmal für eine Runde. Dann ist alles Rest, man bekommt alle Kugeln. Profis sagen dazu: „3 durch 5 ist 0, Rest 3.“</li>
+    </ul>
+    <p><b>Ende:</b> Ist die Schatztruhe leer, zählt jede Person ihren Schatz. Wer mehr hat, gewinnt. Weil 15 ungerade ist, gibt es kein Unentschieden.</p>
+    <p><b>Gut zu wissen:</b> Mit 15 Kugeln am Anfang bringt die 2 einen Rest von 1, die 4 und die 6 je einen Rest von 3; bei 3 und 5 geht es genau auf. Weil immer die ganze Truhe verteilt wird, ist jede Runde eine neue Geteiltaufgabe, von 15 durch 4 bis 2 durch 6. Je leerer die Truhe, desto öfter bleibt etwas übrig, und gegen Ende räumt ein einziger Wurf oft alles ab. Ein Spiel dauert meistens 8 bis 17 Züge (zusammengezählt). Nach ein paar Runden weiß Mathilda das Ergebnis oft schon vorher („12 durch 5? Jeder 2, Rest 2!“). Dann sagt sie es zuerst und verteilt nur noch zur Kontrolle. Bei deinen Zügen passt sie auf: Verteil ruhig einmal absichtlich ungerecht.</p>
+    <p><b>Varianten:</b></p>
+    <ul>
+      <li><b>Hellseherin:</b> Vor dem Verteilen sagt man genau voraus: „Jedes bekommt 3, Rest 3.“ Stimmt es, gibt es eine Glückskugel aus der Truhe dazu (wenn noch eine da ist).</li>
+      <li><b>Drachen-Wahl (Strategie):</b> Mit 2 Würfeln würfeln und aussuchen, welcher Würfel die Anzahl der Drachenkinder bestimmt. Mathilda muss vorher beide Möglichkeiten im Kopf durchrechnen: „11 Kugeln. Mit der 6 bleiben 5 übrig, mit der 2 nur 1. Ich nehm die 6!“ Das Spiel wird kürzer (meistens 6 bis 11 Züge).</li>
+      <li><b>Sackerl-Schatz (aufteilen):</b> Der Würfel sagt, wie viele Kugeln in ein Sackerl kommen (auf einen Teller oder einfach als Häufchen auf den Tisch). Man füllt so viele Sackerl, wie es geht; was nicht mehr für ein volles Sackerl reicht, ist der Rest. Die 1 bleibt die Glückskugel. Frag nach ein paar Runden: „Fällt dir etwas auf?“ Der Rest ist genau derselbe wie beim Verteilen: 15 Kugeln, je 4 in ein Sackerl, ergibt 3 Sackerl und Rest 3.</li>
+      <li><b>Großer Schatz:</b> mit allen 20 Kugeln. Dauert länger (meistens 12 bis 23 Züge), und 10 zu 10 ist möglich: „Unentschieden, gerecht geteilt!“</li>
+    </ul>
+  </div>
+
+  <div class="kasten bewegung darf-brechen" data-titel="Känguru-Teilen am Kreide-Zahlenstrahl">
+    <p>Aufteilen heißt auch: Wie oft passt die 3 in die 12? Das kann Mathilda hüpfen. Ein Känguru-Sprung geht 3 Zahlen weit, von der 0 auf die 3. Ist das zum Springen zu weit (bei 40 cm Abstand sind es 1,20 m), macht sie 3 kleine Hüpfer und dann einen Stopp mit Klatschen. Gezählt werden die Stopps. Du schreibst die Geteiltaufgabe mit Kreide daneben.</p>
+    <ul>
+      <li>„Start auf 0. Wie viele 3er-Sprünge sind es bis zur 12?“ (4 Sprünge: 3, 6, 9, 12. Also 12 : 3 = 4.)</li>
+      <li>„Wie viele 5er-Sprünge bis zur 20?“ (4 Sprünge: 5, 10, 15, 20. Also 20 : 5 = 4.)</li>
+      <li>„Wie viele 2er-Sprünge bis zur 14?“ (7 Sprünge. Also 14 : 2 = 7.)</li>
+      <li><b>Mit Rest:</b> „3er-Sprünge Richtung 14. Kein Sprung darf über die 14 hinaus.“ (4 Sprünge bis zur 12, dann fehlen noch 2 kleine Hüpfer: <span class="keine-pruefung">14 : 3 = 4 Rest 2</span>.) Genau diese Aufgabe zeichnet sie danach auf Blatt <a class="blattref" href="#blatt-15-2"></a>.</li>
+      <li>„4er-Sprünge Richtung 18.“ (4 Sprünge bis zur 16, Rest 2.) „5er-Sprünge Richtung 17.“ (3 Sprünge bis zur 15, Rest 2.)</li>
+      <li><b>Rückwärts:</b> „Start auf 20, 5er-Sprünge zurück bis 0.“ (4 Sprünge, wie 20 − 5 − 5 − 5 − 5 = 0.) Aufteilen ist immer wieder gleich viel wegnehmen.</li>
+      <li><b>Rollentausch:</b> Mathilda gibt dir eine Aufgabe. Mach einmal einen zu kurzen Sprung und lass dich erwischen.</li>
+    </ul>
+    <p>Ohne Kreide-Zahlenstrahl geht es im Gang mit Schritten: Mathilda macht 12 Schritte, zählt dabei laut „eins, zwei, drei“ und stampft bei jeder 3 auf. Wie oft hat sie gestampft? (4-mal, also 12 : 3 = 4.)</p>
+  </div>
+
+  <div class="kasten basteln darf-brechen" data-titel="Falt-Zauber: Halbe und Viertel">
+    <ol>
+      <li><b>Quadrat machen:</b> Ein A4-Blatt schräg falten, sodass die kurze Kante genau auf der langen Kante liegt. Den Streifen, der übersteht, abschneiden und aufklappen: ein Quadrat.</li>
+      <li><b>Zwei Halbe, erste Art:</b> Kante auf Kante falten, fest streichen, aufklappen. Zwei gleich große Rechtecke. Mathilda malt eine Hälfte an: „Das ist ein Halbes.“</li>
+      <li><b>Zwei Halbe, zweite Art:</b> Neues Quadrat, diesmal Ecke auf Ecke: zwei gleich große Dreiecke. Frag: „Ist das Dreieck-Halbe genauso viel Papier wie das Rechteck-Halbe?“ (Ja, beide sind die Hälfte vom selben Quadrat. Zum Nachprüfen das Dreieck-Halbe ausschneiden und auf das Rechteck-Halbe legen. Die Spitze, die übersteht, abschneiden: Sie passt genau in die Lücke.)</li>
+      <li><b>Vier Viertel:</b> Ein Quadrat Kante auf Kante falten und gleich noch einmal Kante auf Kante. Aufklappen: 4 kleine Quadrate. „Ein Viertel ist die Hälfte von der Hälfte.“ Weitere Arten: beide Diagonalen falten (4 Dreiecke) oder zweimal in dieselbe Richtung falten (4 Streifen). Mathilda malt in jedem Quadrat ein Viertel an.</li>
+      <li><b>Viertel-Zauberstern:</b> Ein Quadrat aus dünnem Papier zweimal in der Mitte falten (kleines Quadrat aus 4 Lagen). Kleine Dreiecke, Bögen oder halbe Herzen ausschneiden. Vorher raten lassen: „Wie oft siehst du nachher jedes Loch?“ (Ein Loch mitten im kleinen Quadrat gibt es viermal, eines in jedem Viertel. Ein halbes Herz an einer Falte wird zu zwei ganzen Herzen.) Ans Fenster kleben. Das ist der große Bruder des Klecksbilds aus Einheit 3: Dort hat eine Falte alles verdoppelt, hier machen zwei Falten alles vierfach.</li>
+      <li><b>Profi-Falten:</b> Noch ein drittes Mal in der Mitte falten. Wie viele Teile sind es nach dem Aufklappen? (8. Jeder Teil ist die Hälfte von einem Viertel. Erwachsene sagen „ein Achtel“.) Und beim vierten Mal? (16.) Ab dem fünften Mal wird das Papier so dick, dass es kaum noch geht.</li>
+    </ol>
+  </div>
+
+  <div class="kasten tipp" data-titel="Jause teilen: Halbe und Viertel zum Aufessen">
+    <p>Eine quadratische Brotscheibe kann man auf viele Arten vierteln: in 4 kleine Quadrate, in 4 Dreiecke (über Kreuz von Ecke zu Ecke) oder in 4 Streifen. Mathilda zeigt mit dem Finger, wo du schneidest. Frag: „Ist ein Dreieck-Viertel genauso viel Brot wie ein Quadrat-Viertel?“ (Ja. Beide sind ein Viertel vom selben Brot, sie sehen nur anders aus.) Beim Apfel: einmal durch, das sind 2 Halbe; jede Hälfte noch einmal durch, das sind 4 Viertel. „Wie viele Viertel sind so viel wie ein Halbes?“ (2.) Teilt ihr euch den Apfel, bekommt jede Person 2 Viertel, also ein Halbes.</p>
+  </div>
+
+  <h2>Wenn es hakt oder zu leicht ist</h2>
+
+  <div class="kasten stolper darf-brechen">
+    <ul>
+      <li><b>Sie verteilt mit der ganzen Hand.</b> Jeder Gast bekommt eine Handvoll, die Häufchen sind verschieden groß. Zeig das Reihum-Verteilen: „Eins für dich, eins für dich …“ Am Ende vergleichen: Türme bauen oder Reihen legen, dann sieht man sofort, ob es gerecht ist.</li>
+      <li><b>Sie nennt die Gesamtzahl als Ergebnis.</b> Bei 12 : 3 sagt sie „12“. Frag: „Wie viele hat <b>ein</b> Gast?“ Das Ergebnis einer Geteiltaufgabe ist immer, was einer bekommt, oder wie viele Sackerl es werden.</li>
+      <li><b>Sie verwechselt durch mit minus.</b> <span class="keine-pruefung">12 : 3 = 9</span>. Lies laut „12 durch 3“ und lass sie die Geschichte dazu erzählen. Probe mit der Malaufgabe: 3-mal die 9 wären 27, nicht 12.</li>
+      <li><b>Beim Aufteilen nimmt sie die falsche Zahl.</b> „12 Zuckerl, je 4 in ein Sackerl“ schreibt sie als <span class="rechnung">12 : 3 = 4</span>. Frag: „Was weißt du schon, und was suchst du?“ Die 4 pro Sackerl weiß sie schon, die kommt in die Rechnung: 12 : 4. Gesucht sind die Sackerl: 3.</li>
+      <li><b>Der Rest ist zu groß.</b> <span class="keine-pruefung">14 : 3 = 3 Rest 5</span>. Frag: „Reicht der Rest noch für eine Runde?“ Der Rest muss immer kleiner sein als die Anzahl der Kinder (siehe Beispielsätze).</li>
+      <li><b>Sie will den Rest auch noch verteilen.</b> „Ich schneid das Zuckerl durch!“ Bei Zuckerl und Kugeln bleibt der Rest übrig. Bei Keksen, Äpfeln oder Palatschinken darf man ihn teilen; dann bekommt jeder noch ein Halbes oder ein Viertel dazu (Schwerer machen, Nr. 7).</li>
+      <li><b>Ungleiche Teile heißen bei ihr auch Halbe.</b> Falten und genau aufeinanderlegen: Nur wenn nichts übersteht, sind es zwei Halbe. Beim Schneiden darf sie dich kontrollieren.</li>
+      <li><b>„Ein Viertel ist mehr als ein Halbes.“</b> Weil 4 mehr ist als 2. Teile übereinanderlegen und an die Palatschinke denken: Je mehr Kinder sich eine teilen, desto kleiner ist jedes Stück.</li>
+      <li><b>„Ein Viertel von 8 ist 4.“</b> Das Wort „Viertel“ klingt nach 4. Leg 8 Zuckerl in 4 gleich große Häufchen: In einem Häufchen liegen 2. Oder zweimal halbieren: 8, 4, 2.</li>
+    </ul>
+  </div>
+
+  <div class="kasten leichter">
+    <ul>
+      <li>Nur verteilen, nur mit echten Zuckerl und kleinen Zahlen: 6 an 2, 6 an 3, 8 an 4, 10 an 2.</li>
+      <li>Mit „durch 2“ anfangen: Das ist Halbieren aus Einheit 3. Die Hälfte von 14 ist 7, also 14 : 2 = 7.</li>
+      <li>Im Spiel mit 9 statt 15 Kugeln beginnen. Dann sind die Häufchen klein und das Verteilen geht schnell. 9 ist ungerade, also gibt es kein Unentschieden.</li>
+      <li>Den Rest zuerst nur mit 2 Kindern zeigen: Es geht auf, oder genau 1 bleibt übrig.</li>
+      <li>Halbe und Viertel heute nur falten und anmalen, noch ohne Mengen.</li>
+    </ul>
+  </div>
+
+  <div class="kasten schwerer darf-brechen">
+    <p class="e15-vorrat">Mathilda ist schnell, darum hier ein ganzer Vorrat. Wählt aus, was Spaß macht; die Lösungen stehen in Klammern.</p>
+    <ol>
+      <li><b>Große Geteiltaufgaben mit den Malreihen.</b> 30 : 10 (3), 35 : 5 (7), 18 : 2 (9), 45 : 5 (9), 50 : 5 (10), 100 : 10 (10). Frag immer: „Welche Malaufgabe hilft?“ Bei 35 : 5 ist es 7 · 5 = 35 aus der 5er-Reihe.</li>
+      <li><b>Teilen mit Rest im Kopf.</b> <span class="keine-pruefung">17 : 5 (3 Rest 2), 23 : 10 (2 Rest 3), 19 : 2 (9 Rest 1), 22 : 4 (5 Rest 2), 29 : 3 (9 Rest 2), 50 : 6 (8 Rest 2)</span>. Trick: „Welche Zahl aus der Malreihe liegt knapp darunter?“ Bei 17 : 5 ist es die 15, das sind 3 Fünfer, und bis 17 fehlen noch 2.</li>
+      <li><b>Mal-Geteilt-Familien.</b> Wie die Aufgabenfamilien aus Einheit 6: Aus 4, 5 und 20 werden 4 Aufgaben: 4 · 5 = 20, 5 · 4 = 20, 20 : 4 = 5, 20 : 5 = 4. Weiter mit 2, 9, 18 und mit 10, 7, 70. Manche Familien haben nur 2 Aufgaben, so wie beim Plus 6 + 6 = 12: aus 3, 3, 9 werden nur 3 · 3 = 9 und 9 : 3 = 3. „Findest du noch so eine?“ (Mehrere Lösungen, zum Beispiel 2, 2, 4 oder 4, 4, 16 oder 5, 5, 25 oder 10, 10, 100. Regel: Eine Zahl wird mit sich selbst malgenommen.)</li>
+      <li><b>Rest-Rätsel.</b> Das Rätsel von Blatt <a class="blattref" href="#blatt-15-2"></a> schwerer: „Verteile ich die Zuckerl an 2, 3, 4, 5 oder 6 Kinder, bleibt immer 1 übrig. Wie viele Zuckerl sind es mindestens, wenn es mehr als 1 ist?“ (61. Hilfe: Welche Zahl geht bei allen genau auf? Die 60: An 2, 3, 4, 5 oder 6 Kinder verteilt, bekommt jedes 30, 20, 15, 12 oder 10. Eins mehr, und überall bleibt 1 übrig.)</li>
+      <li><b>Kobold Klecks teilt.</b> Klecks hat gerechnet: <span class="keine-pruefung rechnung">14 : 3 = 3 Rest 5</span> (Rest zu groß, richtig ist 4 Rest 2), <span class="keine-pruefung rechnung">20 : 4 = 4 Rest 4</span> (richtig ist 5, es geht auf), <span class="keine-pruefung rechnung">17 : 5 = 3 Rest 2</span> (stimmt!), <span class="keine-pruefung rechnung">9 : 2 = 5 Rest 1</span> (zu viel verteilt, 2 · 5 ist schon 10; richtig ist 4 Rest 1). Prüfen geht so: Malaufgabe plus Rest muss wieder die Zahl ergeben, bei 14 : 3 also <span class="rechnung">3 · 4 + 2 = 14</span>.</li>
+      <li><b>Viertel als Halbieren vom Halbieren.</b> Ein Viertel von 20 (die Hälfte ist 10, davon die Hälfte 5), von 40 (10), von 100 (25), von 12 (3), von 36 (9, denn die Hälfte ist 18 und davon die Hälfte 9). „Und drei Viertel von 8?“ (Ein Viertel ist 2, drei Viertel sind 6.)</li>
+      <li><b>Rest und Halbe zusammen.</b> „9 Kekse für dich und mich.“ (Jeder 4, der Rest-Keks wird gebrochen: Jeder bekommt 4 und ein Halbes.) „5 Palatschinken für 4 Kinder.“ (Jedes eine, die übrige wird geviertelt: Jedes bekommt eine und ein Viertel.) „3 Äpfel für 2.“ (Einen und ein Halbes.) „2 Äpfel für 4.“ (Ein Halbes, das sind 2 Viertel.)</li>
+      <li><b>Wann geht es auf?</b> „An wie viele Kinder kann man 12 Zuckerl verteilen, ohne dass etwas übrig bleibt?“ (An 1, 2, 3, 4, 6 oder 12.) „Und 24?“ (1, 2, 3, 4, 6, 8, 12, 24.) „Welche Zahlen bis 20 gehen bei den meisten Kinderzahlen auf?“ (Gleich drei: 12, 18 und 20, jede bei 6 verschiedenen Kinderzahlen. Die 12 ist die kleinste davon.) Darum sind 12 Stück so praktisch zum Teilen.</li>
+      <li><b>Sturkopf-Zahlen.</b> „Finde alle Zahlen von 2 bis 20, die man nur an 1 Kind oder an genauso viele Kinder, wie Zuckerl da sind, gerecht verteilen kann.“ (2, 3, 5, 7, 11, 13, 17, 19. Erwachsene nennen sie Primzahlen.) „Welche davon ist die einzige gerade?“ (Die 2.)</li>
+      <li><b>Durch 1, durch sich selbst, durch 0.</b> 7 : 1 = 7 (ein Kind bekommt alles), 7 : 7 = 1, 0 : 5 = 0 (keine Zuckerl, keiner bekommt etwas). Und: „5 Zuckerl an 0 Kinder. Wie viele bekommt jedes?“ Das geht nicht, es ist ja niemand da. Durch 0 kann man nicht teilen. Ein schönes Gespräch für Profis.</li>
+      <li><b>Eigene Geteilt-Geschichten.</b> Mathilda erfindet zu 15 : 3 = 5 eine Verteil-Geschichte („15 Gummiringerl an 3 Feen“) und eine Aufteil-Geschichte („15 Kekse, je 3 auf einen Teller: 5 Teller“). Dann stellt sie dir eine Rest-Geschichte, die du lösen musst.</li>
+    </ol>
+  </div>
+
+  <div class="kasten bonus">
+    <p><b>1. Kipferl für alle:</b> „Die Oma bringt 12 Kipferl. Wir sind zu viert. Wie viele bekommt jeder? Und wenn der Opa auch noch kommt?“ <i>(Lösung: Zu viert bekommt jeder 3. Zu fünft bekommt jeder 2, und 2 Kipferl bleiben übrig.)</i></p>
+    <p><b>2. Das Zuckerl-Glas:</b> „Ich habe weniger als 10 Zuckerl. Verteile ich sie an 2 Kinder, bleibt 1 übrig. An 3 Kinder geht es genau auf. An 4 Kinder bleibt wieder 1 übrig. Wie viele Zuckerl habe ich?“ <i>(Lösung: 9. Zu dritt geht es nur bei 3, 6 oder 9 auf; 6 geht auch zu zweit auf, und bei 3 bleiben zu viert 3 übrig.)</i></p>
+    <p><b>3. Pizza für drei:</b> „Mathilda isst ein Viertel der Pizza, Papa isst die Hälfte. Wie viel bleibt für Mama?“ <i>(Lösung: ein Viertel. Die Hälfte sind 2 Viertel, mit Mathildas Viertel sind 3 Viertel weg.)</i></p>
+  </div>
+
+  <h2>Hintergrund</h2>
+
+  <div class="kasten warum">
+    <p>Geteilt hat zwei Grundvorstellungen. Beim <b>Verteilen</b> ist die Anzahl der Teile bekannt und gesucht ist, wie groß ein Teil wird. Beim <b>Aufteilen</b> ist die Größe der Teile bekannt und gesucht ist, wie viele Teile es werden. Dass beides dieselbe Rechnung ist, liegt an der Tauschaufgabe beim Mal: 3 Kinder mit je 4 Zuckerl sind gleich viele Zuckerl wie 4 Sackerl mit je 3. Sachaufgaben kommen in beiden Formen vor, darum lohnt es sich, zu jeder Geteiltaufgabe beide Geschichten zu kennen. Aufteilen ist außerdem wiederholtes Wegnehmen (12 − 3 − 3 − 3 − 3 = 0), so wie Mal wiederholtes Plus ist.</p>
+    <p>Geteilt ist die Umkehrung von Mal. Deshalb lernt man die Geteiltaufgaben nicht extra auswendig, sondern leitet sie aus den Malreihen ab: 35 : 5 fragt „5 mal wie viel ist 35?“. Das ist dasselbe Denken wie beim Ergänzen, wo 13 − 8 fragt „8 plus wie viel ist 13?“.</p>
+    <p>Beim Teilen mit Rest gilt immer: Anzahl der Kinder mal Anteil, plus Rest, ergibt wieder die Ausgangszahl (13 = 3 · 4 + 1), und der Rest ist kleiner als die Anzahl der Kinder. Reste sind überall: Beim Teilen durch 2 entscheidet der Rest, ob eine Zahl gerade oder ungerade ist, und der Kalender rechnet mit dem Rest beim Teilen durch 7. In 10 Tagen ist derselbe Wochentag wie in 3 Tagen, denn <span class="keine-pruefung">10 : 7 = 1 Rest 3</span>.</p>
+    <p>Halbe und Viertel sind die ersten Bruchzahlen. Entscheidend ist „gleich groß“, nicht „gleiche Form“: Ein Dreieck-Viertel und ein Quadrat-Viertel vom selben Brot sind gleich viel. Ein Viertel von 12 Zuckerl ist dasselbe wie 12 : 4 = 3; hier treffen sich Bruchzahlen und Geteilt. In Österreich begegnen Mathilda die Viertel auch auf der Uhr: „viertel drei“, „halb drei“ und „dreiviertel drei“ heißt, dass ein Viertel, die Hälfte oder drei Viertel der Stunde bis 3 Uhr vergangen sind.</p>
+  </div>
+
+  <h2>Lösungen</h2>
+  <div class="e15-loes">
+  <m-loesungen einheit="15" skala="0.39"></m-loesungen>
+  <div class="kasten loesung">
+    <p>Die Lösungen der Hüpf-, Schwerer- und Bonus-Aufgaben stehen dort in Klammern. Hier die offenen Stellen der Blätter:</p>
+    <p><b>Blatt 15-1:</b> Aufgabe 1: auf jedem Teller 4 Punkte, egal wo. Aufgabe 2: Welche 5 Edelsteine zusammen eingekreist werden, ist egal, Hauptsache immer 5 (3 Sackerl). Profi: Es fehlt die 5.</p>
+    <p><b>Blatt 15-2:</b> Aufgabe 1: auf jedem Teller 3 Punkte; eingekreist wird der eine Keks, der übrig bleibt (welcher, ist egal). Aufgabe 2: 4 Sprünge, auf 3, 6, 9 und 12, bis zur 14 bleiben 2. Aufgabe 3: Der Rest wächst (1, 2, 3) und ist bei 5 Kindern wieder 1, weil 10 genau aufgeht. Knobel-Ecke: 12 geht bei 2, 3 und 4 genau auf, also bleibt bei 13 überall 1 übrig. Keine andere Zahl zwischen 10 und 20 passt.</p>
+    <p><b>Blatt 15-3:</b> Aufgabe 1: gerecht halbiert sind das Quadrat mit der Mittellinie, das Herz und das Quadrat mit der Diagonale. Beim Kreis und beim Rechteck liegt die Linie nicht in der Mitte, beim Dreieck ist das obere Stück nur ein Viertel. Aufgabe 2: Welches Viertel angemalt wird, ist egal. Aufgabe 3: mehrere Lösungen möglich. Richtig ist jede Einteilung in 4 Teile, die je so groß sind wie 4 Kästchen, auch wenn sie verschieden aussehen.</p>
+  </div>
+  </div>
+
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 15-1: Verteilen und aufteilen                                -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="15" data-titel="Verteilen und aufteilen" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, verteile 12 Zuckerl gerecht an 3 Feen. Male für jedes Zuckerl einen Punkt auf einen Teller.</p>
+    <div class="e15-verteilen">
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="68mm" height="31.5mm" viewBox="0 0 68 31.5"><path class="e15-z" d="M4.6 5 L1.3 2 L1.3 8 Z M12.4 5 L15.7 2 L15.7 8 Z"/><ellipse class="e15-z" cx="8.5" cy="5" rx="4.5" ry="3.3"/><path class="duenn" d="M6.8 1.95 Q8.2 5 6.8 8.05 M9.7 1.85 Q11.1 5 9.7 8.15"/><path class="e15-z" d="M21.6 5 L18.3 2 L18.3 8 Z M29.4 5 L32.7 2 L32.7 8 Z"/><ellipse class="e15-z" cx="25.5" cy="5" rx="4.5" ry="3.3"/><path class="duenn" d="M23.8 1.95 Q25.2 5 23.8 8.05 M26.7 1.85 Q28.1 5 26.7 8.15"/><path class="e15-z" d="M38.6 5 L35.3 2 L35.3 8 Z M46.4 5 L49.7 2 L49.7 8 Z"/><ellipse class="e15-z" cx="42.5" cy="5" rx="4.5" ry="3.3"/><path class="duenn" d="M40.8 1.95 Q42.2 5 40.8 8.05 M43.7 1.85 Q45.1 5 43.7 8.15"/><path class="e15-z" d="M55.6 5 L52.3 2 L52.3 8 Z M63.4 5 L66.7 2 L66.7 8 Z"/><ellipse class="e15-z" cx="59.5" cy="5" rx="4.5" ry="3.3"/><path class="duenn" d="M57.8 1.95 Q59.2 5 57.8 8.05 M60.7 1.85 Q62.1 5 60.7 8.15"/><path class="e15-z" d="M4.6 15.5 L1.3 12.5 L1.3 18.5 Z M12.4 15.5 L15.7 12.5 L15.7 18.5 Z"/><ellipse class="e15-z" cx="8.5" cy="15.5" rx="4.5" ry="3.3"/><path class="duenn" d="M6.8 12.45 Q8.2 15.5 6.8 18.55 M9.7 12.35 Q11.1 15.5 9.7 18.65"/><path class="e15-z" d="M21.6 15.5 L18.3 12.5 L18.3 18.5 Z M29.4 15.5 L32.7 12.5 L32.7 18.5 Z"/><ellipse class="e15-z" cx="25.5" cy="15.5" rx="4.5" ry="3.3"/><path class="duenn" d="M23.8 12.45 Q25.2 15.5 23.8 18.55 M26.7 12.35 Q28.1 15.5 26.7 18.65"/><path class="e15-z" d="M38.6 15.5 L35.3 12.5 L35.3 18.5 Z M46.4 15.5 L49.7 12.5 L49.7 18.5 Z"/><ellipse class="e15-z" cx="42.5" cy="15.5" rx="4.5" ry="3.3"/><path class="duenn" d="M40.8 12.45 Q42.2 15.5 40.8 18.55 M43.7 12.35 Q45.1 15.5 43.7 18.65"/><path class="e15-z" d="M55.6 15.5 L52.3 12.5 L52.3 18.5 Z M63.4 15.5 L66.7 12.5 L66.7 18.5 Z"/><ellipse class="e15-z" cx="59.5" cy="15.5" rx="4.5" ry="3.3"/><path class="duenn" d="M57.8 12.45 Q59.2 15.5 57.8 18.55 M60.7 12.35 Q62.1 15.5 60.7 18.65"/><path class="e15-z" d="M4.6 26 L1.3 23 L1.3 29 Z M12.4 26 L15.7 23 L15.7 29 Z"/><ellipse class="e15-z" cx="8.5" cy="26" rx="4.5" ry="3.3"/><path class="duenn" d="M6.8 22.95 Q8.2 26 6.8 29.05 M9.7 22.85 Q11.1 26 9.7 29.15"/><path class="e15-z" d="M21.6 26 L18.3 23 L18.3 29 Z M29.4 26 L32.7 23 L32.7 29 Z"/><ellipse class="e15-z" cx="25.5" cy="26" rx="4.5" ry="3.3"/><path class="duenn" d="M23.8 22.95 Q25.2 26 23.8 29.05 M26.7 22.85 Q28.1 26 26.7 29.15"/><path class="e15-z" d="M38.6 26 L35.3 23 L35.3 29 Z M46.4 26 L49.7 23 L49.7 29 Z"/><ellipse class="e15-z" cx="42.5" cy="26" rx="4.5" ry="3.3"/><path class="duenn" d="M40.8 22.95 Q42.2 26 40.8 29.05 M43.7 22.85 Q45.1 26 43.7 29.15"/><path class="e15-z" d="M55.6 26 L52.3 23 L52.3 29 Z M63.4 26 L66.7 23 L66.7 29 Z"/><ellipse class="e15-z" cx="59.5" cy="26" rx="4.5" ry="3.3"/><path class="duenn" d="M57.8 22.95 Q59.2 26 57.8 29.05 M60.7 22.85 Q62.1 26 60.7 29.15"/></svg>
+      <div class="e15-gaeste">
+        <div class="e15-gast"><m-bild name="fee" gr="15"></m-bild><svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 28 28"><circle class="rahmen" cx="14" cy="14" r="13.6"/><circle cx="14" cy="14" r="10.08" fill="none" stroke="var(--linie)" stroke-width="0.35" stroke-dasharray="1.2 0.9"/><circle class="p2 lsg" cx="10.2" cy="10.2" r="2.1"/><circle class="p2 lsg" cx="17.8" cy="10.2" r="2.1"/><circle class="p2 lsg" cx="10.2" cy="17.8" r="2.1"/><circle class="p2 lsg" cx="17.8" cy="17.8" r="2.1"/></svg></div>
+        <div class="e15-gast"><m-bild name="fee" gr="15"></m-bild><svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 28 28"><circle class="rahmen" cx="14" cy="14" r="13.6"/><circle cx="14" cy="14" r="10.08" fill="none" stroke="var(--linie)" stroke-width="0.35" stroke-dasharray="1.2 0.9"/><circle class="p2 lsg" cx="10.2" cy="10.2" r="2.1"/><circle class="p2 lsg" cx="17.8" cy="10.2" r="2.1"/><circle class="p2 lsg" cx="10.2" cy="17.8" r="2.1"/><circle class="p2 lsg" cx="17.8" cy="17.8" r="2.1"/></svg></div>
+        <div class="e15-gast"><m-bild name="fee" gr="15"></m-bild><svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 28 28"><circle class="rahmen" cx="14" cy="14" r="13.6"/><circle cx="14" cy="14" r="10.08" fill="none" stroke="var(--linie)" stroke-width="0.35" stroke-dasharray="1.2 0.9"/><circle class="p2 lsg" cx="10.2" cy="10.2" r="2.1"/><circle class="p2 lsg" cx="17.8" cy="10.2" r="2.1"/><circle class="p2 lsg" cx="10.2" cy="17.8" r="2.1"/><circle class="p2 lsg" cx="17.8" cy="17.8" r="2.1"/></svg></div>
+      </div>
+    </div>
+    <div class="reihe e15-ergebnis"><span>Jede Fee bekommt <m-feld l="4"></m-feld> Zuckerl.</span> <m-aufgabe>12 : 3 = _</m-aufgabe></div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Der Drache packt seine Edelsteine in Sackerl. In jedes Sackerl kommen genau 5. Kreis immer 5 ein.</p>
+    <div class="e15-reihe-steine"><span class="e15-stapel"><m-punkte n="15" art="reihe" symbol="edelstein" gr="50"></m-punkte><svg class="e15-ueber" xmlns="http://www.w3.org/2000/svg" width="146.25mm" height="9.75mm" viewBox="0 0 146.25 9.75"><rect class="e15-schlaufe lsg" x="0.7" y="-1.6" width="47.35" height="12.95" rx="4.5"/><rect class="e15-schlaufe lsg" x="49.45" y="-1.6" width="47.35" height="12.95" rx="4.5"/><rect class="e15-schlaufe lsg" x="98.2" y="-1.6" width="47.35" height="12.95" rx="4.5"/></svg></span></div>
+    <div class="reihe e15-ergebnis"><span>Das sind <m-feld l="3"></m-feld> Sackerl.</span> <m-aufgabe>15 : 5 = _</m-aufgabe></div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Die Malaufgabe hilft dir beim Teilen.</p>
+    <div class="raster s3 e15-paare">
+      <div class="spalte"><m-aufgabe>2 · 6 = _</m-aufgabe><m-aufgabe>12 : 2 = _</m-aufgabe></div>
+      <div class="spalte"><m-aufgabe>4 · 5 = _</m-aufgabe><m-aufgabe>20 : 4 = _</m-aufgabe></div>
+      <div class="spalte"><m-aufgabe>3 · 10 = _</m-aufgabe><m-aufgabe>30 : 3 = _</m-aufgabe></div>
+    </div>
+  </div>
+  <div class="profi" data-titel="Profi-Aufgabe: Mal-Geteilt-Familie">
+    <p>3 Zahlen, 4 Aufgaben. Welche Zahl fehlt?</p>
+    <div class="e15-familie">
+      <m-familie oben="20" links="4" rechts="_" op="·" gr="36"></m-familie>
+      <div class="raster s2 e15-fam-aufg">
+        <m-aufgabe>4 · _ = 20</m-aufgabe>
+        <m-aufgabe>_ · 4 = 20</m-aufgabe>
+        <m-aufgabe>20 : 4 = _</m-aufgabe>
+        <m-aufgabe>20 : _ = 4</m-aufgabe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 15-2: Der Rest                                               -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="15" data-titel="Was bleibt übrig?" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, verteile 13 Kekse gerecht an 4 Drachen. Male Punkte auf die Teller. Kreis den übrigen Keks ein.</p>
+    <div class="e15-verteilen">
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="47.5mm" height="26.8mm" viewBox="0 0 47.5 26.8"><circle class="e15-keks" cx="4.75" cy="4.4" r="3.8"/><circle cx="3.35" cy="3.2" r="0.6" fill="var(--tinte)"/><circle cx="6.25" cy="3.8" r="0.6" fill="var(--tinte)"/><circle cx="4.45" cy="6" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="14.25" cy="4.4" r="3.8"/><circle cx="12.85" cy="3.2" r="0.6" fill="var(--tinte)"/><circle cx="15.75" cy="3.8" r="0.6" fill="var(--tinte)"/><circle cx="13.95" cy="6" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="23.75" cy="4.4" r="3.8"/><circle cx="22.35" cy="3.2" r="0.6" fill="var(--tinte)"/><circle cx="25.25" cy="3.8" r="0.6" fill="var(--tinte)"/><circle cx="23.45" cy="6" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="33.25" cy="4.4" r="3.8"/><circle cx="31.85" cy="3.2" r="0.6" fill="var(--tinte)"/><circle cx="34.75" cy="3.8" r="0.6" fill="var(--tinte)"/><circle cx="32.95" cy="6" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="42.75" cy="4.4" r="3.8"/><circle cx="41.35" cy="3.2" r="0.6" fill="var(--tinte)"/><circle cx="44.25" cy="3.8" r="0.6" fill="var(--tinte)"/><circle cx="42.45" cy="6" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="4.75" cy="13.4" r="3.8"/><circle cx="3.35" cy="12.2" r="0.6" fill="var(--tinte)"/><circle cx="6.25" cy="12.8" r="0.6" fill="var(--tinte)"/><circle cx="4.45" cy="15" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="14.25" cy="13.4" r="3.8"/><circle cx="12.85" cy="12.2" r="0.6" fill="var(--tinte)"/><circle cx="15.75" cy="12.8" r="0.6" fill="var(--tinte)"/><circle cx="13.95" cy="15" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="23.75" cy="13.4" r="3.8"/><circle cx="22.35" cy="12.2" r="0.6" fill="var(--tinte)"/><circle cx="25.25" cy="12.8" r="0.6" fill="var(--tinte)"/><circle cx="23.45" cy="15" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="33.25" cy="13.4" r="3.8"/><circle cx="31.85" cy="12.2" r="0.6" fill="var(--tinte)"/><circle cx="34.75" cy="12.8" r="0.6" fill="var(--tinte)"/><circle cx="32.95" cy="15" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="42.75" cy="13.4" r="3.8"/><circle cx="41.35" cy="12.2" r="0.6" fill="var(--tinte)"/><circle cx="44.25" cy="12.8" r="0.6" fill="var(--tinte)"/><circle cx="42.45" cy="15" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="4.75" cy="22.4" r="3.8"/><circle cx="3.35" cy="21.2" r="0.6" fill="var(--tinte)"/><circle cx="6.25" cy="21.8" r="0.6" fill="var(--tinte)"/><circle cx="4.45" cy="24" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="14.25" cy="22.4" r="3.8"/><circle cx="12.85" cy="21.2" r="0.6" fill="var(--tinte)"/><circle cx="15.75" cy="21.8" r="0.6" fill="var(--tinte)"/><circle cx="13.95" cy="24" r="0.6" fill="var(--tinte)"/><circle class="e15-keks" cx="23.75" cy="22.4" r="3.8"/><circle cx="22.35" cy="21.2" r="0.6" fill="var(--tinte)"/><circle cx="25.25" cy="21.8" r="0.6" fill="var(--tinte)"/><circle cx="23.45" cy="24" r="0.6" fill="var(--tinte)"/><circle class="e15-rot-kreis lsg" cx="23.75" cy="22.4" r="5.3"/></svg>
+      <div class="e15-gaeste">
+        <div class="e15-gast"><m-bild name="drache" gr="13"></m-bild><svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="27mm" height="27mm" viewBox="0 0 27 27"><circle class="rahmen" cx="13.5" cy="13.5" r="13.1"/><circle cx="13.5" cy="13.5" r="9.72" fill="none" stroke="var(--linie)" stroke-width="0.35" stroke-dasharray="1.2 0.9"/><circle class="p2 lsg" cx="13.5" cy="9.2" r="2.2"/><circle class="p2 lsg" cx="9.2" cy="17" r="2.2"/><circle class="p2 lsg" cx="17.8" cy="17" r="2.2"/></svg></div>
+        <div class="e15-gast"><m-bild name="drache" gr="13"></m-bild><svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="27mm" height="27mm" viewBox="0 0 27 27"><circle class="rahmen" cx="13.5" cy="13.5" r="13.1"/><circle cx="13.5" cy="13.5" r="9.72" fill="none" stroke="var(--linie)" stroke-width="0.35" stroke-dasharray="1.2 0.9"/><circle class="p2 lsg" cx="13.5" cy="9.2" r="2.2"/><circle class="p2 lsg" cx="9.2" cy="17" r="2.2"/><circle class="p2 lsg" cx="17.8" cy="17" r="2.2"/></svg></div>
+        <div class="e15-gast"><m-bild name="drache" gr="13"></m-bild><svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="27mm" height="27mm" viewBox="0 0 27 27"><circle class="rahmen" cx="13.5" cy="13.5" r="13.1"/><circle cx="13.5" cy="13.5" r="9.72" fill="none" stroke="var(--linie)" stroke-width="0.35" stroke-dasharray="1.2 0.9"/><circle class="p2 lsg" cx="13.5" cy="9.2" r="2.2"/><circle class="p2 lsg" cx="9.2" cy="17" r="2.2"/><circle class="p2 lsg" cx="17.8" cy="17" r="2.2"/></svg></div>
+        <div class="e15-gast"><m-bild name="drache" gr="13"></m-bild><svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="27mm" height="27mm" viewBox="0 0 27 27"><circle class="rahmen" cx="13.5" cy="13.5" r="13.1"/><circle cx="13.5" cy="13.5" r="9.72" fill="none" stroke="var(--linie)" stroke-width="0.35" stroke-dasharray="1.2 0.9"/><circle class="p2 lsg" cx="13.5" cy="9.2" r="2.2"/><circle class="p2 lsg" cx="9.2" cy="17" r="2.2"/><circle class="p2 lsg" cx="17.8" cy="17" r="2.2"/></svg></div>
+      </div>
+    </div>
+    <div class="reihe e15-ergebnis"><span>Jeder bekommt <m-feld l="3"></m-feld>.</span> <span class="keine-pruefung"><span class="aufgabe e15-rest"><span class="z">13</span><span class="op">:</span><span class="z">4</span><span class="op">=</span><m-feld l="3"></m-feld><span class="e15-wort">Rest</span><m-feld l="1"></m-feld></span></span></div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Das Känguru springt immer 3 weit, aber nie über die 14. Zeichne die Sprünge. Wie oft springt es? Wie viel bleibt übrig?</p>
+    <div class="e15-stapel"><m-zahlenstrahl von="0" bis="20" breite="170" markiert="14" spruenge="0>3"></m-zahlenstrahl><svg class="e15-ueber" xmlns="http://www.w3.org/2000/svg" width="170.5mm" height="25mm" viewBox="0 0 170.5 25"><path class="e15-bogen lsg" d="M29 14.2 Q41 6.22 53 14.2"/><path class="e15-pfeil lsg" d="M53 14.4 l-2.2 -2 l-0.3 2.6 Z"/><text class="zahl lsg" x="41" y="5.5" font-size="4.6">+3</text><path class="e15-bogen lsg" d="M53 14.2 Q65 6.22 77 14.2"/><path class="e15-pfeil lsg" d="M77 14.4 l-2.2 -2 l-0.3 2.6 Z"/><text class="zahl lsg" x="65" y="5.5" font-size="4.6">+3</text><path class="e15-bogen lsg" d="M77 14.2 Q89 6.22 101 14.2"/><path class="e15-pfeil lsg" d="M101 14.4 l-2.2 -2 l-0.3 2.6 Z"/><text class="zahl lsg" x="89" y="5.5" font-size="4.6">+3</text><path class="e15-bogen lsg" d="M101 14.2 Q109 9.6 117 14.2" stroke-dasharray="1.4 1"/><path class="e15-pfeil lsg" d="M117 14.4 l-2.2 -2 l-0.3 2.6 Z"/><text class="zahl lsg" x="109" y="8" font-size="3.8">Rest 2</text></svg></div>
+    <div class="reihe e15-ergebnis"><span class="keine-pruefung"><span class="aufgabe e15-rest"><span class="z">14</span><span class="op">:</span><span class="z">3</span><span class="op">=</span><m-feld l="4"></m-feld><span class="e15-wort">Rest</span><m-feld l="2"></m-feld></span></span></div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Verteile 11 Zuckerl an 2, 3, 4 und 5 Kinder. Nimm Kugeln zu Hilfe.</p>
+    <div class="e15-rest-raster keine-pruefung">
+      <span class="aufgabe e15-rest"><span class="z">11</span><span class="op">:</span><span class="z">2</span><span class="op">=</span><m-feld l="5" art="k"></m-feld><span class="e15-wort">Rest</span><m-feld l="1" art="k"></m-feld></span>
+      <span class="aufgabe e15-rest"><span class="z">11</span><span class="op">:</span><span class="z">3</span><span class="op">=</span><m-feld l="3" art="k"></m-feld><span class="e15-wort">Rest</span><m-feld l="2" art="k"></m-feld></span>
+      <span class="aufgabe e15-rest"><span class="z">11</span><span class="op">:</span><span class="z">4</span><span class="op">=</span><m-feld l="2" art="k"></m-feld><span class="e15-wort">Rest</span><m-feld l="3" art="k"></m-feld></span>
+      <span class="aufgabe e15-rest"><span class="z">11</span><span class="op">:</span><span class="z">5</span><span class="op">=</span><m-feld l="2" art="k"></m-feld><span class="e15-wort">Rest</span><m-feld l="1" art="k"></m-feld></span>
+    </div>
+  </div>
+  <div class="knobel" data-titel="Knobel-Ecke: Das Zuckerl-Rätsel">
+    <div class="e15-raetsel">
+      <p>Ich habe mehr als 10 und weniger als 20 Zuckerl.<br>Ich verteile sie an 2 Kinder: 1 bleibt übrig.<br>Ich verteile sie an 3 Kinder: 1 bleibt übrig.<br>Ich verteile sie an 4 Kinder: wieder 1 übrig!<br>Wie viele Zuckerl habe ich? <m-feld l="13"></m-feld></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 15-3: Halbe und Viertel                                      -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="15" data-titel="Halbe und Viertel" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, welche Bilder sind gerecht halbiert? Gerecht heißt: Beide Teile sind gleich groß. Kreis sie ein.</p>
+    <div class="reihe e15-formen">
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 28 28"><rect class="rahmen" x="4" y="4" width="20" height="20"/><line x1="14" y1="4" x2="14" y2="24" stroke="var(--akzent)" stroke-width="0.9" stroke-linecap="round"/><circle class="e15-rot-kreis lsg" cx="14" cy="14" r="13.6"/></svg>
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 28 28"><circle class="rahmen" cx="14" cy="14" r="10.5"/><line x1="18.2" y1="4.38" x2="18.2" y2="23.62" stroke="var(--akzent)" stroke-width="0.9" stroke-linecap="round"/></svg>
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 28 28"><path class="rahmen" d="M14 23.5 C5 17 2.5 11 5.5 7 C8.5 3.5 12.5 4.5 14 8.2 C15.5 4.5 19.5 3.5 22.5 7 C25.5 11 23 17 14 23.5 Z"/><line x1="14" y1="8.2" x2="14" y2="23.5" stroke="var(--akzent)" stroke-width="0.9" stroke-linecap="round"/><circle class="e15-rot-kreis lsg" cx="14" cy="14" r="13.6"/></svg>
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 28 28"><rect class="rahmen" x="2.5" y="7" width="23" height="14"/><line x1="10" y1="7" x2="10" y2="21" stroke="var(--akzent)" stroke-width="0.9" stroke-linecap="round"/></svg>
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 28 28"><rect class="rahmen" x="4" y="4" width="20" height="20"/><line x1="4" y1="4" x2="24" y2="24" stroke="var(--akzent)" stroke-width="0.9" stroke-linecap="round"/><circle class="e15-rot-kreis lsg" cx="14" cy="14" r="13.6"/></svg>
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 28 28"><path class="rahmen" d="M14 3.5 L24.5 23.5 L3.5 23.5 Z"/><line x1="8.75" y1="13.5" x2="19.25" y2="13.5" stroke="var(--akzent)" stroke-width="0.9" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Male bei jedem Bild ein Viertel an.</p>
+    <div class="reihe e15-viertel">
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="36mm" height="36mm" viewBox="0 0 36 36"><rect class="rahmen" x="2" y="2" width="32" height="32"/><rect class="e15-teil lsg" x="2.3" y="2.3" width="15.7" height="15.7"/><path d="M18 2 V34 M2 18 H34" stroke="var(--akzent)" stroke-width="0.9" stroke-linecap="round"/></svg>
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="36mm" height="36mm" viewBox="0 0 36 36"><rect class="rahmen" x="2" y="2" width="32" height="32"/><path class="e15-teil lsg" d="M2.4 2.3 L33.6 2.3 L18 17.9 Z"/><path d="M2 2 L34 34 M34 2 L2 34" stroke="var(--akzent)" stroke-width="0.9" stroke-linecap="round"/></svg>
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="36mm" height="36mm" viewBox="0 0 36 36"><rect class="rahmen" x="2" y="6" width="32" height="24"/><rect class="e15-teil lsg" x="2.3" y="6.3" width="7.7" height="23.4"/><path d="M10 6 V30 M18 6 V30 M26 6 V30" stroke="var(--akzent)" stroke-width="0.9" stroke-linecap="round"/></svg>
+      <svg class="e15-bild" xmlns="http://www.w3.org/2000/svg" width="36mm" height="36mm" viewBox="0 0 36 36"><circle class="rahmen" cx="18" cy="18" r="16"/><path class="e15-teil lsg" d="M18 18 L18 2.3 A15.7 15.7 0 0 1 33.7 18 Z"/><path d="M18 2 V34 M2 18 H34" stroke="var(--akzent)" stroke-width="0.9" stroke-linecap="round"/></svg>
+    </div>
+    <p class="e15-zeile">Ein Ganzes hat <m-feld l="4"></m-feld> Viertel, ein Halbes <m-feld l="2"></m-feld> Viertel.</p>
+  </div>
+  <div class="aufg">
+    <p class="anw">Teile jedes Quadrat in 4 gleich große Teile. Jedes Mal anders!</p>
+    <div class="e15-stapel"><m-kaestchen b="16" h="4"></m-kaestchen><svg class="e15-ueber" xmlns="http://www.w3.org/2000/svg" width="160.4mm" height="40.4mm" viewBox="0 0 160.4 40.4"><rect x="0.2" y="0.2" width="40" height="40" fill="none" stroke="var(--tinte)" stroke-width="0.7"/><rect x="60.2" y="0.2" width="40" height="40" fill="none" stroke="var(--tinte)" stroke-width="0.7"/><rect x="120.2" y="0.2" width="40" height="40" fill="none" stroke="var(--tinte)" stroke-width="0.7"/><path class="lsg" d="M20.2 0.2 V40.2 M0.2 20.2 H40.2" stroke="var(--rot)" stroke-width="0.8" stroke-linecap="round"/><path class="lsg" d="M70.2 0.2 V40.2 M80.2 0.2 V40.2 M90.2 0.2 V40.2" stroke="var(--rot)" stroke-width="0.8" stroke-linecap="round"/><path class="lsg" d="M120.2 0.2 L160.2 40.2 M160.2 0.2 L120.2 40.2" stroke="var(--rot)" stroke-width="0.8" stroke-linecap="round"/></svg></div>
+    <p class="lsg-nur">Mehrere Lösungen möglich, z. B. so.</p>
+  </div>
+  <div class="profi" data-titel="Profi-Aufgabe: Die Hälfte von der Hälfte">
+    <div class="e15-profi">
+      <div class="e15-hv">
+        <p>Ein Viertel ist die Hälfte von der Hälfte.</p>
+        <p><span class="e15-l">Von 8:</span> die Hälfte <m-feld l="4"></m-feld>, ein Viertel <m-feld l="2"></m-feld></p>
+        <p><span class="e15-l">Von 12:</span> die Hälfte <m-feld l="6"></m-feld>, ein Viertel <m-feld l="3"></m-feld></p>
+        <p><span class="e15-l">Von 20:</span> die Hälfte <m-feld l="10"></m-feld>, ein Viertel <m-feld l="5"></m-feld></p>
+      </div>
+      <m-bild name="zauberhut" gr="26"></m-bild>
+    </div>
+  </div>
+</section>
