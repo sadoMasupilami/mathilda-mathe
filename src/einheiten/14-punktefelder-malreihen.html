@@ -1,0 +1,413 @@
+<!--
+  Einheit 14: Punktefelder & Malreihen (Block C)
+  Punktefeld lesen (Reihen · Punkte pro Reihe), Tauschaufgabe beim Mal (Punktefeld drehen),
+  Malreihen 2er, 5er, 10er, leichte Aufgaben 1 ·, 2 ·, 5 ·, 10 · und der Nachbar-Trick (6 · 5 = 5 · 5 + 5).
+  Bauen und ansehen:  ./baue.sh --nur 14 --png --dpi 110
+  Blatt 14-1, Aufgabe 3: Lösungspunkte und -ziffern als Inline-SVG über <m-kaestchen b="16" h="5">
+  (Kästchen 10 mm, Mitte eines Kästchens bei 5.2 + 10 · Spalte bzw. 5.2 + 10 · Zeile, gezählt ab 0).
+  Spielplan 14-3: 11 · 11 Kästchen; Spieldauer und Punktestände per Simulation geprüft
+  (meist 9–17 Würfe insgesamt, 3–7 Rechtecke pro Person, Punktestände meist 25–75).
+-->
+<section class="anleitung e14-anl" data-einheit="14" data-titel="Punktefelder &amp; Malreihen">
+
+  <div class="kasten ziel">
+    <p>Heute bekommt das Mal ein Bild, das Mathilda durch die ganze Volksschule begleitet: das <span class="begriff">Punktefeld</span>. Die Punkte liegen in geraden Reihen, und jede Reihe ist gleich lang. 3 Reihen mit je 4 Punkten sind 3-mal die 4, also 3&nbsp;·&nbsp;4&nbsp;=&nbsp;12. In Einheit 13 hat Mathilda Mal als gleich große Gruppen und als Sprünge kennengelernt. Im Punktefeld stehen diese Gruppen ordentlich in Reihen. Das hat einen großen Vorteil: Dreht man das Punktefeld, wird aus 3&nbsp;·&nbsp;4 die Aufgabe 4&nbsp;·&nbsp;3, und es sind immer noch dieselben 12 Punkte. Die <b>Tauschaufgabe gilt also auch beim Mal</b>.</p>
+    <p>Danach kommen die ersten <span class="begriff">Malreihen</span>: die <span class="begriff">2er-Reihe</span> (1&nbsp;·&nbsp;2 bis 10&nbsp;·&nbsp;2), die <span class="begriff">5er-Reihe</span> und die <span class="begriff">10er-Reihe</span>. Mathilda muss sie nicht stur auswendig lernen. Sie merkt sich die leichten Aufgaben jeder Reihe (1 ·, 2 ·, 5 · und 10 ·) und holt sich die anderen mit dem <b>Nachbar-Trick</b>, der Nachbaraufgabe aus Einheit 3, diesmal beim Mal: 6&nbsp;·&nbsp;5 ist eine Reihe mehr als 5&nbsp;·&nbsp;5, also 25&nbsp;+&nbsp;5&nbsp;=&nbsp;30. Im Spiel „Rechteck-Erobern“ würfelt sie Punktefelder, zeichnet sie als Rechtecke auf Kästchenpapier und merkt schnell, dass ihr das Drehen beim Gewinnen hilft.</p>
+  </div>
+
+  <div class="kasten material">
+    <ul>
+      <li><b>Ausdrucken:</b> Blatt <a class="blattref" href="#blatt-14-1"></a>, Blatt <a class="blattref" href="#blatt-14-2"></a> und den <a class="blattref" href="#blatt-14-3">Spielplan 14-3</a>. Am besten in Farbe: In der Profi-Aufgabe auf Blatt 14-1 und im Trick oben auf Blatt 14-2 zeigen blaue und rote Punkte die zwei Teile eines Punktefelds. Den Spielplan druckst du am besten zweimal aus oder steckst ihn in eine Klarsichthülle und spielt mit abwischbarem Stift. Dann könnt ihr öfter spielen.</li>
+      <li><b>20 Kugeln</b> aus Einheit 1 und die <b>2 Eierkarton-Zehnerfelder</b>. Heute sind flache Dinge besser als runde, weil das Punktefeld gedreht wird: Knöpfe, Muggelsteine, Zuckerl, Münzen oder Nudeln. Für Schwerer-Idee 7 (24 Kugeln) nehmt ihr Knöpfe oder Nudeln dazu. Dazu ein großes Buch, ein Jausenbrett oder ein Tablett als Unterlage zum Drehen.</li>
+      <li><b>2 Würfel</b>, 2 Buntstifte (Blau für Mathilda, Rot für dich), Bleistift und Radiergummi.</li>
+      <li><b>Für die Punktefeld-Jagd:</b> ein Küchenwecker oder eine Sanduhr (3 Minuten). Wenn du sichergehen willst, legst du vorher zwei, drei „Funde“ gut sichtbar hin: eine Muffinform, einen Legostein, einen leeren Eierkarton.</li>
+      <li><b>Extra (Basteln, gern an einem anderen Tag):</b> Karton (eine Müslischachtel reicht), runde Klebepunkte aus dem Papiergeschäft oder Filzstifte, Lineal, Schere.</li>
+      <li><b>Ersatz:</b> Ohne Würfel geht es mit Spielkarten Ass bis 6 (Ass = 1): zwei Karten aufdecken statt würfeln, danach kommen sie zurück in den Stapel und ihr mischt. Statt des Spielplans geht das Rechenheft: ein Feld mit 11 Reihen zu je 11 Kästchen umranden, daneben zwei schmale Spalten für die Punkte.</li>
+      <li><b>Vorbereitung (5 Minuten):</b> ausdrucken, Kugeln abzählen, Buch oder Brett bereitlegen, „Funde“ für die Jagd verteilen.</li>
+    </ul>
+  </div>
+
+  <h2>Ablauf Schritt für Schritt</h2>
+  <ol class="ablauf">
+    <li data-min="4"><span class="schritt-titel">Punktefelder legen und drehen</span>Leg auf ein großes Buch 3 Reihen mit je 4 Kugeln, schön gerade untereinander. Mathilda sagt, wie viele es sind, ohne jede einzeln zu zählen. Dann drehst du das Buch eine Vierteldrehung und fragst noch einmal (Beispielsätze unten). Danach legt Mathilda selbst: 2 Reihen mit je 5 (das ist genau das Eierkarton-Zehnerfeld!) und 4 Reihen mit je 5. Du drehst, sie sagt die Tauschaufgabe.</li>
+    <li data-min="4"><span class="schritt-titel">Punktefeld-Jagd im Haus</span>Küchenwecker auf 3 Minuten: Wer findet mehr Punktefelder? Muffinform, Legostein, Eierkarton, die 6 auf dem Würfel … Bei jedem Fund sagt Mathilda die Malaufgabe und, nach dem Drehen, die Tauschaufgabe. Regeln und Fundliste im Kasten „Bewegung“.</li>
+    <li data-min="5"><span class="schritt-titel">Mathildas Blatt: Punktefelder</span>Blatt <a class="blattref" href="#blatt-14-1"></a>. Aufgabe 1 und 2 sind der Kern. Bei Aufgabe 3 malt Mathilda einen Punkt in jedes Kästchen, und in die unterste Kästchenreihe schreibt sie wie im Rechenheft die zwei Malaufgaben, ein Zeichen pro Kästchen. Die Profi-Aufgabe (ein Punktefeld zerlegen) ist der Vorgeschmack auf den Nachbar-Trick in Schritt 4. Tipp dazu: 5&nbsp;·&nbsp;4 ist die Tauschaufgabe von 4&nbsp;·&nbsp;5.</li>
+    <li data-min="6"><span class="schritt-titel">Malreihen-Turnen und Malreihen</span>Zuerst 2 Minuten Malreihen-Turnen (Kasten „Bewegung“). Dann Blatt <a class="blattref" href="#blatt-14-2"></a>: Lest gemeinsam den Nachbar-Trick oben im Kasten. Mit den Kugeln geht er so: 3 Reihen mit je 5 legen (15), dann eine Reihe dazu, schon sind es 4&nbsp;·&nbsp;5&nbsp;=&nbsp;15&nbsp;+&nbsp;5&nbsp;=&nbsp;20. Dann füllt Mathilda die drei Malreihen aus. Die gelben Zeilen (1 ·, 2 ·, 5 ·, 10 ·) stehen schon da; von ihnen aus findet sie die anderen mit einer Reihe mehr oder weniger. Die Knobel-Ecke ist für später.</li>
+    <li data-min="8"><span class="schritt-titel">Spiel: Rechteck-Erobern</span>Mit dem <a class="blattref" href="#blatt-14-3">Spielplan 14-3</a> und 2 Würfeln. Jedes Rechteck ist ein Punktefeld aus Kästchen: Malaufgabe laut sagen, hineinschreiben, Ergebnis in die eigene Spalte. Ist die Zeit knapp, hört ihr nach 4 Rechtecken pro Person auf und zählt zusammen. Zum Schluss: Sammelpass stempeln, Sterne anmalen. Den Rest von Blatt 14-2 und die Zauber-Drehkarten macht ihr gern an einem kurzen zweiten Termin (etwa 10 Minuten).</li>
+  </ol>
+
+  <h3>Beispielsätze</h3>
+  <div class="sag">
+    <p class="du">„Mathilda, ich lege Kugeln in Reihen. Wie viele Reihen sind das? Und wie viele Kugeln liegen in jeder Reihe?“</p>
+    <p class="sie">„3 Reihen. In jeder sind 4.“</p>
+    <p class="du">„Wie viele Kugeln sind es zusammen? Aber nicht jede einzeln zählen!“</p>
+    <p class="sie">„4, 8, 12. Zwölf!“</p>
+    <p class="dann">Jetzt die Wörter geben: „So etwas heißt Punktefeld. 3 Reihen mit je 4 sind 3-mal die 4, also 3&nbsp;·&nbsp;4. Beim Punktefeld sagen wir immer zuerst die Reihen.“ Schreib 3&nbsp;·&nbsp;4&nbsp;=&nbsp;12 auf einen Zettel und leg ihn unter das Buch.</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Jetzt zaubere ich. Pass gut auf!“ (Du drehst das Buch eine Vierteldrehung.) „Wie viele Reihen sind es jetzt?“</p>
+    <p class="sie">„4 Reihen mit je 3. Das ist 4&nbsp;·&nbsp;3 … Aber das sind ja dieselben Kugeln! Wieder 12.“</p>
+    <p class="dann">Genau das ist die Entdeckung des Tages: „Die Tauschaufgabe gilt auch beim Mal. 3&nbsp;·&nbsp;4 und 4&nbsp;·&nbsp;3 haben dasselbe Ergebnis, weil es dasselbe Punktefeld ist, nur gedreht.“ Will sie nachzählen, lass sie ruhig: Das Staunen gehört dazu. Frag dann: „Klappt das bei jedem Punktefeld?“ Probiert es mit dem Eierkarton-Zehnerfeld: quer 2 Reihen mit je 5, hochkant 5 Reihen mit je 2.</p>
+  </div>
+
+  <div class="kasten tipp" data-titel="Punktefeld, Tauschaufgabe und Nachbar-Trick auf einen Blick">
+    <p>Beim Punktefeld sagen wir immer <b>zuerst die Reihen</b> (waagrecht, wie Zeilen im Buch), dann, wie viele Punkte in jeder Reihe liegen: 3&nbsp;·&nbsp;4 heißt „3-mal die 4“, also 4&nbsp;+&nbsp;4&nbsp;+&nbsp;4 wie in Einheit 13. Nach einer Vierteldrehung sind es 4 Reihen mit je 3, also 4&nbsp;·&nbsp;3, und gleich viele Punkte. Im Familien-Dreieck aus Einheit 6 steht beim Mal oben das Ergebnis. Heute gehören nur die zwei Malaufgaben dazu, die Geteiltaufgaben kommen in Einheit 15. Ganz rechts der Nachbar-Trick: 5 Reihen und noch eine.</p>
+    <div class="e14-blick">
+      <div><m-punktefeld reihen="3" spalten="4" abstand="6"></m-punktefeld><span>3&nbsp;·&nbsp;4&nbsp;=&nbsp;12</span></div>
+      <div><m-punktefeld reihen="4" spalten="3" abstand="6"></m-punktefeld><span>gedreht: 4&nbsp;·&nbsp;3&nbsp;=&nbsp;12</span></div>
+      <div><m-familie oben="12" links="3" rechts="4" op="·" gr="34"></m-familie><span>3&nbsp;·&nbsp;4 und 4&nbsp;·&nbsp;3</span></div>
+      <div><m-punktefeld reihen="6" spalten="5" abstand="4.4" teile-reihen="5" farbe-reihen="5"></m-punktefeld><span>6&nbsp;·&nbsp;5&nbsp;=&nbsp;25&nbsp;+&nbsp;5&nbsp;=&nbsp;30</span></div>
+    </div>
+  </div>
+
+  <div class="sag">
+    <p class="du">„Wie viel ist 3&nbsp;·&nbsp;4?“</p>
+    <p class="sie">„7!“</p>
+    <p class="dann">Das ist die Plusaufgabe 3&nbsp;+&nbsp;4. Nicht einfach „falsch“ sagen, sondern legen lassen: „Leg mir 3 Reihen mit je 4.“ Sie sieht sofort, dass es mehr als 7 Kugeln sind. Dann: „Plus heißt: 3 und noch 4 dazu. Mal heißt: 3-mal die 4.“</p>
+  </div>
+  <div class="sag">
+    <p class="du">„6&nbsp;·&nbsp;5. Kennst du eine leichte Aufgabe, die ganz in der Nähe ist?“</p>
+    <p class="sie">„5&nbsp;·&nbsp;5 ist 25. Und dann noch eine Reihe … 25 und 5 sind 30.“</p>
+    <p class="dann">So steht es oben auf Blatt 14-2. Häufiger Fehler: „25 und 6 sind 31.“ Dann zeig auf das Punktefeld im Trick-Kasten: „Wie viele Punkte hat die neue, rote Reihe?“ – „5.“ Die 6 sagt nur, wie viele Reihen es sind. Dazu kommt immer eine ganze Reihe, und die hat 5 Punkte.</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Du hast 1 und 6 gewürfelt. Wo passt dein Rechteck noch hin?“</p>
+    <p class="sie">„Quer passt es nicht mehr … aber hochkant! 6 Reihen mit je 1 Kästchen. 6&nbsp;·&nbsp;1&nbsp;=&nbsp;6.“</p>
+    <p class="dann">Lob diese Idee ausdrücklich: „Da hilft dir die Tauschaufgabe beim Gewinnen.“ Gegen Ende des Spiels kommt das oft vor.</p>
+  </div>
+
+  <h2>Spiele, Bewegung und Basteln</h2>
+
+  <div class="kasten spiel darf-brechen" data-titel="Rechteck-Erobern">
+    <p class="spiel-meta">2 Personen · ca. 8–10 Minuten · <a class="blattref" href="#blatt-14-3">Spielplan 14-3</a> · 2 Würfel · 2 Buntstifte (Blau für Mathilda, Rot für dich) · Bleistift</p>
+    <p><b>Idee:</b> Ihr erobert Kästchen. Die zwei Würfel sagen, wie groß euer Rechteck wird: so viele Reihen und so viele Kästchen in jeder Reihe. Jedes Rechteck ist also ein Punktefeld aus Kästchen. Wer am Ende mehr Kästchen erobert hat, gewinnt.</p>
+    <p><b>Vorbereitung:</b> Der Spielplan liegt zwischen euch. Das große Feld hat 11 Reihen mit je 11 Kästchen. Rechts daneben hat jede Person ihre Punkte-Spalte, 3 Kästchen breit. Mathilda beginnt.</p>
+    <ol class="regeln">
+      <li><b>Würfeln und wählen:</b> Mit beiden Würfeln würfeln. Eine Zahl sagt, wie viele Reihen das Rechteck hat, die andere, wie viele Kästchen in jeder Reihe sind. Wer würfelt, darf wählen. Bei 2 und 5 gehen 2 Reihen mit je 5 Kästchen (flach und breit) oder 5 Reihen mit je 2 (schmal und hoch). Beide haben 10 Kästchen: Das ist die Tauschaufgabe.</li>
+      <li><b>Einzeichnen:</b> Das Rechteck auf freie Kästchen zeichnen, immer an den Linien entlang, und mit der eigenen Farbe umranden. Am besten zuerst mit dem Finger abzählen und die vier Ecken mit kleinen Punkten markieren. Das Rechteck darf an andere Rechtecke und an den Rand stoßen, aber nichts überdecken und nicht über den Rand hinausgehen.</li>
+      <li><b>Rechnen:</b> Die Malaufgabe laut sagen („2 mal 5 ist 10“) und ins Rechteck schreiben: 2&nbsp;·&nbsp;5. Das Ergebnis kommt in die eigene Punkte-Spalte, eine Zahl pro Zeile, Einer unter Einer. Aufgaben wie 4&nbsp;·&nbsp;6, die Mathilda noch nicht kennt, sind gewollt: Sie zählt das Rechteck reihenweise ab (6, 12, 18, 24) oder nimmt den Nachbar-Trick (5&nbsp;·&nbsp;6&nbsp;=&nbsp;30, eine Reihe weniger: 30&nbsp;−&nbsp;6&nbsp;=&nbsp;24).</li>
+      <li><b>Passt nicht:</b> Passt das Rechteck nirgends hin, auch nicht gedreht, hat man Pech. Die andere Person ist dran. Schaut gemeinsam nach, bevor ihr „Pech“ sagt.</li>
+      <li><b>Ende:</b> Sobald beide nacheinander nichts einzeichnen konnten („zweimal hintereinander Pech“) oder alle Kästchen voll sind, ist das Spiel aus. Jede Person zieht unter ihre Zahlen einen Strich und zählt zusammen. Wer mehr Kästchen hat, gewinnt. Gleich viele: unentschieden.</li>
+    </ol>
+    <p><b>Sonderfälle:</b> Ist ein Rechteck zu klein für die Malaufgabe (1&nbsp;·&nbsp;1, 1&nbsp;·&nbsp;2, 2&nbsp;·&nbsp;2), kommt nur das Ergebnis hinein. Bei einem Pasch bringt Drehen nichts: 3&nbsp;·&nbsp;3 gedreht ist wieder 3&nbsp;·&nbsp;3.</p>
+    <p><b>Zusammenzählen:</b> Schritt für Schritt im Kopf oder untereinander wie in Einheit 11. Dabei kann der Übertrag größer als 1 sein, etwa bei 18, 36 und 8: „8 plus 6 gleich 14, plus 8 gleich 22. 2 an, 2 weiter.“ – „2 plus 1 gleich 3, plus 3 gleich 6. 6 an.“ Zusammen 62.</p>
+    <p><b>Gut zu wissen:</b> Ein Rechteck hat 1 bis 36 Kästchen, im Schnitt etwa 12; das Feld hat 11&nbsp;·&nbsp;11&nbsp;=&nbsp;121. Wir haben einige tausend Partien am Computer durchgespielt: Meistens wird insgesamt 9- bis 17-mal gewürfelt, jede Person zeichnet 3 bis 7 Rechtecke und erobert 25 bis 75 Kästchen. Die 11 Zeilen der Punkte-Spalte reichen fast immer (sonst die Summe daneben schreiben). Wer anfängt, hat einen kleinen Vorteil, also beginnt abwechselnd. Strategie: Große Rechtecke an den Rand oder in eine Ecke legen; gegen Ende hilft das Drehen am meisten.</p>
+    <p><b>Varianten:</b></p>
+    <ul>
+      <li><b>Zehner-Zauber (10er-Reihe):</b> Eine gewürfelte 1 darf auch als 10 zählen (bei zwei Einsen nur eine, sonst wäre 10&nbsp;·&nbsp;10 fast das ganze Feld). Aus 1 und 4 wird dann 10&nbsp;·&nbsp;4&nbsp;=&nbsp;40 oder 4&nbsp;·&nbsp;10&nbsp;=&nbsp;40, also 10 Reihen mit je 4 oder 4 Reihen mit je 10. Das bringt viele Kästchen, passt aber später nicht mehr so leicht hinein. Mathilda muss also überlegen: 1 oder 10? Schön auch auf einer Doppelseite im Rechenheft, dann gibt es Summen über 100.</li>
+      <li><b>Nachbar-Joker:</b> Passt das Rechteck nicht, darf man eine Reihe weglassen und rechnet dabei laut mit dem Nachbar-Trick: „6&nbsp;·&nbsp;5 passt nicht. 6&nbsp;·&nbsp;5 ist 30, eine Reihe weniger: 30&nbsp;−&nbsp;5&nbsp;=&nbsp;25. Ich zeichne 5&nbsp;·&nbsp;5.“ Das Spiel dauert dann etwas länger, weil seltener ein Wurf verfällt.</li>
+      <li><b>Leichte Variante (nur 2er-Reihe):</b> Nur mit einem Würfel. Jedes Rechteck hat 2 Reihen, die Würfelzahl sagt, wie viele Kästchen in jeder Reihe sind (oder gedreht: 2 Kästchen in jeder Reihe). Bei einer 4 sind es 2&nbsp;·&nbsp;4&nbsp;=&nbsp;8 Kästchen.</li>
+    </ul>
+  </div>
+
+  <div class="kasten bewegung darf-brechen" data-titel="Punktefeld-Jagd und Malreihen-Turnen">
+    <p><b>Punktefeld-Jagd (ca. 4 Minuten):</b> Küchenwecker auf 3 Minuten. Ihr sucht beide gleichzeitig nach Punktefeldern im Haus: Dinge in geraden Reihen, jede Reihe gleich lang. Wer etwas findet, zeigt es und sagt die Malaufgabe („Muffinform: 3 Reihen mit je 4 Mulden, 3&nbsp;·&nbsp;4&nbsp;=&nbsp;12“), dann nach einer Vierteldrehung die Tauschaufgabe. Jeder richtige Fund gibt einen Strich, wer mehr Striche hat, gewinnt. Bring ruhig auch einmal etwas, das <b>kein</b> Punktefeld ist (die Obstschale): „Nein, das liegt ja durcheinander!“</p>
+    <p><b>Gute Funde</b> (zählt trotzdem nach, die Größen sind verschieden): Eierkarton (2&nbsp;·&nbsp;5&nbsp;=&nbsp;10 oder 2&nbsp;·&nbsp;3&nbsp;=&nbsp;6), Muffinform (oft 3&nbsp;·&nbsp;4&nbsp;=&nbsp;12), Legostein (2&nbsp;·&nbsp;4&nbsp;=&nbsp;8 Noppen), die 6 auf dem Würfel (3 Reihen mit je 2), Getränketräger (2&nbsp;·&nbsp;3&nbsp;=&nbsp;6 Flaschen), Telefontasten (4&nbsp;·&nbsp;3&nbsp;=&nbsp;12), dazu Schokoladetafel, Eiswürfelform, Fliesen und Fenster mit Sprossen. Profi: der Kalender (eine Reihe ist eine Woche, 4 Wochen sind 4&nbsp;·&nbsp;7&nbsp;=&nbsp;28 Tage).</p>
+    <p><b>Malreihen-Turnen (ca. 2 Minuten):</b></p>
+    <ul>
+      <li><b>2er-Reihe:</b> Mathilda zählt von 1 bis 20. Jede zweite Zahl ruft sie laut und klatscht dazu, die anderen flüstert sie: „eins, ZWEI (klatsch), drei, VIER (klatsch) …“</li>
+      <li><b>5er-Reihe:</b> bis 50 zählen, bei 5, 10, 15 … ein kräftiger Stampfer. Profi: nur die Zahlen der 5er-Reihe laut, die anderen im Kopf.</li>
+      <li><b>10er-Reihe:</b> in Zehnern bis 100 zählen (10, 20, 30 …), bei jeder Zahl ein Hampelmann. Das sind 10 Hampelmänner.</li>
+      <li><b>Alles zusammen (Profi):</b> von 1 bis 30. Bei jeder zweiten Zahl klatschen, bei jeder fünften stampfen, bei jeder zehnten ein Hampelmann. „Warum musst du bei 10, 20 und 30 alles auf einmal machen?“ (Diese Zahlen kommen beim Zählen in Zweiern, in Fünfern und in Zehnern vor.)</li>
+      <li><b>Stiegen-Variante:</b> Jede Stufe zählt 2. „Auf welcher Stufe bist du bei 14?“ (Auf der 7., denn 7&nbsp;·&nbsp;2&nbsp;=&nbsp;14.) Mit Fünfern: „Welche Zahl hat die 6. Stufe?“ (30.) Ohne Stiege geht es mit kleinen Schritten im Gang. Ist wenig Platz, macht Mathilda Kniebeugen statt Hampelmännern.</li>
+    </ul>
+  </div>
+
+  <div class="kasten basteln darf-brechen" data-titel="Zauber-Drehkarten">
+    <p>Etwa 10 Minuten, gut für einen zweiten Termin. Mit den Karten „zaubert“ Mathilda die Tauschaufgabe.</p>
+    <ol>
+      <li>3 quadratische Kärtchen aus Karton schneiden (etwa 12 cm Seitenlänge). Mit Bleistift ganz leicht ein Gitter vorzeichnen: Striche bei 2, 4, 6, 8 und 10 cm, waagrecht und senkrecht.</li>
+      <li>Auf die Kreuzungen kommen Klebepunkte (oder dicke Filzstift-Punkte oder Fingertupfer mit Farbe): Karte 1 bekommt 2 Reihen mit je 5 Punkten, Karte 2 bekommt 3 Reihen mit je 4, Karte 3 bekommt 4 Reihen mit je 5.</li>
+      <li>An die untere Kante schreibt Mathilda die Malaufgabe, zum Beispiel 2&nbsp;·&nbsp;5&nbsp;=&nbsp;10. Dann dreht sie die Karte eine Vierteldrehung im Uhrzeigersinn, sodass die rechte Kante unten ist, und schreibt dort die Tauschaufgabe hin: 5&nbsp;·&nbsp;2&nbsp;=&nbsp;10. Bei den anderen Karten heißen die Tauschaufgaben 4&nbsp;·&nbsp;3&nbsp;=&nbsp;12 und 5&nbsp;·&nbsp;4&nbsp;=&nbsp;20.</li>
+      <li><b>Zaubern:</b> Karte zeigen, „Simsalabim!“, Vierteldrehung. Unten steht eine neue Aufgabe, das Punktefeld sieht ganz anders aus, aber es sind gleich viele Punkte.</li>
+    </ol>
+    <p><b>Dreh-Blitz (Spiel mit den Karten):</b> Du zeigst eine Karte 2 Sekunden lang und hältst dabei beide Aufgaben mit den Fingern zu. Mathilda sagt die Malaufgabe. Dann drehst du, und sie sagt die Tauschaufgabe. Jede richtige Antwort gibt einen Strich, nach 5 Strichen tauscht ihr die Rollen. Profi: Sie sagt die Tauschaufgabe, bevor du drehst.</p>
+  </div>
+
+  <h2>Wenn es hakt oder zu leicht ist</h2>
+
+  <div class="kasten stolper darf-brechen">
+    <ul>
+      <li><b>Sie liest das Punktefeld andersherum.</b> Bei 3 Reihen mit je 4 sagt sie „4&nbsp;·&nbsp;3“. Das Ergebnis stimmt ja, dank Tauschaufgabe. Kein Drama, nur die Abmachung wiederholen: „Beim Punktefeld sagen wir zuerst die Reihen. Wie viele Reihen siehst du?“ Hilft es, fährt sie mit dem Finger jede Reihe von links nach rechts nach.</li>
+      <li><b>Plus statt Mal.</b> 3 Reihen mit je 4 sind für sie „7“. Lass sie die 7 Punkte zeigen. Sie merkt schnell, dass viele übrig bleiben. Dann reihenweise zählen: „4, 8, 12.“</li>
+      <li><b>Sie zählt jeden Punkt einzeln.</b> Nicht falsch, aber langsam. Frag: „Wie viele sind in einer Reihe? Und in zwei Reihen?“ Bei Reihen mit mehr als 5 Punkten hilft der Blitzblick mit der Kraft der 5 (die kleine Lücke nach dem fünften Punkt auf Blatt 14-1).</li>
+      <li><b>Sie verliert in der Malreihe den Faden.</b> Bei 7&nbsp;·&nbsp;5 zählt sie 5, 10, 15 … und weiß nicht mehr, wann sie aufhören muss. Finger mitzählen lassen: Jeder Finger ist ein Fünfer, bei 7 Fingern ist Schluss. Oder vom nächsten gelben Feld aus: 5&nbsp;·&nbsp;5&nbsp;=&nbsp;25, dann noch 2 Fünfer.</li>
+      <li><b>Sie verwechselt 5er- und 10er-Reihe.</b> <span class="keine-pruefung">7&nbsp;·&nbsp;5&nbsp;=&nbsp;70?</span> Frag: „Ist eine Reihe mit 5 Punkten länger oder kürzer als eine mit 10?“ Dann muss auch das Ergebnis kleiner sein, und zwar genau die Hälfte von 70.</li>
+      <li><b>Nachbar-Trick mit der falschen Zahl.</b> Bei 6&nbsp;·&nbsp;5 rechnet sie 25&nbsp;+&nbsp;6&nbsp;=&nbsp;31, bei 9&nbsp;·&nbsp;5 rechnet sie 50&nbsp;−&nbsp;9&nbsp;=&nbsp;41. Zeig auf ein Punktefeld: Dazu oder weg kommt immer eine ganze Reihe, und eine Reihe hat 5 Punkte.</li>
+      <li><b>Beim Spiel geht das Rechteck schief.</b> Es ist ein Kästchen zu lang, liegt nicht an den Linien oder überdeckt ein anderes. Erst die vier Ecken mit kleinen Punkten markieren, dann nachzählen, dann umranden.</li>
+    </ul>
+  </div>
+
+  <div class="kasten leichter">
+    <ul>
+      <li>Nur Punktefelder bis 5&nbsp;·&nbsp;5, und immer zuerst mit Kugeln legen, dann malen. Reihenweise zählen ist am Anfang völlig in Ordnung.</li>
+      <li>Mit der 10er-Reihe beginnen (jeder Finger ist 10, alle Finger sind 100), dann die 2er-Reihe (Schuhe, Socken und Hände kommen in Paaren). Die 5er-Reihe zuletzt: Jede Hand ist 5.</li>
+      <li>Auf Blatt 14-2 zuerst nur die 10er-Spalte, dann die 2er-Spalte. Die 5er-Spalte darf Mathilda mit den Fingern machen oder später.</li>
+      <li>Im Spiel die „Leichte Variante (nur 2er-Reihe)“ nehmen, oder du zählst am Ende zusammen.</li>
+    </ul>
+  </div>
+
+  <div class="kasten schwerer darf-brechen">
+    <p class="e14-vorrat">Mathilda ist schnell, darum hier ein ganzer Vorrat. Sucht euch aus, was Spaß macht; die Lösungen stehen in Klammern. Einiges greift weit vor.</p>
+    <ol>
+      <li><b>Die 4er-Reihe ist die doppelte 2er-Reihe.</b> 3&nbsp;·&nbsp;2&nbsp;=&nbsp;6, also ist 3&nbsp;·&nbsp;4 das Doppelte: 12. „Wie viel ist 6&nbsp;·&nbsp;4?“ (Das Doppelte von 12, also 24.) 7&nbsp;·&nbsp;4 (doppelt 14, also 28), 9&nbsp;·&nbsp;4 (doppelt 18, also 36). „Wie geht die ganze 4er-Reihe?“ (4, 8, 12, 16, 20, 24, 28, 32, 36, 40.) Genauso ist die 10er-Reihe die doppelte 5er-Reihe: 7&nbsp;·&nbsp;5&nbsp;=&nbsp;35 und 7&nbsp;·&nbsp;10&nbsp;=&nbsp;70.</li>
+      <li><b>Eine Reihe weniger.</b> 9&nbsp;·&nbsp;4&nbsp;=&nbsp;10&nbsp;·&nbsp;4&nbsp;−&nbsp;4&nbsp;=&nbsp;36. Ebenso 9&nbsp;·&nbsp;5 (50&nbsp;−&nbsp;5&nbsp;=&nbsp;45), 9&nbsp;·&nbsp;3 (30&nbsp;−&nbsp;3&nbsp;=&nbsp;27), 9&nbsp;·&nbsp;6 (60&nbsp;−&nbsp;6&nbsp;=&nbsp;54). „Was ist bei allen 9-mal-Aufgaben gleich?“ (10-mal, eine Reihe weg.)</li>
+      <li><b>Punktefeld zerlegen (die Kraft der 5 beim Mal).</b> Wie die Profi-Aufgabe auf Blatt 14-1: 7&nbsp;·&nbsp;4&nbsp;=&nbsp;5&nbsp;·&nbsp;4&nbsp;+&nbsp;2&nbsp;·&nbsp;4&nbsp;=&nbsp;20&nbsp;+&nbsp;8&nbsp;=&nbsp;28. Dann 8&nbsp;·&nbsp;3&nbsp;=&nbsp;5&nbsp;·&nbsp;3&nbsp;+&nbsp;3&nbsp;·&nbsp;3&nbsp;=&nbsp;15&nbsp;+&nbsp;9&nbsp;=&nbsp;24 und 7&nbsp;·&nbsp;7&nbsp;=&nbsp;5&nbsp;·&nbsp;7&nbsp;+&nbsp;2&nbsp;·&nbsp;7&nbsp;=&nbsp;35&nbsp;+&nbsp;14&nbsp;=&nbsp;49. Am Hunderterfeld unten ist die Lücke die Linie.</li>
+      <li><b>Das Hunderterfeld und der Zwei-Blätter-Trick.</b> Im Kasten unten ist ein Punktefeld mit 10 Reihen zu je 10: 10&nbsp;·&nbsp;10&nbsp;=&nbsp;100. Ein Blatt Papier kommt von rechts, eines von unten. „Zeig mir 6&nbsp;·&nbsp;7.“ (6 Reihen mit je 7 bleiben frei: 5&nbsp;·&nbsp;7&nbsp;+&nbsp;7&nbsp;=&nbsp;35&nbsp;+&nbsp;7&nbsp;=&nbsp;42.) „Wie viele Punkte sind jetzt versteckt?“ (100&nbsp;−&nbsp;42&nbsp;=&nbsp;58.) Dann schiebt Mathilda ein Blatt um eine Reihe weiter und sagt die Nachbaraufgabe: 7&nbsp;·&nbsp;7&nbsp;=&nbsp;42&nbsp;+&nbsp;7&nbsp;=&nbsp;49.</li>
+      <li><b>Die 5er-Reihe aus der 10er-Reihe.</b> 5&nbsp;·&nbsp;8 ist die Hälfte von 10&nbsp;·&nbsp;8. Weil 10&nbsp;·&nbsp;8&nbsp;=&nbsp;80 ist, ist 5&nbsp;·&nbsp;8&nbsp;=&nbsp;40. Ebenso 5&nbsp;·&nbsp;7 (Hälfte von 70, also 35), 5&nbsp;·&nbsp;9 (45), 5&nbsp;·&nbsp;6 (30) und 5&nbsp;·&nbsp;12 (60).</li>
+      <li><b>Malreihen über 10-mal hinaus.</b> 11&nbsp;·&nbsp;2&nbsp;=&nbsp;22, 12&nbsp;·&nbsp;2&nbsp;=&nbsp;24, 15&nbsp;·&nbsp;2&nbsp;=&nbsp;30, 11&nbsp;·&nbsp;5&nbsp;=&nbsp;55, 12&nbsp;·&nbsp;5&nbsp;=&nbsp;60, 12&nbsp;·&nbsp;10&nbsp;=&nbsp;120, 25&nbsp;·&nbsp;10&nbsp;=&nbsp;250. „Wie oft passt die 5 in die 100?“ (20-mal: 20&nbsp;·&nbsp;5&nbsp;=&nbsp;100.)</li>
+      <li><b>Rechteck-Forscher.</b> „Wie viele verschiedene Punktefelder kannst du aus 12 Kugeln legen?“ (6: 1&nbsp;·&nbsp;12, 2&nbsp;·&nbsp;6, 3&nbsp;·&nbsp;4, 4&nbsp;·&nbsp;3, 6&nbsp;·&nbsp;2 und 12&nbsp;·&nbsp;1. Ohne die gedrehten sind es 3.) Mit 24 Kugeln (8: 1&nbsp;·&nbsp;24, 2&nbsp;·&nbsp;12, 3&nbsp;·&nbsp;8, 4&nbsp;·&nbsp;6 und die vier gedrehten). Mit 16 Kugeln (5: 1&nbsp;·&nbsp;16, 2&nbsp;·&nbsp;8, 4&nbsp;·&nbsp;4, 8&nbsp;·&nbsp;2, 16&nbsp;·&nbsp;1). „Warum ist es bei 16 eine ungerade Anzahl?“ (4&nbsp;·&nbsp;4 bleibt gedreht 4&nbsp;·&nbsp;4.) Und mit 7 Kugeln? (Nur 1&nbsp;·&nbsp;7 und 7&nbsp;·&nbsp;1, also eine einzige Reihe; für dich: eine Primzahl.)</li>
+      <li><b>Gleiche Würfelsumme, andere Kästchenzahl.</b> Die Knobel-Ecke auf dem Spielplan: 4 und 6 sind zusammen 10, 5 und 5 auch. Trotzdem ist 4&nbsp;·&nbsp;6&nbsp;=&nbsp;24 und 5&nbsp;·&nbsp;5&nbsp;=&nbsp;25. Weiter (auch ohne Würfel): 1&nbsp;·&nbsp;9&nbsp;=&nbsp;9, 2&nbsp;·&nbsp;8&nbsp;=&nbsp;16, 3&nbsp;·&nbsp;7&nbsp;=&nbsp;21. „Was fällt dir auf?“ (Je näher beieinander, desto mehr Kästchen.)</li>
+      <li><b>Lücken beim Mal.</b> <span class="keine-pruefung">☐ · 5&nbsp;=&nbsp;35</span> (7), <span class="keine-pruefung">4&nbsp;·&nbsp;☐ = 20</span> (5), <span class="keine-pruefung">☐ · 2&nbsp;=&nbsp;18</span> (9), <span class="keine-pruefung">6&nbsp;·&nbsp;☐ = 60</span> (10). Frag: „Welche Malreihe hilft dir?“</li>
+      <li><b>Kobold Klecks rechnet mit.</b> Er sagt: <span class="keine-pruefung">„8&nbsp;·&nbsp;2&nbsp;=&nbsp;18“</span> (richtig: 16), <span class="keine-pruefung">„4&nbsp;·&nbsp;10&nbsp;=&nbsp;14“</span> (40; er hat plus gerechnet) und <span class="keine-pruefung">„6&nbsp;·&nbsp;5&nbsp;=&nbsp;25&nbsp;+&nbsp;6&nbsp;=&nbsp;31“</span> (30; er hat die 6 statt einer Reihe mit 5 dazugegeben). Mathilda findet die Fehler und erklärt sie mit einem Punktefeld.</li>
+      <li><b>Würfel-Forscher.</b> „Welche Ergebnisse können beim Rechteck-Erobern herauskommen?“ (18 verschiedene: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 30, 36.) „Welche kann man auf zwei verschiedene Arten würfeln?“ (4 aus 1 und 4 oder 2 und 2; 6 aus 1 und 6 oder 2 und 3; 12 aus 2 und 6 oder 3 und 4.)</li>
+    </ol>
+  </div>
+
+  <div class="kasten tipp" data-titel="Das Hunderterfeld (zu Schwerer-Idee 3 und 4)">
+    <div class="e14-hfeld">
+      <m-punktefeld reihen="10" spalten="10" fuenfer abstand="4.6"></m-punktefeld>
+      <div>
+        <p>Dieses Feld könnt ihr direkt hier in der Anleitung benutzen: 10 Reihen mit je 10 Punkten, mit kleinen Lücken nach 5 (Kraft der 5). Es ist ein Punktefeld, nicht die Hundertertafel aus Einheit 8.</p>
+        <p><b>Zwei-Blätter-Trick:</b> Ein Blatt deckt von rechts ab, eines von unten. Oben links bleibt ein Punktefeld frei, etwa 3&nbsp;·&nbsp;4. Rutscht das untere Blatt eine Reihe tiefer, wird daraus 4&nbsp;·&nbsp;4&nbsp;=&nbsp;12&nbsp;+&nbsp;4&nbsp;=&nbsp;16.</p>
+        <p>Die 10er-Reihe sind ganze Reihen (7&nbsp;·&nbsp;10&nbsp;=&nbsp;70), die 5er-Reihe halbe Reihen bis zur Lücke (7&nbsp;·&nbsp;5&nbsp;=&nbsp;35), die 2er-Reihe die ersten zwei Punkte jeder Reihe (7&nbsp;·&nbsp;2&nbsp;=&nbsp;14).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="kasten bonus">
+    <p><b>1. Die Drachenhöhle:</b> „Ein Drache hat 2 Flügel. In der Höhle schlafen 8 Drachen. Wie viele Flügel sind das?“ <i>(Lösung: 16, denn 8&nbsp;·&nbsp;2&nbsp;=&nbsp;16. Profi: „Und wie viele Beine, wenn jeder Drache 4 hat?“ Das Doppelte von 16, also 32.)</i></p>
+    <p><b>2. Hände hoch:</b> „Wie viele Finger sind an 7 Händen? Und an 7 Kindern?“ <i>(Lösung: 35, denn 7&nbsp;·&nbsp;5&nbsp;=&nbsp;35. Ein Kind hat 10 Finger, 7 Kinder haben 70.)</i></p>
+    <p><b>3. Das Feenbeet:</b> „Eine Fee pflanzt Blumen in 4 Reihen mit je 5 Blumen. Dann zaubert sie noch eine Reihe dazu. Wie viele Blumen sind es jetzt?“ <i>(Lösung: 25. Vorher 20, eine Reihe mehr sind 5 mehr. Das ist 5&nbsp;·&nbsp;5.)</i></p>
+    <p><b>4. Punktefeld-Rätsel (für Profis):</b> „Ich habe 12 Kugeln in ein Punktefeld gelegt. Es hat mehr als 2 Reihen, aber weniger als 4. Wie viele Kugeln liegen in jeder Reihe?“ <i>(Lösung: 4. Mehr als 2 und weniger als 4 Reihen, das sind genau 3 Reihen, und 3&nbsp;·&nbsp;4&nbsp;=&nbsp;12.)</i></p>
+  </div>
+
+  <h2>Hintergrund</h2>
+
+  <div class="kasten warum darf-brechen">
+    <p>Das Punktefeld ist das wichtigste Bild für das Malrechnen, weil man darin zwei Dinge auf einmal sieht: die gleich großen Gruppen (die Reihen) und das Ganze als ein Rechteck. Bei Gruppen auf Tellern sehen 3 Teller mit je 4 Erdbeeren und 4 Teller mit je 3 Erdbeeren ganz verschieden aus. Dass beide 12 ergeben, muss man ausrechnen. Beim Punktefeld genügt eine Vierteldrehung. So wird das Vertauschungsgesetz für Kinder unmittelbar einsichtig, und Mathilda muss von den Malaufgaben fast nur noch die Hälfte lernen.</p>
+    <p>Die gestrichelte Linie im Punktefeld steht für das Verteilungsgesetz: 7&nbsp;·&nbsp;4&nbsp;=&nbsp;5&nbsp;·&nbsp;4&nbsp;+&nbsp;2&nbsp;·&nbsp;4, und 6&nbsp;·&nbsp;5&nbsp;=&nbsp;5&nbsp;·&nbsp;5&nbsp;+&nbsp;1&nbsp;·&nbsp;5. In der Didaktik nennt man 1 ·, 2 ·, 5 · und 10 · oft Kernaufgaben: Sie sind leicht (1-mal, Verdoppeln, Hälfte von 10-mal, 10-mal), und alle anderen lassen sich mit einer oder zwei Reihen mehr oder weniger daraus ableiten. Von den 100 Aufgaben des kleinen Einmaleins (1&nbsp;·&nbsp;1 bis 10&nbsp;·&nbsp;10) haben 64 mindestens eine 1, 2, 5 oder 10 dabei. Von den restlichen 36 bleiben nach dem Tauschen nur 21 verschiedene übrig. Kinder, die so ableiten, kommen beim Einmaleins viel weiter als Kinder, die nur Reihen aufsagen, und sie können sich bei Lücken selbst helfen.</p>
+    <p>„Rechteck-Erobern“ ist nebenbei eine erste Begegnung mit dem Flächeninhalt: Wie viele Kästchen hat ein Rechteck? Reihen mal Kästchen pro Reihe. Dieselbe Idee kommt später beim Rechnen mit Quadratzentimetern und beim schriftlichen Multiplizieren wieder (12&nbsp;·&nbsp;4&nbsp;=&nbsp;10&nbsp;·&nbsp;4&nbsp;+&nbsp;2&nbsp;·&nbsp;4, das ist wieder ein zerlegtes Punktefeld). Warum 2er-, 5er- und 10er-Reihe zuerst kommen, steht schon in Einheit 13; neu ist heute, dass die 5er-Reihe die Hälfte der 10er-Reihe ist.</p>
+  </div>
+
+  <h2>Lösungen</h2>
+  <div class="e14-loes">
+    <m-loesungen einheit="14" skala="0.38"></m-loesungen>
+    <div class="kasten loesung">
+      <p>Lösungen zu Jagd, Turnen, Schwerer-Ideen und Bonus stehen dort in Klammern.</p>
+      <p><b>Blatt 14-1, Aufgabe 1 und 2:</b> Die Tauschaufgabe (5&nbsp;·&nbsp;2 statt 2&nbsp;·&nbsp;5) hat dasselbe Ergebnis und gilt. Nur „zuerst die Reihen“ wiederholen.</p>
+      <p><b>Blatt 14-1, Aufgabe 3:</b> Mehrere Lösungen möglich. Neben 3&nbsp;·&nbsp;4 passen 2&nbsp;·&nbsp;6 oder 4&nbsp;·&nbsp;3 ins Feld. 6&nbsp;·&nbsp;2 ist zu hoch. 1&nbsp;·&nbsp;12 passt nur ohne leeres Kästchen dazwischen; dann kleben die zwei Felder aneinander, und eine Lücke wäre besser. Unten steht dann zum Beispiel 3&nbsp;·&nbsp;4&nbsp;=&nbsp;12 und 2&nbsp;·&nbsp;6&nbsp;=&nbsp;12, ein Zeichen pro Kästchen.</p>
+      <p><b>Blatt 14-1, Profi:</b> 5&nbsp;·&nbsp;4&nbsp;=&nbsp;20 (Tauschaufgabe von 4&nbsp;·&nbsp;5), 2&nbsp;·&nbsp;4&nbsp;=&nbsp;8, zusammen 28.</p>
+      <p><b>Blatt 14-2, Knobel-Ecke:</b> Von diesen Zahlen sind nur 10 und 20 in beiden Reihen. Das Rätsel hat genau eine Lösung: 35.</p>
+      <p><b>Spielplan 14-3, Knobel-Ecke:</b> Fee 4&nbsp;·&nbsp;6&nbsp;=&nbsp;24, Drache 5&nbsp;·&nbsp;5&nbsp;=&nbsp;25. Der Drache erobert mehr, obwohl beide Würfe zusammen 10 ergeben.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 14-1: Punktefelder                                           -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="14" data-titel="Punktefelder" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, wie viele Reihen? Wie viele Punkte in jeder Reihe?</p>
+    <div class="e14-drei e14-k2">
+      <div class="e14-zelle"><m-punktefeld reihen="2" spalten="5" abstand="6.5"></m-punktefeld><m-aufgabe feld="k">[2] · [5] = [10]</m-aufgabe></div>
+      <div class="e14-zelle"><m-punktefeld reihen="4" spalten="3" abstand="6"></m-punktefeld><m-aufgabe feld="k">[4] · [3] = [12]</m-aufgabe></div>
+      <div class="e14-zelle"><m-punktefeld reihen="3" spalten="6" abstand="6.5" fuenfer></m-punktefeld><m-aufgabe feld="k">[3] · [6] = [18]</m-aufgabe></div>
+    </div>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Das Punktefeld wird gedreht. Schreib beide Malaufgaben.</p>
+    <div class="e14-dreh e14-k2">
+      <div class="e14-zelle"><m-punktefeld reihen="2" spalten="6" abstand="6" symbol="stern" fuenfer></m-punktefeld><m-aufgabe feld="k">[2] · [6] = [12]</m-aufgabe></div>
+      <div class="e14-pfeil">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24mm" height="14mm" viewBox="0 0 24 14"><path d="M2 12.5 Q12 -2.5 22 12.5" fill="none" stroke="var(--akzent)" stroke-width="1"/><path d="M18.9 11 L22 12.5 L21.7 9" fill="none" stroke="var(--akzent)" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        <span>gedreht</span>
+      </div>
+      <div class="e14-neben"><m-punktefeld reihen="6" spalten="2" abstand="5.6" symbol="stern" fuenfer></m-punktefeld><m-aufgabe feld="k">[6] · [2] = [12]</m-aufgabe></div>
+    </div>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Male 3 Reihen mit je 4 Punkten. Male daneben ein anderes Punktefeld mit 12 Punkten. Schreib ganz unten beide Malaufgaben.</p>
+    <div class="e14-heft">
+      <m-kaestchen b="16" h="5"></m-kaestchen>
+      <svg class="e14-heft-lsg" xmlns="http://www.w3.org/2000/svg" width="160.4mm" height="50.4mm" viewBox="0 0 160.4 50.4">
+        <g class="lsg">
+          <circle class="p2" cx="5.2" cy="5.2" r="2.6"/><circle class="p2" cx="15.2" cy="5.2" r="2.6"/><circle class="p2" cx="25.2" cy="5.2" r="2.6"/><circle class="p2" cx="35.2" cy="5.2" r="2.6"/>
+          <circle class="p2" cx="5.2" cy="15.2" r="2.6"/><circle class="p2" cx="15.2" cy="15.2" r="2.6"/><circle class="p2" cx="25.2" cy="15.2" r="2.6"/><circle class="p2" cx="35.2" cy="15.2" r="2.6"/>
+          <circle class="p2" cx="5.2" cy="25.2" r="2.6"/><circle class="p2" cx="15.2" cy="25.2" r="2.6"/><circle class="p2" cx="25.2" cy="25.2" r="2.6"/><circle class="p2" cx="35.2" cy="25.2" r="2.6"/>
+          <circle class="p2" cx="75.2" cy="5.2" r="2.6"/><circle class="p2" cx="85.2" cy="5.2" r="2.6"/><circle class="p2" cx="95.2" cy="5.2" r="2.6"/><circle class="p2" cx="105.2" cy="5.2" r="2.6"/><circle class="p2" cx="115.2" cy="5.2" r="2.6"/><circle class="p2" cx="125.2" cy="5.2" r="2.6"/>
+          <circle class="p2" cx="75.2" cy="15.2" r="2.6"/><circle class="p2" cx="85.2" cy="15.2" r="2.6"/><circle class="p2" cx="95.2" cy="15.2" r="2.6"/><circle class="p2" cx="105.2" cy="15.2" r="2.6"/><circle class="p2" cx="115.2" cy="15.2" r="2.6"/><circle class="p2" cx="125.2" cy="15.2" r="2.6"/>
+        </g>
+        <text class="zahl lsg" x="5.2" y="45.2" font-size="7">3</text><text class="zahl lsg" x="15.2" y="45.2" font-size="7">·</text><text class="zahl lsg" x="25.2" y="45.2" font-size="7">4</text><text class="zahl lsg" x="35.2" y="45.2" font-size="7">=</text><text class="zahl lsg" x="45.2" y="45.2" font-size="7">1</text><text class="zahl lsg" x="55.2" y="45.2" font-size="7">2</text>
+        <text class="zahl lsg" x="75.2" y="45.2" font-size="7">2</text><text class="zahl lsg" x="85.2" y="45.2" font-size="7">·</text><text class="zahl lsg" x="95.2" y="45.2" font-size="7">6</text><text class="zahl lsg" x="105.2" y="45.2" font-size="7">=</text><text class="zahl lsg" x="115.2" y="45.2" font-size="7">1</text><text class="zahl lsg" x="125.2" y="45.2" font-size="7">2</text>
+      </svg>
+      <p class="lsg-nur e14-heft-hinweis">Mehrere Lösungen möglich, z. B. 2 · 6 oder 4 · 3</p>
+    </div>
+  </div>
+
+  <div class="profi" data-titel="Profi-Aufgabe: Ein Punktefeld zerlegen">
+    <div class="e14-zerlegen">
+      <m-punktefeld reihen="7" spalten="4" abstand="4.6" teile-reihen="5" farbe-reihen="5"></m-punktefeld>
+      <div class="e14-zerlegen-rechts">
+        <p>7 Reihen mit je 4. Die Linie teilt das Feld.</p>
+        <div class="e14-zwei-aufg">
+          <span class="e14-auf"><span class="e14-wort">Oben:</span><m-aufgabe>5 · 4 = _</m-aufgabe></span>
+          <span class="e14-auf"><span class="e14-wort">Unten:</span><m-aufgabe>2 · 4 = _</m-aufgabe></span>
+        </div>
+        <span class="e14-auf"><span class="e14-wort">Zusammen:</span><m-aufgabe>7 · 4 = [20] + [8] = [28]</m-aufgabe></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 14-2: Malreihen                                              -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="14" data-titel="Malreihen" data-verteilt>
+  <div class="e14-trick">
+    <div class="e14-trickbild">
+      <m-punktefeld reihen="6" spalten="5" abstand="4.6" teile-reihen="5" farbe-reihen="5"></m-punktefeld>
+      <span class="e14-tl e14-tl1">25</span><span class="e14-tl e14-tl2">5</span>
+    </div>
+    <div>
+      <p><b>Nachbar-Trick:</b> eine Reihe mehr oder weniger.</p>
+      <p class="e14-gross">6 · 5 = 25 + 5 = 30 <span class="e14-wie">eine Reihe mehr</span></p>
+      <p class="e14-gross">9 · 5 = 50 − 5 = 45 <span class="e14-wie">eine Reihe weniger</span></p>
+    </div>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Mathilda, schreib die Malreihen fertig. Die gelben Aufgaben helfen dir.</p>
+    <div class="e14-leiter">
+      <div class="e14-zeile e14-kopf"><span>2er-Reihe</span><span>5er-Reihe</span><span>10er-Reihe</span></div>
+      <div class="e14-zeile e14-kern"><m-aufgabe>1 · 2 = 2</m-aufgabe><m-aufgabe>1 · 5 = 5</m-aufgabe><m-aufgabe>1 · 10 = 10</m-aufgabe></div>
+      <div class="e14-zeile e14-kern"><m-aufgabe>2 · 2 = 4</m-aufgabe><m-aufgabe>2 · 5 = 10</m-aufgabe><m-aufgabe>2 · 10 = 20</m-aufgabe></div>
+      <div class="e14-zeile"><m-aufgabe>3 · 2 = _</m-aufgabe><m-aufgabe>3 · 5 = _</m-aufgabe><m-aufgabe>3 · 10 = _</m-aufgabe></div>
+      <div class="e14-zeile"><m-aufgabe>4 · 2 = _</m-aufgabe><m-aufgabe>4 · 5 = _</m-aufgabe><m-aufgabe>4 · 10 = _</m-aufgabe></div>
+      <div class="e14-zeile e14-kern"><m-aufgabe>5 · 2 = 10</m-aufgabe><m-aufgabe>5 · 5 = 25</m-aufgabe><m-aufgabe>5 · 10 = 50</m-aufgabe></div>
+      <div class="e14-zeile"><m-aufgabe>6 · 2 = _</m-aufgabe><m-aufgabe>6 · 5 = _</m-aufgabe><m-aufgabe>6 · 10 = _</m-aufgabe></div>
+      <div class="e14-zeile"><m-aufgabe>7 · 2 = _</m-aufgabe><m-aufgabe>7 · 5 = _</m-aufgabe><m-aufgabe>7 · 10 = _</m-aufgabe></div>
+      <div class="e14-zeile"><m-aufgabe>8 · 2 = _</m-aufgabe><m-aufgabe>8 · 5 = _</m-aufgabe><m-aufgabe>8 · 10 = _</m-aufgabe></div>
+      <div class="e14-zeile"><m-aufgabe>9 · 2 = _</m-aufgabe><m-aufgabe>9 · 5 = _</m-aufgabe><m-aufgabe>9 · 10 = _</m-aufgabe></div>
+      <div class="e14-zeile e14-kern"><m-aufgabe>10 · 2 = 20</m-aufgabe><m-aufgabe>10 · 5 = 50</m-aufgabe><m-aufgabe>10 · 10 = 100</m-aufgabe></div>
+    </div>
+  </div>
+
+  <div class="knobel" data-titel="Knobel-Ecke: Zahlen-Detektiv">
+    <p>Welche Zahlen sind in der 2er-Reihe <b>und</b> in der 5er-Reihe? Kreis sie ein!</p>
+    <div class="e14-zahlen"><span>4</span><span>5</span><span>8</span><span>10</span><span>12</span><span>15</span><span>16</span><span>20</span></div>
+    <p class="lsg-nur e14-lsg">Einkreisen: 10 und 20</p>
+    <p class="e14-raetsel"><span>Ich bin in der 5er-Reihe. Ich bin größer als 30 und kleiner als 40. Wer bin ich?</span><m-feld l="35"></m-feld></p>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 14-3: Spielplan Rechteck-Erobern                              -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="14" data-titel="Rechteck-Erobern" data-art="Spielplan" data-verteilt>
+  <div class="aufg ohne-nr">
+    <p class="anw"><b>So geht’s, Mathilda:</b></p>
+    <ol class="e14-regeln">
+      <li>Würfle mit 2 Würfeln. Eine Zahl sagt die Reihen, die andere die Kästchen in jeder Reihe. Du darfst wählen!</li>
+      <li>Male das Rechteck auf freie Kästchen. Umrande es mit deiner Farbe.</li>
+      <li>Sag die Malaufgabe laut. Schreib sie ins Rechteck.</li>
+      <li>Schreib das Ergebnis in deine Spalte. Dann ist Mama oder Papa dran.</li>
+      <li>Passt es nirgends hin, auch gedreht nicht? Pech, du setzt aus!</li>
+      <li>Zweimal hintereinander Pech? Wer mehr Kästchen hat, gewinnt!</li>
+    </ol>
+  </div>
+
+  <div class="e14-brett">
+    <m-kaestchen b="11" h="11"></m-kaestchen>
+    <div class="e14-punkte">
+      <div class="e14-spalte"><span class="e14-name">Mathilda</span><m-kaestchen b="3" h="11"></m-kaestchen></div>
+      <div class="e14-spalte"><span class="e14-name">Mama/Papa</span><m-kaestchen b="3" h="11"></m-kaestchen></div>
+    </div>
+  </div>
+
+  <div class="knobel e14-knobel3">
+    <p>Die Fee würfelt 4 und 6. Der Drache würfelt 5 und 5. Wer erobert mehr Kästchen? Rechne und kreis das Bild ein!</p>
+    <div class="e14-wer">
+      <span class="e14-auf"><m-bild name="fee" gr="17"></m-bild><m-aufgabe>4 · 6 = _</m-aufgabe></span>
+      <span class="e14-auf"><m-bild name="drache" gr="17"></m-bild><m-aufgabe>5 · 5 = _</m-aufgabe></span>
+    </div>
+    <p class="lsg-nur e14-lsg">Der Drache: 25 ist mehr als 24</p>
+  </div>
+</section>
+
+<style>
+  /* Anleitung */
+  .e14-anl .kasten > .kasten-titel { break-after: avoid; }
+  .e14-vorrat { break-after: avoid; }
+  .e14-blick { display: flex; justify-content: space-around; align-items: flex-end; gap: 4mm; margin: 2mm 0 1mm 0; }
+  .e14-blick > div { display: flex; flex-direction: column; align-items: center; gap: 1.5mm; }
+  .e14-blick > div > span { font-size: 9.5pt; white-space: nowrap; }
+  .e14-hfeld { display: flex; gap: 6mm; align-items: flex-start; }
+  .e14-hfeld > div { flex: 1; }
+  .e14-loes { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 4mm; align-items: start; margin: 2mm 0 4mm 0; }
+  .e14-loes m-loesungen, .e14-loes .loesungen-raster { display: contents; }
+  .e14-loes > .kasten.loesung { margin: 5mm 0 0 0; font-size: 9.5pt; }
+  .e14-loes > .kasten.loesung p { margin-bottom: 1.6mm; }
+
+  /* Blatt 14-1 */
+  .e14-drei { display: flex; justify-content: space-between; align-items: flex-end; }
+  .e14-zelle { display: flex; flex-direction: column; align-items: center; gap: 3mm; }
+  .e14-k2 .aufgabe { gap: 1.3mm; }
+  .e14-dreh { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 6mm; }
+  .e14-pfeil { display: flex; flex-direction: column; align-items: center; gap: 1mm; margin-bottom: 14mm; color: var(--akzent); font-weight: 700; }
+  .e14-neben { display: flex; align-items: flex-end; gap: 4mm; }
+  /* Malaufgabe mit einstelligen Lücken (1 Kästchen) und zweistelligem Ergebnis (2 Kästchen) */
+  .e14-k2 .feld.k:last-child { width: 20mm; min-width: 20mm; }
+  .e14-pfeil svg { display: block; }
+  .e14-heft { position: relative; display: inline-block; }
+  .e14-heft m-kaestchen { display: block; }
+  .e14-heft > svg.e14-heft-lsg { position: absolute; left: 0; top: 0; overflow: visible; }
+  .loesungsmodus .lsg-nur.e14-heft-hinweis { position: absolute; left: 70.4mm; top: 21mm; margin: 0; padding: 0 1.5mm; font-size: 14pt; line-height: 1.2; background: var(--papier); max-width: 88mm; }
+  .e14-zerlegen { display: flex; align-items: center; gap: 8mm; }
+  .e14-zerlegen-rechts { display: flex; flex-direction: column; gap: 2mm; }
+  .e14-zerlegen-rechts > p { margin: 0; }
+  .e14-zwei-aufg { display: flex; gap: 8mm; }
+  .e14-auf { display: inline-flex; align-items: center; gap: 2mm; }
+  .e14-wort { font-size: 16pt; }
+
+  /* Blatt 14-2 */
+  .e14-trick { display: flex; align-items: center; gap: 6mm; background: var(--akzent-hell); border-radius: 4mm; padding: 2.5mm 5mm; }
+  /* Punktefeld 6 · 5 (abstand 4.6): blauer Block Mitte bei 12.65 mm, rote Reihe bei 26.45 mm, Breite 25.3 mm */
+  .e14-trickbild { position: relative; width: 34mm; height: 29.9mm; flex: none; }
+  .e14-trickbild m-punktefeld, .e14-trickbild svg { display: block; }
+  .e14-tl { position: absolute; left: 27mm; transform: translateY(-50%); font-size: 16pt; font-weight: 700; line-height: 1; }
+  .e14-tl1 { top: 12.65mm; color: var(--punkt); }
+  .e14-tl2 { top: 26.45mm; color: var(--punkt2); }
+  .e14-trick p { margin: 0 0 1mm 0; }
+  .e14-trick p:last-child { margin: 0; }
+  .e14-gross { font-size: 21pt; line-height: 1.25; }
+  .e14-wie { font-size: 15pt; color: var(--akzent); font-weight: 700; margin-left: 3mm; }
+  .e14-leiter { display: flex; flex-direction: column; gap: 0.7mm; }
+  .e14-zeile { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; justify-items: center; border-radius: 2mm; }
+  .e14-zeile.e14-kern { background: var(--gold-hell); }
+  .e14-zeile.e14-kopf { font-family: var(--text); font-weight: 900; font-size: 15pt; color: var(--akzent); }
+  .e14-leiter .aufgabe { min-height: 10.6mm; }
+  .e14-leiter .aufgabe > :first-child { min-width: 12mm; justify-content: flex-end; text-align: right; }
+  .e14-leiter .aufgabe > span.z:last-child { min-width: 21mm; text-align: center; }
+  .e14-zahlen { display: flex; justify-content: space-between; padding: 1mm 6mm 2mm 6mm; font-size: 24pt; }
+  .e14-zahlen span { display: inline-block; min-width: 12mm; text-align: center; }
+  .e14-lsg { position: absolute; top: 3mm; right: 6mm; margin: 0; }
+  .e14-raetsel { display: flex; align-items: center; justify-content: space-between; gap: 6mm; margin: 0 !important; }
+  .e14-raetsel > span { flex: 1; }
+
+  /* Blatt 14-3 */
+  .e14-regeln { margin: 0; padding-left: 9mm; font-size: 15pt; line-height: 1.25; }
+  .e14-regeln li { margin-bottom: 1mm; }
+  .e14-brett { display: flex; justify-content: space-between; align-items: flex-end; }
+  .e14-brett > m-kaestchen { display: block; }
+  .e14-punkte { display: flex; gap: 3mm; }
+  .e14-spalte { display: flex; flex-direction: column; align-items: center; gap: 1mm; }
+  .e14-spalte m-kaestchen { display: block; }
+  .e14-name { font-family: var(--text); font-weight: 900; font-size: 14pt; color: var(--akzent); }
+  .e14-wer { display: flex; justify-content: space-around; align-items: center; }
+  .e14-knobel3 > p { margin: 0 0 1.5mm 0; }
+</style>

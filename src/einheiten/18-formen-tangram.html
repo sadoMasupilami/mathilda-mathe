@@ -1,0 +1,467 @@
+<!--
+  Einheit 18: Formen, Spiegel & Tangram (Block D)
+  Formen benennen und unterscheiden (Dreieck, Viereck, Quadrat, Rechteck, Kreis), Ecken und Seiten zählen,
+  Spiegelachse und Spiegelbilder auf Kästchenpapier, Tangram basteln und Figuren legen.
+  Bauen und ansehen:  ./baue.sh --nur 18 --png --dpi 110
+
+  Technik:
+  - Spiegelbilder (Blatt 18-2): <m-kaestchen> mit darübergelegtem SVG. Gitterpunkt (i, j) liegt bei
+    (0.2 + 10·i, 0.2 + 10·j) mm. Die Lösungshälfte hat class="lsg" (nur in der Lösungsansicht sichtbar).
+  - Tangram-Figuren (Blatt 18-3) sind aus den echten Teilen von <m-tangram> zusammengesetzt
+    (Eckpunkte wie window.__tangram, 1 Einheit = 1/4 der Quadratseite = 5,6 mm, nur gedreht und verschoben,
+    das schiefe Viereck muss nie umgedreht werden). Ein Prüfskript hat Überlappung (keine), Gesamtfläche (16)
+    und Zusammenhang geprüft. Die farbigen Teile in <g class="lsg"> zeigen in der Lösung eine mögliche Lage.
+  - Quadrat-Lösungen im Lösungskasten: 2, 3, 4, 5 und 7 Teile, ebenfalls aus echten Teilen.
+-->
+<section class="anleitung" data-einheit="18" data-titel="Formen, Spiegel &amp; Tangram">
+
+  <div class="kasten ziel">
+    <p>Heute wird Mathilda zur Formen-Forscherin. Sie lernt die wichtigsten Flächenformen beim Namen kennen: <span class="begriff">Dreieck</span>, <span class="begriff">Viereck</span>, <span class="begriff">Rechteck</span>, <span class="begriff">Quadrat</span> und <span class="begriff">Kreis</span>. Dabei zählt sie <span class="begriff">Ecken</span> und <span class="begriff">Seiten</span> und entdeckt, dass man eine Form nicht nur am Aussehen erkennt, sondern an ihren Eigenschaften: Ein Viereck ist ein Rechteck, wenn alle 4 Ecken so sind wie die Ecke eines Blatt Papiers. Ein Quadrat ist ein ganz besonderes Rechteck, bei dem zusätzlich alle 4 Seiten gleich lang sind. Und ein Quadrat bleibt ein Quadrat, auch wenn es auf der Spitze steht.</p>
+    <p>Danach holt ihr den Handspiegel aus Einheit 3 wieder hervor. Damals hat die Falte beim Klecksbild aus 5 Punkten 10 gemacht. Heute bekommt die Linie, an der gespiegelt wird, ihren Namen: <span class="begriff">Spiegel&shy;achse</span>. Mathilda ergänzt Spiegelbilder auf Kästchenpapier und sucht Spiegel&shy;achsen in Figuren. Zum Schluss bastelt ihr ein <b>Tangram</b>, ein über 200 Jahre altes Legespiel aus China: 7 Teile, aus denen ein Haus, ein Boot, eine Katze, ein Zauberer und sogar ein Einhorn werden. Ganz nebenbei übt Mathilda dabei, Formen im Kopf zu drehen.</p>
+  </div>
+
+  <div class="kasten material">
+    <ul>
+      <li><b>Ausdrucken:</b> <a class="blattref" href="#blatt-18-1"></a>, <a class="blattref" href="#blatt-18-2"></a> und die <a class="blattref" href="#blatt-18-3">Bastelvorlage 18-3</a>. Blatt 18-3 am besten <b>zweimal</b>: Ein Exemplar wird zerschnitten (auf festeres Papier mit 160 g drucken oder vor dem Schneiden auf den Karton einer Müslischachtel kleben), das zweite bleibt ganz, damit die Legefiguren erhalten bleiben. Farbig drucken ist schön, schwarz-weiß geht auch.</li>
+      <li><b>Stifte und Werkzeug:</b> Buntstifte in Grün, Gelb, Rot und Blau, Bleistift, Radiergummi, ein kurzes Lineal, Schere, Kleber, ein Kuvert für die Tangram-Teile. Dazu der <b>Handspiegel</b> aus Einheit 3.</li>
+      <li><b>Fühl-Sackerl:</b> ein Stoffsackerl oder ein Polsterüberzug mit 5 flachen Dingen, zum Beispiel ein runder Bierdeckel, eine Ansichtskarte (mit spitzen Ecken, nicht abgerundet wie bei Spielkarten), ein Knopf, dazu ein Dreieck und ein Quadrat (Seitenlänge etwa 6 cm), die du schnell aus dem Karton einer Müslischachtel schneidest.</li>
+      <li><b>Zwei Blätter Altpapier</b> für den Ecken-Prüfer und den Falt-Schnitt-Zauber, ein <b>Zettel</b> für die Strichliste der Formen-Jagd und ein Küchenwecker.</li>
+      <li><b>Für das Spiel „Quadrate fangen“:</b> eine Seite Kästchenpapier (z. B. aus einem alten Rechenheft) und 2 Stifte in verschiedenen Farben.</li>
+      <li><b>Wer mag (für Extras):</b> eine Springschnur oder ein Wollfaden (3 bis 4 m) und die Straßenkreide aus Einheit 4.</li>
+      <li><b>Vorbereitung (10 Minuten):</b> Tangram ausschneiden (schneidet Mathilda selbst, dauert die Einheit etwa 5 Minuten länger), das Fühl-Sackerl füllen, einen Ecken-Prüfer falten (Kasten „Basteln“) und das Spielfeld für „Quadrate fangen“ vorzeichnen: 4 Reihen mit je 6 dicken Punkten, immer 2 Kästchen Abstand.</li>
+    </ul>
+  </div>
+
+  <h2>Ablauf Schritt für Schritt</h2>
+  <ol class="ablauf">
+    <li data-min="3"><span class="schritt-titel">Fühl-Sackerl: Ecken und Seiten</span>Mathilda greift ins Sackerl, fühlt ein Ding, ohne hinzuschauen, und beschreibt es: rund oder eckig? Wie viele Ecken? Erst dann holt sie es heraus, und ihr gebt der Form ihren Namen. Dabei führst du die zwei wichtigsten Wörter ein: Eine <b>Ecke</b> ist eine Spitze, die man antippen kann. Eine <b>Seite</b> ist die gerade Linie zwischen zwei Ecken, die man mit dem Finger nachfahren kann. Zum Schluss zeigst du den Ecken-Prüfer, und ihr prüft die Ansichtskarte: Alle 4 Ecken passen genau hinein, also ist sie ein Rechteck.</li>
+    <li data-min="5"><span class="schritt-titel">Formen-Jagd im Haus</span>Küchenwecker auf 4 Minuten, Strichliste in die Hand, los (Kasten „Bewegung“). Danach zählt ihr kurz nach: Welche Form hat Mathilda am öftesten gefunden? Meistens gewinnen die Rechtecke mit großem Abstand, Dreiecke sind selten.</li>
+    <li data-min="5"><span class="schritt-titel">Formen-Detektiv am Blatt</span><a class="blattref" href="#blatt-18-1"></a>, Aufgaben 1 und 2. Beim Zauberschloss ist das Zählen der Kern; fertig ausmalen darf sie später. Bei Aufgabe 3 braucht sie ihren Ecken-Prüfer. Wenn die Zeit knapp ist, kommen Aufgabe 3 und die Knobel-Ecke an einem anderen Tag dran.</li>
+    <li data-min="5"><span class="schritt-titel">Spiegel-Zauber</span>Zuerst ein Falt-Schnitt-Herz (Kasten „Basteln“): aufklappen, staunen, und dann bekommt die Falte ihren Namen: Spiegel&shy;achse. Mathilda stellt den Handspiegel auf die Falte und sieht wieder ein ganzes Herz. Danach <a class="blattref" href="#blatt-18-2"></a>, Aufgabe 1: Krone und Tannenbaum fertig zeichnen. Aufgabe 2 (mit Lineal) und die Profi-Aufgabe sind für später.</li>
+    <li data-min="6"><span class="schritt-titel">Spiel: Quadrate fangen</span>Eine Partie auf dem vorgezeichneten Feld mit 15 Quadraten (Kasten „Spiel“). Jedes Quadrat braucht 4 Seiten; wer die vierte zieht, fängt es.</li>
+    <li data-min="5"><span class="schritt-titel">Tangram</span>Leg die 7 Teile auf den Tisch und stellt sie gemeinsam vor: 2 große Dreiecke, 1 mittleres, 2 kleine, 1 Quadrat und 1 schiefes Viereck. Dann legt Mathilda auf <a class="blattref" href="#blatt-18-3"></a> das Haus und das Boot (die mit den Linien). Die Umriss-Figuren sind ein wunderbarer Zeitvertreib für die nächsten Tage: Teile ins Kuvert, Kuvert und Blatt in die Schultasche oder ins Auto. Zum Schluss: Sammelpass stempeln, Sterne anmalen.</li>
+  </ol>
+
+  <h3>Beispielsätze</h3>
+  <div class="sag">
+    <p class="du">„Greif ins Sackerl, aber nicht schauen! Was fühlst du?“</p>
+    <p class="sie">„Das ist flach und rund. Der Bierdeckel!“</p>
+    <p class="du">„Hat er Ecken?“</p>
+    <p class="sie">„Nein, gar keine.“</p>
+    <p class="dann">„Genau, ein Kreis. Er hat keine Ecke und keine gerade Seite.“ Beim Karton-Dreieck: „Tipp jede Ecke einmal an und zähl mit.“ (3.) „Jetzt fahr die Seiten mit dem Finger nach.“ (Auch 3.) So spürt sie den Unterschied zwischen Ecke und Seite.</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Die Ansichtskarte und das Karton-Quadrat haben beide 4 Ecken. Was ist anders?“</p>
+    <p class="sie">„Die Karte ist länger. Beim Quadrat sind alle Seiten gleich lang.“</p>
+    <p class="dann">Super beobachtet. Dann beide mit dem Ecken-Prüfer testen: „Bei beiden passen alle 4 Ecken genau. Darum sind beide Rechtecke. Das Quadrat ist ein ganz besonderes Rechteck: Bei ihm sind auch noch alle Seiten gleich lang.“ Protestiert sie („Ein Quadrat ist doch kein Rechteck!“), hilft ein Vergleich: „Jeder Dackel ist ein Hund, aber nicht jeder Hund ist ein Dackel.“</p>
+  </div>
+  <div class="sag">
+    <p class="du">(Du drehst das Karton-Quadrat auf die Spitze.) „Und was ist das jetzt?“</p>
+    <p class="sie">„Eine Raute!“ oder: „Das ist kein Quadrat mehr.“</p>
+    <p class="dann">Sehr typisch, auch bei Erwachsenen. Frag: „Hat sich am Karton etwas verändert? Zähl die Seiten, prüf die Ecken.“ Dreh es langsam zurück: „Ein Quadrat bleibt ein Quadrat, egal wie es liegt.“ „Raute“ ist übrigens nicht falsch: Jedes Quadrat ist auch eine Raute (4 gleich lange Seiten).</p>
+  </div>
+  <div class="sag">
+    <p class="du">„Die Spitze der Krone ist 3 Kästchen links von der Spiegel&shy;achse. Wo muss sie auf der anderen Seite hin?“</p>
+    <p class="sie">„Auch 3 Kästchen weg, aber rechts!“</p>
+    <p class="dann">Genau so geht Spiegeln auf Kästchenpapier: jede Ecke einzeln von der Achse aus abzählen, einen Punkt setzen, erst zum Schluss die Punkte verbinden. Zur Kontrolle stellt Mathilda den Handspiegel auf die gestrichelte Linie.</p>
+  </div>
+  <div class="sag">
+    <p class="sie">„Das geht nicht! Beim Einhorn bleibt immer ein Teil übrig!“</p>
+    <p class="du">„Die zwei großen Dreiecke sind die schwierigsten. Wo in der Figur ist so viel Platz für sie?“</p>
+    <p class="dann">Hilfen in Stufen: zuerst nur fragen, wo die großen Dreiecke hinpassen; dann ein großes Dreieck richtig hinlegen; dann mit dem Finger kurz andeuten, wo zwei Teile aneinanderstoßen. Beim Einhorn bilden die zwei großen Dreiecke den Bauch, beim Haus das Dach. Und: Profis lassen eine Figur auch einmal liegen und versuchen es morgen wieder.</p>
+  </div>
+
+  <div class="kasten tipp" data-titel="Die Formen auf einen Blick">
+    <table class="tab e18-formtab">
+      <tr><th>Form</th><th>Ecken</th><th>Seiten</th><th>So erkennt man sie</th></tr>
+      <tr><td><b>Dreieck</b></td><td>3</td><td>3</td><td>egal ob spitz, flach, schief oder auf dem Kopf</td></tr>
+      <tr><td><b>Viereck</b></td><td>4</td><td>4</td><td>muss nicht „ordentlich“ aussehen</td></tr>
+      <tr><td><b>Rechteck</b></td><td>4</td><td>4</td><td>Viereck, bei dem alle 4 Ecken in den Ecken-Prüfer passen</td></tr>
+      <tr><td><b>Quadrat</b></td><td>4</td><td>4</td><td>Rechteck mit 4 gleich langen Seiten, egal wie es liegt</td></tr>
+      <tr><td><b>Kreis</b></td><td>0</td><td>–</td><td>rund, jeder Punkt am Rand gleich weit von der Mitte</td></tr>
+    </table>
+    <p>Die Ecke, die in den Ecken-Prüfer passt, heißt später in der Schule <b>rechter Winkel</b>; für Mathilda reicht „eine Ecke wie beim Blatt Papier“. Auf den Blättern steht „die anderen Rechtecke“ für Rechtecke, die keine Quadrate sind.</p>
+  </div>
+
+  <h2>Spiele, Bewegung und Basteln</h2>
+
+  <div class="kasten bewegung darf-brechen e18-kt" data-titel="Formen-Jagd im Haus">
+    <div class="e18-jagd">
+      <div>
+        <p><b>So geht’s:</b> Mathilda bekommt einen Zettel mit einer Strichliste wie rechts und einen Bleistift. Du stellst den Küchenwecker auf 4 Minuten. Sie läuft durch Wohnung oder Haus und sucht flache Formen: die Fliese (Quadrat), den Teller (Kreis), die Kastentür (Rechteck), das Fenster, das Buch, den Bierdeckel. Für jede Form gibt es einen Strich in der richtigen Zeile, aber erst, wenn sie dir die Form zeigt und sagt, warum: „Die Fliese ist ein Quadrat, alle Seiten sind gleich lang.“</p>
+        <p><b>Strichliste:</b> 4 Striche nebeneinander, der 5. quer darüber. So sieht man die Fünfer mit Blitzblick, wie bei der Kraft der 5 aus Einheit 1.</p>
+      </div>
+      <svg class="e18-strichliste" xmlns="http://www.w3.org/2000/svg" width="56mm" height="33mm" viewBox="0 0 56 33"><rect x="0.3" y="0.3" width="55.4" height="32.4" rx="2" fill="white" stroke="var(--linie)" stroke-width="0.4"/><circle cx="5" cy="5.5" r="2.6" fill="none" stroke="var(--tinte)" stroke-width="0.45"/><text class="e18-st" x="10" y="6.8">Kreis</text><polygon points="2.4,15.6 7.6,15.6 5,10.9" fill="none" stroke="var(--tinte)" stroke-width="0.45" stroke-linejoin="round"/><text class="e18-st" x="10" y="14.8">Dreieck</text><rect x="2.6" y="18.6" width="4.8" height="4.8" fill="none" stroke="var(--tinte)" stroke-width="0.45"/><text class="e18-st" x="10" y="22.8">Quadrat</text><rect x="1.8" y="27.3" width="6.4" height="3.6" fill="none" stroke="var(--tinte)" stroke-width="0.45"/><text class="e18-st" x="10" y="30.6">Rechteck</text><g stroke="var(--punkt)" stroke-width="0.45" stroke-linecap="round"><path d="M28 3.4 v4.4 M29.6 3.4 v4.4 M31.2 3.4 v4.4"/><path d="M28 11.4 v4.4"/><path d="M28 19.4 v4.4 M29.6 19.4 v4.4 M31.2 19.4 v4.4 M32.8 19.4 v4.4"/><path d="M28 27.4 v4.4 M29.6 27.4 v4.4 M31.2 27.4 v4.4 M32.8 27.4 v4.4 M27 31 L33.8 28.2 M36.4 27.4 v4.4 M38 27.4 v4.4"/></g></svg>
+    </div>
+    <ul>
+      <li><b>Nur flache Flächen zählen:</b> Bei einer Schachtel zählt der Deckel, ein Ball zählt nicht, ein ovales Tablett ist kein Kreis. Dreiecke sind selten: Kleiderbügel, Tortenstück, Notenständer, Giebelwand. Findet Mathilda keines, hilft „warm“ und „kalt“.</li>
+      <li><b>Danach fragen:</b> „Warum gibt es im Haus so viele Rechtecke?“ (Türen, Bücher, Kästen und Fliesen lassen sich ohne Lücken nebeneinander bauen und stapeln.)</li>
+      <li><b>Als Wettspiel zu zweit:</b> Jede und jeder hat eine Strichliste. Wer findet in 4 Minuten mehr? Ein Dreieck zählt doppelt. Dasselbe Ding bekommt nur, wer es zuerst zeigt.</li>
+    </ul>
+  </div>
+
+  <div class="kasten spiel darf-brechen e18-kt" data-titel="Quadrate fangen">
+    <p class="spiel-meta">2 Personen · 5 bis 10 Minuten · 1 Seite Kästchenpapier (oder ein leeres Blatt) · 2 Stifte in verschiedenen Farben · viele kennen das Spiel als „Käsekästchen“</p>
+    <div class="e18-spiel-kopf">
+      <div>
+        <p><b>Idee:</b> Ihr zieht abwechselnd Seiten. Wer die vierte Seite eines kleinen Quadrats zieht, hat es gefangen. Wer am Ende mehr Quadrate gefangen hat, gewinnt.</p>
+        <p><b>Vorbereitung:</b> 4 Reihen mit je 6 dicken Punkten aufs Kästchenpapier, immer 2 Kästchen Abstand. Dazwischen liegen 3 · 5 = 15 kleine Quadrate. Jede Person hat ihre Farbe und ihr Zeichen: Mathilda zum Beispiel blau mit Stern, du rot mit Herz (nicht „M“ für Mathilda und Mama).</p>
+      </div>
+      <svg class="e18-spielbild" xmlns="http://www.w3.org/2000/svg" width="38mm" height="24mm" viewBox="0 0 38 24"><g stroke-width="0.7" stroke-linecap="round"><path d="M1 1 H8 V8 M15 1 H22 M22 8 V15 H29 M36 15 V22" stroke="var(--punkt)" fill="none"/><path d="M1 1 V8 H8 M22 8 H29 M8 22 H15" stroke="var(--rot)" fill="none"/></g><path d="M29 8 V15" stroke="var(--grau)" stroke-width="0.5" stroke-dasharray="0.8 0.8"/><polygon points="4.50,1.80 5.18,3.57 7.07,3.67 5.59,4.86 6.09,6.68 4.50,5.65 2.91,6.68 3.41,4.86 1.93,3.67 3.82,3.57" fill="var(--gold)" stroke="var(--tinte)" stroke-width="0.2"/><g fill="var(--tinte)"><circle cx="1" cy="1" r="0.75"/><circle cx="8" cy="1" r="0.75"/><circle cx="15" cy="1" r="0.75"/><circle cx="22" cy="1" r="0.75"/><circle cx="29" cy="1" r="0.75"/><circle cx="36" cy="1" r="0.75"/><circle cx="1" cy="8" r="0.75"/><circle cx="8" cy="8" r="0.75"/><circle cx="15" cy="8" r="0.75"/><circle cx="22" cy="8" r="0.75"/><circle cx="29" cy="8" r="0.75"/><circle cx="36" cy="8" r="0.75"/><circle cx="1" cy="15" r="0.75"/><circle cx="8" cy="15" r="0.75"/><circle cx="15" cy="15" r="0.75"/><circle cx="22" cy="15" r="0.75"/><circle cx="29" cy="15" r="0.75"/><circle cx="36" cy="15" r="0.75"/><circle cx="1" cy="22" r="0.75"/><circle cx="8" cy="22" r="0.75"/><circle cx="15" cy="22" r="0.75"/><circle cx="22" cy="22" r="0.75"/><circle cx="29" cy="22" r="0.75"/><circle cx="36" cy="22" r="0.75"/></g></svg>
+    </div>
+    <ol class="regeln">
+      <li><b>Zug:</b> Wer dran ist, zieht <b>eine</b> Linie zwischen zwei Nachbarpunkten: waagrecht oder senkrecht, nie schräg, nie über zwei Abstände. Mathilda beginnt.</li>
+      <li><b>Quadrat gefangen:</b> Ist deine Linie die vierte Seite eines kleinen Quadrats, malst du dein Zeichen hinein und <b>musst</b> gleich noch eine Linie ziehen. Fängst du wieder eines, geht es so weiter.</li>
+      <li><b>Doppelt gefangen:</b> Eine Linie kann die vierte Seite von zwei Quadraten auf einmal sein. Dann bekommst du beide und ziehst trotzdem nur eine Extra-Linie.</li>
+      <li><b>Nichts gefangen:</b> Die andere Person ist dran.</li>
+      <li><b>Ende:</b> Das Spiel endet, wenn alle Linien gezogen sind. Auf diesem Feld sind das genau 38 (20 waagrechte und 18 senkrechte), und dann sind alle 15 Quadrate vergeben. Wer mehr Quadrate hat, gewinnt. Weil 15 ungerade ist, gibt es nie ein Unentschieden.</li>
+    </ol>
+    <p><b>Im Bild:</b> Mathilda (blau) hat das Quadrat links oben gefangen. Beim Quadrat mit der gestrichelten Linie fehlt nur noch diese Seite: Wer jetzt dran ist, fängt es.</p>
+    <p><b>Gut zu wissen:</b> Der wichtigste Trick ist Zählen: Hat ein Quadrat schon 2 Seiten, wäre die nächste Linie dort die dritte, und der andere fängt es. Am Anfang gibt es viele „sichere“ Linien; gegen Ende muss irgendwer eine dritte Seite ziehen, und dann fängt man oft mehrere Quadrate hintereinander. Denk ruhig laut: „Hier hat das Quadrat schon 2 Seiten, da zieh ich lieber nicht.“ Eine Partie dauert etwa 5 Minuten.</p>
+    <p><b>Varianten:</b></p>
+    <ul>
+      <li><b>Kleines Feld zum Lernen:</b> 3 Reihen mit je 4 Punkten, also 2 · 3 = 6 Quadrate und 17 Linien. Geht in 2 Minuten; hier kann es 3 : 3 unentschieden ausgehen.</li>
+      <li><b>Großes Feld:</b> 6 Reihen mit je 6 Punkten: 25 Quadrate und 60 Linien (30 waagrechte, 30 senkrechte), etwa 10 Minuten. <b>Verkehrt-Spiel:</b> Wer am Ende weniger Quadrate hat, gewinnt.</li>
+      <li><b>Dreiecke fangen (für Profis):</b> Zusätzlich darf man in ein Kästchen eine schräge Linie von Ecke zu Ecke ziehen, höchstens eine pro Kästchen und nur, solange es noch nicht gefangen ist. Ein Kästchen mit Schräge besteht aus 2 Dreiecken: Wer die dritte Seite eines Dreiecks zieht, fängt es (1 Punkt) und zieht wie beim Quadrat noch eine Linie. Ein Kästchen ohne Schräge, das ganz umrandet wird, zählt 2 Punkte. Das Spiel endet, wenn jedes Kästchen vergeben ist. Es werden 30 Punkte verteilt; 15 : 15 ist unentschieden.</li>
+    </ul>
+  </div>
+
+  <div class="kasten basteln darf-brechen e18-kt" data-titel="Ecken-Prüfer und Falt-Schnitt-Zauber">
+    <p><b>Ecken-Prüfer (1 Minute):</b> Nimm ein Stück Papier mit krummem Rand, ruhig ein abgerissenes. Falte es einmal irgendwo und streich die Falte fest: Die Faltkante ist schnurgerade. Jetzt falte so, dass die Faltkante genau auf sich selbst liegt, und streich wieder fest. Die neue Ecke ist eine perfekte „Blatt-Papier-Ecke“. Damit prüft Mathilda: Passt die Ecke genau hinein, ohne Spalt und ohne dass etwas übersteht?</p>
+    <p><b>Falt-Schnitt-Zauber (2 Minuten):</b> Ein Blatt in der Mitte falten. Mathilda zeichnet an die Falte ein halbes Herz: Die Linie beginnt an der Falte und endet an der Falte. Durch beide Lagen ausschneiden, aufklappen: ein ganzes Herz! Die Falte ist genau die <b>Spiegel&shy;achse</b>. Links und rechts davon ist alles gleich, nur gespiegelt. Den Handspiegel auf die Falte stellen: wieder ein ganzes Herz. Weitere Ideen: halber Tannenbaum, halbe Krone. Vorher raten: „Wie wird es aussehen?“</p>
+    <p><b>Profi-Zauber:</b> Das Papier zweimal falten (erst in der Mitte, dann noch einmal quer), eine Form an die zwei Faltkanten zeichnen und ausschneiden. Beim Aufklappen entsteht eine Figur mit <b>zwei</b> Spiegel&shy;achsen, zum Beispiel ein Stern. Und was passiert, wenn die Zeichnung die Falte gar nicht berührt? (Dann bekommt man zwei getrennte Figuren, die Spiegelbilder voneinander sind.)</p>
+  </div>
+
+  <div class="kasten basteln darf-brechen e18-kt" data-titel="Tangram basteln und legen">
+    <p><b>Basteln (Mathilda selbst: etwa 5 bis 8 Minuten):</b> Das ganze Quadrat von <a class="blattref" href="#blatt-18-3"></a> ausschneiden, dann zuerst die lange Linie quer durch die Mitte schneiden, danach die kleineren Teile. Genau auf der Linie schneiden, sonst passen die Teile später nicht gut zusammen. Auf Karton geklebt werden die Teile stabil und lassen sich leichter greifen.</p>
+    <p><b>Die 7 Teile:</b> 2 große Dreiecke, 1 mittleres Dreieck, 2 kleine Dreiecke, 1 Quadrat und 1 schiefes Viereck (Erwachsene sagen Parallelogramm). Lass Mathilda vergleichen: „Wie viele kleine Dreiecke passen auf das Quadrat?“ (2.) „Und auf ein großes Dreieck?“ (4.)</p>
+    <p><b>Die Regeln:</b> Eine Figur besteht immer aus <b>allen 7</b> Teilen. Die Teile berühren sich, liegen aber nie übereinander. Drehen ist erlaubt, das schiefe Viereck darf man sogar umdrehen; bei den Figuren auf Blatt 18-3 ist das aber nie nötig. Zuerst die zwei Figuren mit Linien (Haus und Boot), dann die drei Umriss-Figuren (Katze, Zauberer, Einhorn). Bei allen gilt: die großen Dreiecke zuerst!</p>
+    <p><b>Zu zweit:</b> Beim <b>Rätsel-Tausch</b> legt eine Person hinter einem aufgestellten Buch eine eigene Figur und fährt ihren Umriss auf einem Blatt nach; die andere legt die Figur in den Umriss. Beim <b>Wettlegen</b> (Blatt 18-3 noch einmal ausdrucken) legt ihr gleichzeitig dieselbe Figur; wer fertig ist, ruft „Zauberei!“.</p>
+  </div>
+
+  <div class="kasten bewegung darf-brechen e18-kt" data-titel="Formen mit Seil und Kreide (Extra)">
+    <ul>
+      <li><b>Seil-Formen:</b> Knotet die Enden einer Springschnur zusammen. Du hältst die Schnur mit beiden Händen, Mathilda mit einer: ein Dreieck! Geht sie zur Seite, wird es spitz, flach oder schief, bleibt aber ein Dreieck. Halten beide mit beiden Händen, entsteht ein Viereck; jetzt ein Rechteck (Ecken-Prüfer an die Ecken) und ein Quadrat (Seiten mit Handspannen nachmessen).</li>
+      <li><b>Riesen-Kreis:</b> Du hältst im Hof ein Ende der Schnur fest auf den Boden, Mathilda geht mit dem anderen Ende und der Kreide bei gespannter Schnur einmal rundherum. Jeder Punkt am Rand ist genau eine Schnurlänge von der Mitte entfernt.</li>
+      <li><b>Formen-Hüpfen:</b> Kreis, Dreieck, Quadrat und ein langes Rechteck groß mit Kreide auf den Boden malen (bei Regen im Gang mit Malerkrepp). Du rufst: „Spring in die Form mit 3 Ecken!“, „… ohne Ecke!“, „… in das Rechteck, das kein Quadrat ist!“ Dann erfindet Mathilda die Rätsel.</li>
+    </ul>
+  </div>
+
+  <h2>Wenn es hakt oder zu leicht ist</h2>
+
+  <div class="kasten stolper darf-brechen e18-kt">
+    <ul>
+      <li><b>Ein Quadrat auf der Spitze sei kein Quadrat.</b> Das glauben sehr viele Kinder, weil Quadrate in Büchern fast immer „gerade“ stehen. Karton-Quadrat langsam drehen: „Ist es kleiner geworden? Hat es andere Seiten?“ Auf Blatt 18-1, Aufgabe 3, ist so ein gedrehtes Quadrat versteckt.</li>
+      <li><b>„Ein Quadrat ist doch kein Rechteck!“</b> Im Alltag sagt man das oft so. Nicht streiten, sondern prüfen: Alle Ecken passen in den Ecken-Prüfer, also hat das Quadrat alles, was ein Rechteck braucht. Der Dackel-Vergleich aus den Beispielsätzen hilft.</li>
+      <li><b>Nur „schöne“ Dreiecke werden erkannt.</b> Ein langes, flaches oder umgedrehtes Dreieck wird zum „Ding“. Merksatz: Jede Form mit 3 Ecken und 3 geraden Seiten ist ein Dreieck.</li>
+      <li><b>Die erste Ecke wird zweimal gezählt.</b> Beim Antippen rundherum zählt sie am Ende die Startecke noch einmal und kommt beim Dreieck auf 4. Tipp: jede gezählte Ecke mit einem kleinen Haken abhaken.</li>
+      <li><b>Ecken und Seiten werden verwechselt.</b> Merkhilfe: Ecken kann man antippen, Seiten kann man nachfahren. Bei jeder Form sind es gleich viele Ecken wie Seiten; kommt etwas anderes heraus, hat sich ein Zählfehler eingeschlichen. Und der Kreis? Er hat keine Ecke und keine gerade Seite, nur eine runde Linie.</li>
+      <li><b>Verschoben statt gespiegelt.</b> Auf Blatt 18-2 zeichnet sie die linke Hälfte einfach noch einmal daneben, sodass die Krone schief wird. Dann jeden Eckpunkt einzeln von der Spiegel&shy;achse aus abzählen: „3 Kästchen links, also 3 Kästchen rechts.“</li>
+      <li><b>Schräge Linien kippen in die falsche Richtung.</b> Wer schräge Linien direkt „nachzeichnet“, erwischt oft die falsche Richtung. Besser Punkt für Punkt arbeiten wie bei den gespiegelten Punkten auf Blatt 3-1 in Einheit 3: erst alle Eckpunkte auf der anderen Seite setzen, dann verbinden.</li>
+      <li><b>Beim Tangram passt nichts.</b> Meist liegt ein großes Dreieck an der falschen Stelle. Lieber alles wegnehmen und mit den großen Dreiecken neu anfangen. Passt das schiefe Viereck „fast“, hilft bei selbst erfundenen Figuren manchmal Umdrehen.</li>
+    </ul>
+  </div>
+
+  <div class="kasten leichter">
+    <ul>
+      <li>Zuerst nur drei Gruppen unterscheiden: Kreis, Dreieck, Viereck. Quadrat und Rechteck kommen später dazu.</li>
+      <li>Spiegeln zuerst nur mit Punkten üben wie auf Blatt 3-1 aus Einheit 3, dann mit geraden Linien, zuletzt mit schrägen. Den Handspiegel darf Mathilda immer verwenden.</li>
+      <li><b>Tangram in Originalgröße:</b> Du legst eine Figur und fährst ihren Umriss mit Bleistift auf einem großen Blatt nach. Mathilda legt die Teile direkt in den Umriss. Oder du legst 5 Teile richtig hin, und sie ergänzt die letzten 2.</li>
+      <li>Kleine Tangram-Aufgaben zum Aufwärmen: aus den 2 kleinen Dreiecken ein Quadrat legen, dann ein größeres Dreieck, dann ein schiefes Viereck.</li>
+      <li>„Quadrate fangen“ auf dem kleinen Feld mit 6 Quadraten spielen.</li>
+    </ul>
+  </div>
+
+  <div class="kasten schwerer darf-brechen e18-kt">
+    <p class="e18-vorrat">Mathilda ist schnell, darum hier ein ganzer Vorrat. Wählt aus, was Spaß macht; die Lösungen stehen in Klammern.</p>
+    <ol>
+      <li><b>Quadrate zählen.</b> „Wie viele Quadrate stecken in einem Feld aus 3 · 3 Kästchen?“ Zeichnet es auf Kästchenpapier und malt jedes gefundene Quadrat in einer anderen Farbe nach. (14: 9 kleine, 4 mittlere aus je 2 · 2 Kästchen und 1 großes. Bei 2 · 2 Kästchen sind es 5, siehe Knobel-Ecke auf Blatt 18-1. Profi: Bei 4 · 4 Kästchen sind es 16 + 9 + 4 + 1 = 30.)</li>
+      <li><b>Dreiecke zählen.</b> „Zeichne ein Quadrat mit beiden Linien von Ecke zu Ecke. Wie viele Dreiecke siehst du?“ (8: 4 kleine und 4 große, die aus je 2 kleinen bestehen.) „Und in einem Dreieck mit 3 Linien von der Spitze nach unten?“ (10. Zum Vergleich: mit 1 Linie sind es 3, mit 2 Linien 6 wie auf Blatt 18-1.)</li>
+      <li><b>Wie viele Spiegel&shy;achsen?</b> Schneidet aus Papier ein Quadrat, ein Rechteck (das kein Quadrat ist) und einen Kreis (Teller umfahren) aus. Mathilda faltet und sucht alle Spiegel&shy;achsen. (Quadrat: 4, nämlich 2 durch die Seitenmitten und 2 von Ecke zu Ecke. Rechteck: nur 2! Faltet man es von Ecke zu Ecke, liegen die Hälften nicht aufeinander. Kreis: unendlich viele, jede Linie durch die Mitte. Das schiefe Tangram-Viereck: keine.)</li>
+      <li><b>Buchstaben im Spiegel.</b> Mathilda schreibt das ABC in Großbuchstaben und prüft mit dem Handspiegel. (Senkrechte Spiegel&shy;achse: A, M, T, U, V, W, Y. Waagrechte: B, C, D, E, K. Beide: H, I, O, X. Keine: F, G, J, L, N, P, Q, R, S, Z. Je nach Handschrift gibt es kleine Abweichungen.) Welche Wörter sehen im Spiegel gleich aus? (OTTO, UHU, AHA: Jeder Buchstabe hat eine senkrechte Spiegel&shy;achse, und das Wort heißt rückwärts gleich.) Zum Schluss: den eigenen Namen in Spiegelschrift schreiben.</li>
+      <li><b>Quadrate aus Tangram-Teilen.</b> Die Profi-Aufgabe auf Blatt 18-3 (Lösungen im Lösungskasten). Mit 1 Teil geht es natürlich auch (das Quadrat allein). Dann die große Frage: „Geht es auch mit 6 Teilen?“ (Nein, nie. Warum, steht im Kasten „Warum funktioniert das?“.)</li>
+      <li><b>Großes Dreieck und Rechteck.</b> „Lege aus allen 7 Teilen ein großes Dreieck.“ (Lösung unten.) Noch schwerer: ein Rechteck aus allen 7 Teilen, doppelt so lang wie breit. (Das geht. Tipp: Die zwei großen Dreiecke bilden zusammen ein Quadrat, die 5 kleinen Teile ein zweites, gleich großes Quadrat.)
+        <span class="e18-dreieck-lsg"><svg class="e18-lfig" xmlns="http://www.w3.org/2000/svg" width="26.4mm" height="13.6mm" viewBox="0 0 26.4 13.6"><polygon fill="#f1ebff" points="26,13.2 13.2,13.2 19.6,6.8"/><polygon fill="#e3f6f4" points="0.4,13.2 6.8,6.8 13.2,13.2"/><polygon fill="#fff0e3" points="19.6,6.8 13.2,6.8 16.4,3.6"/><polygon fill="#fde9f4" points="10,3.6 13.2,0.4 16.4,3.6 13.2,6.8"/><polygon fill="#fff4cc" points="6.8,6.8 10,3.6 10,10"/><polygon fill="#eef5ff" points="13.2,13.2 13.2,6.8 19.6,6.8"/><polygon fill="#eef8ee" points="10,3.6 13.2,6.8 13.2,13.2 10,10"/></svg></span></li>
+      <li><b>Rechtecke aus 12 Kästchen.</b> „Zeichne auf Kästchenpapier alle Rechtecke aus genau 12 Kästchen.“ (1 Reihe mit 12, 2 Reihen mit je 6, 3 Reihen mit je 4; gedreht sind es dieselben.) Wie bei den Punktefeldern aus Einheit 14: 3 Reihen mit je 4 Kästchen sind 3 · 4 = 12. „Welches Rechteck braucht den längsten Zaun?“ Zaun = alle Kästchenseiten am Rand. (1 · 12: 26 Seiten, 2 · 6: 16, 3 · 4: 14. Das lange, dünne braucht am meisten.) Profi mit 16 Kästchen: (1 · 16: 34, 2 · 8: 20, 4 · 4: 16. Das Quadrat braucht den kürzesten Zaun.)</li>
+      <li><b>Würfelnetze.</b> Ein Würfel hat 6 Quadrate als Flächen. Welche dieser Formen aus 6 Quadraten kann man zu einem Würfel falten? Abzeichnen (jedes Quadrat 3 · 3 Kästchen), ausschneiden, probieren.
+        <div class="e18-netze">
+          <span><m-wuerfelnetz gr="5" leer></m-wuerfelnetz><b>A</b></span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="20.6mm" height="15.6mm" viewBox="0 0 20.6 15.6"><g class="e18-netz"><rect x="0.3" y="5.3" width="5" height="5"/><rect x="5.3" y="5.3" width="5" height="5"/><rect x="10.3" y="5.3" width="5" height="5"/><rect x="15.3" y="5.3" width="5" height="5"/><rect x="0.3" y="0.3" width="5" height="5"/><rect x="15.3" y="10.3" width="5" height="5"/></g></svg><b>B</b></span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="15.6mm" height="10.6mm" viewBox="0 0 15.6 10.6"><g class="e18-netz"><rect x="0.3" y="0.3" width="5" height="5"/><rect x="5.3" y="0.3" width="5" height="5"/><rect x="10.3" y="0.3" width="5" height="5"/><rect x="0.3" y="5.3" width="5" height="5"/><rect x="5.3" y="5.3" width="5" height="5"/><rect x="10.3" y="5.3" width="5" height="5"/></g></svg><b>C</b></span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="20.6mm" height="10.6mm" viewBox="0 0 20.6 10.6"><g class="e18-netz"><rect x="0.3" y="5.3" width="5" height="5"/><rect x="5.3" y="5.3" width="5" height="5"/><rect x="10.3" y="5.3" width="5" height="5"/><rect x="15.3" y="5.3" width="5" height="5"/><rect x="0.3" y="0.3" width="5" height="5"/><rect x="5.3" y="0.3" width="5" height="5"/></g></svg><b>D</b></span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="20.6mm" height="15.6mm" viewBox="0 0 20.6 15.6"><g class="e18-netz"><rect x="0.3" y="0.3" width="5" height="5"/><rect x="5.3" y="0.3" width="5" height="5"/><rect x="5.3" y="5.3" width="5" height="5"/><rect x="10.3" y="5.3" width="5" height="5"/><rect x="10.3" y="10.3" width="5" height="5"/><rect x="15.3" y="10.3" width="5" height="5"/></g></svg><b>E</b></span>
+        </div>
+        (A, B und E werden Würfel. C nicht, denn ein Block aus 2 · 2 Quadraten lässt sich nie zu einem Würfel falten; bei D landen die zwei oberen Quadrate beide auf dem Deckel. Netz A hat Klebelaschen für einen stabilen Würfel. Es gibt genau 11 verschiedene Würfelnetze.)</li>
+      <li><b>Das Haus vom Nikolaus.</b> Das Fünfeck von Blatt 18-1 mit einem Kreuz im Viereck darunter: „Zeichne das Haus in einem Zug, ohne abzusetzen und ohne eine Linie zweimal zu fahren.“ Bei jeder Linie sagt man eine Silbe: „Das – ist – das – Haus – vom – Ni – ko – laus.“ (8 Silben, 8 Linien. Es klappt nur, wenn man unten links oder unten rechts anfängt; dort treffen sich 3 Linien. Wer oben beginnt, bleibt stecken.)</li>
+      <li><b>Ecken rechnen.</b> „Wie viele Ecken haben alle 7 Tangram-Teile zusammen?“ (5 Dreiecke mit je 3 Ecken sind 15, 2 Vierecke mit je 4 Ecken sind 8, zusammen 23.) „Wie viele Ecken hat der Umriss des Tangram-Hauses?“ (7. Auch die zwei Ecken unter dem Dach, wo die Wand beginnt, zählen mit.) „3 Dreiecke und 2 Fünfecke?“ (3 · 3 + 2 · 5 = 9 + 10 = 19.)</li>
+    </ol>
+  </div>
+
+  <div class="kasten bonus">
+    <p><b>1. Ecke ab:</b> „Ich habe ein quadratisches Blatt Papier und schneide mit der Schere eine Ecke gerade ab. Wie viele Ecken hat das Papier jetzt?“ <i>(Lösung: 5! Wo eine Ecke war, sind jetzt zwei. Schneidet man alle 4 Ecken ab, hat es 8 Ecken, wie ein Stoppschild.)</i></p>
+    <p><b>2. Wer bin ich?</b> „Ich habe 4 Ecken wie ein Blatt Papier. 2 Seiten sind lang, 2 sind kurz.“ <i>(Ein Rechteck.)</i> „Ich bin rund und habe keine Ecke.“ <i>(Ein Kreis.)</i> „Ich habe 3 Seiten und stehe auf meiner Spitze.“ <i>(Ein Dreieck, zum Beispiel das Schild „Vorrang geben“.)</i> Danach erfindet Mathilda die Rätsel für dich.</p>
+    <p><b>3. Schilder-Detektiv im Auto:</b> „Wie viele Ecken hat ein Stoppschild?“ <i>(Lösung: 8.)</i> „Welche Form haben die Schilder, die etwas verbieten, zum Beispiel ‚Fahrverbot‘?“ <i>(Kreise.)</i> „Und welche Form hat das Schild beim Zebrastreifen?“ <i>(Ein Quadrat, mit einem Dreieck darin.)</i></p>
+  </div>
+
+  <h2>Hintergrund</h2>
+
+  <div class="kasten warum darf-brechen e18-kt">
+    <p>Kinder erkennen Formen zuerst am Aussehen („sieht aus wie ein Dach“), erst später an Eigenschaften: Wie viele Ecken? Gleich lange Seiten? Passt die Ecke in den Ecken-Prüfer? Darum zählt und prüft Mathilda heute, statt nur Namen zu lernen. Mit Eigenschaften lassen sich die kniffligen Fragen beantworten: Ein gedrehtes Quadrat ist immer noch ein Quadrat, und ein Quadrat ist ein Rechteck, weil es alles hat, was ein Rechteck braucht. Zum Ecken-Prüfer: Eine gerade Faltkante ist ein „gestreckter Winkel“ (180°). Faltet man sie auf sich selbst, halbiert man ihn zum rechten Winkel (90°).</p>
+    <p>Bei einer Spiegel&shy;achse (Achsensymmetrie) hat jeder Punkt einen Partner auf der anderen Seite, gleich weit von der Achse entfernt; ihre Verbindungslinie steht senkrecht auf der Achse. Darum klappt „Kästchen abzählen“. Das schiefe Tangram-Viereck ist das einzige Teil ohne Spiegel&shy;achse: Sein Spiegelbild bekommt man nur durch Umdrehen.</p>
+    <p>Beim Tangram besteht jedes Teil aus kleinen Dreiecken: Quadrat, schiefes Viereck und mittleres Dreieck sind je 2, ein großes Dreieck 4, alle 7 Teile zusammen 16. Darum haben alle Figuren dieselbe Fläche, auch wenn die Katze breiter aussieht als das Haus. Und darum gibt es kein Quadrat aus 6 Teilen: Ohne ein Teil bleiben 12, 14 oder 15 kleine Dreiecke übrig, Tangram-Quadrate gibt es aber nur aus 2, 4, 8 oder 16 (ihre Seite muss sich aus den Kantenlängen der Teile zusammensetzen). Formen im Kopf drehen (räumliches Vorstellungsvermögen) lässt sich mit Legespielen gut üben; es hilft später in der Geometrie, beim Kartenlesen und beim Bauen.</p>
+  </div>
+
+  <h2>Lösungen</h2>
+  <div class="e18-loes">
+    <m-loesungen einheit="18" skala="0.36"></m-loesungen>
+    <div class="kasten loesung">
+      <p><b>Blatt 18-1, Aufgabe 1:</b> 3 Kreise (Sonne, 2 runde Fenster), 4 Dreiecke (2 Dächer, 2 Fahnen), 5 Quadrate (3 Zinnen, 2 Turmfenster), 6 andere Rechtecke (Haus in der Mitte, 2 Türme, Tor, 2 schmale Fenster). Wer die Quadrate bei den Rechtecken mitzählt (11), denkt auch richtig.</p>
+      <p><b>Aufgabe 2:</b> immer gleich viele Ecken wie Seiten. <b>Aufgabe 3:</b> das Rechteck, das gedrehte Quadrat und das schräge Rechteck. Bei der Raute und beim Viereck mit den schrägen Seiten passt keine Ecke. <b>Knobel-Ecke:</b> 6 Dreiecke (3 schmale, 2 aus je zwei schmalen, 1 großes), 5 Quadrate (4 kleine, 1 großes).</p>
+      <p><b>Blatt 18-2, Aufgabe 2:</b> Herz und Pilz senkrecht, Fisch waagrecht, Blitz keine. <b>Profi:</b> Der Stern hat eine senkrechte und eine waagrechte Spiegel&shy;achse.</p>
+      <p><b>Blatt 18-3:</b> Die bunten Teile zeigen eine Lösung; jede Lage mit allen 7 Teilen ohne Überlappung ist richtig. <b>Profi:</b> Quadrate aus 2, 3, 4, 5 und 7 Teilen (für 2 Teile gehen auch die zwei großen Dreiecke):</p>
+      <div class="e18-quadrate"><svg class="e18-lfig" xmlns="http://www.w3.org/2000/svg" width="7.16mm" height="7.16mm" viewBox="0 0 7.16 7.16"><polygon fill="#fff0e3" points="0.4,6.76 6.76,0.4 6.76,6.76"/><polygon fill="#fff4cc" points="0.4,0.4 6.76,0.4 0.4,6.76"/></svg><svg class="e18-lfig" xmlns="http://www.w3.org/2000/svg" width="9.8mm" height="9.8mm" viewBox="0 0 9.8 9.8"><polygon fill="#fff0e3" points="0.4,9.4 0.4,0.4 4.9,4.9"/><polygon fill="#fff4cc" points="4.9,4.9 0.4,0.4 9.4,0.4"/><polygon fill="#eef5ff" points="9.4,0.4 9.4,9.4 0.4,9.4"/></svg><svg class="e18-lfig" xmlns="http://www.w3.org/2000/svg" width="13.53mm" height="13.53mm" viewBox="0 0 13.53 13.53"><polygon fill="#f1ebff" points="13.13,13.13 0.4,0.4 13.13,0.4"/><polygon fill="#fff0e3" points="0.4,0.4 6.76,6.76 0.4,6.76"/><polygon fill="#fff4cc" points="0.4,6.76 6.76,6.76 0.4,13.13"/><polygon fill="#eef5ff" points="0.4,13.13 6.76,6.76 13.13,13.13"/></svg><svg class="e18-lfig" xmlns="http://www.w3.org/2000/svg" width="13.53mm" height="13.53mm" viewBox="0 0 13.53 13.53"><polygon fill="#fff0e3" points="6.76,13.13 13.13,6.76 13.13,13.13"/><polygon fill="#fde9f4" points="0.4,6.76 6.76,6.76 6.76,13.13 0.4,13.13"/><polygon fill="#fff4cc" points="0.4,6.76 0.4,0.4 6.76,6.76"/><polygon fill="#eef5ff" points="13.13,0.4 6.76,6.76 0.4,0.4"/><polygon fill="#eef8ee" points="13.13,0.4 13.13,6.76 6.76,13.13 6.76,6.76"/></svg><svg class="e18-lfig" xmlns="http://www.w3.org/2000/svg" width="18.8mm" height="18.8mm" viewBox="0 0 18.8 18.8"><polygon fill="#f1ebff" points="0.4,0.4 18.4,0.4 9.4,9.4"/><polygon fill="#e3f6f4" points="0.4,0.4 9.4,9.4 0.4,18.4"/><polygon fill="#fff0e3" points="18.4,0.4 18.4,9.4 13.9,4.9"/><polygon fill="#fde9f4" points="9.4,9.4 13.9,4.9 18.4,9.4 13.9,13.9"/><polygon fill="#fff4cc" points="9.4,9.4 13.9,13.9 4.9,13.9"/><polygon fill="#eef5ff" points="18.4,9.4 18.4,18.4 9.4,18.4"/><polygon fill="#eef8ee" points="0.4,18.4 4.9,13.9 13.9,13.9 9.4,18.4"/></svg></div>
+      <p>Die Lösungen der Schwerer-Aufgaben und der Bonus-Knobeleien stehen dort in Klammern.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 18-1: Formen-Detektiv                                        -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="18" data-titel="Formen-Detektiv" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, male die Formen im Zauberschloss an und zähle sie!</p>
+    <div class="e18-schloss-reihe">
+      <svg class="e18-schloss" xmlns="http://www.w3.org/2000/svg" width="80mm" height="70.4mm" viewBox="0 0 100 88">
+        <g class="e18-f">
+          <rect x="6" y="30" width="22" height="56"/><rect x="72" y="30" width="22" height="56"/><rect x="28" y="46" width="44" height="40"/>
+          <rect x="32" y="38" width="8" height="8"/><rect x="46" y="38" width="8" height="8"/><rect x="60" y="38" width="8" height="8"/>
+          <polygon points="3,30 31,30 17,9"/><polygon points="69,30 97,30 83,9"/>
+          <rect x="42" y="64" width="16" height="22"/><circle cx="50" cy="55" r="5"/>
+          <rect x="32" y="60" width="6" height="14"/><rect x="62" y="60" width="6" height="14"/>
+          <rect x="12" y="38" width="10" height="10"/><circle cx="17" cy="64" r="5"/><rect x="78" y="38" width="10" height="10"/>
+          <polygon points="17,1 17,7.5 26,4.25"/><polygon points="83,1 83,7.5 92,4.25"/>
+          <circle cx="50" cy="13" r="8"/>
+        </g>
+        <path d="M17 9 V1 M83 9 V1" stroke="var(--tinte)" stroke-width="0.7"/>
+        <g class="lsg e18-fl">
+          <rect class="e18-rr" x="6" y="30" width="22" height="56"/><rect class="e18-rr" x="72" y="30" width="22" height="56"/><rect class="e18-rr" x="28" y="46" width="44" height="40"/>
+          <rect class="e18-qq" x="32" y="38" width="8" height="8"/><rect class="e18-qq" x="46" y="38" width="8" height="8"/><rect class="e18-qq" x="60" y="38" width="8" height="8"/>
+          <polygon class="e18-dd" points="3,30 31,30 17,9"/><polygon class="e18-dd" points="69,30 97,30 83,9"/>
+          <rect class="e18-rr" x="42" y="64" width="16" height="22"/><circle class="e18-kk" cx="50" cy="55" r="5"/>
+          <rect class="e18-rr" x="32" y="60" width="6" height="14"/><rect class="e18-rr" x="62" y="60" width="6" height="14"/>
+          <rect class="e18-qq" x="12" y="38" width="10" height="10"/><circle class="e18-kk" cx="17" cy="64" r="5"/><rect class="e18-qq" x="78" y="38" width="10" height="10"/>
+          <polygon class="e18-dd" points="17,1 17,7.5 26,4.25"/><polygon class="e18-dd" points="83,1 83,7.5 92,4.25"/>
+          <circle class="e18-kk" cx="50" cy="13" r="8"/>
+        </g>
+      </svg>
+      <div class="e18-legende">
+        <div class="e18-leg"><svg xmlns="http://www.w3.org/2000/svg" width="10mm" height="10mm" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4.3" fill="#3ea85a" stroke="var(--tinte)" stroke-width="0.4"/></svg><span><b>Kreise</b><br>grün</span><m-feld l="3" art="k"></m-feld></div>
+        <div class="e18-leg"><svg xmlns="http://www.w3.org/2000/svg" width="10mm" height="10mm" viewBox="0 0 10 10"><polygon points="0.6,9 9.4,9 5,1" fill="#f6cf1d" stroke="var(--tinte)" stroke-width="0.4" stroke-linejoin="round"/></svg><span><b>Dreiecke</b><br>gelb</span><m-feld l="4" art="k"></m-feld></div>
+        <div class="e18-leg"><svg xmlns="http://www.w3.org/2000/svg" width="10mm" height="10mm" viewBox="0 0 10 10"><rect x="1.2" y="1.2" width="7.6" height="7.6" fill="#e2405c" stroke="var(--tinte)" stroke-width="0.4"/></svg><span><b>Quadrate</b><br>rot</span><m-feld l="5" art="k"></m-feld></div>
+        <div class="e18-leg"><svg xmlns="http://www.w3.org/2000/svg" width="10mm" height="10mm" viewBox="0 0 10 10"><rect x="0.4" y="2.6" width="9.2" height="4.8" fill="#3d7fd9" stroke="var(--tinte)" stroke-width="0.4"/></svg><span><b>andere Rechtecke</b><br>blau</span><m-feld l="6" art="k"></m-feld></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Zähle die Ecken und die Seiten.</p>
+    <div class="e18-es">
+      <span></span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32mm" height="23.1mm" viewBox="0 0 36 26"><polygon class="e18-form" points="3,23 33,19 13,3"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32mm" height="23.1mm" viewBox="0 0 36 26"><polygon class="e18-form" points="4,6 26,2 33,22 9,24"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32mm" height="23.1mm" viewBox="0 0 36 26"><polygon class="e18-form" points="5,11 18,1 31,11 31,25 5,25"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32mm" height="23.1mm" viewBox="0 0 36 26"><polygon class="e18-form" points="30,13 24,23.39 12,23.39 6,13 12,2.61 24,2.61"/></svg>
+      <span class="e18-es-l">Ecken</span><m-feld l="3" art="k"></m-feld><m-feld l="4" art="k"></m-feld><m-feld l="5" art="k"></m-feld><m-feld l="6" art="k"></m-feld>
+      <span class="e18-es-l">Seiten</span><m-feld l="3" art="k"></m-feld><m-feld l="4" art="k"></m-feld><m-feld l="5" art="k"></m-feld><m-feld l="6" art="k"></m-feld>
+    </div>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Wo passen alle 4 Ecken in den Ecken-Prüfer? Kreis ein!</p>
+    <div class="e18-vierecke">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32mm" height="32mm" viewBox="0 0 32 32"><polygon class="e18-form" points="3,9 29,9 29,23 3,23"/><circle class="lsg e18-ring" cx="16" cy="16" r="15.4"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32mm" height="32mm" viewBox="0 0 32 32"><polygon class="e18-form" points="2,16 16,7.92 30,16 16,24.08"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32mm" height="32mm" viewBox="0 0 32 32"><polygon class="e18-form" points="16,3 29,16 16,29 3,16"/><circle class="lsg e18-ring" cx="16" cy="16" r="15.4"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32mm" height="32mm" viewBox="0 0 32 32"><polygon class="e18-form" points="3,24 29,24 22,8 10,8"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32mm" height="32mm" viewBox="0 0 32 32"><polygon class="e18-form" points="23.43,5.91 28.5,16.79 8.57,26.09 3.5,15.21"/><circle class="lsg e18-ring" cx="16" cy="16" r="15.4"/></svg>
+    </div>
+  </div>
+
+  <div class="knobel" data-titel="Knobel-Ecke: Genau hinschauen!">
+    <p>Mathilda, wie viele siehst du? Auch große zählen!</p>
+    <div class="e18-knobel">
+      <div class="e18-kn"><svg xmlns="http://www.w3.org/2000/svg" width="38mm" height="24.3mm" viewBox="0 0 50 32"><polygon class="e18-form" points="2,30 48,30 25,2"/><path d="M25 2 L17 30 M25 2 L33 30" stroke="var(--tinte)" stroke-width="0.7"/></svg><span>Dreiecke</span><m-feld l="6" art="k"></m-feld></div>
+      <div class="e18-kn"><svg xmlns="http://www.w3.org/2000/svg" width="24mm" height="24mm" viewBox="0 0 30 30"><rect class="e18-form" x="2" y="2" width="26" height="26"/><path d="M15 2 V28 M2 15 H28" stroke="var(--tinte)" stroke-width="0.7"/></svg><span>Quadrate</span><m-feld l="5" art="k"></m-feld></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 18-2: Spiegelbilder                                          -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="18" data-titel="Spiegelbilder" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, die gestrichelte Linie ist die Spiegelachse. Zeichne die andere Hälfte genau wie im Spiegel!</p>
+    <div class="e18-zwei">
+      <div class="e18-gitter"><m-kaestchen b="8" h="7"></m-kaestchen><svg xmlns="http://www.w3.org/2000/svg" width="80.4mm" height="70.4mm" viewBox="0 0 80.4 70.4"><line class="e18-achse" x1="40.2" y1="-2" x2="40.2" y2="72.4"/><polyline class="e18-halb" points="40.2,60.2 10.2,60.2 10.2,10.2 30.2,30.2 40.2,10.2"/><circle class="e18-juwel" cx="20.2" cy="50.2" r="2.6"/><polyline class="lsg e18-lsg-linie" points="40.2,10.2 50.2,30.2 70.2,10.2 70.2,60.2 40.2,60.2"/><circle class="lsg e18-lsg-punkt" cx="60.2" cy="50.2" r="2.6"/></svg></div>
+      <div class="e18-gitter"><m-kaestchen b="8" h="7"></m-kaestchen><svg xmlns="http://www.w3.org/2000/svg" width="80.4mm" height="70.4mm" viewBox="0 0 80.4 70.4"><line class="e18-achse" x1="40.2" y1="-2" x2="40.2" y2="72.4"/><polyline class="e18-halb" points="40.2,10.2 20.2,30.2 30.2,30.2 10.2,50.2 30.2,50.2 30.2,60.2 40.2,60.2"/><circle class="e18-juwel" cx="30.2" cy="40.2" r="2.6"/><polyline class="lsg e18-lsg-linie" points="40.2,10.2 60.2,30.2 50.2,30.2 70.2,50.2 50.2,50.2 50.2,60.2 40.2,60.2"/><circle class="lsg e18-lsg-punkt" cx="50.2" cy="40.2" r="2.6"/></svg></div>
+    </div>
+    <p class="e18-tipp">Tipp: Zähl die Kästchen bis zur Spiegelachse. Prüfe mit dem Spiegel!</p>
+  </div>
+
+  <div class="aufg">
+    <p class="anw">Zeichne jede Spiegelachse ein. Eine Figur hat keine!</p>
+    <div class="e18-achsen">
+      <div><svg xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 30 30"><path class="e18-form e18-herz" d="M15 27 C9 22 2 17 3 10 C4 4 11 3 15 9 C19 3 26 4 27 10 C28 17 21 22 15 27 Z"/><line class="lsg e18-lsg-achse" x1="15" y1="0.5" x2="15" y2="29.5"/></svg></div>
+      <div><svg xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 30 30"><polygon class="e18-form" points="20,15 28.5,8.5 28.5,21.5"/><polygon class="e18-form" points="8,9.4 12.5,4.5 15.5,9.6"/><polygon class="e18-form" points="8,20.6 12.5,25.5 15.5,20.4"/><ellipse class="e18-form" cx="12" cy="15" rx="10.5" ry="6.5"/><line class="lsg e18-lsg-achse" x1="0.3" y1="15" x2="29.7" y2="15"/></svg></div>
+      <div><svg xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 30 30"><rect class="e18-form" x="11" y="14" width="8" height="13" rx="1.5"/><path class="e18-form" d="M3 15 C3 7 8.5 2.5 15 2.5 C21.5 2.5 27 7 27 15 Z"/><circle cx="15" cy="7.5" r="2" fill="var(--tinte)"/><circle cx="9" cy="11" r="1.5" fill="var(--tinte)"/><circle cx="21" cy="11" r="1.5" fill="var(--tinte)"/><line class="lsg e18-lsg-achse" x1="15" y1="0.5" x2="15" y2="29.5"/></svg></div>
+      <div><svg xmlns="http://www.w3.org/2000/svg" width="28mm" height="28mm" viewBox="0 0 30 30"><polygon class="e18-form" points="17,1 6,16 13,16 9,29 24,12 16.5,12 21,1"/></svg><p class="lsg-nur e18-keine">keine</p></div>
+    </div>
+  </div>
+
+  <div class="profi" data-titel="Profi-Aufgabe: Der Zauberstern">
+    <div class="e18-stern">
+      <div class="e18-stern-text">
+        <p>Dieser Stern hat <b>zwei</b> Spiegelachsen.</p>
+        <p>Ein Viertel ist schon fertig. Zeichne die anderen drei Viertel.</p>
+        <p>Dann male deinen Zauberstern an!</p>
+      </div>
+      <div class="e18-gitter"><m-kaestchen b="8" h="8"></m-kaestchen><svg xmlns="http://www.w3.org/2000/svg" width="80.4mm" height="80.4mm" viewBox="0 0 80.4 80.4"><line class="e18-achse" x1="40.2" y1="-2" x2="40.2" y2="82.4"/><line class="e18-achse" x1="-2" y1="40.2" x2="82.4" y2="40.2"/><polyline class="e18-halb" points="40.2,10.2 30.2,30.2 10.2,20.2 20.2,40.2"/><polyline class="lsg e18-lsg-linie" points="40.2,10.2 50.2,30.2 70.2,20.2 60.2,40.2 70.2,60.2 50.2,50.2 40.2,70.2 30.2,50.2 10.2,60.2 20.2,40.2"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 18-3: Tangram (Bastelvorlage mit Legefiguren)                -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="18" data-titel="Tangram" data-art="Bastelvorlage" data-verteilt>
+  <div class="aufg ohne-nr">
+    <p class="anw"><b>So geht’s, Mathilda:</b> Schneide die 7 Teile aus. Lege die Figuren nach. Nimm immer alle 7 Teile!</p>
+  </div>
+
+  <div class="e18-tg-oben">
+    <div class="e18-tg-vorlage"><m-tangram gr="104" farbig></m-tangram><span class="e18-schere"><m-bild name="schere" gr="9"></m-bild></span></div>
+    <div class="e18-leicht">
+      <p class="e18-stufe">Leicht: mit Linien</p>
+      <div class="e18-figzelle"><svg class="e18-fig" xmlns="http://www.w3.org/2000/svg" width="32.88mm" height="32.88mm" viewBox="0 0 32.88 32.88"><polygon class="e18-sil" points="8.52,32.28 24.36,32.28 24.36,16.44 32.28,16.44 16.44,0.6 0.6,16.44 8.52,16.44"/><g class="e18-innen"><polygon points="16.44,16.44 0.6,16.44 16.44,0.6"/><polygon points="16.44,16.44 32.28,16.44 16.44,0.6"/><polygon points="16.44,32.28 24.36,24.36 24.36,32.28"/><polygon points="8.52,24.36 16.44,24.36 16.44,32.28 8.52,32.28"/><polygon points="8.52,24.36 8.52,16.44 16.44,24.36"/><polygon points="24.36,16.44 24.36,24.36 16.44,32.28 16.44,24.36"/><polygon points="24.36,16.44 16.44,24.36 8.52,16.44"/></g><g class="lsg e18-loes-teile"><polygon fill="#f1ebff" points="16.44,16.44 0.6,16.44 16.44,0.6"/><polygon fill="#e3f6f4" points="16.44,16.44 32.28,16.44 16.44,0.6"/><polygon fill="#fff0e3" points="16.44,32.28 24.36,24.36 24.36,32.28"/><polygon fill="#fde9f4" points="8.52,24.36 16.44,24.36 16.44,32.28 8.52,32.28"/><polygon fill="#fff4cc" points="8.52,24.36 8.52,16.44 16.44,24.36"/><polygon fill="#eef5ff" points="24.36,16.44 16.44,24.36 8.52,16.44"/><polygon fill="#eef8ee" points="24.36,16.44 24.36,24.36 16.44,32.28 16.44,24.36"/></g></svg><span>Haus</span></div>
+      <div class="e18-figzelle"><svg class="e18-fig" xmlns="http://www.w3.org/2000/svg" width="34.8mm" height="40.4mm" viewBox="0 0 34.8 40.4"><polygon class="e18-sil" points="17.4,0.6 17.4,6.2 6.2,17.4 17.4,28.6 0.6,28.6 11.8,39.8 23,39.8 34.2,28.6 28.6,28.6 17.4,17.4 17.4,11.8 23,17.4 23,6.2"/><g class="e18-innen"><polygon points="17.4,6.2 17.4,28.6 6.2,17.4"/><polygon points="17.4,17.4 17.4,28.6 28.6,28.6"/><polygon points="17.4,0.6 17.4,11.8 23,17.4 23,6.2"/><polygon points="0.6,28.6 23,28.6 11.8,39.8"/><polygon points="23,28.6 28.6,34.2 23,39.8 17.4,34.2"/><polygon points="23,28.6 34.2,28.6 28.6,34.2"/><polygon points="11.8,39.8 17.4,34.2 23,39.8"/></g><g class="lsg e18-loes-teile"><polygon fill="#f1ebff" points="17.4,6.2 17.4,28.6 6.2,17.4"/><polygon fill="#e3f6f4" points="0.6,28.6 23,28.6 11.8,39.8"/><polygon fill="#fff0e3" points="23,28.6 34.2,28.6 28.6,34.2"/><polygon fill="#fde9f4" points="23,28.6 28.6,34.2 23,39.8 17.4,34.2"/><polygon fill="#fff4cc" points="11.8,39.8 17.4,34.2 23,39.8"/><polygon fill="#eef5ff" points="17.4,17.4 17.4,28.6 28.6,28.6"/><polygon fill="#eef8ee" points="17.4,0.6 17.4,11.8 23,17.4 23,6.2"/></g></svg><span>Boot</span></div>
+    </div>
+  </div>
+
+  <div class="e18-schwer-block">
+    <p class="e18-stufe">Schwer: nur der Umriss</p>
+    <div class="e18-schwer">
+      <div class="e18-figzelle"><svg class="e18-fig" xmlns="http://www.w3.org/2000/svg" width="46mm" height="34.8mm" viewBox="0 0 46 34.8"><polygon class="e18-sil" points="17.4,28.6 6.2,28.6 0.6,34.2 45.4,34.2 28.6,17.4 34.2,11.8 34.2,0.6 28.6,6.2 23,0.6 23,23"/><g class="lsg e18-loes-teile"><polygon fill="#f1ebff" points="23,34.2 34.2,23 45.4,34.2"/><polygon fill="#e3f6f4" points="23,11.8 34.2,23 23,34.2"/><polygon fill="#fff0e3" points="23,11.8 28.6,6.2 23,0.6"/><polygon fill="#fde9f4" points="23,11.8 28.6,6.2 34.2,11.8 28.6,17.4"/><polygon fill="#fff4cc" points="28.6,6.2 34.2,11.8 34.2,0.6"/><polygon fill="#eef5ff" points="23,23 23,34.2 11.8,34.2"/><polygon fill="#eef8ee" points="11.8,34.2 17.4,28.6 6.2,28.6 0.6,34.2"/></g></svg><span>Katze</span></div>
+      <div class="e18-figzelle"><svg class="e18-fig" xmlns="http://www.w3.org/2000/svg" width="32.88mm" height="32.88mm" viewBox="0 0 32.88 32.88"><polygon class="e18-sil" points="12.48,8.52 12.48,16.44 8.52,16.44 8.52,24.36 0.6,32.28 32.28,32.28 24.36,24.36 32.28,16.44 32.28,8.52 24.36,16.44 20.4,16.44 20.4,8.52 24.36,8.52 16.44,0.6 8.52,8.52"/><g class="lsg e18-loes-teile"><polygon fill="#f1ebff" points="8.52,16.44 24.36,16.44 8.52,32.28"/><polygon fill="#e3f6f4" points="24.36,16.44 24.36,32.28 8.52,32.28"/><polygon fill="#fff0e3" points="8.52,32.28 0.6,32.28 8.52,24.36"/><polygon fill="#fde9f4" points="12.48,8.52 20.4,8.52 20.4,16.44 12.48,16.44"/><polygon fill="#fff4cc" points="24.36,32.28 32.28,32.28 24.36,24.36"/><polygon fill="#eef5ff" points="8.52,8.52 24.36,8.52 16.44,0.6"/><polygon fill="#eef8ee" points="24.36,16.44 24.36,24.36 32.28,16.44 32.28,8.52"/></g></svg><span>Zauberer</span></div>
+      <div class="e18-figzelle"><svg class="e18-fig" xmlns="http://www.w3.org/2000/svg" width="34.8mm" height="46mm" viewBox="0 0 34.8 46"><polygon class="e18-sil" points="23,23 0.6,23 11.8,34.2 11.8,45.4 23,34.2 28.6,39.8 34.2,34.2 28.6,28.6 28.6,17.4 34.2,11.8 34.2,0.6 23,11.8"/><g class="lsg e18-loes-teile"><polygon fill="#f1ebff" points="0.6,23 23,23 11.8,34.2"/><polygon fill="#e3f6f4" points="11.8,34.2 34.2,34.2 23,23"/><polygon fill="#fff0e3" points="28.6,6.2 34.2,11.8 34.2,0.6"/><polygon fill="#fde9f4" points="23,11.8 28.6,17.4 34.2,11.8 28.6,6.2"/><polygon fill="#fff4cc" points="23,34.2 34.2,34.2 28.6,39.8"/><polygon fill="#eef5ff" points="11.8,34.2 23,34.2 11.8,45.4"/><polygon fill="#eef8ee" points="23,23 28.6,28.6 28.6,17.4 23,11.8"/></g></svg><span>Einhorn</span></div>
+    </div>
+  </div>
+
+  <div class="profi" data-titel="Profi-Aufgabe: Quadrate legen">
+    <p>Lege Quadrate aus 2, 3, 4, 5 und allen 7 Teilen!</p>
+    <div class="e18-haken">
+      <span><m-feld l="✓" art="k"></m-feld> 2 Teile</span>
+      <span><m-feld l="✓" art="k"></m-feld> 3 Teile</span>
+      <span><m-feld l="✓" art="k"></m-feld> 4 Teile</span>
+      <span><m-feld l="✓" art="k"></m-feld> 5 Teile</span>
+      <span><m-feld l="✓" art="k"></m-feld> 7 Teile</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Lösungen: die drei verkleinerten Blätter und der Text-Kasten in einem Raster (wie Einheit 4) */
+  .e18-loes { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 4mm; align-items: start; margin: 2mm 0 4mm 0; }
+  .e18-loes m-loesungen, .e18-loes .loesungen-raster { display: contents; }
+  .e18-loes > .kasten.loesung { margin: 0; font-size: 9.5pt; }
+  .e18-loes > .kasten.loesung p { margin-bottom: 1.6mm; }
+  .e18-quadrate { display: flex; flex-wrap: wrap; gap: 2mm 3.5mm; align-items: flex-end; margin: 1.5mm 0 0.5mm 0; }
+  .e18-dreieck-lsg { display: flex; margin: 1.5mm 0 0.5mm 0; }
+  .e18-kt > .kasten-titel, .e18-kt > .spiel-meta { break-after: avoid; }
+  .e18-kt li { break-inside: avoid; }
+  .e18-formtab th:first-child { width: 19mm; }
+  .e18-formtab th:nth-child(2), .e18-formtab th:nth-child(3) { width: 16mm; }
+  .e18-formtab td, .e18-formtab th { hyphens: manual; }
+  .e18-lfig { display: block; }
+  .e18-lfig polygon { stroke: var(--tinte); stroke-width: 0.25; stroke-linejoin: round; }
+  .e18-vorrat { break-after: avoid; }
+  .e18-vorrat + ol > li:first-child { break-inside: avoid; }
+
+  /* Anleitung: Strichliste, Spielbild, Würfelnetze */
+  .e18-jagd { display: flex; gap: 5mm; align-items: flex-start; }
+  .e18-jagd > div { flex: 1; }
+  .e18-strichliste, .e18-spielbild { display: block; flex: none; margin-top: 1mm; }
+  .e18-st { font-family: var(--text); font-size: 3.6px; fill: var(--tinte); }
+  .e18-spiel-kopf { display: flex; gap: 5mm; align-items: flex-start; }
+  .e18-spiel-kopf > div { flex: 1; }
+  .e18-netze { display: flex; flex-wrap: wrap; gap: 3mm 7mm; align-items: flex-end; margin: 2mm 0 1.5mm 0; }
+  .e18-netze > span { display: inline-flex; flex-direction: column; align-items: center; gap: 1mm; }
+  .e18-netze svg { display: block; }
+  .e18-netz rect { fill: white; stroke: var(--tinte); stroke-width: 0.35; }
+
+  /* Gemeinsame Formen */
+  .e18-form { fill: white; stroke: var(--tinte); stroke-width: 0.7; stroke-linejoin: round; }
+  .e18-ring { fill: none; stroke: var(--rot); stroke-width: 0.8; }
+
+  /* Blatt 18-1 */
+  .e18-schloss-reihe { display: flex; align-items: center; justify-content: space-between; gap: 6mm; }
+  .e18-schloss { display: block; flex: none; }
+  .e18-f > * { fill: white; stroke: var(--tinte); stroke-width: 0.7; stroke-linejoin: round; }
+  .e18-fl > * { stroke: var(--tinte); stroke-width: 0.7; stroke-linejoin: round; }
+  .e18-fl .e18-kk { fill: #bfe6c6; }
+  .e18-fl .e18-dd { fill: #fbeb9a; }
+  .e18-fl .e18-qq { fill: #f8bfca; }
+  .e18-fl .e18-rr { fill: #c6daf8; }
+  .e18-legende { display: flex; flex-direction: column; gap: 4mm; flex: 1; }
+  .e18-leg { display: flex; align-items: center; gap: 3mm; }
+  .e18-leg > svg { display: block; flex: none; }
+  .e18-leg > span { flex: 1; line-height: 1.15; }
+  .e18-leg > span b { font-weight: 700; }
+  .e18-es { display: grid; grid-template-columns: 24mm repeat(4, 1fr); gap: 2.5mm 2mm; align-items: center; justify-items: center; }
+  .e18-es > svg { display: block; }
+  .e18-es-l { justify-self: start; }
+  .e18-vierecke { display: flex; justify-content: space-between; padding: 0 2mm; }
+  .e18-vierecke svg { display: block; overflow: visible; }
+  .e18-knobel { display: flex; justify-content: space-between; gap: 6mm; }
+  .e18-kn { display: flex; align-items: center; gap: 3mm; }
+  .e18-kn > span { max-width: 38mm; line-height: 1.2; }
+  .e18-kn > svg { display: block; flex: none; }
+
+  /* Blatt 18-2 */
+  .e18-zwei { display: flex; justify-content: space-between; padding: 0 3mm; }
+  .e18-gitter { position: relative; display: inline-block; line-height: 0; }
+  .e18-gitter m-kaestchen { display: block; }
+  .e18-gitter > svg { position: absolute; left: 0; top: 0; overflow: visible; }
+  .e18-achse { stroke: var(--akzent); stroke-width: 0.9; stroke-dasharray: 3 1.8; }
+  .e18-halb { fill: none; stroke: var(--tinte); stroke-width: 0.9; stroke-linejoin: round; stroke-linecap: round; }
+  .e18-juwel { fill: var(--punkt); }
+  .e18-lsg-linie { fill: none; stroke: var(--rot); stroke-width: 0.9; stroke-linejoin: round; stroke-linecap: round; }
+  .e18-lsg-punkt { fill: var(--rot); }
+  .e18-lsg-achse { stroke: var(--rot); stroke-width: 0.7; stroke-dasharray: 2 1.2; }
+  .e18-tipp { margin: 2mm 0 0 0; text-align: center; }
+  .e18-achsen { display: flex; justify-content: space-between; padding: 0 4mm; }
+  .e18-achsen > div { position: relative; }
+  .e18-achsen svg { display: block; overflow: visible; }
+  .loesungsmodus .lsg-nur.e18-keine { position: absolute; left: 0; right: 0; bottom: -7mm; margin: 0; text-align: center; }
+  .e18-stern { display: flex; align-items: center; gap: 6mm; }
+  .e18-stern-text { flex: 1; }
+  .e18-stern-text p { margin: 0 0 3mm 0; }
+
+  /* Blatt 18-3 */
+  .e18-tg-oben { display: flex; justify-content: space-between; align-items: flex-start; gap: 4mm; }
+  .e18-tg-vorlage { position: relative; line-height: 0; }
+  .e18-schere { position: absolute; left: -3mm; top: -5mm; background: white; }
+  .e18-leicht { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3mm; }
+  .e18-stufe { margin: 0; font-weight: 700; color: var(--akzent); }
+  .e18-figzelle { display: flex; flex-direction: column; align-items: center; gap: 1.5mm; }
+  .e18-figzelle > svg { display: block; overflow: visible; }
+  .e18-sil { fill: var(--akzent-hell); stroke: var(--tinte); stroke-width: 0.6; stroke-linejoin: round; }
+  .e18-innen polygon { fill: none; stroke: var(--tinte); stroke-width: 0.3; stroke-linejoin: round; }
+  .e18-loes-teile polygon { stroke: var(--rot); stroke-width: 0.35; stroke-linejoin: round; }
+  .e18-schwer-block { display: flex; flex-direction: column; gap: 3mm; }
+  .e18-schwer { display: flex; justify-content: space-around; align-items: flex-end; }
+  .e18-haken { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 3mm; }
+  .e18-haken > span { display: inline-flex; align-items: center; gap: 1.5mm; white-space: nowrap; }
+</style>

@@ -1,0 +1,407 @@
+<!--
+  Einheit 13: Hüpfen in Sprüngen
+  Block C · Mal als gleich große Gruppen und als wiederholtes Plus (3 · 4 = 4 + 4 + 4 = 12),
+  Sprünge am Zahlenstrahl, Zählen in 2er-, 5er- und 10er-Schritten, Mal-Geschichten.
+  Bauen:  ./baue.sh --nur 13 --png --dpi 110
+  Vereinbarung: 3 · 4 heißt „3-mal die 4“: 3 Gruppen mit je 4, am Zahlenstrahl 3 Sprünge zu je 4.
+  Bilder (Teller mit Erdbeeren, Blumen, Kirschen, Kobold Klecks) sind Inline-SVG in mm.
+  Knobel-Ecke 13-1: Teller mit 4, 4 und 3 Erdbeeren (Klecks-Fehler; 3 · 3 = 9 durch Wegnehmen).
+  Blatt 13-2, Aufgabe 3: Der Zahlenstrahl hat Sprünge, die Bögen sind aber auf dem Blatt
+  ausgeblendet (.e13-selbst) und erscheinen nur in der Lösungsansicht (rot).
+  Spielplan 13-3: Feld 4 · 4 mit den möglichen Ergebnissen; 10 und 20 kommen zweimal vor.
+  Würfel 1–2 = 2 weit, 3–4 = 5 weit, 5–6 = 10 weit.
+-->
+<style>
+  /* Bilder */
+  .e13-bild { display: block; overflow: visible; }
+  .e13-erdb { fill: var(--rot); stroke: var(--tinte); stroke-width: 0.3; }
+  .e13-blatt { fill: #59b25f; stroke: var(--tinte); stroke-width: 0.25; }
+  .e13-kern { fill: #ffe7a3; }
+  .e13-teller { fill: white; stroke: var(--tinte); stroke-width: 0.5; }
+  .e13-rand { fill: none; stroke: var(--linie); stroke-width: 0.35; }
+  .e13-stiel { fill: none; stroke: #3d8b47; stroke-width: 0.6; stroke-linecap: round; }
+  .e13-bluete { fill: #ffe0ec; stroke: var(--tinte); stroke-width: 0.35; }
+  .e13-mitte { fill: var(--gold); stroke: var(--tinte); stroke-width: 0.35; }
+  .e13-kirsche { fill: var(--rot); stroke: var(--tinte); stroke-width: 0.35; }
+  .e13-glanz { fill: white; opacity: 0.8; }
+  /* Anleitung */
+  .e13-drei { display: flex; align-items: center; justify-content: space-between; gap: 4mm; margin: 2mm 0 1mm 0; }
+  .e13-drei > div { display: flex; flex-direction: column; align-items: center; gap: 1.5mm; }
+  .e13-drei .e13-cap { font-size: 9pt; color: var(--grau); }
+  .e13-drei .beispiel { font-size: 13pt; }
+  .e13-vorrat { break-after: avoid; }
+  .e13-vorrat + ol > li:first-child { break-inside: avoid; }
+  .e13-loes { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 4mm; align-items: start; margin: 2mm 0 4mm 0; }
+  .e13-loes m-loesungen, .e13-loes .loesungen-raster { display: contents; }
+  .e13-loes > .kasten.loesung { margin: 5mm 0 0 0; font-size: 9.5pt; }
+  .e13-loes > .kasten.loesung p { margin-bottom: 1.6mm; }
+  /* Blatt 13-1 */
+  .e13-a1 { display: flex; align-items: center; justify-content: space-between; gap: 6mm; padding-right: 4mm; }
+  .e13-a1 .spalte { gap: 4mm; }
+  .e13-merke { margin: 3mm 0 0 0; padding: 2mm 4mm; background: var(--akzent-hell); border-radius: 3mm; }
+  .e13-zeilen { display: flex; flex-direction: column; gap: 3mm; }
+  .e13-zeile { display: grid; grid-template-columns: 72mm 1fr; align-items: center; gap: 4mm; }
+  .e13-zeile > .spalte { gap: 3mm; }
+  .e13-bildzelle { display: flex; justify-content: center; }
+  /* Einer-Felder schmal (1 Kästchen), Ergebnis mit zwei Ziffern bleibt 2 Kästchen breit */
+  .blatt .e13-schmal .feld { width: 10mm; min-width: 10mm; }
+  .blatt .e13-schmal .feld:last-child { width: 20mm; min-width: 20mm; }
+  .e13-a3 { display: flex; align-items: center; justify-content: space-between; gap: 6mm; }
+  .e13-gitter { position: relative; display: inline-block; line-height: 0; }
+  .e13-gitter > m-kaestchen { display: block; }
+  .e13-gitter > svg { position: absolute; left: 0; top: 0; overflow: visible; }
+  .e13-gitter .e13-ring { fill: none; stroke: var(--rot); stroke-width: 0.5; }
+  .e13-knobel1 { display: flex; align-items: center; gap: 4mm; }
+  .e13-knobel1 > div { flex: 1; display: flex; flex-direction: column; gap: 2mm; }
+  .e13-knobel1 p { margin: 0; }
+  .e13-knobel2 { display: flex; align-items: center; justify-content: space-between; gap: 6mm; margin-top: 2mm; }
+  .e13-knobel2 p { margin: 0; flex: 1; }
+  .e13-mal { display: flex; flex-direction: column; align-items: flex-start; gap: 2mm; }
+  /* Blatt 13-2 */
+  .e13-strahl svg { width: 176mm; height: auto; }
+  .e13-unter { display: flex; align-items: center; gap: 6mm; margin-top: 1mm; }
+  .e13-unter .e13-text { font-size: 16pt; }
+  .e13-selbst .bogen, .e13-selbst .akzent-f, .e13-selbst text[fill] { visibility: hidden; }
+  .loesungsmodus .e13-selbst .bogen, .loesungsmodus .e13-selbst .akzent-f, .loesungsmodus .e13-selbst text[fill] { visibility: visible; }
+  .loesungsmodus .e13-selbst .bogen { stroke: var(--rot); stroke-width: 0.8; }
+  .loesungsmodus .e13-selbst .akzent-f { fill: var(--rot); }
+  .loesungsmodus .e13-selbst text[fill] { fill: var(--rot); font-weight: 700; }
+  .e13-folge { display: flex; align-items: center; gap: 2.5mm; font-size: 22pt; line-height: 1; margin: 1mm 0 3mm 0; }
+  .e13-folge .e13-k { color: var(--grau); }
+  .e13-profi-raster { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 2mm 4mm; margin: 0 0 2mm 0; }
+  .e13-profi-raster .e13-folge { margin: 0; }
+  .e13-nw { white-space: nowrap; }
+  .e13-profi-zeile { display: flex; align-items: center; gap: 4mm; margin: 0; }
+  /* Blatt 13-3 */
+  .e13-regeln { margin: 0; padding-left: 9mm; }
+  .e13-regeln li { margin-bottom: 1.2mm; }
+  .e13-spiel { display: flex; align-items: center; justify-content: space-between; gap: 6mm; }
+  .e13-feld { display: grid; grid-template-columns: repeat(4, 22mm); grid-auto-rows: 22mm; gap: 2.5mm; padding: 3mm; border: 0.8mm solid var(--akzent); border-radius: 4mm; background: white; }
+  .e13-feld > div { display: flex; align-items: center; justify-content: center; border: 0.5mm solid var(--tinte); border-radius: 3mm; background: var(--akzent-hell); font-size: 26pt; font-weight: 700; }
+  .e13-legende { flex: 1; display: flex; flex-direction: column; gap: 3mm; }
+  .e13-legende p { margin: 0; }
+  .e13-leg-titel { font-weight: 700; }
+  .e13-leg-zeile { display: flex; align-items: center; gap: 2mm; }
+  .e13-leg-zeile .e13-pfeil { color: var(--akzent); font-weight: 700; margin: 0 1mm; }
+  .e13-leg-zeile b { font-size: 20pt; }
+  .e13-farben { border-top: 0.4mm solid var(--linie); padding-top: 2mm; }
+  .e13-hilfe p { margin: 0 0 1mm 0; }
+  .e13-hilfe svg { width: 176mm; height: auto; }
+  .e13-knobel3 { display: flex; align-items: center; justify-content: space-between; gap: 5mm; }
+  .e13-knobel3 p { margin: 0; }
+  .e13-wuerfel2 { display: inline-flex; gap: 2mm; vertical-align: middle; margin: 0 1mm; }
+</style>
+
+<section class="anleitung" data-einheit="13" data-titel="Hüpfen in Sprüngen">
+
+  <div class="kasten ziel">
+    <p>Mit dieser Einheit beginnt Block C, und Mathilda lernt ein ganz neues Rechenzeichen kennen: <span class="begriff">mal</span>. Liegen auf 3 Tellern je 4 Erdbeeren, dann sind das 3-mal die 4, also 4 + 4 + 4 = 12. Weil so etwas oft vorkommt, gibt es dafür eine Abkürzung, die <span class="begriff">Malaufgabe</span>: 3 · 4 = 12, gesprochen „3 mal 4 ist 12“. Das Wichtigste daran sind die <span class="begriff">Gruppen</span>: Mal geht nur, wenn alle Gruppen gleich groß sind.</p>
+    <p>Das zweite Bild für Mal sind Sprünge. Ein Känguru, das von der 0 aus 3 Sprünge zu je 4 macht, landet auf der 12, genau wie bei den Erdbeeren. Mathilda hüpft als Känguru am Kreide-Zahlenstrahl, zählt dabei in 2er-, 5er- und 10er-Schritten und spielt zum Schluss das Würfelspiel „Känguru-Feld“, in dem jeder Wurf eine Malaufgabe ist. Auswendig lernen muss sie heute nichts: Jede Malaufgabe kann sie mit Plus oder mit Sprüngen selbst ausrechnen. Punktefelder und Malreihen kommen erst in Einheit 14.</p>
+  </div>
+
+  <div class="kasten material">
+    <ul>
+      <li><b>Ausdrucken:</b> Blatt <a class="blattref" href="#blatt-13-1"></a>, Blatt <a class="blattref" href="#blatt-13-2"></a> und den <a class="blattref" href="#blatt-13-3">Spielplan 13-3</a>. Am besten in Farbe (rote Erdbeeren, orange Sprungbögen); schwarz-weiß geht auch.</li>
+      <li><b>Für die Gruppen:</b> 3 bis 4 kleine Teller oder Untertassen (Ersatz: Muffinförmchen oder gezeichnete Kreise) und die 20 Kugeln aus Einheit 1. Noch schöner ist eine echte Jause (Erdbeeren, Weintrauben, Salzstangerl), die nach dem Rechnen gegessen wird.</li>
+      <li><b>Kreide-Zahlenstrahl 0–20</b> aus Einheit 4 (Striche 40 cm auseinander) und Straßenkreide in einer zweiten Farbe für die Fünferzahlen. Ist der Strahl weg, zeichnet ihr ihn neu (Kasten „Bewegung“). Bei Regen: Malerkrepp und Filzstift im Gang.</li>
+      <li><b>Für das Spiel:</b> 2 Würfel und wieder die 20 Kugeln als Spielsteine: 10 blaue für Mathilda, 10 rote für dich. Ersatz: Münzen und Knöpfe.</li>
+      <li>Bleistift, Buntstifte, eine feste Unterlage zum Schreiben im Freien, Sammelpass und Stempel.</li>
+      <li><b>Nur für die Bastelidee (optional):</b> etwa 30 Perlen oder Nudeln (Penne, Rigatoni) in zwei Farben und ein Stück Wolle.</li>
+    </ul>
+    <p><b>Vorbereitung (5 Minuten):</b> Schau nach, ob der Kreide-Zahlenstrahl noch da ist, und zeichne ihn sonst nach. Die Fünferzahlen schreibt Mathilda in Schritt 4 selbst dazu. Teller und Kugeln bereitstellen. Wenn du eine echte Jause nimmst: 12 Erdbeeren oder Weintrauben reichen für den Anfang.</p>
+  </div>
+
+  <h2>Ablauf Schritt für Schritt</h2>
+  <ol class="ablauf">
+    <li data-min="2"><span class="schritt-titel">Aufwärmen: Zählen in Schritten</span>Zählt gemeinsam Dinge, die paarweise kommen: die Schuhe im Vorzimmer oder die Augen am Esstisch. „Zähl in 2er-Schritten: 2, 4, 6 …“ Dann haltet ihr beide eure Hände hoch: „Wie viele Finger sind das? Zähl in 5er-Schritten!“ (5, 10, 15, 20.) Zum Schluss ganz schnell in 10er-Schritten bis 100. Das sind die drei Känguru-Sprünge von heute.</li>
+    <li data-min="5"><span class="schritt-titel">Entdecken: gleich große Gruppen</span>Stell 3 Teller hin und leg auf jeden 4 Kugeln (oder Erdbeeren). „Wie viele sind es zusammen?“ Dann kommen die neuen Wörter: „Das sind 3 Gruppen mit je 4, also 3-mal die 4. Man schreibt 3 · 4 und sagt 3 mal 4.“ Schreib 4 + 4 + 4 = 12 und darunter 3 · 4 = 12 groß auf ein Blatt. Danach legt Mathilda selbst: 2 Teller mit je 5, dann 4 Teller mit je 2, und sagt jedes Mal die Malaufgabe. Zum Schluss legst du den „Trick-Teller“ mit 4, 4 und 3 Kugeln (Beispielsätze unten).</li>
+    <li data-min="5"><span class="schritt-titel">Blatt: Gleich große Gruppen</span>Blatt <a class="blattref" href="#blatt-13-1"></a>. Aufgabe 1 macht ihr gemeinsam, Aufgabe 2 ist der Kern: Aus jedem Bild wird eine Plusaufgabe und eine Malaufgabe. Bei Aufgabe 3 malt Mathilda selbst Gruppen ins Kästchenpapier und schreibt die Malaufgabe dazu. Die Knobel-Ecke mit Kobold Klecks passt genau zum Trick-Teller.</li>
+    <li data-min="6"><span class="schritt-titel">Känguru-Sprünge am Kreide-Zahlenstrahl</span>Erst springt Mathilda als kleines Känguru in 2er-Sprüngen. Dann schreibt sie mit der zweiten Kreidefarbe die Fünferzahlen dazu und springt als Riesen-Känguru in 5er- und 10er-Sprüngen (Kasten „Bewegung“). Nach jeder Hüpf-Aufgabe fragst du: „Wie oft bist du gesprungen? Wie weit? Wo bist du?“ Nimm Blatt 13-2, Bleistift und Unterlage gleich mit hinaus.</li>
+    <li data-min="4"><span class="schritt-titel">Sprünge aufs Papier</span>Gleich neben dem Kreide-Zahlenstrahl: Blatt <a class="blattref" href="#blatt-13-2"></a>, Aufgaben 1 bis 3. Bei Aufgabe 2 muss Mathilda herausfinden, wie weit das Riesen-Känguru springt (nur 0, 10, 20 und 30 sind beschriftet). Bei Aufgabe 3 zeichnet sie die Bögen selbst ein. Die Profi-Aufgabe ist für Schnelle oder für einen zweiten kurzen Termin.</li>
+    <li data-min="7"><span class="schritt-titel">Spiel: Känguru-Feld</span>Eine Partie mit dem <a class="blattref" href="#blatt-13-3">Spielplan 13-3</a>. Jede Malaufgabe wird laut gesagt, am besten mit den Sprüngen: „3 Sprünge zu je 5: 5, 10, 15. 3 mal 5 ist 15.“ Wird die Zeit knapp, hört ihr nach 5 Würfen pro Person auf, und wer mehr Kugeln am Feld hat, gewinnt. Zum Schluss: Sammelpass stempeln, Sterne anmalen.</li>
+  </ol>
+
+  <div class="kasten tipp" data-titel="Drei Bilder für 3 · 4">
+    <p>Mal hat heute drei Gesichter, und alle bedeuten dasselbe: <b>Gruppen</b> (3 Teller mit je 4 Erdbeeren), <b>Plus</b> (4 + 4 + 4) und <b>Sprünge</b> (3 Sprünge zu je 4 am Zahlenstrahl). Die erste Zahl sagt immer, <b>wie oft</b> (wie viele Gruppen, wie viele Sprünge), die zweite, <b>wie viel</b> in jeder Gruppe ist oder wie weit jeder Sprung geht. 3 · 4 heißt also „3-mal die 4“, und so bleibt es in allen weiteren Einheiten. Merksatz für Mathilda: „Erst wie oft, dann wie viel.“ Sprecht die Malaufgabe immer ganz aus: „3 mal 4 ist 12.“</p>
+    <div class="e13-drei">
+      <div><svg class="e13-bild e13-klein" xmlns="http://www.w3.org/2000/svg" width="55mm" height="17mm" viewBox="0 0 55 17"><circle class="e13-teller" cx="8.5" cy="8.5" r="8"/><circle class="e13-rand" cx="8.5" cy="8.5" r="6.08"/><g transform="translate(6.02 6.02) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(10.98 6.02) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(6.02 10.98) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(10.98 10.98) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><circle class="e13-teller" cx="27.5" cy="8.5" r="8"/><circle class="e13-rand" cx="27.5" cy="8.5" r="6.08"/><g transform="translate(25.02 6.02) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(29.98 6.02) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(25.02 10.98) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(29.98 10.98) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><circle class="e13-teller" cx="46.5" cy="8.5" r="8"/><circle class="e13-rand" cx="46.5" cy="8.5" r="6.08"/><g transform="translate(44.02 6.02) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(48.98 6.02) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(44.02 10.98) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(48.98 10.98) scale(0.55)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g></svg><span class="e13-cap">3 Gruppen mit je 4</span></div>
+      <div><span class="beispiel">4 + 4 + 4 = 12</span><span class="beispiel">3 · 4 = 12</span><span class="e13-cap">3-mal die 4</span></div>
+      <div><m-zahlenstrahl von="0" bis="12" breite="72" beschriftung="0,4,8,12" spruenge="0>4>8>12"></m-zahlenstrahl><span class="e13-cap">3 Sprünge zu je 4</span></div>
+    </div>
+  </div>
+
+  <h3>Beispielsätze</h3>
+  <div class="sag">
+    <p class="du">„Mathilda, auf jedem Teller liegen 4 Erdbeeren. Wie viele sind es zusammen?“</p>
+    <p class="sie">„4, 8, 12. Zwölf!“ (oder sie zählt einzeln: „1, 2, 3 … 12.“)</p>
+    <p class="du">„Wie oft liegt die 4 da?“</p>
+    <p class="sie">„Dreimal. Auf jedem Teller einmal.“</p>
+    <p class="dann">Jetzt den Begriff geben: „Genau, 3-mal die 4. Weil das so oft vorkommt, gibt es dafür ein eigenes Zeichen, den Malpunkt: 3 · 4. Das ist eine Malaufgabe, und man sagt 3 mal 4.“ Zählt sie einzeln, ist das am Anfang in Ordnung. Frag danach: „Geht es auch schneller, immer gleich einen ganzen Teller auf einmal?“</p>
+  </div>
+
+  <div class="sag">
+    <p class="du">(Du legst auf die Teller 4, 4 und 3 Kugeln.) „Und das hier? Ist das auch 3 mal 4?“</p>
+    <p class="sie">„Ja!“ oder: „Nein, auf dem letzten Teller fehlt eine.“</p>
+    <p class="dann">Sagt sie „Ja“, lass sie zählen: Es sind 11. Dann der wichtigste Satz der Einheit: „Mal geht nur, wenn alle Gruppen gleich groß sind. Das hier ist 4 + 4 + 3. Was müssen wir tun, damit es 3 mal 4 wird?“ (Eine Kugel dazulegen.) Genau dieses Bild kommt in der Knobel-Ecke von Blatt 13-1 mit Kobold Klecks wieder.</p>
+  </div>
+
+  <div class="sag">
+    <p class="du">(Am Kreide-Zahlenstrahl, nach 3 Riesen-Sprüngen.) „Wie oft bist du gesprungen, und wie weit war jeder Sprung?“</p>
+    <p class="sie">„Dreimal. Und immer 5 weit. Ich bin auf der 15!“</p>
+    <p class="du">„Welche Malaufgabe ist das?“</p>
+    <p class="sie">„3 mal 5. Wie die Blumen auf dem Blatt!“</p>
+    <p class="dann">Das ist der zweite wichtige Moment: Gruppen und Sprünge sind dieselbe Malaufgabe. Merkt sie es nicht selbst, zeig auf die 3 Blumen mit je 5 Blütenblättern auf Blatt 13-1: „Wo steckt hier die 3, wo die 5?“</p>
+  </div>
+
+  <div class="sag">
+    <p class="du">„Was ist 3 mal 5?“</p>
+    <p class="sie">„8!“</p>
+    <p class="dann">Sie hat 3 + 5 gerechnet. Das ist am Anfang ganz normal, denn Plus kennt sie schon lange. Nicht korrigieren, sondern fragen: „Wie viele Gruppen sind es? Und wie viel ist in jeder Gruppe?“ Dann 3 Teller mit je 5 Kugeln legen oder 3 Riesen-Sprünge hüpfen lassen. Zum Schluss beide Aufgaben nebeneinander aufschreiben: 3 + 5 = 8, aber 3 · 5 = 15.</p>
+  </div>
+
+  <div class="sag">
+    <p class="du">„Erzähl mir eine Mal-Geschichte zu 2 · 5.“</p>
+    <p class="sie">„2 Drachen haben je 5 Goldmünzen. Das sind 10 Münzen.“</p>
+    <p class="dann">Prüft gemeinsam: Gibt es gleich große Gruppen? Die 2 sind die Drachen (wie oft), die 5 die Münzen von jedem Drachen (wie viel): erst wie oft, dann wie viel. Erzählt sie „Ein Drache hat 2 Münzen, der andere 5“, ist das eine Plus-Geschichte. Frag dann: „Haben beide gleich viele?“ Mal-Geschichten erfinden ist auch eine Schwerer-Idee (siehe unten).</p>
+  </div>
+
+  <h2>Spiele, Bewegung und Basteln</h2>
+
+  <div class="kasten spiel darf-brechen" data-titel="Känguru-Feld">
+    <p class="spiel-meta">2 Personen · ca. 5–8 Minuten pro Partie · <a class="blattref" href="#blatt-13-3">Spielplan 13-3</a> · 2 Würfel · 20 Kugeln (10 blau, 10 rot) oder Münzen und Knöpfe</p>
+    <p><b>Idee:</b> Jeder Wurf ist eine Malaufgabe. Ein Würfel sagt, wie oft das Känguru springt, der andere, wie weit. Mit dem Ergebnis besetzt man ein Feld auf dem Spielplan. Wer zuerst 3 eigene Kugeln in einer Reihe hat, gewinnt.</p>
+    <p><b>Vorbereitung:</b> Der Spielplan liegt zwischen euch. Mathilda nimmt die blauen Kugeln, du die roten. Mathilda beginnt. Rechts neben dem Feld steht, wie weit das Känguru springt: Zeigt der Würfel 1 oder 2, springt es 2 weit; bei 3 oder 4 springt es 5 weit; bei 5 oder 6 springt es 10 weit.</p>
+    <ol class="regeln">
+      <li><b>Würfeln:</b> Wer dran ist, würfelt mit beiden Würfeln.</li>
+      <li><b>Aussuchen:</b> Ein Würfel zählt die Sprünge, der andere bestimmt laut Tabelle, wie weit jeder Sprung geht. Wer gewürfelt hat, sucht aus, welcher Würfel was bedeutet. Bei 3 und 5 gibt es also zwei Möglichkeiten: 3 Sprünge, und die 5 heißt 10 weit, also 3 · 10 = 30. Oder 5 Sprünge, und die 3 heißt 5 weit, also 5 · 5 = 25.</li>
+      <li><b>Laut rechnen:</b> Die gewählte Malaufgabe wird mit Sprüngen gesagt: „5 Sprünge zu je 5: 5, 10, 15, 20, 25. 5 mal 5 ist 25.“ Wer will, hüpft dabei mit dem Finger auf dem Hilfe-Zahlenstrahl am Spielplan.</li>
+      <li><b>Besetzen:</b> Eine eigene Kugel auf ein freies Feld mit diesem Ergebnis legen. Die 10 und die 20 gibt es zweimal, da darf man wählen.</li>
+      <li><b>Pech:</b> Ist für keine der beiden Möglichkeiten ein Feld frei, wird keine Kugel gelegt. Die andere Person ist dran.</li>
+      <li><b>Gewonnen:</b> Wer zuerst 3 eigene Kugeln direkt nebeneinander in einer Reihe hat (waagrecht, senkrecht oder schräg), gewinnt sofort.</li>
+      <li><b>Anderes Ende:</b> Bringen 3 Würfe hintereinander Pech (egal bei wem) oder sind alle Felder belegt, ist das Spiel auch aus. Dann gewinnt, wer mehr Kugeln am Feld hat. Gleich viele heißt unentschieden.</li>
+    </ol>
+    <p><b>Sonderfälle:</b> Bei einem Pasch gibt es nur eine Aufgabe (bei 4 und 4 sind es 4 Sprünge zu je 5, also 20). Die andere Person ist immer Rechenkontrolle. Du darfst ab und zu absichtlich falsch rechnen, höchstens zweimal pro Partie. Erwischt dich Mathilda, nimmst du deine Kugel wieder weg, und sie ist dran. Das zählt nicht als Pech-Wurf.</p>
+    <p><b>Beispielzug:</b> Mathilda würfelt 2 und 6. Sie überlegt laut: „2 Sprünge, die 6 heißt 10 weit: 10, 20. Oder 6 Sprünge, die 2 heißt 2 weit: 2, 4, 6, 8, 10, 12.“ In der dritten Reihe liegen schon blaue Kugeln auf der 40 und der 15. Also nimmt sie die 20 gleich daneben: 3 in einer Reihe, gewonnen! Am Anfang hilfst du beim Übersetzen der Würfel mit der Tabelle.</p>
+    <p><b>Gut zu wissen:</b> Die 10 lässt sich am leichtesten erwürfeln (in 10 von 36 möglichen Würfen), darum steht sie zweimal am Feld, ebenso die 20 (7 von 36). Am schwersten sind 2, 4, 15, 50 und 60 (je 3 von 36). Die vier Felder in der Mitte liegen in den meisten Reihen. Wer klug wählt (eigene Reihe verlängern, zwei fremde Kugeln in einer Reihe blockieren), gewinnt viel öfter. Meist ist eine Partie nach 3 bis 7 Würfen pro Person entschieden; etwa jede zehnte endet durch 3 Pech-Würfe. Wer beginnt, gewinnt etwas öfter (ungefähr 6 von 10 Partien): Darum beginnt Mathilda, und bei der Revanche beginnt, wer verloren hat. 10 Kugeln pro Person reichen immer, denn spätestens mit der 10. Kugel hat man 3 in einer Reihe.</p>
+    <p><b>Varianten:</b></p>
+    <ul>
+      <li><b>Erst legen (leichter):</b> In den ersten Zügen legt Mathilda jede Aufgabe mit Nudeln oder Knöpfen in Gruppen: 4 Sprünge zu je 2 sind 4 Häufchen mit je 2 Nudeln. Bei 10er-Sprüngen zeigt sie für jeden Sprung einmal alle 10 Finger und zählt mit: 10, 20, 30 …</li>
+      <li><b>Ohne Aussuchen (leichter):</b> Ihr würfelt mit einem Würfel zweimal. Der erste Wurf zählt die Sprünge, der zweite sagt, wie weit. Dafür darf man bei Pech einmal neu würfeln.</li>
+      <li><b>Doppelt rechnen (mehr Übung):</b> Mathilda rechnet auch bei deinen Würfen beide Möglichkeiten laut vor, du suchst dann aus. So rechnet sie in jeder Partie doppelt so viele Malaufgaben.</li>
+      <li><b>Großes Känguru-Feld (Profi):</b> Mathilda zeichnet auf Kästchenpapier ein eigenes Feld für 3er-, 4er- und 10er-Kängurus (1 oder 2 heißt 3 weit, 3 oder 4 heißt 4 weit, 5 oder 6 heißt 10 weit). Dafür muss sie zuerst alle möglichen Ergebnisse finden (siehe „Schwerer machen“, Idee 10).</li>
+    </ul>
+  </div>
+
+  <div class="kasten bewegung darf-brechen" data-titel="Känguru-Sprünge am Kreide-Zahlenstrahl">
+    <p><b>Falls der Strahl aus Einheit 4 weg ist:</b> Eine gerade Kreidelinie mit 21 Querstrichen für 0 bis 20, je 40 cm auseinander (8 m; bei wenig Platz 30 cm, dann 6 m). 0, 10 und 20 lang und in der zweiten Farbe, 5 und 15 etwas länger. Die Zahlen kommen nur auf <b>eine</b> Seite der Linie. Bei Regen: Malerkrepp im Gang.</p>
+    <p><b>Kleines Känguru (2er-Sprünge):</b> Mathilda steht mit beiden Beinen auf der 0. Jeder Sprung geht über einen Strich hinweg und landet auf dem übernächsten: 0, 2, 4, 6 … Bei jeder Landung ruft sie die Zahl. Sind 80 cm zu weit, macht sie einen kleinen Zwischenhüpfer, flüstert die Zahl dazwischen und ruft nur die Landezahl.</p>
+    <p><b>Riesen-Känguru (5er-Sprünge):</b> Jetzt schreibt Mathilda mit der zweiten Kreidefarbe auf die freie Seite der Linie die Fünferzahlen und zählt dabei laut in 5er-Schritten: neben die 0 eine 0, neben die 1 eine 5, neben die 2 eine 10 und so weiter bis neben die 10 die 50 (wer mag, bis 100 neben der 20). Auf den Fünferzahlen ist jeder normale Hüpfer von Strich zu Strich ein Riesensprung: 5 weit.</p>
+    <p><b>Riesen-Känguru mit 10er-Sprüngen:</b> Auf den Fünferzahlen springt Mathilda wieder über einen Strich hinweg: 0, 10, 20, 30, 40, 50. Ein 10er-Sprung ist so weit wie zwei 5er-Sprünge.</p>
+    <p><b>Hüpf-Aufgaben</b> (Lösung in Klammern). Nach jeder Aufgabe sagt Mathilda die Malaufgabe:</p>
+    <ul>
+      <li><b>Kleines Känguru:</b> „4 Sprünge zu je 2. Wo landest du?“ (Auf der 8, also 4 · 2 = 8.) „6 Sprünge zu je 2.“ (12.) „Wie viele 2er-Sprünge sind es von der 0 bis zur 20?“ (10.)</li>
+      <li><b>Riesen-Känguru:</b> „3 Sprünge zu je 5.“ (15, also 3 · 5 = 15.) „5 Sprünge zu je 5.“ (25.) „4 Sprünge zu je 10.“ (40, also 4 · 10 = 40.)</li>
+      <li><b>Detektiv-Sprünge:</b> „Ich bin als kleines Känguru auf der 14 gelandet. Wie oft bin ich gesprungen?“ (7-mal.) „Und als Riesen-Känguru auf der 35?“ (Auch 7-mal. Zum Staunen: Die 35 steht genau neben der 7. Die Zahl am Strich zählt die Sprünge, die Fünferzahl daneben ist das Ergebnis.)</li>
+      <li><b>Rollentausch:</b> Du hüpfst, Mathilda sagt an. Starte einmal absichtlich auf der 1 statt auf der 0 und ruf: „3, 5, 7!“ Lass sie den Fehler finden: Kängurus starten auf der 0.</li>
+      <li><b>Flüster-Hüpfen (Profi):</b> Mathilda hüpft Strich für Strich, flüstert zwei Zahlen und ruft die dritte laut mit einem Klatscher: „1, 2, DREI! 4, 5, SECHS!“ Die lauten Zahlen sind die 3er-Schritte: 3, 6, 9, 12, 15, 18.</li>
+    </ul>
+  </div>
+
+  <div class="kasten basteln" data-titel="Fünferkette zum Umhängen (optional)">
+    <p>Etwa 10 Minuten, am besten an einem anderen Tag. Mathilda fädelt 30 Perlen oder Nudeln auf ein Stück Wolle (vorne Tixo um die Wolle wickeln, dann geht es leichter): 5 blaue, 5 rote, 5 blaue und so weiter, 6 Fünfergruppen. Nudeln malt sie vorher mit Filzstift an. Die Kette ist die Kraft der 5 aus Einheit 1 zum Umhängen. <b>Zählen:</b> in 5er-Schritten von Gruppe zu Gruppe (5, 10, 15 … 30), in 10er-Schritten immer eine blaue und eine rote Gruppe (10, 20, 30), in 2er-Schritten je 2 Perlen. <b>Malaufgaben zeigen:</b> „Zeig mir 4 · 5!“ (4 Gruppen, 20 Perlen.) „Wie viele Perlen sind 3 · 10?“ (30, die ganze Kette.)</p>
+  </div>
+
+  <h2>Wenn es hakt oder zu leicht ist</h2>
+
+  <div class="kasten stolper darf-brechen">
+    <ul>
+      <li><b>Sie zählt jede Erdbeere einzeln.</b> Am Anfang völlig in Ordnung. Danach: „Kannst du gleich einen ganzen Teller zählen?“ Zähl einmal vor: „4, 8, 12.“ Weiterrechnen mit Plus ist erlaubt: 8 + 4 = 12.</li>
+      <li><b>Plus statt mal.</b> Sie rechnet <span class="keine-pruefung">3 · 5 = 8</span>. Zurück zum Material (siehe Beispielsätze), dann 3 + 5 = 8 und 3 · 5 = 15 nebeneinander schreiben und laut lesen.</li>
+      <li><b>Ungleiche Gruppen werden zur Malaufgabe.</b> Bei 4, 4 und 3 Erdbeeren schreibt sie 3 · 4. Frag: „Ist auf jedem Teller gleich viel?“ Mal geht nur bei gleich großen Gruppen, sonst bleibt es Plus: 4 + 4 + 3 = 11.</li>
+      <li><b>Die Zahlen sind vertauscht.</b> Zu 3 Tellern mit je 4 schreibt sie 4 · 3, „weil auf jedem Teller 4 sind“. Das Ergebnis zählt als richtig (warum, entdeckt sie in Einheit 14). Die Schreibweise korrigierst du freundlich mit dem Merksatz: „Erst wie oft, dann wie viel. 3 Teller, also 3-mal die 4: 3 · 4.“</li>
+      <li><b>Das Känguru startet auf der 1.</b> Dann landet sie bei 2er-Sprüngen auf 3, 5, 7. Oder sie zählt die Striche statt der Sprünge. Sag: „Kängurus starten auf der 0. Gezählt werden die Sprünge, nicht die Striche“, und zähl am Kreide-Zahlenstrahl laut mit: „Erster Sprung, zweiter Sprung …“</li>
+      <li><b>Sprungweite und Landezahl verwechselt.</b> Auf Blatt 13-2 schreibt sie 10 in das Kästchen über dem Bogen statt +5. Wie in Einheit 4: „Oben am Bogen steht, wie weit du springst. Unten am Strich steht, wo du landest.“</li>
+      <li><b>Verzählt in 5er-Schritten.</b> Sie sagt „5, 10, 15, 20, 30“ und lässt die 25 aus. Tipp: Fünferzahlen enden abwechselnd auf 5 und auf 0. Zum Kontrollieren helfen die Fünferzahlen am Kreide-Zahlenstrahl oder die Fünferkette.</li>
+      <li><b>Das falsche Malzeichen.</b> Sie schreibt ein x oder einen Punkt unten auf der Linie. In Österreich ist das Malzeichen ein Punkt in der Mitte, auf halber Höhe der Ziffern.</li>
+      <li><b>„Das ist doch nur Plus!“</b> Stimmt, und das ist ein kluger Satz. Mal ist ein Plus mit lauter gleichen Zahlen. Frag zurück: „Schreib mir 10 + 10 + 10 + 10 + 10 + 10 + 10 auf. Und jetzt als Malaufgabe!“ (7 · 10.) Dann ist klar, warum es die Abkürzung gibt.</li>
+    </ul>
+  </div>
+
+  <div class="kasten leichter">
+    <ul>
+      <li>Nur mit Material: Teller und Kugeln, kleine Zahlen wie 2 · 2, 3 · 2 und 2 · 5. Jede Malaufgabe zuerst legen, dann als Plus aufschreiben und erst dann als Malaufgabe.</li>
+      <li>Zuerst nur 2er- und 10er-Schritte, die 5er-Schritte am nächsten Tag mit der Fünferkette (Kasten „Basteln“).</li>
+      <li>Im Spiel die Variante „Erst legen“ oder „Ohne Aussuchen“ nehmen und den Hilfe-Zahlenstrahl benutzen: Ein Knopf startet auf der 0 und hüpft Sprung für Sprung weiter.</li>
+      <li>Bei Blatt 13-2, Aufgabe 3 zeichnest du den ersten Bogen vor, Mathilda die anderen zwei.</li>
+    </ul>
+  </div>
+
+  <div class="kasten schwerer darf-brechen">
+    <p class="e13-vorrat">Mathilda ist schnell, darum hier ein ganzer Vorrat. Wählt aus, was Spaß macht; die Lösungen stehen in Klammern. Vieles greift schon auf die Einheiten 14 und 15 vor.</p>
+    <ol>
+      <li><b>3er- und 4er-Sprünge.</b> „Das Zauber-Känguru springt immer 3 weit, das Drachen-Känguru immer 4 weit. Beide hüpfen von der 0 bis zur 40. Auf welchen Zahlen landen beide?“ (3, 6, 9 … 39 und 4, 8, 12 … 40; gemeinsam sind 12, 24 und 36.) Am Kreide-Zahlenstrahl geht der Anfang bis 20 mit dem Flüster-Hüpfen (beim 4er flüstert sie drei Zahlen); dort treffen sich beide nur auf der 12.</li>
+      <li><b>Das Riesen-Känguru und die 100.</b> „10 Sprünge zu je 10?“ (100, also 10 · 10 = 100.) „Wie viele 5er-Sprünge braucht man bis 100?“ (20.) „Und wie viele 2er-Sprünge?“ (50.) Mit den Fünferzahlen bis 100 am Kreide-Zahlenstrahl sieht man die 20 Sprünge direkt.</li>
+      <li><b>Mal mit 1 und mit 0.</b> „1 Teller mit 4 Erdbeeren?“ (1 · 4 = 4.) „4 Teller mit je 1 Erdbeere?“ (4 · 1 = 4.) „3 leere Teller?“ (3 · 0 = 0.) „Das Känguru macht 0 Sprünge zu je 5. Wo ist es?“ (Immer noch auf der 0, denn 0 · 5 = 0.) Viele Kinder staunen, dass mal nicht immer mehr macht.</li>
+      <li><b>Mal-Geschichten erfinden.</b> Mathilda erfindet Geschichten zu 2 · 6, 5 · 2 und 4 · 10 und malt sie auf Kästchenpapier (12, 10 und 40). Umgekehrt erzählst du, und sie entscheidet „Mal oder nicht?“: „3 Feen haben je 2 Flügel“ (Mal: 3 · 2 = 6), „Ein Drache hat 4 Eier, ein anderer 6“ (kein Mal, sondern 4 + 6 = 10), „5 Kinder bekommen je 3 Zuckerl“ (Mal: 5 · 3 = 15).</li>
+      <li><b>Rückwärts denken (Vorgeschmack auf Einheit 15).</b> „Das Riesen-Känguru ist in 5er-Sprüngen auf der 30 gelandet. Wie oft ist es gesprungen?“ (6-mal, <span class="keine-pruefung">☐ · 5 = 30</span>.) „Es ist 4-mal gesprungen und auf der 20 gelandet. Wie weit war jeder Sprung?“ (5 weit, <span class="keine-pruefung">4 · ☐ = 20</span>.) „12 Erdbeeren auf 3 Tellern, auf jedem gleich viele. Wie viele pro Teller?“ (4.)</li>
+      <li><b>Verdoppeln hilft (Einheit 3).</b> 2 · 7 ist 7 + 7, also das Doppelte von 7 (14). Ebenso 2 · 8 und 2 · 9 (16 und 18). Und 4 · 3 ist Doppel-Doppel: 3, verdoppelt 6, noch einmal verdoppelt 12. Probiert 4 · 6 (6, 12, 24) und 4 · 5 (5, 10, 20).</li>
+      <li><b>Zwei Kängurus, ein Ziel (Vorgeschmack auf Einheit 14).</b> „Ein Känguru macht 3 Sprünge zu je 5, ein anderes 5 Sprünge zu je 3. Wer landet weiter vorne?“ (Keines, beide landen auf der 15.) „Und 2 Sprünge zu je 10 gegen 10 Sprünge zu je 2?“ (Beide auf der 20.) „Ist das immer so?“ (Ja, das ist die Tauschaufgabe beim Mal. Sie bleibt eine Forscherfrage bis Einheit 14.)</li>
+      <li><b>Mal und Plus gemischt.</b> „3 Teller mit je 4 Erdbeeren und dazu noch 2 einzelne Erdbeeren?“ (14.) „2 volle Eierkartons und 3 Kugeln extra?“ (23, nämlich 2 · 10 + 3 = 23. Genau so sind Zehner und Einer gebaut!)</li>
+      <li><b>Große Sprünge mit Zehnerzahlen.</b> „3 Sprünge zu je 20?“ (60: 20, 40, 60.) „2 Sprünge zu je 50?“ (100.) „4 Sprünge zu je 25?“ (100: 25, 50, 75, 100.) Mit dem Spielgeld aus Einheit 9: „Du kaufst 3 Bücher zu je 10 Euro. Wie viel zahlst du?“ (30 Euro, drei 10-€-Scheine.)</li>
+      <li><b>Eigenes Känguru-Feld bauen.</b> Für die Profi-Variante des Spiels mit 3er-, 4er- und 10er-Kängurus findet Mathilda alle Ergebnisse, die man würfeln kann, und zeichnet daraus ein Feld auf Kästchenpapier. (Genau 16 verschiedene: 3, 6, 9, 12, 15, 18, dazu 4, 8, 16, 20, 24 und 10, 30, 40, 50, 60. Die 12 und die 20 gibt es auf zwei Arten, sie stehen nur einmal da. Das passt genau in ein Feld mit 4 Reihen zu je 4 Kästchen.)</li>
+    </ol>
+  </div>
+
+  <div class="kasten bonus">
+    <p><b>1. Enten am Teich:</b> „Am Teich stehen Enten. Zusammen haben sie 12 Beine. Wie viele Enten sind es?“ <i>(Lösung: 6 Enten, denn in 2er-Schritten sind es 6 Schritte bis 12.)</i></p>
+    <p><b>2. Viele Finger:</b> „Wie viele Finger haben 3 Kinder an ihren Händen?“ <i>(Lösung: 30, in 10er-Schritten. Mit den Zehen: 60.)</i></p>
+    <p><b>3. Wettspringen:</b> „Zwei Kängurus starten auf der 0. Eines macht 4 Sprünge zu je 5, das andere 4 Sprünge zu je 10. Wie weit sind sie dann auseinander?“ <i>(Lösung: 20.)</i></p>
+  </div>
+
+  <h2>Hintergrund</h2>
+
+  <div class="kasten warum">
+    <p><b>Mal ist abgekürztes Plus.</b> Eine Malaufgabe fasst ein Plus mit lauter gleichen Zahlen zusammen: 4 + 4 + 4 = 3 · 4. Im deutschsprachigen Raum liest man 3 · 4 meist als „3-mal die 4“: Die erste Zahl sagt, wie oft, die zweite, was wiederholt wird. Alle Einheiten der Werkstatt halten sich daran, damit Bild, Sprechweise und Rechnung immer zusammenpassen. Das Wort „mal“ kennt Mathilda aus dem Alltag („dreimal klatschen“), und genau diese Bedeutung ist gemeint.</p>
+    <p><b>Zwei Bilder für dieselbe Sache.</b> Gruppen zeigen Mal als Anzahl, Sprünge am Zahlenstrahl als Länge. Beide braucht Mathilda später: Aus den Gruppen wird in Einheit 14 das Punktefeld, an dem man sieht, warum 3 · 4 und 4 · 3 dasselbe ergeben. Aus den Sprüngen wird das Geteilt in Einheit 15: „Wie oft passt die 4 in die 12?“ heißt nichts anderes als „Wie viele 4er-Sprünge bis zur 12?“.</p>
+    <p><b>Warum 2er, 5er und 10er zuerst?</b> Diese Schritte passen zu dem, was Mathilda schon kann: 2er-Schritte sind Verdoppeln (Einheit 3), 5er-Schritte die Kraft der 5 (Einheit 1), 10er-Schritte die Zehner aus Block B. Am Kreide-Zahlenstrahl stehen die Malaufgaben mit 5 übrigens direkt nebeneinander: Neben der 3 steht die 15, weil 3 · 5 = 15 ist. Auswendig lernen kommt später; wer das Bild im Kopf hat, kann jede Malaufgabe selbst herleiten, auch die überraschenden mit 1 und 0 (3 leere Teller sind 0 Erdbeeren).</p>
+  </div>
+
+  <h2>Lösungen</h2>
+  <div class="e13-loes">
+  <m-loesungen einheit="13" skala="0.39"></m-loesungen>
+  <div class="kasten loesung">
+    <p>Die Lösungen der Hüpf-Aufgaben, der Schwerer-Ideen und der Bonus-Knobeleien stehen direkt dort in Klammern. Hier die Erklärungen zu den offenen Stellen der Blätter:</p>
+    <p><b>Blatt 13-1, Aufgabe 3 (selbst zeichnen):</b> Mehrere Lösungen möglich. Richtig sind 3 Gruppen mit je 3 Punkten, egal wo sie im Kästchenpapier stehen. Jede Gruppe bekommt einen Kreis. Die Malaufgabe ist 3 · 3 = 9. Malt Mathilda 3 Kreise mit 3, 3 und 2 Punkten, frag: „Sind alle Gruppen gleich groß?“</p>
+    <p><b>Blatt 13-1, Knobel-Ecke:</b> Es stimmt nicht. Auf dem dritten Teller liegen nur 3 Erdbeeren, die Gruppen sind nicht gleich groß. Es sind 4 + 4 + 3 = 11 Erdbeeren. Für 3 · 4 = 12 fehlt 1 Erdbeere auf dem dritten Teller. Isst Klecks dagegen von jedem vollen Teller 1 Erdbeere, liegt auf jedem Teller 3, also 3 · 3 = 9 (denn 11 − 2 = 9). Das ist der eigentliche Knobel-Teil: Gleich große Gruppen bekommt man durch Dazulegen <b>oder</b> Wegnehmen. Schreibt Mathilda nicht gleich 3 · 3, frag: „Wie viele liegen auf dem kleinsten Teller?“</p>
+    <p><b>Blatt 13-2, Aufgabe 2:</b> In die Kästchen über den Bögen kommt +5 (nur 5 ist auch richtig). Bis zur 10 braucht das Känguru 2 Sprünge, also ist jeder Sprung 5 weit.</p>
+    <p><b>Blatt 13-2, Aufgabe 3:</b> Drei Bögen von der 0 zur 4, von der 4 zur 8 und von der 8 zur 12, über jedem Bogen +4. Landung auf der 12.</p>
+    <p><b>Blatt 13-2, Profi-Aufgabe:</b> Das Riesen-Känguru landet nach 10 Sprüngen auf der 100. Die 3er-Schritte gehen 3, 6, 9, 12, 15, 18.</p>
+    <p><b>Spielplan 13-3, Knobel-Ecke:</b> Mit 3 und 5 gibt es zwei Möglichkeiten: 3 Sprünge, und die 5 heißt 10 weit (3 · 10 = 30), oder 5 Sprünge, und die 3 heißt 5 weit (5 · 5 = 25).</p>
+  </div>
+  </div>
+
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 13-1: Gleich große Gruppen                                    -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="13" data-titel="Gleich große Gruppen" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, auf jedem Teller liegen 4 Erdbeeren. Wie viele sind es?</p>
+    <div class="e13-a1">
+      <svg class="e13-bild" xmlns="http://www.w3.org/2000/svg" width="83mm" height="24.8mm" viewBox="0 0 97 29"><circle class="e13-teller" cx="14.5" cy="14.5" r="14"/><circle class="e13-rand" cx="14.5" cy="14.5" r="10.64"/><g transform="translate(10.16 10.16) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(18.84 10.16) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(10.16 18.84) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(18.84 18.84) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><circle class="e13-teller" cx="48.5" cy="14.5" r="14"/><circle class="e13-rand" cx="48.5" cy="14.5" r="10.64"/><g transform="translate(44.16 10.16) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(52.84 10.16) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(44.16 18.84) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(52.84 18.84) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><circle class="e13-teller" cx="82.5" cy="14.5" r="14"/><circle class="e13-rand" cx="82.5" cy="14.5" r="10.64"/><g transform="translate(78.16 10.16) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(86.84 10.16) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(78.16 18.84) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(86.84 18.84) scale(1)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g></svg>
+      <div class="spalte">
+        <m-aufgabe>4 + 4 + 4 = _</m-aufgabe>
+        <m-aufgabe>3 · 4 = _</m-aufgabe>
+      </div>
+    </div>
+    <p class="e13-merke">3 Teller mit je 4: Das ist 3-mal die 4. Du sagst „3 mal 4“.</p>
+  </div>
+  <div class="aufg">
+    <p class="anw">Gleich große Gruppen! Zähl die Blütenblätter und die Kirschen. Schreib die Plus- und die Malaufgabe.</p>
+    <div class="e13-zeilen">
+      <div class="e13-zeile">
+        <div class="e13-bildzelle"><svg class="e13-bild" xmlns="http://www.w3.org/2000/svg" width="55mm" height="23mm" viewBox="0 0 62 26"><path class="e13-stiel" d="M10 13 Q11.5 18.4 10 24"/><path class="e13-blatt" d="M10.5 20.08 C13 17 16 17.7 16.5 17 C15.5 21.9 13 21.9 10.5 20.08 Z"/><ellipse class="e13-bluete" cx="10" cy="5.5" rx="2.5" ry="4.3" transform="rotate(0 10 10)"/><ellipse class="e13-bluete" cx="10" cy="5.5" rx="2.5" ry="4.3" transform="rotate(72 10 10)"/><ellipse class="e13-bluete" cx="10" cy="5.5" rx="2.5" ry="4.3" transform="rotate(144 10 10)"/><ellipse class="e13-bluete" cx="10" cy="5.5" rx="2.5" ry="4.3" transform="rotate(216 10 10)"/><ellipse class="e13-bluete" cx="10" cy="5.5" rx="2.5" ry="4.3" transform="rotate(288 10 10)"/><circle class="e13-mitte" cx="10" cy="10" r="2.7"/><path class="e13-stiel" d="M31 13 Q32.5 18.4 31 24"/><path class="e13-blatt" d="M31.5 20.08 C34 17 37 17.7 37.5 17 C36.5 21.9 34 21.9 31.5 20.08 Z"/><ellipse class="e13-bluete" cx="31" cy="5.5" rx="2.5" ry="4.3" transform="rotate(0 31 10)"/><ellipse class="e13-bluete" cx="31" cy="5.5" rx="2.5" ry="4.3" transform="rotate(72 31 10)"/><ellipse class="e13-bluete" cx="31" cy="5.5" rx="2.5" ry="4.3" transform="rotate(144 31 10)"/><ellipse class="e13-bluete" cx="31" cy="5.5" rx="2.5" ry="4.3" transform="rotate(216 31 10)"/><ellipse class="e13-bluete" cx="31" cy="5.5" rx="2.5" ry="4.3" transform="rotate(288 31 10)"/><circle class="e13-mitte" cx="31" cy="10" r="2.7"/><path class="e13-stiel" d="M52 13 Q53.5 18.4 52 24"/><path class="e13-blatt" d="M52.5 20.08 C55 17 58 17.7 58.5 17 C57.5 21.9 55 21.9 52.5 20.08 Z"/><ellipse class="e13-bluete" cx="52" cy="5.5" rx="2.5" ry="4.3" transform="rotate(0 52 10)"/><ellipse class="e13-bluete" cx="52" cy="5.5" rx="2.5" ry="4.3" transform="rotate(72 52 10)"/><ellipse class="e13-bluete" cx="52" cy="5.5" rx="2.5" ry="4.3" transform="rotate(144 52 10)"/><ellipse class="e13-bluete" cx="52" cy="5.5" rx="2.5" ry="4.3" transform="rotate(216 52 10)"/><ellipse class="e13-bluete" cx="52" cy="5.5" rx="2.5" ry="4.3" transform="rotate(288 52 10)"/><circle class="e13-mitte" cx="52" cy="10" r="2.7"/></svg></div>
+        <div class="spalte"><m-aufgabe class="e13-schmal">[5] + [5] + [5] = _</m-aufgabe><m-aufgabe class="e13-schmal">[3] · [5] = _</m-aufgabe></div>
+      </div>
+      <div class="e13-zeile">
+        <div class="e13-bildzelle"><svg class="e13-bild" xmlns="http://www.w3.org/2000/svg" width="67.5mm" height="16.5mm" viewBox="0 0 67.5 16.5"><g transform="translate(0.0 0)"><path class="e13-stiel" d="M7.2 1.8 Q3.6 4.8 3.8 10 M7.2 1.8 Q9.8 5.4 10.6 10"/><path class="e13-blatt" d="M7.2 1.8 C9.2 -0.2 11.8 0.2 12.8 1.4 C11.2 3.2 9 3.2 7.2 1.8 Z"/><circle class="e13-kirsche" cx="3.8" cy="12.7" r="2.9"/><circle class="e13-glanz" cx="2.8" cy="11.8" r="0.7"/><circle class="e13-kirsche" cx="10.6" cy="12.7" r="2.9"/><circle class="e13-glanz" cx="9.6" cy="11.8" r="0.7"/></g><g transform="translate(2.5 0)"><path class="e13-stiel" d="M22.2 1.8 Q18.6 4.8 18.8 10 M22.2 1.8 Q24.8 5.4 25.6 10"/><path class="e13-blatt" d="M22.2 1.8 C24.2 -0.2 26.8 0.2 27.8 1.4 C26.2 3.2 24 3.2 22.2 1.8 Z"/><circle class="e13-kirsche" cx="18.8" cy="12.7" r="2.9"/><circle class="e13-glanz" cx="17.8" cy="11.8" r="0.7"/><circle class="e13-kirsche" cx="25.6" cy="12.7" r="2.9"/><circle class="e13-glanz" cx="24.6" cy="11.8" r="0.7"/></g><g transform="translate(5.0 0)"><path class="e13-stiel" d="M37.2 1.8 Q33.6 4.8 33.8 10 M37.2 1.8 Q39.8 5.4 40.6 10"/><path class="e13-blatt" d="M37.2 1.8 C39.2 -0.2 41.8 0.2 42.8 1.4 C41.2 3.2 39 3.2 37.2 1.8 Z"/><circle class="e13-kirsche" cx="33.8" cy="12.7" r="2.9"/><circle class="e13-glanz" cx="32.8" cy="11.8" r="0.7"/><circle class="e13-kirsche" cx="40.6" cy="12.7" r="2.9"/><circle class="e13-glanz" cx="39.6" cy="11.8" r="0.7"/></g><g transform="translate(7.5 0)"><path class="e13-stiel" d="M52.2 1.8 Q48.6 4.8 48.8 10 M52.2 1.8 Q54.8 5.4 55.6 10"/><path class="e13-blatt" d="M52.2 1.8 C54.2 -0.2 56.8 0.2 57.8 1.4 C56.2 3.2 54 3.2 52.2 1.8 Z"/><circle class="e13-kirsche" cx="48.8" cy="12.7" r="2.9"/><circle class="e13-glanz" cx="47.8" cy="11.8" r="0.7"/><circle class="e13-kirsche" cx="55.6" cy="12.7" r="2.9"/><circle class="e13-glanz" cx="54.6" cy="11.8" r="0.7"/></g></svg></div>
+        <div class="spalte"><m-aufgabe feld="k">[2] + [2] + [2] + [2] = _</m-aufgabe><m-aufgabe feld="k">[4] · [2] = _</m-aufgabe></div>
+      </div>
+    </div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Zeichne 3 Gruppen mit je 3 Punkten. Kreis jede Gruppe ein.</p>
+    <div class="e13-a3">
+      <div class="e13-gitter"><m-kaestchen b="11" h="3"></m-kaestchen><svg xmlns="http://www.w3.org/2000/svg" width="110.4mm" height="30.4mm" viewBox="0 0 110.4 30.4"><g class="lsg"><ellipse class="e13-ring" cx="15.2" cy="15.2" rx="13" ry="13"/><ellipse class="e13-ring" cx="55.2" cy="15.2" rx="13" ry="13"/><ellipse class="e13-ring" cx="95.2" cy="15.2" rx="13" ry="13"/><circle class="p2" cx="10.2" cy="10.2" r="2.6"/><circle class="p2" cx="20.2" cy="10.2" r="2.6"/><circle class="p2" cx="15.2" cy="20.2" r="2.6"/><circle class="p2" cx="50.2" cy="10.2" r="2.6"/><circle class="p2" cx="60.2" cy="10.2" r="2.6"/><circle class="p2" cx="55.2" cy="20.2" r="2.6"/><circle class="p2" cx="90.2" cy="10.2" r="2.6"/><circle class="p2" cx="100.2" cy="10.2" r="2.6"/><circle class="p2" cx="95.2" cy="20.2" r="2.6"/></g></svg></div>
+      <div class="e13-mal"><span>Die Malaufgabe:</span><m-aufgabe feld="k">[3] · [3] = [9]</m-aufgabe></div>
+    </div>
+  </div>
+  <div class="knobel" data-titel="Knobel-Ecke: Kobold Klecks">
+    <p>Kobold Klecks sagt: „Das sind 3 · 4 Erdbeeren!“ Stimmt das?</p>
+    <div class="e13-knobel1">
+      <svg class="e13-klecks" xmlns="http://www.w3.org/2000/svg" width="18mm" height="18mm" viewBox="0 0 100 100" aria-label="Kobold Klecks"><path fill="white" stroke="#1f2340" stroke-width="3.2" stroke-linejoin="round" d="M50 14 C60 12 64 22 72 24 C84 26 90 36 85 46 C81 54 90 60 86 70 C82 82 69 80 61 86 C53 92 43 90 37 84 C29 78 16 82 13 70 C10 60 19 54 15 44 C12 34 21 25 32 25 C41 25 40 16 50 14 Z"/><circle fill="white" stroke="#1f2340" stroke-width="3.2" cx="89" cy="18" r="4"/><circle fill="white" stroke="#1f2340" stroke-width="3.2" cx="10" cy="89" r="3.5"/><circle fill="white" stroke="#1f2340" stroke-width="3" cx="40" cy="48" r="8"/><circle fill="#1f2340" cx="42" cy="50" r="3.5"/><circle fill="white" stroke="#1f2340" stroke-width="3" cx="61" cy="48" r="8"/><circle fill="#1f2340" cx="63" cy="50" r="3.5"/><path fill="none" stroke="#1f2340" stroke-width="3.2" stroke-linecap="round" d="M38 66 Q50 76 63 66"/></svg>
+      <svg class="e13-bild" xmlns="http://www.w3.org/2000/svg" width="67mm" height="21mm" viewBox="0 0 67 21"><circle class="e13-teller" cx="10.5" cy="10.5" r="10"/><circle class="e13-rand" cx="10.5" cy="10.5" r="7.6"/><g transform="translate(7.4 7.4) scale(0.72)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(13.6 7.4) scale(0.72)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(7.4 13.6) scale(0.72)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(13.6 13.6) scale(0.72)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><circle class="e13-teller" cx="33.5" cy="10.5" r="10"/><circle class="e13-rand" cx="33.5" cy="10.5" r="7.6"/><g transform="translate(30.4 7.4) scale(0.72)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(36.6 7.4) scale(0.72)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(30.4 13.6) scale(0.72)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(36.6 13.6) scale(0.72)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><circle class="e13-teller" cx="56.5" cy="10.5" r="10"/><circle class="e13-rand" cx="56.5" cy="10.5" r="7.6"/><g transform="translate(53.4 7.4) scale(0.72)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(59.6 7.4) scale(0.72)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g><g transform="translate(53.4 13.6) scale(0.72)"><path class="e13-erdb" d="M0 -2.2 C2.4 -3.2 3.6 -0.8 2.4 1.6 C1.6 3.2 0.6 3.9 0 4 C-0.6 3.9 -1.6 3.2 -2.4 1.6 C-3.6 -0.8 -2.4 -3.2 0 -2.2 Z"/><path class="e13-blatt" d="M-2.4 -2.5 L-0.8 -2 L0 -3.5 L0.8 -2 L2.4 -2.5 L1.2 -1.1 L0 -1.7 L-1.2 -1.1 Z"/><circle class="e13-kern" cx="-1" cy="0" r="0.32"/><circle class="e13-kern" cx="1" cy="0.2" r="0.32"/><circle class="e13-kern" cx="0" cy="1.7" r="0.32"/></g></svg>
+      <div>
+        <p>Es sind <m-feld l="11"></m-feld> Erdbeeren.</p>
+        <p>Für 3 · 4 fehlt <m-feld l="1" art="k"></m-feld> Erdbeere.</p>
+      </div>
+    </div>
+    <div class="e13-knobel2">
+      <p>Klecks isst 2 Erdbeeren auf. Jetzt sind alle Gruppen gleich groß:</p>
+      <m-aufgabe feld="k">[3] · [3] = [9]</m-aufgabe>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 13-2: Känguru-Sprünge                                         -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="13" data-titel="Känguru-Sprünge" data-verteilt>
+  <div class="aufg">
+    <p class="anw">Mathilda, das kleine Känguru springt immer 2 weit. Wo landet es?</p>
+    <div class="e13-strahl"><m-zahlenstrahl von="0" bis="20" breite="176" beschriftung="fuenfer" markiert="0" spruenge="0>2>4>6>8>10" luecken="2,4,6,8,10"></m-zahlenstrahl></div>
+    <div class="e13-unter"><span class="e13-text">5 Sprünge zu je 2:</span><m-aufgabe>5 · 2 = _</m-aufgabe></div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Das Riesen-Känguru springt 4-mal. Wie weit ist jeder Sprung?</p>
+    <div class="e13-strahl"><m-zahlenstrahl von="0" bis="30" breite="176" beschriftung="0,10,20,30" markiert="0" spruenge="0>5>10>15>20" sprung-luecken></m-zahlenstrahl></div>
+    <div class="e13-unter"><span class="e13-text">Die Malaufgabe:</span><m-aufgabe class="e13-schmal">[4] · [5] = [20]</m-aufgabe></div>
+  </div>
+  <div class="aufg">
+    <p class="anw">Zeichne 3 Sprünge zu je 4. Das Känguru startet auf der 0.</p>
+    <div class="e13-strahl e13-selbst"><m-zahlenstrahl von="0" bis="20" breite="176" markiert="0" spruenge="0>4>8>12"></m-zahlenstrahl></div>
+    <div class="e13-unter"><m-aufgabe>4 + 4 + 4 = _</m-aufgabe><m-aufgabe>3 · 4 = _</m-aufgabe></div>
+  </div>
+  <div class="profi">
+    <p>Jetzt springt das Riesen-Känguru 10 weit und das <span class="e13-nw">Zauber-Känguru</span> 3 weit. Wie geht es weiter?</p>
+    <div class="e13-profi-raster">
+      <span>10 weit:</span>
+      <div class="e13-folge"><span>10,</span><span>20,</span><span>30,</span><m-feld l="40"></m-feld><m-feld l="50"></m-feld><m-feld l="60"></m-feld><span class="e13-k">…</span></div>
+      <span>3 weit:</span>
+      <div class="e13-folge"><span>3,</span><span>6,</span><span>9,</span><m-feld l="12"></m-feld><m-feld l="15"></m-feld><m-feld l="18"></m-feld></div>
+    </div>
+    <div class="e13-profi-zeile"><span>10 Sprünge zu je 10:</span><m-aufgabe>10 · 10 = _</m-aufgabe></div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- Blatt 13-3: Spielplan Känguru-Feld                                  -->
+<!-- ================================================================== -->
+<section class="blatt" data-einheit="13" data-titel="Känguru-Feld" data-art="Spielplan" data-verteilt>
+  <div class="aufg ohne-nr">
+    <p class="anw"><b>So geht’s, Mathilda:</b></p>
+    <ol class="e13-regeln">
+      <li>Würfle mit 2 Würfeln.</li>
+      <li>Ein Würfel zählt die Sprünge. Der andere sagt, wie weit (schau rechts). Du suchst aus!</li>
+      <li>Rechne laut: „3 Sprünge zu je 5: 5, 10, 15. 3 mal 5 ist 15.“</li>
+      <li>Leg eine Kugel auf dein Ergebnis. Kein Feld frei? Pech!</li>
+      <li>3 Kugeln in einer Reihe, auch schräg? Gewonnen!</li>
+    </ol>
+  </div>
+  <div class="e13-spiel">
+    <div class="e13-feld">
+      <div>50</div><div>20</div><div>12</div><div>6</div>
+      <div>30</div><div>5</div><div>4</div><div>10</div>
+      <div>40</div><div>15</div><div>20</div><div>25</div>
+      <div>60</div><div>10</div><div>8</div><div>2</div>
+    </div>
+    <div class="e13-legende">
+      <p class="e13-leg-titel">So weit springt das Känguru:</p>
+      <div class="e13-leg-zeile"><m-wuerfel n="1" gr="11"></m-wuerfel><m-wuerfel n="2" gr="11"></m-wuerfel><span class="e13-pfeil">→</span><b>2</b><span>weit</span></div>
+      <div class="e13-leg-zeile"><m-wuerfel n="3" gr="11"></m-wuerfel><m-wuerfel n="4" gr="11"></m-wuerfel><span class="e13-pfeil">→</span><b>5</b><span>weit</span></div>
+      <div class="e13-leg-zeile"><m-wuerfel n="5" gr="11"></m-wuerfel><m-wuerfel n="6" gr="11"></m-wuerfel><span class="e13-pfeil">→</span><b>10</b><span>weit</span></div>
+      <p class="e13-farben">Mathilda: blau<br>Mama oder Papa: rot</p>
+    </div>
+  </div>
+  <div class="e13-hilfe">
+    <p>Hilfe: Hüpf mit dem Finger!</p>
+    <m-zahlenstrahl von="0" bis="60" breite="176" beschriftung="fuenfer"></m-zahlenstrahl>
+  </div>
+  <div class="knobel">
+    <div class="e13-knobel3">
+      <p>Mathilda würfelt <span class="e13-wuerfel2"><m-wuerfel n="3" gr="10"></m-wuerfel><m-wuerfel n="5" gr="10"></m-wuerfel></span>. Welche zwei Aufgaben kannst du nehmen?</p>
+      <div class="spalte"><m-aufgabe>3 · [10] = [30]</m-aufgabe><m-aufgabe>5 · [5] = [25]</m-aufgabe></div>
+    </div>
+  </div>
+</section>
