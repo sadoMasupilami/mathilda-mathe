@@ -60,6 +60,7 @@
   /* Blatt 13-2 */
   .e13-strahl svg { width: 176mm; height: auto; }
   .e13-unter { display: flex; align-items: center; gap: 6mm; margin-top: 1mm; }
+  .e13-unter.e13-luft { margin-top: 4mm; gap: 14mm; }
   .e13-unter .e13-text { font-size: 16pt; }
   .e13-selbst .bogen, .e13-selbst .akzent-f, .e13-selbst text[fill] { visibility: hidden; }
   .loesungsmodus .e13-selbst .bogen, .loesungsmodus .e13-selbst .akzent-f, .loesungsmodus .e13-selbst text[fill] { visibility: visible; }
@@ -70,13 +71,12 @@
   .e13-folge .e13-k { color: var(--grau); }
   .e13-profi-raster { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 2mm 4mm; margin: 0 0 2mm 0; }
   .e13-profi-raster .e13-folge { margin: 0; }
-  .e13-nw { white-space: nowrap; }
   .e13-profi-zeile { display: flex; align-items: center; gap: 4mm; margin: 0; }
   /* Blatt 13-3 */
   .e13-regeln { margin: 0; padding-left: 9mm; }
   .e13-regeln li { margin-bottom: 1.2mm; }
   .e13-spiel { display: flex; align-items: center; justify-content: space-between; gap: 6mm; }
-  .e13-feld { display: grid; grid-template-columns: repeat(4, 22mm); grid-auto-rows: 22mm; gap: 2.5mm; padding: 3mm; border: 0.8mm solid var(--akzent); border-radius: 4mm; background: white; }
+  .e13-feld { display: grid; grid-template-columns: repeat(4, 20mm); grid-auto-rows: 20mm; gap: 2.5mm; padding: 3mm; border: 0.8mm solid var(--akzent); border-radius: 4mm; background: white; }
   .e13-feld > div { display: flex; align-items: center; justify-content: center; border: 0.5mm solid var(--tinte); border-radius: 3mm; background: var(--akzent-hell); font-size: 26pt; font-weight: 700; }
   .e13-legende { flex: 1; display: flex; flex-direction: column; gap: 3mm; }
   .e13-legende p { margin: 0; }
@@ -102,7 +102,7 @@
   <div class="kasten material">
     <ul>
       <li><b>Ausdrucken:</b> Blatt <a class="blattref" href="#blatt-13-1"></a>, Blatt <a class="blattref" href="#blatt-13-2"></a> und den <a class="blattref" href="#blatt-13-3">Spielplan 13-3</a>. Am besten in Farbe (rote Erdbeeren, orange Sprungbögen); schwarz-weiß geht auch.</li>
-      <li><b>Für die Gruppen:</b> 3 bis 4 kleine Teller oder Untertassen (Ersatz: Muffinförmchen oder gezeichnete Kreise) und die 20 Kugeln aus Einheit 1. Noch schöner ist eine echte Jause (Erdbeeren, Weintrauben, Salzstangerl), die nach dem Rechnen gegessen wird.</li>
+      <li><b>Für die Gruppen:</b> 4 kleine Teller oder Untertassen (Ersatz: Muffinförmchen oder gezeichnete Kreise) und die 20 Kugeln aus Einheit 1. Noch schöner ist eine echte Jause (Erdbeeren, Weintrauben, Salzstangerl), die nach dem Rechnen gegessen wird.</li>
       <li><b>Kreide-Zahlenstrahl 0–20</b> aus Einheit 4 (Striche 40 cm auseinander) und Straßenkreide in einer zweiten Farbe für die Fünferzahlen. Ist der Strahl weg, zeichnet ihr ihn neu (Kasten „Bewegung“). Bei Regen: Malerkrepp und Filzstift im Gang.</li>
       <li><b>Für das Spiel:</b> 2 Würfel und wieder die 20 Kugeln als Spielsteine: 10 blaue für Mathilda, 10 rote für dich. Ersatz: Münzen und Knöpfe.</li>
       <li>Bleistift, Buntstifte, eine feste Unterlage zum Schreiben im Freien, Sammelpass und Stempel.</li>
@@ -115,8 +115,8 @@
   <ol class="ablauf">
     <li data-min="2"><span class="schritt-titel">Aufwärmen: Zählen in Schritten</span>Zählt gemeinsam Dinge, die paarweise kommen: die Schuhe im Vorzimmer oder die Augen am Esstisch. „Zähl in 2er-Schritten: 2, 4, 6 …“ Dann haltet ihr beide eure Hände hoch: „Wie viele Finger sind das? Zähl in 5er-Schritten!“ (5, 10, 15, 20.) Zum Schluss ganz schnell in 10er-Schritten bis 100. Das sind die drei Känguru-Sprünge von heute.</li>
     <li data-min="5"><span class="schritt-titel">Entdecken: gleich große Gruppen</span>Stell 3 Teller hin und leg auf jeden 4 Kugeln (oder Erdbeeren). „Wie viele sind es zusammen?“ Dann kommen die neuen Wörter: „Das sind 3 Gruppen mit je 4, also 3-mal die 4. Man schreibt 3 · 4 und sagt 3 mal 4.“ Schreib 4 + 4 + 4 = 12 und darunter 3 · 4 = 12 groß auf ein Blatt. Danach legt Mathilda selbst: 2 Teller mit je 5, dann 4 Teller mit je 2, und sagt jedes Mal die Malaufgabe. Zum Schluss legst du den „Trick-Teller“ mit 4, 4 und 3 Kugeln (Beispielsätze unten).</li>
-    <li data-min="5"><span class="schritt-titel">Blatt: Gleich große Gruppen</span>Blatt <a class="blattref" href="#blatt-13-1"></a>. Aufgabe 1 macht ihr gemeinsam, Aufgabe 2 ist der Kern: Aus jedem Bild wird eine Plusaufgabe und eine Malaufgabe. Bei Aufgabe 3 malt Mathilda selbst Gruppen ins Kästchenpapier und schreibt die Malaufgabe dazu. Die Knobel-Ecke mit Kobold Klecks passt genau zum Trick-Teller.</li>
-    <li data-min="6"><span class="schritt-titel">Känguru-Sprünge am Kreide-Zahlenstrahl</span>Erst springt Mathilda als kleines Känguru in 2er-Sprüngen. Dann schreibt sie mit der zweiten Kreidefarbe die Fünferzahlen dazu und springt als Riesen-Känguru in 5er- und 10er-Sprüngen (Kasten „Bewegung“). Nach jeder Hüpf-Aufgabe fragst du: „Wie oft bist du gesprungen? Wie weit? Wo bist du?“ Nimm Blatt 13-2, Bleistift und Unterlage gleich mit hinaus.</li>
+    <li data-min="5"><span class="schritt-titel">Blatt: Gleich große Gruppen</span>Blatt <a class="blattref" href="#blatt-13-1"></a>. Aufgabe 1 macht ihr gemeinsam, Aufgabe 2 ist der Kern: Aus jedem Bild wird eine Plusaufgabe und eine Malaufgabe. Bei Aufgabe 3 malt Mathilda selbst Gruppen ins Kästchenpapier und schreibt die Malaufgabe dazu. Die Knobel-Ecke mit Kobold Klecks passt genau zum Trick-Teller. Braucht Mathilda länger als 5 Minuten, kommt Aufgabe 3 an einen kurzen zweiten Termin.</li>
+    <li data-min="6"><span class="schritt-titel">Känguru-Sprünge am Kreide-Zahlenstrahl</span>Erst springt Mathilda als kleines Känguru in 2er-Sprüngen. Dann schreibt sie mit der zweiten Kreidefarbe die Fünferzahlen dazu und springt als Riesen-Känguru in 5er- und 10er-Sprüngen (Kasten „Bewegung“). Nach jeder Hüpf-Aufgabe fragst du: „Wie oft bist du gesprungen? Wie weit? Wo bist du?“ Nimm <a class="blattref" href="#blatt-13-2"></a>, Bleistift und Unterlage gleich mit hinaus.</li>
     <li data-min="4"><span class="schritt-titel">Sprünge aufs Papier</span>Gleich neben dem Kreide-Zahlenstrahl: Blatt <a class="blattref" href="#blatt-13-2"></a>, Aufgaben 1 bis 3. Bei Aufgabe 2 muss Mathilda herausfinden, wie weit das Riesen-Känguru springt (nur 0, 10, 20 und 30 sind beschriftet). Bei Aufgabe 3 zeichnet sie die Bögen selbst ein. Die Profi-Aufgabe ist für Schnelle oder für einen zweiten kurzen Termin.</li>
     <li data-min="7"><span class="schritt-titel">Spiel: Känguru-Feld</span>Eine Partie mit dem <a class="blattref" href="#blatt-13-3">Spielplan 13-3</a>. Jede Malaufgabe wird laut gesagt, am besten mit den Sprüngen: „3 Sprünge zu je 5: 5, 10, 15. 3 mal 5 ist 15.“ Wird die Zeit knapp, hört ihr nach 5 Würfen pro Person auf, und wer mehr Kugeln am Feld hat, gewinnt. Zum Schluss: Sammelpass stempeln, Sterne anmalen.</li>
   </ol>
@@ -142,7 +142,7 @@
   <div class="sag">
     <p class="du">(Du legst auf die Teller 4, 4 und 3 Kugeln.) „Und das hier? Ist das auch 3 mal 4?“</p>
     <p class="sie">„Ja!“ oder: „Nein, auf dem letzten Teller fehlt eine.“</p>
-    <p class="dann">Sagt sie „Ja“, lass sie zählen: Es sind 11. Dann der wichtigste Satz der Einheit: „Mal geht nur, wenn alle Gruppen gleich groß sind. Das hier ist 4 + 4 + 3. Was müssen wir tun, damit es 3 mal 4 wird?“ (Eine Kugel dazulegen.) Genau dieses Bild kommt in der Knobel-Ecke von Blatt 13-1 mit Kobold Klecks wieder.</p>
+    <p class="dann">Sagt sie „Ja“, lass sie zählen: Es sind 11. Dann der wichtigste Satz der Einheit: „Mal geht nur, wenn alle Gruppen gleich groß sind. Das hier ist 4 + 4 + 3. Was müssen wir tun, damit es 3 mal 4 wird?“ (Eine Kugel dazulegen.) Genau dieses Bild kommt in der Knobel-Ecke von <a class="blattref" href="#blatt-13-1"></a> mit Kobold Klecks wieder.</p>
   </div>
 
   <div class="sag">
@@ -150,7 +150,7 @@
     <p class="sie">„Dreimal. Und immer 5 weit. Ich bin auf der 15!“</p>
     <p class="du">„Welche Malaufgabe ist das?“</p>
     <p class="sie">„3 mal 5. Wie die Blumen auf dem Blatt!“</p>
-    <p class="dann">Das ist der zweite wichtige Moment: Gruppen und Sprünge sind dieselbe Malaufgabe. Merkt sie es nicht selbst, zeig auf die 3 Blumen mit je 5 Blütenblättern auf Blatt 13-1: „Wo steckt hier die 3, wo die 5?“</p>
+    <p class="dann">Das ist der zweite wichtige Moment: Gruppen und Sprünge sind dieselbe Malaufgabe. Merkt sie es nicht selbst, zeig auf die 3 Blumen mit je 5 Blütenblättern auf <a class="blattref" href="#blatt-13-1"></a>: „Wo steckt hier die 3, wo die 5?“</p>
   </div>
 
   <div class="sag">
@@ -180,9 +180,9 @@
       <li><b>Gewonnen:</b> Wer zuerst 3 eigene Kugeln direkt nebeneinander in einer Reihe hat (waagrecht, senkrecht oder schräg), gewinnt sofort.</li>
       <li><b>Anderes Ende:</b> Bringen 3 Würfe hintereinander Pech (egal bei wem) oder sind alle Felder belegt, ist das Spiel auch aus. Dann gewinnt, wer mehr Kugeln am Feld hat. Gleich viele heißt unentschieden.</li>
     </ol>
-    <p><b>Sonderfälle:</b> Bei einem Pasch gibt es nur eine Aufgabe (bei 4 und 4 sind es 4 Sprünge zu je 5, also 20). Die andere Person ist immer Rechenkontrolle. Du darfst ab und zu absichtlich falsch rechnen, höchstens zweimal pro Partie. Erwischt dich Mathilda, nimmst du deine Kugel wieder weg, und sie ist dran. Das zählt nicht als Pech-Wurf.</p>
+    <p><b>Sonderfälle:</b> Bei einem Pasch gibt es nur eine Aufgabe (bei 4 und 4 sind es 4 Sprünge zu je 5, also 20). Die andere Person ist immer Rechenkontrolle. Du darfst ab und zu absichtlich falsch rechnen, höchstens zweimal pro Partie. Erwischt dich Mathilda, nimmst du deine Kugel wieder weg, und sie ist dran. Das zählt nicht als Pech-Wurf. Merkt sie es nicht, verrätst du den Fehler nach ihrem nächsten Zug und nimmst die Kugel trotzdem weg: Schummeln bringt nie einen Vorteil.</p>
     <p><b>Beispielzug:</b> Mathilda würfelt 2 und 6. Sie überlegt laut: „2 Sprünge, die 6 heißt 10 weit: 10, 20. Oder 6 Sprünge, die 2 heißt 2 weit: 2, 4, 6, 8, 10, 12.“ In der dritten Reihe liegen schon blaue Kugeln auf der 40 und der 15. Also nimmt sie die 20 gleich daneben: 3 in einer Reihe, gewonnen! Am Anfang hilfst du beim Übersetzen der Würfel mit der Tabelle.</p>
-    <p><b>Gut zu wissen:</b> Die 10 lässt sich am leichtesten erwürfeln (in 10 von 36 möglichen Würfen), darum steht sie zweimal am Feld, ebenso die 20 (7 von 36). Am schwersten sind 2, 4, 15, 50 und 60 (je 3 von 36). Die vier Felder in der Mitte liegen in den meisten Reihen. Wer klug wählt (eigene Reihe verlängern, zwei fremde Kugeln in einer Reihe blockieren), gewinnt viel öfter. Meist ist eine Partie nach 3 bis 7 Würfen pro Person entschieden; etwa jede zehnte endet durch 3 Pech-Würfe. Wer beginnt, gewinnt etwas öfter (ungefähr 6 von 10 Partien): Darum beginnt Mathilda, und bei der Revanche beginnt, wer verloren hat. 10 Kugeln pro Person reichen immer, denn spätestens mit der 10. Kugel hat man 3 in einer Reihe.</p>
+    <p><b>Gut zu wissen:</b> Die 10 lässt sich am leichtesten erwürfeln (in 10 von 36 möglichen Würfen), darum steht sie zweimal am Feld, ebenso die 20 (7 von 36). Am schwersten sind 2, 4, 15, 50 und 60 (je 3 von 36). Die vier Felder in der Mitte liegen in den meisten Reihen. Wer klug wählt (eigene Reihe verlängern, zwei fremde Kugeln in einer Reihe blockieren), gewinnt deutlich öfter. Meist ist eine Partie nach 3 bis 7 Würfen pro Person entschieden; etwa jede zehnte endet durch 3 Pech-Würfe. Wer beginnt, gewinnt etwas öfter (ungefähr 6 von 10 Partien): Darum beginnt Mathilda, und bei der Revanche beginnt, wer verloren hat. 10 Kugeln pro Person reichen immer, denn spätestens mit der 10. Kugel hat man 3 in einer Reihe.</p>
     <p><b>Varianten:</b></p>
     <ul>
       <li><b>Erst legen (leichter):</b> In den ersten Zügen legt Mathilda jede Aufgabe mit Nudeln oder Knöpfen in Gruppen: 4 Sprünge zu je 2 sind 4 Häufchen mit je 2 Nudeln. Bei 10er-Sprüngen zeigt sie für jeden Sprung einmal alle 10 Finger und zählt mit: 10, 20, 30 …</li>
@@ -220,7 +220,7 @@
       <li><b>Ungleiche Gruppen werden zur Malaufgabe.</b> Bei 4, 4 und 3 Erdbeeren schreibt sie 3 · 4. Frag: „Ist auf jedem Teller gleich viel?“ Mal geht nur bei gleich großen Gruppen, sonst bleibt es Plus: 4 + 4 + 3 = 11.</li>
       <li><b>Die Zahlen sind vertauscht.</b> Zu 3 Tellern mit je 4 schreibt sie 4 · 3, „weil auf jedem Teller 4 sind“. Das Ergebnis zählt als richtig (warum, entdeckt sie in Einheit 14). Die Schreibweise korrigierst du freundlich mit dem Merksatz: „Erst wie oft, dann wie viel. 3 Teller, also 3-mal die 4: 3 · 4.“</li>
       <li><b>Das Känguru startet auf der 1.</b> Dann landet sie bei 2er-Sprüngen auf 3, 5, 7. Oder sie zählt die Striche statt der Sprünge. Sag: „Kängurus starten auf der 0. Gezählt werden die Sprünge, nicht die Striche“, und zähl am Kreide-Zahlenstrahl laut mit: „Erster Sprung, zweiter Sprung …“</li>
-      <li><b>Sprungweite und Landezahl verwechselt.</b> Auf Blatt 13-2 schreibt sie 10 in das Kästchen über dem Bogen statt +5. Wie in Einheit 4: „Oben am Bogen steht, wie weit du springst. Unten am Strich steht, wo du landest.“</li>
+      <li><b>Sprungweite und Landezahl verwechselt.</b> Auf <a class="blattref" href="#blatt-13-2"></a>, Aufgabe 2, schreibt sie 10 in das Kästchen über dem Bogen statt +5. Wie in Einheit 4: „Oben am Bogen steht, wie weit du springst. Unten am Strich steht, wo du landest.“</li>
       <li><b>Verzählt in 5er-Schritten.</b> Sie sagt „5, 10, 15, 20, 30“ und lässt die 25 aus. Tipp: Fünferzahlen enden abwechselnd auf 5 und auf 0. Zum Kontrollieren helfen die Fünferzahlen am Kreide-Zahlenstrahl oder die Fünferkette.</li>
       <li><b>Das falsche Malzeichen.</b> Sie schreibt ein x oder einen Punkt unten auf der Linie. In Österreich ist das Malzeichen ein Punkt in der Mitte, auf halber Höhe der Ziffern.</li>
       <li><b>„Das ist doch nur Plus!“</b> Stimmt, und das ist ein kluger Satz. Mal ist ein Plus mit lauter gleichen Zahlen. Frag zurück: „Schreib mir 10 + 10 + 10 + 10 + 10 + 10 + 10 auf. Und jetzt als Malaufgabe!“ (7 · 10.) Dann ist klar, warum es die Abkürzung gibt.</li>
@@ -230,9 +230,9 @@
   <div class="kasten leichter">
     <ul>
       <li>Nur mit Material: Teller und Kugeln, kleine Zahlen wie 2 · 2, 3 · 2 und 2 · 5. Jede Malaufgabe zuerst legen, dann als Plus aufschreiben und erst dann als Malaufgabe.</li>
-      <li>Zuerst nur 2er- und 10er-Schritte, die 5er-Schritte am nächsten Tag mit der Fünferkette (Kasten „Basteln“).</li>
+      <li>Zuerst nur 2er- und 10er-Schritte, die 5er-Schritte am nächsten Tag mit der Fünferkette (Kasten „Basteln“). Für die 10er reicht der Null-Zauber aus Einheit 9: jeder Strich ein Zehner.</li>
       <li>Im Spiel die Variante „Erst legen“ oder „Ohne Aussuchen“ nehmen und den Hilfe-Zahlenstrahl benutzen: Ein Knopf startet auf der 0 und hüpft Sprung für Sprung weiter.</li>
-      <li>Bei Blatt 13-2, Aufgabe 3 zeichnest du den ersten Bogen vor, Mathilda die anderen zwei.</li>
+      <li>Bei <a class="blattref" href="#blatt-13-2"></a>, Aufgabe 3, zeichnest du den ersten Bogen vor.</li>
     </ul>
   </div>
 
@@ -242,12 +242,12 @@
       <li><b>3er- und 4er-Sprünge.</b> „Das Zauber-Känguru springt immer 3 weit, das Drachen-Känguru immer 4 weit. Beide hüpfen von der 0 bis zur 40. Auf welchen Zahlen landen beide?“ (3, 6, 9 … 39 und 4, 8, 12 … 40; gemeinsam sind 12, 24 und 36.) Am Kreide-Zahlenstrahl geht der Anfang bis 20 mit dem Flüster-Hüpfen (beim 4er flüstert sie drei Zahlen); dort treffen sich beide nur auf der 12.</li>
       <li><b>Das Riesen-Känguru und die 100.</b> „10 Sprünge zu je 10?“ (100, also 10 · 10 = 100.) „Wie viele 5er-Sprünge braucht man bis 100?“ (20.) „Und wie viele 2er-Sprünge?“ (50.) Mit den Fünferzahlen bis 100 am Kreide-Zahlenstrahl sieht man die 20 Sprünge direkt.</li>
       <li><b>Mal mit 1 und mit 0.</b> „1 Teller mit 4 Erdbeeren?“ (1 · 4 = 4.) „4 Teller mit je 1 Erdbeere?“ (4 · 1 = 4.) „3 leere Teller?“ (3 · 0 = 0.) „Das Känguru macht 0 Sprünge zu je 5. Wo ist es?“ (Immer noch auf der 0, denn 0 · 5 = 0.) Viele Kinder staunen, dass mal nicht immer mehr macht.</li>
-      <li><b>Mal-Geschichten erfinden.</b> Mathilda erfindet Geschichten zu 2 · 6, 5 · 2 und 4 · 10 und malt sie auf Kästchenpapier (12, 10 und 40). Umgekehrt erzählst du, und sie entscheidet „Mal oder nicht?“: „3 Feen haben je 2 Flügel“ (Mal: 3 · 2 = 6), „Ein Drache hat 4 Eier, ein anderer 6“ (kein Mal, sondern 4 + 6 = 10), „5 Kinder bekommen je 3 Zuckerl“ (Mal: 5 · 3 = 15).</li>
+      <li><b>Mal-Geschichten erfinden.</b> Mathilda erfindet Geschichten zu 2 · 6, 5 · 2 und 4 · 10 und malt sie auf Kästchenpapier (12, 10 und 40). Umgekehrt erzählst du, und sie entscheidet „Mal oder nicht?“: „3 Einhörner haben je 4 Beine“ (Mal: 3 · 4 = 12), „Ein Drache hat 4 Eier, ein anderer 6“ (kein Mal, sondern 4 + 6 = 10), „5 Kinder bekommen je 3 Zuckerl“ (Mal: 5 · 3 = 15).</li>
       <li><b>Rückwärts denken (Vorgeschmack auf Einheit 15).</b> „Das Riesen-Känguru ist in 5er-Sprüngen auf der 30 gelandet. Wie oft ist es gesprungen?“ (6-mal, <span class="keine-pruefung">☐ · 5 = 30</span>.) „Es ist 4-mal gesprungen und auf der 20 gelandet. Wie weit war jeder Sprung?“ (5 weit, <span class="keine-pruefung">4 · ☐ = 20</span>.) „12 Erdbeeren auf 3 Tellern, auf jedem gleich viele. Wie viele pro Teller?“ (4.)</li>
       <li><b>Verdoppeln hilft (Einheit 3).</b> 2 · 7 ist 7 + 7, also das Doppelte von 7 (14). Ebenso 2 · 8 und 2 · 9 (16 und 18). Und 4 · 3 ist Doppel-Doppel: 3, verdoppelt 6, noch einmal verdoppelt 12. Probiert 4 · 6 (6, 12, 24) und 4 · 5 (5, 10, 20).</li>
       <li><b>Zwei Kängurus, ein Ziel (Vorgeschmack auf Einheit 14).</b> „Ein Känguru macht 3 Sprünge zu je 5, ein anderes 5 Sprünge zu je 3. Wer landet weiter vorne?“ (Keines, beide landen auf der 15.) „Und 2 Sprünge zu je 10 gegen 10 Sprünge zu je 2?“ (Beide auf der 20.) „Ist das immer so?“ (Ja, das ist die Tauschaufgabe beim Mal. Sie bleibt eine Forscherfrage bis Einheit 14.)</li>
       <li><b>Mal und Plus gemischt.</b> „3 Teller mit je 4 Erdbeeren und dazu noch 2 einzelne Erdbeeren?“ (14.) „2 volle Eierkartons und 3 Kugeln extra?“ (23, nämlich 2 · 10 + 3 = 23. Genau so sind Zehner und Einer gebaut!)</li>
-      <li><b>Große Sprünge mit Zehnerzahlen.</b> „3 Sprünge zu je 20?“ (60: 20, 40, 60.) „2 Sprünge zu je 50?“ (100.) „4 Sprünge zu je 25?“ (100: 25, 50, 75, 100.) Mit dem Spielgeld aus Einheit 9: „Du kaufst 3 Bücher zu je 10 Euro. Wie viel zahlst du?“ (30 Euro, drei 10-€-Scheine.)</li>
+      <li><b>Große Sprünge bis 100.</b> „3 Sprünge zu je 20?“ (60: 20, 40, 60.) „2 Sprünge zu je 50?“ (100.) „4 Sprünge zu je 25?“ (100: 25, 50, 75, 100.) Mit dem Spielgeld aus Einheit 9: „Du kaufst 3 Bücher zu je 10 Euro. Wie viel zahlst du?“ (30 Euro, drei 10-€-Scheine.)</li>
       <li><b>Eigenes Känguru-Feld bauen.</b> Für die Profi-Variante des Spiels mit 3er-, 4er- und 10er-Kängurus findet Mathilda alle Ergebnisse, die man würfeln kann, und zeichnet daraus ein Feld auf Kästchenpapier. (Genau 16 verschiedene: 3, 6, 9, 12, 15, 18, dazu 4, 8, 16, 20, 24 und 10, 30, 40, 50, 60. Die 12 und die 20 gibt es auf zwei Arten, sie stehen nur einmal da. Das passt genau in ein Feld mit 4 Reihen zu je 4 Kästchen.)</li>
     </ol>
   </div>
@@ -275,7 +275,7 @@
     <p><b>Blatt 13-1, Knobel-Ecke:</b> Es stimmt nicht. Auf dem dritten Teller liegen nur 3 Erdbeeren, die Gruppen sind nicht gleich groß. Es sind 4 + 4 + 3 = 11 Erdbeeren. Für 3 · 4 = 12 fehlt 1 Erdbeere auf dem dritten Teller. Isst Klecks dagegen von jedem vollen Teller 1 Erdbeere, liegt auf jedem Teller 3, also 3 · 3 = 9 (denn 11 − 2 = 9). Das ist der eigentliche Knobel-Teil: Gleich große Gruppen bekommt man durch Dazulegen <b>oder</b> Wegnehmen. Schreibt Mathilda nicht gleich 3 · 3, frag: „Wie viele liegen auf dem kleinsten Teller?“</p>
     <p><b>Blatt 13-2, Aufgabe 2:</b> In die Kästchen über den Bögen kommt +5 (nur 5 ist auch richtig). Bis zur 10 braucht das Känguru 2 Sprünge, also ist jeder Sprung 5 weit.</p>
     <p><b>Blatt 13-2, Aufgabe 3:</b> Drei Bögen von der 0 zur 4, von der 4 zur 8 und von der 8 zur 12, über jedem Bogen +4. Landung auf der 12.</p>
-    <p><b>Blatt 13-2, Profi-Aufgabe:</b> Das Riesen-Känguru landet nach 10 Sprüngen auf der 100. Die 3er-Schritte gehen 3, 6, 9, 12, 15, 18.</p>
+    <p><b>Blatt 13-2, Profi-Aufgabe:</b> Das Riesen-Känguru springt hier 10 weit: 40, 50, 60. Das Zauber-Känguru springt 3 weit: 12, 15, 18. Nach 10 Sprüngen zu je 10 landet man auf der 100.</p>
     <p><b>Spielplan 13-3, Knobel-Ecke:</b> Mit 3 und 5 gibt es zwei Möglichkeiten: 3 Sprünge, und die 5 heißt 10 weit (3 · 10 = 30), oder 5 Sprünge, und die 3 heißt 5 weit (5 · 5 = 25).</p>
   </div>
   </div>
@@ -351,14 +351,14 @@
   <div class="aufg">
     <p class="anw">Zeichne 3 Sprünge zu je 4. Das Känguru startet auf der 0.</p>
     <div class="e13-strahl e13-selbst"><m-zahlenstrahl von="0" bis="20" breite="176" markiert="0" spruenge="0>4>8>12"></m-zahlenstrahl></div>
-    <div class="e13-unter"><m-aufgabe>4 + 4 + 4 = _</m-aufgabe><m-aufgabe>3 · 4 = _</m-aufgabe></div>
+    <div class="e13-unter e13-luft"><m-aufgabe>4 + 4 + 4 = _</m-aufgabe><m-aufgabe>3 · 4 = _</m-aufgabe></div>
   </div>
   <div class="profi">
-    <p>Jetzt springt das Riesen-Känguru 10 weit und das <span class="e13-nw">Zauber-Känguru</span> 3 weit. Wie geht es weiter?</p>
+    <p>Wie springen die Kängurus weiter?</p>
     <div class="e13-profi-raster">
-      <span>10 weit:</span>
+      <span>Riesen-Känguru:</span>
       <div class="e13-folge"><span>10,</span><span>20,</span><span>30,</span><m-feld l="40"></m-feld><m-feld l="50"></m-feld><m-feld l="60"></m-feld><span class="e13-k">…</span></div>
-      <span>3 weit:</span>
+      <span>Zauber-Känguru:</span>
       <div class="e13-folge"><span>3,</span><span>6,</span><span>9,</span><m-feld l="12"></m-feld><m-feld l="15"></m-feld><m-feld l="18"></m-feld></div>
     </div>
     <div class="e13-profi-zeile"><span>10 Sprünge zu je 10:</span><m-aufgabe>10 · 10 = _</m-aufgabe></div>
@@ -376,7 +376,8 @@
       <li>Ein Würfel zählt die Sprünge. Der andere sagt, wie weit (schau rechts). Du suchst aus!</li>
       <li>Rechne laut: „3 Sprünge zu je 5: 5, 10, 15. 3 mal 5 ist 15.“</li>
       <li>Leg eine Kugel auf dein Ergebnis. Kein Feld frei? Pech!</li>
-      <li>3 Kugeln in einer Reihe, auch schräg? Gewonnen!</li>
+      <li>3 Kugeln nebeneinander, untereinander oder schräg? Gewonnen!</li>
+      <li>3-mal Pech hintereinander? Wer mehr Kugeln hat, gewinnt.</li>
     </ol>
   </div>
   <div class="e13-spiel">
