@@ -10,9 +10,27 @@
     "einheiten/03-doppelt-und-halb.html",
     "einheiten/04-ueber-die-zehn-plus.html",
     "einheiten/05-zurueck-ueber-die-zehn-minus.html",
+    "einheiten/06-zahlenfamilien-detektiv.html",
+    "einheiten/07-buendeln.html",
+    "einheiten/08-hundertertafel.html",
+    "einheiten/09-grosse-spruenge.html",
+    "einheiten/10-ueber-die-zehner.html",
+    "rahmen/50-urkunde-1.html",
+    "einheiten/11-untereinander-plus.html",
+    "einheiten/12-untereinander-minus.html",
+    "einheiten/13-huepfen-in-spruengen.html",
+    "einheiten/14-punktefelder-malreihen.html",
+    "einheiten/15-gerecht-teilen.html",
+    "einheiten/16-zahlenmauern-rechendreiecke.html",
+    "einheiten/17-magische-quadrate.html",
+    "einheiten/18-formen-tangram.html",
+    "einheiten/19-zaubertricks.html",
+    "einheiten/20-rechen-fest.html",
+    "rahmen/51-urkunde-2.html",
     "rahmen/90-rueckmeldebogen.html"
   ],
   "extras": [
-    "einheiten/00-muster.html"
+    "einheiten/00-muster.html",
+    "einheiten/99-muster-neu.html"
   ]
 }

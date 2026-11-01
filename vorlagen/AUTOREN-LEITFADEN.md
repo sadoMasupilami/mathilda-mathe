@@ -147,6 +147,80 @@ Zahlenstrahl: `breite` (mm, Standard 170), `beschriftung` = `alle | fuenfer | ze
 ```
 Karten: Schnittlinien gestrichelt, Schere oben links. `.gross` (40 pt) und `.mittel` (24 pt) für Kartentext. Bilder (Strichzeichnungen zum Anmalen): stern, zauberstab, krone, mond, edelstein, trank, zauberhut, schloss, drache, einhorn, fee, schere, gluehbirne, eule, wuerfel, rakete, karten, ei, kreide, haken, ziel, achtung, feder, huepfen, lupe, medaille (nur für Urkunden; die Krone bedeutet immer „Profi-Aufgabe“).
 
+## 4b. Bausteine ab Einheit 6
+
+Muster mit allen neuen Bausteinen: `src/einheiten/99-muster-neu.html` (`./baue.sh --nur 99 --png`). Alle Lücken werden geprüft und in der Lösungsansicht rot gezeigt.
+
+### Hundertertafel und Ausschnitte
+```html
+<m-hundertertafel zelle="10"></m-hundertertafel>                       <!-- 1–100, 10 · 10 cm -->
+<m-hundertertafel luecken="23,45,67"></m-hundertertafel>               <!-- Lücken, Lösung rot -->
+<m-hundertertafel zeige="1,10,55" luecken="alle"></m-hundertertafel>   <!-- fast leer: nur 1, 10, 55 stehen da -->
+<m-hundertertafel zeige="" ></m-hundertertafel>                        <!-- ganz leer (z. B. als Spielplan) -->
+<m-hundertertafel markiert="5,15,25" markiert2="50" loesung-markiert="2,4,6" loesung-markiert2="5,10"></m-hundertertafel>
+<m-hundertertafel zeilen="3-5" von="101"></m-hundertertafel>          <!-- nur Zeilen 3–5, Tafel 101–200 -->
+<m-tafelstueck form="kreuz" mitte="45"></m-tafelstueck>               <!-- kreuz | block | diagonal (3 · 3) -->
+<m-tafelstueck form="XX. ; .XX ; ..X" oben-links="34" zeige="34"></m-tafelstueck>  <!-- eigene Form -->
+```
+`markiert`/`markiert2` färben Felder hell (Akzent/Gold) und sind auf dem Blatt sichtbar, `loesung-markiert`/`loesung-markiert2` nur in der Lösung („Mal alle Zahlen mit 5 Einern an“). Bei `m-tafelstueck` sind alle Felder außer `zeige` Lücken (Standard: die Mitte bzw. das erste Feld). Ausschnitte, die über den Rand der Tafel gehen, sind Fehler. Die Tafel mit `zelle="15"` ist 15 cm breit und passt als Spielplan auf ein Blatt.
+
+### Stellenwerttafel, Zehnerstangen, Bündel, Geld
+```html
+<m-stellenwerttafel spalten="Z E" zeilen="3 4 = _ ; [5] [7] = 57 ; 2 13 = [33]"></m-stellenwerttafel>
+<m-stellenwerttafel spalten="H Z E" zelle="13" zeilen="1 2 5 ; [2] [0] [4] = 204 ; . _ 0 = 60"></m-stellenwerttafel>
+<m-zehnerstangen z="3" e="4"></m-zehnerstangen>                      <!-- Zehnerstangen und Einerwürfel -->
+<m-zehnerstangen h="1" z="2" e="7" gr="3"></m-zehnerstangen>         <!-- mit Hunderterplatte -->
+<m-zehnerstangen z="2" e="13" art="buendel"></m-zehnerstangen>       <!-- Zahnstocher-Bündel mit Gummiringerl -->
+<m-geld werte="10 10 5 2 1 50c 20c"></m-geld>                        <!-- Scheine 5–500 €, Münzen 1 €, 2 €, 1c–50c -->
+```
+Stellenwerttafel: je Zeile ein Eintrag pro Spalte, dann optional `= Zahl`. `[5]` ist eine Lücke mit Lösung 5, `_` wird ausgerechnet (nur eines pro Zeile), `.` ist ein leeres Feld. Einträge über 9 sind erlaubt (ungebündelt: 2 Z 13 E = 33). `spalten` aus T, H, Z, E. Geld ist absichtlich schematisch (Rechteck bzw. Kreis mit Betrag), keine echten Banknoten.
+
+### Untereinander rechnen (österreichisch)
+```html
+<m-schriftlich>47 + 35</m-schriftlich>                         <!-- Ergebnis als Lücke, Übertrag nur in der Lösung -->
+<m-schriftlich luecken="keine" uebertrag="zeigen">47 + 35</m-schriftlich>  <!-- vorgerechnetes Beispiel -->
+<m-schriftlich>63 − 27</m-schriftlich>                         <!-- Ergänzungsverfahren, „1 weiter“ -->
+<m-schriftlich>28 + 37 + 16</m-schriftlich>                    <!-- bis zu 4 Zahlen -->
+<m-schriftlich luecken="frei">86 − 42</m-schriftlich>          <!-- Ergebnis ohne Kästchenrahmen -->
+<m-schriftlich uebertrag="nein">4[7] + 3[5] = 82</m-schriftlich> <!-- Ziffernrätsel: [7] ist eine Lücke -->
+<m-schriftlich zelle="7" luecken="keine" uebertrag="zeigen">63 − 27</m-schriftlich>  <!-- kleiner, für die Anleitung -->
+```
+Echte 1-cm-Kästchen wie im Rechenheft. Einer unter Einer, das Rechenzeichen steht links in der letzten Zeile, der Übertrag klein in der Zeile direkt über dem Strich (bei Minus: das „1 weiter“ in der nächsten Spalte). `uebertrag`: `luecke` (Standard: Mathilda schreibt ihn selbst, Lösung rot), `zeigen`, `nein`. Mit `= Ergebnis` am Ende ist das Ergebnis vorgegeben; einzelne Ziffern in `[ ]` sind dann die Lücken. Alles wird nachgerechnet, auch die Überträge. Braucht (Zahlen + 2) cm Höhe.
+
+### Mal und Geteilt
+```html
+<m-punktefeld reihen="3" spalten="4"></m-punktefeld>                          <!-- 3 · 4: 3 Reihen mit je 4 Punkten -->
+<m-punktefeld reihen="7" spalten="4" teile-reihen="5" farbe-reihen="5"></m-punktefeld>  <!-- 7 · 4 = 5 · 4 + 2 · 4 -->
+<m-punktefeld reihen="10" spalten="10" fuenfer abstand="3"></m-punktefeld>    <!-- Hunderterfeld mit Fünfer-Lücken -->
+<m-familie oben="13" links="5" rechts="_"></m-familie>                        <!-- Aufgabenfamilie: oben = links + rechts -->
+<m-familie oben="_" links="3" rechts="4" op="·"></m-familie>                  <!-- Malfamilie: oben = links · rechts -->
+```
+Punktefeld: `abstand` in mm (Standard 7), `teile-reihen`/`teile-spalten` zeichnen eine gestrichelte Trennlinie, `farbe-reihen`/`farbe-spalten` färben ab dieser Reihe/Spalte rot, `symbol` wie bei `m-punkte`, `rahmen`. **Vereinbarung für alle Einheiten:** 3 · 4 heißt „3-mal die 4“ = 4 + 4 + 4, im Punktefeld 3 Reihen mit je 4 Punkten, am Zahlenstrahl 3 Sprünge zu je 4.
+
+### Knobeln: Rechendreieck, magisches Quadrat
+```html
+<m-rechendreieck innen="3 _ 5" aussen="7 _ _"></m-rechendreieck>    <!-- innen: oben links rechts; außen: links rechts unten -->
+<m-rechendreieck innen="_ _ _" aussen="9 7 10"></m-rechendreieck>   <!-- nur Außenzahlen: Profi -->
+<m-magisch zellen="2 _ 6 ; _ 5 _ ; 4 3 8" verschieden></m-magisch>  <!-- Summe aus einer vollen Reihe oder summe="15" -->
+```
+Rechendreieck: Jede Außenzahl ist die Summe der zwei Innenzahlen an ihrer Seite (links = oben + links, rechts = oben + rechts, unten = links + rechts). `gr` ≥ 54 (Standard 64). Mehrdeutige oder unlösbare Dreiecke und Quadrate sind Fehler. Magisches Quadrat: Zeilen, Spalten und Diagonalen (`diagonalen="nein"` schaltet sie ab) haben dieselbe Summe; `verschieden` prüft, dass keine Zahl doppelt vorkommt; `zelle` in mm (Standard 18). Nur Lücken, die sich Schritt für Schritt aus einer Reihe mit genau einer Lücke ergeben, werden automatisch gelöst, sonst `[Lösung]` angeben.
+
+### Geometrie und Zaubertricks
+```html
+<m-tangram gr="150" nummern farbig></m-tangram>            <!-- Bastelvorlage: 7 Teile aus einem Quadrat -->
+<m-wuerfelnetz gr="35"></m-wuerfelnetz>                   <!-- Würfel zum Basteln mit Klebelaschen -->
+<m-wuerfelnetz gr="35" augen="1 0 0 0 3 0"></m-wuerfelnetz> <!-- oben vorne unten hinten links rechts, 0 = leer -->
+<m-wuerfelnetz gr="35" leer></m-wuerfelnetz>
+<m-zauberkarte wert="4" bis="31" spalten="4"></m-zauberkarte> <!-- Gedankenlese-Karte: alle Zahlen mit der 4 drin -->
+```
+Tangram-Teile (Quadrat 4 · 4 Einheiten): 1 und 2 große Dreiecke, 3 und 5 kleine Dreiecke, 4 Quadrat, 6 mittleres Dreieck, 7 Parallelogramm. Die Eckpunkte stehen in `window.__tangram`, damit man Legefiguren aus echten Teilen zusammensetzen kann. Volle Würfelnetze werden geprüft (Gegenseiten ergeben 7). Zauberkarten: `wert` 1, 2, 4, 8, 16 (32, 64); die erste Zahl jeder Karte ist fett, sie ist der „Schlüssel“ des Tricks.
+
+### Urkunden
+Die zwei Urkunden sind eigene Seiten in `src/rahmen/` (`id="urkunde-1"` nach Einheit 10, `id="urkunde-2"` nach Einheit 20) und kommen auch in die Kopiervorlagen. Verweis aus der Anleitung: `<a class="blattref" href="#urkunde-1">Urkunde 1</a>`. Für den Teil-Build dann `./baue.sh --nur 10,urkunde --png`.
+
+### Was der Build bei Geteilt prüft
+Rechnungen mit Rest („13 : 3 = 4 Rest 1“) erkennt die Textprüfung als falsch, weil 13 : 3 nicht aufgeht. Solche Stellen in `<span class="keine-pruefung">…</span>` setzen und selbst nachrechnen.
+
 ## 5. Qualität vor dem Abgeben
 
 1. `./baue.sh --nur NN --png --dpi 110` ohne ❌ und ohne ⚠️.

@@ -332,6 +332,17 @@ m-zahlenmauer, m-zahlenstrahl, m-rechenstrich, m-kaestchen, m-bild, m-stern, m-s
   vertical-align: middle;
   line-height: 0;
 }
+m-hundertertafel, m-tafelstueck, m-stellenwerttafel, m-schriftlich, m-punktefeld, m-rechendreieck, m-magisch,
+m-zehnerstangen, m-geld, m-tangram, m-familie, m-wuerfelnetz {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 0;
+}
+m-zauberkarte { display: inline-block; vertical-align: middle; }
+.zk { display: inline-grid; gap: 0.6mm 3.5mm; font-family: var(--kind); line-height: 1.15; text-align: right; font-variant-numeric: tabular-nums; }
+.zk .zk-erste { font-weight: 700; color: var(--akzent); }
+.geld-reihe { display: inline-flex; flex-wrap: wrap; gap: 2mm; align-items: center; line-height: 0; }
+.geld-reihe svg { display: block; }
 m-karten, m-loesungen, m-inhalt { display: block; }
 .komp svg { display: block; overflow: visible; }
 svg .p1 { fill: var(--punkt); }
@@ -596,3 +607,38 @@ table.tab th { background: var(--akzent-hell); font-weight: 800; }
 .inhalt-liste li .punkte { flex: 1; border-bottom: 0.35mm dotted var(--linie); transform: translateY(-1mm); }
 .inhalt-liste a { text-decoration: none; }
 .seitenzahl { min-width: 7mm; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------------------------------------------------------------------
+   Urkunden (nach Einheit 10 und 20, in Buch und Kopiervorlagen)
+   --------------------------------------------------------------------- */
+.urkunde { padding: 11mm 12mm 10mm 12mm; font-family: var(--kind); }
+.urkunde .urk-rahmen {
+  flex: 1;
+  border: 2.2mm double var(--gold);
+  outline: 0.6mm solid var(--akzent);
+  outline-offset: 1.6mm;
+  border-radius: 6mm;
+  margin: 2mm;
+  padding: 8mm 12mm 7mm 12mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+.urkunde .urk-ecke { position: absolute; line-height: 0; }
+.urkunde .urk-ecke.lo { left: 5mm; top: 5mm; }
+.urkunde .urk-ecke.ro { right: 5mm; top: 5mm; }
+.urkunde .urk-ecke.lu { left: 5mm; bottom: 5mm; }
+.urkunde .urk-ecke.ru { right: 5mm; bottom: 5mm; }
+.urkunde .urk-titel { font-family: var(--text); font-weight: 1000; font-size: 50pt; line-height: 1; color: var(--akzent); letter-spacing: 0.04em; margin: 3mm 0 1mm 0; }
+.urkunde .urk-unter { font-family: var(--text); font-weight: 900; font-size: 20pt; color: var(--tinte); margin-bottom: 4mm; }
+.urkunde .urk-fuer { font-size: 16pt; margin: 2mm 0 0 0; }
+.urkunde .urk-name { font-size: 40pt; font-weight: 700; line-height: 1.1; margin: 0 0 1mm 0; padding: 0 12mm 1mm 12mm; border-bottom: 0.6mm solid var(--gold); }
+.urkunde .urk-text { font-size: 17pt; line-height: 1.35; margin: 4mm 0 3mm 0; }
+.urkunde .urk-liste { list-style: none; padding: 0; margin: 0 0 3mm 0; text-align: left; font-size: 16pt; line-height: 1.25; }
+.urkunde .urk-liste li { display: flex; align-items: center; gap: 3mm; margin-bottom: 2.4mm; }
+.urkunde .urk-liste li svg { flex: none; display: block; }
+.urkunde .urk-unterschrift { margin-top: auto; width: 100%; display: flex; justify-content: space-between; gap: 14mm; font-size: 14pt; padding: 0 24mm; }
+.urkunde .urk-unterschrift > div { flex: 1; border-top: 0.4mm solid var(--tinte); padding-top: 1.5mm; text-align: center; }
+.urkunde > .fuss { padding-top: 1.5mm; }

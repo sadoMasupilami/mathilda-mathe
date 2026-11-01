@@ -794,6 +794,649 @@
     el.classList.add('komp-karten');
   }
 
+  // =====================================================================
+  // Bausteine ab Einheit 6 (Zahlenraum 100, untereinander rechnen, Mal,
+  // Knobeln, Geometrie, Zaubertricks)
+  // =====================================================================
+  function zahlenListe(s) { return liste(s).map(zahl); }
+  function txt(x, y, s, gr, cls, extra) {
+    return '<text class="' + (cls || 'zahl') + '" x="' + r2(x) + '" y="' + r2(y) + '" font-size="' + r2(gr) + '"' + (extra || '') + '>' + esc(s) + '</text>';
+  }
+  function rectSVG(x, y, w, h, cls, extra) {
+    return '<rect class="' + cls + '" x="' + r2(x) + '" y="' + r2(y) + '" width="' + r2(w) + '" height="' + r2(h) + '"' + (extra || '') + '/>';
+  }
+  function linie(x1, y1, x2, y2, extra) {
+    return '<line x1="' + r2(x1) + '" y1="' + r2(y1) + '" x2="' + r2(x2) + '" y2="' + r2(y2) + '"' + (extra || ' stroke="var(--tinte)" stroke-width="0.35"') + '/>';
+  }
+  const LSG_ROT = '#f9c9d6', LSG_GOLD = '#ffe08a';
+
+  // ---------------------------------------------------------------------
+  // <m-hundertertafel zelle="10" von="1" zeilen="1-10" luecken="23,45" zeige="1,10"
+  //   markiert="…" markiert2="…" loesung-markiert="…" loesung-markiert2="…">
+  // ---------------------------------------------------------------------
+  function mHundertertafel(el) {
+    const z = parseFloat(attr(el, 'zelle', '10'));
+    const von = zahl(attr(el, 'von', '1'));
+    if (isNaN(von) || von < 0) return fehler(el, 'von muss eine Zahl ≥ 0 sein');
+    const bis = von + 99;
+    const zr = attr(el, 'zeilen', '1-10').split('-').map(zahl);
+    const z1 = zr[0], z2 = zr.length > 1 ? zr[1] : zr[0];
+    if (isNaN(z1) || isNaN(z2) || z1 < 1 || z2 > 10 || z1 > z2) return fehler(el, 'zeilen="1-10" (z. B. "3-5")');
+    const lkRoh = attr(el, 'luecken', '').trim();
+    const zeigeRoh = el.getAttribute('zeige');
+    const zeigeL = zeigeRoh === null ? null : zahlenListe(zeigeRoh);
+    const lkAlle = lkRoh === 'alle';
+    const lk = lkAlle ? [] : zahlenListe(lkRoh);
+    const m1 = zahlenListe(attr(el, 'markiert', '')), m2 = zahlenListe(attr(el, 'markiert2', ''));
+    const l1 = zahlenListe(attr(el, 'loesung-markiert', '')), l2 = zahlenListe(attr(el, 'loesung-markiert2', ''));
+    for (const v of [].concat(lk, zeigeL || [], m1, m2, l1, l2)) {
+      if (isNaN(v) || v < von || v > bis) return fehler(el, 'Zahl ' + v + ' liegt nicht auf der Tafel (' + von + '–' + bis + ')');
+    }
+    if (lkAlle && zeigeL === null) return fehler(el, 'luecken="alle" braucht zeige="…" (welche Zahlen stehen da?)');
+    const reihen = z2 - z1 + 1;
+    const W = 10 * z, H = reihen * z;
+    const gr = z * (String(bis).length >= 3 ? 0.36 : 0.44);
+    let inner = rectSVG(0.3, 0.3, W, H, 'rahmen');
+    let texte = '';
+    for (let r = z1 - 1; r < z2; r++) {
+      for (let c = 0; c < 10; c++) {
+        const v = von + r * 10 + c;
+        const x = 0.3 + c * z, y = 0.3 + (r - z1 + 1) * z;
+        if (m1.includes(v)) inner += rectSVG(x, y, z, z, 'hell-f');
+        if (m2.includes(v)) inner += rectSVG(x, y, z, z, 'gold-hell-f');
+        if (l1.includes(v)) inner += rectSVG(x, y, z, z, 'lsg', ' fill="' + LSG_ROT + '"');
+        if (l2.includes(v)) inner += rectSVG(x, y, z, z, 'lsg', ' fill="' + LSG_GOLD + '"');
+        const gezeigt = zeigeL === null ? !lk.includes(v) : zeigeL.includes(v);
+        const luecke = !gezeigt && (lkAlle || lk.includes(v));
+        if (gezeigt || luecke) {
+          texte += txt(x + z / 2, y + z / 2 + 0.2, String(v), gr, luecke ? 'zahl lsg' : 'zahl',
+            (m1.includes(v) || m2.includes(v)) && !luecke ? ' font-weight="700"' : '');
+        }
+      }
+    }
+    for (let c = 1; c < 10; c++) inner += linie(0.3 + c * z, 0.3, 0.3 + c * z, 0.3 + H, c === 5 ? ' stroke="var(--tinte)" stroke-width="0.6"' : undefined);
+    for (let r = z1; r < z2; r++) inner += linie(0.3, 0.3 + (r - z1 + 1) * z, 0.3 + W, 0.3 + (r - z1 + 1) * z, r === 5 ? ' stroke="var(--tinte)" stroke-width="0.6"' : undefined);
+    inner += rectSVG(0.3, 0.3, W, H, 'gitter', ' stroke-width="0.6"');
+    el.innerHTML = svg(r2(W + 0.6), r2(H + 0.6), inner + texte);
+    el.classList.add('komp');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-tafelstueck form="kreuz|block|diagonal" mitte="45" [zeige="45|alle|…"] [von="1"] [zelle="12"]>
+  // <m-tafelstueck form="XX. ; .XX" oben-links="34" zeige="34">   (X = Feld, . = kein Feld)
+  // Ausschnitt aus der Hundertertafel, alle Felder außer „zeige“ sind Lücken.
+  // ---------------------------------------------------------------------
+  const TAFEL_FORMEN = { kreuz: ['.X.', 'XXX', '.X.'], block: ['XXX', 'XXX', 'XXX'], diagonal: ['X.X', '.X.', 'X.X'] };
+  function mTafelstueck(el) {
+    const z = parseFloat(attr(el, 'zelle', '12'));
+    const von = zahl(attr(el, 'von', '1'));
+    const fName = attr(el, 'form', 'kreuz').trim();
+    let form, ol;
+    if (TAFEL_FORMEN[fName]) {
+      form = TAFEL_FORMEN[fName];
+      const mitte = zahl(attr(el, 'mitte', ''));
+      if (isNaN(mitte)) return fehler(el, 'mitte="45" fehlt');
+      ol = mitte - 11;
+    } else {
+      form = fName.split(/\s*[;\/]\s*/).filter(Boolean);
+      ol = zahl(attr(el, 'oben-links', ''));
+      if (isNaN(ol)) return fehler(el, 'oben-links="34" fehlt (Zahl links oben im Ausschnitt)');
+      if (!form.length || form.some((f) => !/^[X.]+$/.test(f))) return fehler(el, 'form="XX. ; .XX" (X = Feld, . = leer) oder kreuz/block/diagonal');
+    }
+    if (isNaN(von)) return fehler(el, 'von');
+    const spalte = (n) => (((n - von) % 10) + 10) % 10;
+    const breite = Math.max.apply(null, form.map((f) => f.length));
+    if (spalte(ol) + breite > 10 || ol < von - 10) return fehler(el, 'Ausschnitt ragt über den Rand der Hundertertafel');
+    const zellen = [];
+    form.forEach((zeile, r) => zeile.split('').forEach((ch, c) => {
+      if (ch === 'X') zellen.push({ r, c, v: ol + r * 10 + c });
+    }));
+    if (!zellen.length) return fehler(el, 'Ausschnitt ohne Felder');
+    if (zellen.some((q) => q.v < von || q.v > von + 99)) return fehler(el, 'Ausschnitt ragt über den Rand der Hundertertafel');
+    const zr = attr(el, 'zeige', TAFEL_FORMEN[fName] ? String(ol + 11) : String(zellen[0].v)).trim();
+    const zeige = zr === 'alle' ? zellen.map((q) => q.v) : zahlenListe(zr);
+    if (zeige.some((v) => !zellen.some((q) => q.v === v))) return fehler(el, 'zeige: Zahl liegt nicht im Ausschnitt');
+    const gr = z * (String(von + 99).length >= 3 ? 0.36 : 0.44);
+    let inner = '';
+    for (const q of zellen) {
+      const x = 0.4 + q.c * z, y = 0.4 + q.r * z;
+      const luecke = !zeige.includes(q.v);
+      inner += rectSVG(x, y, z, z, 'rahmen') + txt(x + z / 2, y + z / 2 + 0.2, String(q.v), gr, luecke ? 'zahl lsg' : 'zahl');
+    }
+    el.innerHTML = svg(r2(breite * z + 0.8), r2(form.length * z + 0.8), inner);
+    el.classList.add('komp', 'geprueft');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-stellenwerttafel spalten="H Z E" zeilen="3 4 = _ ; [5] [7] = 57 ; 2 13 = [33] ; . 4 = 4">
+  //   Zahl, [Lösung] = Lücke, _ = Lücke (wird ausgerechnet), . = leeres Feld
+  // ---------------------------------------------------------------------
+  const STELLEN = { T: 1000, H: 100, Z: 10, E: 1 };
+  function mStellenwerttafel(el) {
+    const sp = liste(attr(el, 'spalten', 'Z E'));
+    if (!sp.length || sp.some((s) => !STELLEN[s])) return fehler(el, 'spalten="H Z E" (aus T H Z E)');
+    const zeilenRoh = attr(el, 'zeilen', '').split(';').map((s) => s.trim()).filter(Boolean);
+    if (!zeilenRoh.length) return fehler(el, 'zeilen="3 4 = _ ; …" fehlt');
+    const zeilen = [];
+    for (const zr of zeilenRoh) {
+      const teile = zr.split('=');
+      if (teile.length > 2) return fehler(el, 'Höchstens ein = pro Zeile: ' + zr);
+      const zellen = teile[0].trim().split(/\s+/).map((s) => (s === '.' ? { leer: true, wert: 0 } : zelle(s)));
+      if (zellen.length !== sp.length) return fehler(el, 'Jede Zeile braucht ' + sp.length + ' Einträge: ' + zr);
+      const ges = teile.length === 2 ? zelle(teile[1]) : null;
+      const autos = zellen.filter((c) => c.auto).length + (ges && ges.auto ? 1 : 0);
+      if (autos > 1) return fehler(el, 'Höchstens ein „_“ pro Zeile: ' + zr);
+      const summe = () => zellen.reduce((a, c, i) => a + c.wert * STELLEN[sp[i]], 0);
+      if (autos === 1) {
+        if (ges && ges.auto) ges.wert = summe();
+        else {
+          if (!ges) return fehler(el, '„_“ in der Tafel geht nur mit „= Zahl“');
+          const i = zellen.findIndex((c) => c.auto);
+          zellen[i].wert = 0;
+          const rest = ges.wert - summe();
+          if (rest < 0 || rest % STELLEN[sp[i]]) return fehler(el, 'Lücke geht nicht auf: ' + zr);
+          zellen[i].wert = rest / STELLEN[sp[i]];
+        }
+      }
+      if (zellen.some((c) => isNaN(c.wert) || c.wert < 0) || (ges && (isNaN(ges.wert) || ges.wert < 0))) return fehler(el, 'Zahl fehlt oder negativ: ' + zr);
+      if (ges && summe() !== ges.wert) return fehler(el, 'FALSCH: ' + zr + ' (Tafel ergibt ' + summe() + ')');
+      zeilen.push({ zellen, ges });
+    }
+    const w = parseFloat(attr(el, 'zelle', '15')), hk = w * 0.62, hz = w * 0.8;
+    const gr = hz * 0.6;
+    const mitGes = zeilen.some((z) => z.ges);
+    const gesStellen = Math.max(2, ...zeilen.filter((z) => z.ges).map((z) => String(z.ges.wert).length));
+    const tafelW = sp.length * w;
+    const gesX = tafelW + 4;
+    const W = tafelW + (mitGes ? 4 + 8 + gesStellen * 10 + 1 : 0);
+    const H = hk + zeilen.length * hz;
+    let inner = rectSVG(0.4, 0.4, tafelW, hk, 'hell-f') + rectSVG(0.4, 0.4, tafelW, H, 'gitter', ' stroke-width="0.6"');
+    sp.forEach((s, i) => {
+      inner += txt(0.4 + i * w + w / 2, 0.4 + hk / 2 + 0.2, s, hk * 0.62, 'zahl', ' font-weight="700"');
+      if (i) inner += linie(0.4 + i * w, 0.4, 0.4 + i * w, 0.4 + H, ' stroke="var(--tinte)" stroke-width="0.5"');
+    });
+    zeilen.forEach((z, r) => {
+      const y = 0.4 + hk + r * hz;
+      inner += linie(0.4, y, 0.4 + tafelW, y, r === 0 ? ' stroke="var(--tinte)" stroke-width="0.6"' : ' stroke="var(--tinte)" stroke-width="0.35"');
+      z.zellen.forEach((c, i) => {
+        const x = 0.4 + i * w;
+        if (c.luecke) inner += rectSVG(x + w * 0.14, y + hz * 0.1, w * 0.72, hz * 0.8, 'rahmen', ' rx="1"');
+        if (!c.leer) inner += txt(x + w / 2, y + hz / 2 + 0.2, fmt(c.wert), gr, c.luecke ? 'zahl lsg' : 'zahl');
+      });
+      if (z.ges) {
+        inner += txt(gesX + 3, y + hz / 2 + 0.2, '=', gr, 'zahl');
+        const s = String(z.ges.wert), bx = gesX + 8, bw = gesStellen * 10;
+        if (z.ges.luecke) {
+          inner += rectSVG(bx, y + (hz - 10) / 2, bw, 10, 'rahmen', ' rx="1"');
+          for (let k = 1; k < gesStellen; k++) inner += linie(bx + k * 10, y + (hz - 10) / 2, bx + k * 10, y + (hz + 10) / 2, ' stroke="var(--kaestchen)" stroke-width="0.3"');
+        }
+        if (z.ges.luecke) {
+          s.split('').forEach((ch, k) => {
+            inner += txt(bx + bw - (s.length - k) * 10 + 5, y + hz / 2 + 0.2, ch, gr, 'zahl lsg');
+          });
+        } else inner += txt(bx + s.length * 5, y + hz / 2 + 0.2, s, gr, 'zahl');
+      }
+    });
+    el.innerHTML = svg(r2(W + 0.8), r2(H + 0.8), inner);
+    el.classList.add('komp', 'geprueft');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-schriftlich [luecken="ergebnis|keine|frei"] [uebertrag="luecke|zeigen|nein"] [zelle="10"]>47 + 35</m-schriftlich>
+  // Untereinander rechnen (österreichisch). Plus mit 2–4 Zahlen, Minus mit dem
+  // Ergänzungsverfahren („1 weiter“). Einzelne Ziffern als [7] werden Lücken.
+  // Mit „= 82“ am Ende wird das Ergebnis vorgegeben (Ziffern in [ ] sind Lücken).
+  // ---------------------------------------------------------------------
+  function ziffern(s) {
+    const ds = [];
+    const re = /\[(\d)\]|(\d)/g;
+    let m, pos = 0;
+    while ((m = re.exec(s))) {
+      if (m.index !== pos) return null;
+      pos = re.lastIndex;
+      ds.push(m[1] !== undefined ? { d: +m[1], luecke: true } : { d: +m[2] });
+    }
+    if (pos !== s.length || !ds.length) return null;
+    return ds;
+  }
+  const zifWert = (ds) => ds.reduce((a, x) => a * 10 + x.d, 0);
+  function mSchriftlich(el) {
+    const src = el.getAttribute('data-src') || el.textContent.trim().replace(/\s+/g, ' ');
+    el.setAttribute('data-src', src);
+    const tok = src.split(' ');
+    const zahlen = [], ops = [];
+    let ergTok = null;
+    for (let i = 0; i < tok.length; i++) {
+      const t = tok[i];
+      if (i % 2 === 0) {
+        const ds = ziffern(t);
+        if (!ds) return fehler(el, 'Unbekannte Zahl „' + t + '“ (Leerzeichen zwischen allen Teilen!)');
+        if (ergTok === '=') { ergTok = ds; if (i !== tok.length - 1) return fehler(el, 'Nach dem Ergebnis darf nichts mehr kommen'); } else zahlen.push(ds);
+      } else {
+        if (t === '=') { if (ergTok !== null) return fehler(el, 'Nur ein ='); ergTok = '='; } else if (OPS[t] === '+' || OPS[t] === MINUS) ops.push(OPS[t]);
+        else return fehler(el, 'Untereinander nur mit + oder − (nicht „' + t + '“)');
+      }
+    }
+    if (ergTok === '=') return fehler(el, 'Nach = fehlt das Ergebnis');
+    if (zahlen.length < 2) return fehler(el, 'Mindestens zwei Zahlen');
+    const plus = ops[0] === '+';
+    if (ops.some((o) => o !== ops[0])) return fehler(el, 'Nur Plus oder nur Minus');
+    if (!plus && zahlen.length !== 2) return fehler(el, 'Minus untereinander nur mit zwei Zahlen');
+    if (zahlen.length > 4) return fehler(el, 'Höchstens 4 Zahlen');
+    if (zahlen.some((ds) => ds.length > 1 && ds[0].d === 0)) return fehler(el, 'Zahl beginnt mit 0');
+    const werte = zahlen.map(zifWert);
+    const soll = plus ? werte.reduce((a, b) => a + b, 0) : werte[0] - werte[1];
+    if (soll < 0) return fehler(el, 'Ergebnis wäre negativ');
+    let erg;
+    const lk = attr(el, 'luecken', 'ergebnis');
+    if (!/^(ergebnis|keine|frei)$/.test(lk)) return fehler(el, 'luecken= ergebnis|keine|frei');
+    if (ergTok) {
+      erg = ergTok;
+      if (zifWert(erg) !== soll) return fehler(el, 'FALSCH: Ergebnis ' + zifWert(erg) + ', richtig ist ' + soll);
+      if (String(soll) !== erg.map((x) => x.d).join('')) return fehler(el, 'Ergebnis ohne führende Nullen schreiben');
+    } else {
+      erg = String(soll).split('').map((ch) => ({ d: +ch, luecke: lk !== 'keine' }));
+    }
+    // Spalten von rechts rechnen, Überträge bestimmen
+    const L0 = Math.max(...zahlen.map((d) => d.length), erg.length);
+    const zif = (ds, c) => (c < ds.length ? ds[ds.length - 1 - c].d : 0);
+    const uebertrag = [0];
+    const ergZ = [];
+    for (let c = 0; c < L0 + 2; c++) {
+      let e;
+      if (plus) {
+        const s = zahlen.reduce((a, ds) => a + zif(ds, c), 0) + uebertrag[c];
+        e = s % 10; uebertrag[c + 1] = Math.floor(s / 10);
+      } else {
+        const oben = zif(zahlen[0], c), unten = zif(zahlen[1], c) + uebertrag[c];
+        if (unten <= oben) { e = oben - unten; uebertrag[c + 1] = 0; } else { e = oben + 10 - unten; uebertrag[c + 1] = 1; }
+      }
+      ergZ.push(e);
+    }
+    const ergSpalten = String(soll).split('').reverse().map(Number);
+    for (let c = 0; c < ergSpalten.length; c++) if (ergZ[c] !== ergSpalten[c]) return fehler(el, 'Interner Rechenfehler in Spalte ' + c);
+    let hoechsteU = 0;
+    uebertrag.forEach((u, c) => { if (u && c < L0 + 1) hoechsteU = Math.max(hoechsteU, c); });
+    const L = Math.max(L0, hoechsteU + 1);
+    const nCols = L + 1;
+    const k = zahlen.length;
+    const z = parseFloat(attr(el, 'zelle', '10'));
+    const uMode = attr(el, 'uebertrag', 'luecke');
+    if (!/^(luecke|zeigen|nein)$/.test(uMode)) return fehler(el, 'uebertrag= luecke|zeigen|nein');
+    const W = nCols * z, H = (k + 2) * z;
+    const gr = z * 0.7;
+    let inner = '';
+    for (let c = 0; c <= nCols; c++) inner += '<line class="kaestchen" x1="' + r2(0.3 + c * z) + '" y1="0.3" x2="' + r2(0.3 + c * z) + '" y2="' + r2(0.3 + H) + '"/>';
+    for (let r = 0; r <= k + 2; r++) inner += '<line class="kaestchen" x1="0.3" y1="' + r2(0.3 + r * z) + '" x2="' + r2(0.3 + W) + '" y2="' + r2(0.3 + r * z) + '"/>';
+    let texte = '';
+    const zeichneZiffern = (ds, r, rahmenFrei) => {
+      ds.forEach((x, j) => {
+        const c = nCols - ds.length + j;
+        const X = 0.3 + c * z, Y = 0.3 + r * z;
+        if (x.luecke && !rahmenFrei) inner += rectSVG(X, Y, z, z, 'gitter', ' stroke-width="0.55" fill="white"');
+        texte += txt(X + z / 2, Y + z / 2 + 0.3, String(x.d), gr, x.luecke ? 'zahl lsg' : 'zahl');
+      });
+    };
+    zahlen.forEach((ds, r) => {
+      zeichneZiffern(ds, r, false);
+      if (r > 0) texte += txt(0.3 + z / 2, 0.3 + r * z + z / 2 + 0.3, ops[0], gr, 'zahl');
+    });
+    if (uMode !== 'nein') {
+      for (let c = 1; c < L + 1; c++) {
+        if (!uebertrag[c]) continue;
+        const col = nCols - 1 - c;
+        texte += txt(0.3 + col * z + z * 0.5, 0.3 + k * z + z * 0.66, String(uebertrag[c]), z * 0.42, uMode === 'luecke' ? 'zahl lsg' : 'zahl');
+      }
+    }
+    zeichneZiffern(erg, k + 1, !ergTok && lk === 'frei');
+    inner += linie(0.3, 0.3 + (k + 1) * z, 0.3 + W, 0.3 + (k + 1) * z, ' stroke="var(--tinte)" stroke-width="0.7"');
+    el.innerHTML = svg(r2(W + 0.6), r2(H + 0.6), inner + texte);
+    el.classList.add('komp', 'geprueft');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-punktefeld reihen="3" spalten="4" [abstand="7"] [fuenfer] [teile-reihen="2"] [teile-spalten="5"]
+  //   [farbe-reihen="2"] [farbe-spalten="5"] [symbol="stern"] [rahmen]>
+  // ---------------------------------------------------------------------
+  function mPunktefeld(el) {
+    const R = zahl(attr(el, 'reihen', '3')), C = zahl(attr(el, 'spalten', '4'));
+    if (isNaN(R) || isNaN(C) || R < 1 || C < 1 || R > 20 || C > 20) return fehler(el, 'reihen und spalten 1–20');
+    const d = parseFloat(attr(el, 'abstand', '7'));
+    const fuenfer = el.hasAttribute('fuenfer');
+    const gap = fuenfer ? d * 0.5 : 0;
+    const rand = d * 0.25;
+    const tr = zahl(attr(el, 'teile-reihen', '')), ts = zahl(attr(el, 'teile-spalten', ''));
+    const fr = zahl(attr(el, 'farbe-reihen', '')), fsp = zahl(attr(el, 'farbe-spalten', ''));
+    if ((!isNaN(tr) && (tr < 1 || tr >= R)) || (!isNaN(ts) && (ts < 1 || ts >= C))) return fehler(el, 'teile-reihen/teile-spalten liegt außerhalb');
+    const sym = attr(el, 'symbol', 'punkt');
+    const xv = (c) => rand + d / 2 + c * d + Math.floor(c / 5) * gap;
+    const yv = (r) => rand + d / 2 + r * d + Math.floor(r / 5) * gap;
+    const W = xv(C - 1) + d / 2 + rand, H = yv(R - 1) + d / 2 + rand;
+    let inner = el.hasAttribute('rahmen') ? rectSVG(0.3, 0.3, W - 0.6, H - 0.6, 'rahmen', ' rx="1.5"') : '';
+    for (let r = 0; r < R; r++) for (let c = 0; c < C; c++) {
+      let cls = 'p1';
+      if (!isNaN(fr) && r >= fr) cls = 'p2';
+      if (!isNaN(fsp) && c >= fsp) cls = 'p2';
+      inner += form(sym, xv(c), yv(r), d * 0.3, cls);
+    }
+    const strich = ' stroke="var(--akzent)" stroke-width="0.7" stroke-dasharray="2 1.2"';
+    if (!isNaN(tr)) { const y = (yv(tr - 1) + yv(tr)) / 2; inner += linie(0.5, y, W - 0.5, y, strich); }
+    if (!isNaN(ts)) { const x = (xv(ts - 1) + xv(ts)) / 2; inner += linie(x, 0.5, x, H - 0.5, strich); }
+    el.innerHTML = svg(r2(W), r2(H), inner);
+    el.classList.add('komp');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-rechendreieck innen="oben links rechts" aussen="links rechts unten" [gr="64"]>
+  //   Jede Außenzahl ist die Summe der zwei Innenzahlen an ihrer Seite:
+  //   linke Seite = oben + links, rechte Seite = oben + rechts, unten = links + rechts
+  // ---------------------------------------------------------------------
+  function mRechendreieck(el) {
+    const innen = liste(attr(el, 'innen', '')).map(zelle);
+    const aussen = liste(attr(el, 'aussen', '')).map(zelle);
+    if (innen.length !== 3 || aussen.length !== 3) return fehler(el, 'innen="oben links rechts" aussen="links rechts unten"');
+    const [o, l, r] = innen, [L, R, U] = aussen;
+    const tripel = [[L, o, l], [R, o, r], [U, l, r]];
+    const bek = (c) => !c.auto;
+    const setze = (c, v) => { c.wert = v; c.auto = false; c.luecke = true; };
+    const propagiere = () => {
+      let g = true;
+      while (g) {
+        g = false;
+        for (const [s, a, b] of tripel) {
+          const k = [s, a, b].filter(bek).length;
+          if (k === 2) {
+            if (!bek(s)) setze(s, a.wert + b.wert);
+            else if (!bek(a)) setze(a, s.wert - b.wert);
+            else setze(b, s.wert - a.wert);
+            g = true;
+          }
+        }
+      }
+    };
+    propagiere();
+    if ([o, l, r].every((c) => !bek(c)) && [L, R, U].every(bek)) {
+      const zo = L.wert + R.wert - U.wert, zl = L.wert + U.wert - R.wert, zr = R.wert + U.wert - L.wert;
+      if (zo % 2 || zl % 2 || zr % 2) return fehler(el, 'Rechendreieck geht nicht glatt auf (Innenzahlen wären keine ganzen Zahlen)');
+      setze(o, zo / 2); setze(l, zl / 2); setze(r, zr / 2);
+    }
+    propagiere();
+    if (innen.concat(aussen).some((c) => c.auto)) return fehler(el, 'Rechendreieck nicht eindeutig lösbar – [Lösung] angeben');
+    if (innen.concat(aussen).some((c) => isNaN(c.wert) || c.wert < 0)) return fehler(el, 'Zahl fehlt oder negativ');
+    for (const [s, a, b] of tripel) if (s.wert !== a.wert + b.wert) return fehler(el, 'FALSCH: ' + s.wert + ' ≠ ' + a.wert + ' + ' + b.wert);
+    const a = parseFloat(attr(el, 'gr', '64'));
+    if (a < 54) return fehler(el, 'Rechendreieck braucht gr ≥ 54 (sonst passen die Felder nicht hinein)');
+    const m = 15, h = a * Math.sqrt(3) / 2;
+    const top = 2;
+    const T = [m + a / 2, top], BL = [m, top + h], BR = [m + a, top + h];
+    const G = [(T[0] + BL[0] + BR[0]) / 3, (T[1] + BL[1] + BR[1]) / 3];
+    const mid = (p, q) => [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2];
+    const ML = mid(T, BL), MR = mid(T, BR), MB = mid(BL, BR);
+    let inner = '<path class="hell-f" d="M' + r2(T[0]) + ' ' + r2(T[1]) + ' L' + r2(BR[0]) + ' ' + r2(BR[1]) + ' L' + r2(BL[0]) + ' ' + r2(BL[1]) + ' Z" stroke="var(--tinte)" stroke-width="0.6" stroke-linejoin="round"/>';
+    for (const p of [ML, MR, MB]) inner += linie(G[0], G[1], p[0], p[1], ' stroke="var(--tinte)" stroke-width="0.45"');
+    const bw = 14, bh = 10.5, gr = 6.2;
+    const ecke = (p, f) => [p[0] + (G[0] - p[0]) * f, p[1] + (G[1] - p[1]) * f];
+    const pos = [ecke(T, 0.62), ecke(BL, 0.46), ecke(BR, 0.46)];
+    innen.forEach((c, i) => { inner += boxSVG(pos[i][0] - bw / 2, pos[i][1] - bh / 2, bw, bh, c, gr); });
+    const n60 = [Math.cos(Math.PI / 6), Math.sin(Math.PI / 6)];
+    const aPos = [[ML[0] - n60[0] * 11.5, ML[1] - n60[1] * 11.5], [MR[0] + n60[0] * 11.5, MR[1] - n60[1] * 11.5], [MB[0], MB[1] + 8.5]];
+    aussen.forEach((c, i) => { inner += boxSVG(aPos[i][0] - bw / 2, aPos[i][1] - bh / 2, bw, bh, c, gr); });
+    el.innerHTML = svg(r2(a + 2 * m), r2(top + h + 15), inner);
+    el.classList.add('komp', 'geprueft');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-magisch zellen="2 7 6 ; 9 5 _ ; 4 [3] 8" [summe="15"] [diagonalen="nein"] [verschieden] [zelle="18"]>
+  // ---------------------------------------------------------------------
+  function mMagisch(el) {
+    const reihen = attr(el, 'zellen', '').split(';').map((s) => s.trim()).filter(Boolean).map((s) => s.split(/\s+/).map(zelle));
+    const n = reihen.length;
+    if (n < 2 || reihen.some((r) => r.length !== n)) return fehler(el, 'zellen="a b c ; d e f ; g h i" (quadratisch)');
+    const mitDiag = attr(el, 'diagonalen', 'ja') !== 'nein';
+    const linien = [];
+    for (let i = 0; i < n; i++) { linien.push(reihen[i]); linien.push(reihen.map((r) => r[i])); }
+    if (mitDiag) { linien.push(reihen.map((r, i) => r[i])); linien.push(reihen.map((r, i) => r[n - 1 - i])); }
+    let S = el.hasAttribute('summe') ? zahl(el.getAttribute('summe')) : NaN;
+    const sum = (L) => L.reduce((a, c) => a + c.wert, 0);
+    if (isNaN(S)) {
+      const voll = linien.find((L) => L.every((c) => !c.auto));
+      if (!voll) return fehler(el, 'summe="15" angeben (keine volle Reihe)');
+      S = sum(voll);
+    }
+    let g = true;
+    while (g) {
+      g = false;
+      for (const L of linien) {
+        const offen = L.filter((c) => c.auto);
+        if (offen.length === 1) {
+          const c = offen[0];
+          c.wert = 0;
+          c.wert = S - sum(L);
+          c.auto = false; c.luecke = true; g = true;
+        }
+      }
+    }
+    if (reihen.some((r) => r.some((c) => c.auto))) return fehler(el, 'Magisches Quadrat nicht eindeutig lösbar – [Lösung] angeben');
+    if (reihen.some((r) => r.some((c) => isNaN(c.wert) || c.wert < 0))) return fehler(el, 'Zahl fehlt oder negativ');
+    for (const L of linien) if (sum(L) !== S) return fehler(el, 'FALSCH: Eine Reihe ergibt ' + sum(L) + ' statt ' + S);
+    if (el.hasAttribute('verschieden')) {
+      const alle = [].concat(...reihen).map((c) => c.wert);
+      if (new Set(alle).size !== alle.length) return fehler(el, 'Zahlen kommen doppelt vor');
+    }
+    const z = parseFloat(attr(el, 'zelle', '18')), gr = z * 0.5;
+    let inner = '';
+    inner += rectSVG(0.5, 0.5, n * z, n * z, 'rahmen');
+    for (let i = 1; i < n; i++) inner += linie(0.5 + i * z, 0.5, 0.5 + i * z, 0.5 + n * z, ' stroke="var(--tinte)" stroke-width="0.45"') + linie(0.5, 0.5 + i * z, 0.5 + n * z, 0.5 + i * z, ' stroke="var(--tinte)" stroke-width="0.45"');
+    reihen.forEach((r, i) => r.forEach((c, j) => { inner += txt(0.5 + j * z + z / 2, 0.5 + i * z + z / 2 + 0.3, fmt(c.wert), gr, c.luecke ? 'zahl lsg' : 'zahl'); }));
+    inner += rectSVG(0.5, 0.5, n * z, n * z, 'gitter', ' stroke-width="0.9"');
+    el.innerHTML = svg(r2(n * z + 1), r2(n * z + 1), inner);
+    el.classList.add('komp', 'geprueft');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-zehnerstangen h="1" z="3" e="4" [art="stangen|buendel"] [gr="4"]>
+  //   stangen: Hunderterplatte, Zehnerstange (10 Würfel), Einerwürfel
+  //   buendel: Zahnstocher-Bündel mit Gummiringerl und einzelne Zahnstocher
+  // ---------------------------------------------------------------------
+  function mZehnerstangen(el) {
+    const h = zahl(attr(el, 'h', '0')), zz = zahl(attr(el, 'z', '0')), e = zahl(attr(el, 'e', '0'));
+    const art = attr(el, 'art', 'stangen');
+    if ([h, zz, e].some((v) => isNaN(v) || v < 0) || h > 9 || zz > 30 || e > 40) return fehler(el, 'h 0–9, z 0–30, e 0–40');
+    let inner = '', W = 0, H = 0;
+    if (art === 'stangen') {
+      const u = parseFloat(attr(el, 'gr', '4'));
+      let x = 0.4;
+      const quad = (qx, qy) => rectSVG(qx, qy, u, u, 'rahmen', ' stroke-width="0.3"');
+      for (let i = 0; i < h; i++) {
+        inner += rectSVG(x, 0.4, 10 * u, 10 * u, 'hell-f', ' stroke="var(--tinte)" stroke-width="0.5"');
+        for (let k = 1; k < 10; k++) inner += linie(x + k * u, 0.4, x + k * u, 0.4 + 10 * u, ' stroke="var(--tinte)" stroke-width="0.2"') + linie(x, 0.4 + k * u, x + 10 * u, 0.4 + k * u, ' stroke="var(--tinte)" stroke-width="0.2"');
+        x += 10 * u + u;
+      }
+      for (let i = 0; i < zz; i++) {
+        inner += rectSVG(x, 0.4, u, 10 * u, 'hell-f', ' stroke="var(--tinte)" stroke-width="0.5"');
+        for (let k = 1; k < 10; k++) inner += linie(x, 0.4 + k * u, x + u, 0.4 + k * u, ' stroke="var(--tinte)" stroke-width="0.2"');
+        x += u * 1.6;
+      }
+      if (zz && e) x += u * 0.6;
+      const spalten = Math.ceil(e / 5);
+      for (let i = 0; i < e; i++) {
+        const sx = x + Math.floor(i / 5) * u * 1.5, sy = 0.4 + 10 * u - (i % 5 + 1) * u * 1.15;
+        inner += quad(sx, sy);
+      }
+      if (e) x += spalten * u * 1.5 - u * 0.5;
+      W = Math.max(x, 1) + 0.4; H = 10 * u + 0.8;
+    } else if (art === 'buendel') {
+      if (h) return fehler(el, 'Hunderter nur mit art="stangen"');
+      const len = parseFloat(attr(el, 'gr', '22'));
+      let x = 0.8;
+      const stab = (sx) => '<line x1="' + r2(sx) + '" y1="1.2" x2="' + r2(sx) + '" y2="' + r2(len) + '" stroke="#a0722a" stroke-width="0.7" stroke-linecap="round"/>' +
+        '<circle cx="' + r2(sx) + '" cy="1.2" r="0.45" fill="#a0722a"/>';
+      for (let i = 0; i < zz; i++) {
+        for (let k = 0; k < 10; k++) inner += stab(x + k * 0.8);
+        inner += rectSVG(x - 0.9, len / 2 - 1.3, 9 * 0.8 + 1.8, 2.6, '', ' rx="1.2" fill="none" stroke="var(--rot)" stroke-width="0.8"');
+        x += 9 * 0.8 + 3.6;
+      }
+      if (zz && e) x += 1.5;
+      for (let i = 0; i < e; i++) { inner += stab(x); x += (i % 5 === 4) ? 3.6 : 2.2; }
+      W = x + 0.4; H = len + 1;
+    } else return fehler(el, 'art="stangen" oder "buendel"');
+    el.innerHTML = svg(r2(W), r2(H), inner);
+    el.classList.add('komp');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-geld werte="10 10 5 2 1 50c 20c" [gr="1"]>   (Scheine und Münzen, schematisch)
+  // ---------------------------------------------------------------------
+  const SCHEINE = [5, 10, 20, 50, 100, 200, 500], MUENZEN = [1, 2], CENT = [1, 2, 5, 10, 20, 50];
+  function mGeld(el) {
+    const werte = liste(attr(el, 'werte', ''));
+    const f = parseFloat(attr(el, 'gr', '1'));
+    if (!werte.length) return fehler(el, 'werte="10 5 2 1 50c"');
+    let html = '<span class="geld-reihe">';
+    for (const w of werte) {
+      const cent = /c$/.test(w);
+      const v = zahl(w.replace(/c$/, ''));
+      if (cent ? !CENT.includes(v) : !(SCHEINE.includes(v) || MUENZEN.includes(v))) return fehler(el, 'Unbekannter Geldwert „' + w + '“');
+      if (!cent && SCHEINE.includes(v)) {
+        const bw = 30 * f, bh = 16 * f;
+        html += svg(r2(bw + 0.8), r2(bh + 0.8), rectSVG(0.4, 0.4, bw, bh, '', ' rx="' + r2(1.6 * f) + '" fill="#eef6ec" stroke="var(--tinte)" stroke-width="0.5"') +
+          rectSVG(0.4 + 1.6 * f, 0.4 + 1.6 * f, bw - 3.2 * f, bh - 3.2 * f, '', ' rx="' + r2(1 * f) + '" fill="none" stroke="var(--tinte)" stroke-width="0.25" stroke-dasharray="0.8 0.6"') +
+          txt(0.4 + bw / 2, 0.4 + bh / 2 + 0.3, v + ' €', 6.2 * f, 'zahl', ' font-weight="700"') +
+          txt(0.4 + 4.2 * f, 0.4 + 4 * f, String(v), 2.6 * f, 'zahl') + txt(0.4 + bw - 4.2 * f, 0.4 + bh - 4 * f, String(v), 2.6 * f, 'zahl'));
+      } else {
+        const r = (cent ? 4 + CENT.indexOf(v) * 0.35 : (v === 1 ? 6.4 : 7)) * f;
+        let s = '<circle cx="' + r2(r + 0.4) + '" cy="' + r2(r + 0.4) + '" r="' + r2(r) + '" fill="' + (cent ? '#fbeedd' : '#fff6d6') + '" stroke="var(--tinte)" stroke-width="0.5"/>';
+        if (!cent) s += '<circle cx="' + r2(r + 0.4) + '" cy="' + r2(r + 0.4) + '" r="' + r2(r * 0.72) + '" fill="none" stroke="var(--tinte)" stroke-width="0.3"/>';
+        if (cent) s += txt(r + 0.4, r + 0.4 - r * 0.18, String(v), r * 0.85, 'zahl', ' font-weight="700"') + txt(r + 0.4, r + 0.4 + r * 0.5, 'Cent', r * 0.36, 'zahl');
+        else s += txt(r + 0.4, r + 0.6, v + ' €', r * 0.62, 'zahl', ' font-weight="700"');
+        html += svg(r2(2 * r + 0.8), r2(2 * r + 0.8), s);
+      }
+    }
+    el.innerHTML = html + '</span>';
+    el.classList.add('komp');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-tangram gr="150" [nummern] [farbig]>   7 Teile aus einem Quadrat
+  // ---------------------------------------------------------------------
+  const TANGRAM = [
+    { n: 1, p: [[0, 0], [4, 0], [2, 2]], f: '#f1ebff' },          // großes Dreieck
+    { n: 2, p: [[0, 0], [2, 2], [0, 4]], f: '#e3f6f4' },          // großes Dreieck
+    { n: 3, p: [[4, 0], [4, 2], [3, 1]], f: '#fff0e3' },          // kleines Dreieck
+    { n: 4, p: [[2, 2], [3, 1], [4, 2], [3, 3]], f: '#fde9f4' },  // Quadrat
+    { n: 5, p: [[2, 2], [3, 3], [1, 3]], f: '#fff4cc' },          // kleines Dreieck
+    { n: 6, p: [[4, 2], [4, 4], [2, 4]], f: '#eef5ff' },          // mittleres Dreieck
+    { n: 7, p: [[0, 4], [1, 3], [3, 3], [2, 4]], f: '#eef8ee' },  // Parallelogramm
+  ];
+  window.__tangram = TANGRAM;
+  function mTangram(el) {
+    const gr = parseFloat(attr(el, 'gr', '150'));
+    const s = gr / 4;
+    const farbig = el.hasAttribute('farbig'), nr = el.hasAttribute('nummern');
+    let inner = '';
+    for (const t of TANGRAM) {
+      const pts = t.p.map(([x, y]) => r2(0.6 + x * s) + ',' + r2(0.6 + y * s)).join(' ');
+      inner += '<polygon points="' + pts + '" fill="' + (farbig ? t.f : 'white') + '" stroke="var(--tinte)" stroke-width="0.7" stroke-linejoin="round"/>';
+      if (nr) {
+        const cx = t.p.reduce((a, q) => a + q[0], 0) / t.p.length, cy = t.p.reduce((a, q) => a + q[1], 0) / t.p.length;
+        inner += txt(0.6 + cx * s, 0.6 + cy * s, String(t.n), s * 0.22, 'zahl', ' fill="var(--grau)"');
+      }
+    }
+    el.innerHTML = svg(r2(gr + 1.2), r2(gr + 1.2), inner);
+    el.classList.add('komp');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-zauberkarte wert="4" [bis="31"] [spalten="4"] [gr="15"]>
+  //   Gedankenlese-Karte: alle Zahlen bis „bis“, in denen „wert“ (1, 2, 4, 8, 16 …) steckt
+  // ---------------------------------------------------------------------
+  function mZauberkarte(el) {
+    const w = zahl(attr(el, 'wert', '1')), bis = zahl(attr(el, 'bis', '31'));
+    const sp = zahl(attr(el, 'spalten', '4'));
+    const gr = parseFloat(attr(el, 'gr', '15'));
+    if (!(w > 0 && (w & (w - 1)) === 0)) return fehler(el, 'wert muss 1, 2, 4, 8, 16, 32 sein');
+    if (isNaN(bis) || bis < w || bis > 127) return fehler(el, 'bis zwischen wert und 127');
+    const zahlen = [];
+    for (let n = 1; n <= bis; n++) if (n & w) zahlen.push(n);
+    el.innerHTML = '<span class="zk" style="grid-template-columns: repeat(' + sp + ', auto); font-size: ' + gr + 'pt">' +
+      zahlen.map((n, i) => '<span' + (i === 0 ? ' class="zk-erste"' : '') + '>' + n + '</span>').join('') + '</span>';
+    el.setAttribute('data-anzahl', zahlen.length);
+    el.classList.add('komp');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-familie oben="13" links="5" rechts="8" [op="·"] [gr="44"]>
+  //   Aufgabenfamilie als Dreieck: oben = links + rechts (oder links · rechts)
+  // ---------------------------------------------------------------------
+  function mFamilie(el) {
+    const o = zelle(attr(el, 'oben', '_')), a = zelle(attr(el, 'links', '_')), b = zelle(attr(el, 'rechts', '_'));
+    const mal = OPS[attr(el, 'op', '+')] === '·';
+    const autos = [o, a, b].filter((c) => c.auto);
+    if (autos.length > 1) return fehler(el, 'Höchstens ein „_“ – sonst [Lösung] angeben');
+    if (o.auto) o.wert = mal ? a.wert * b.wert : a.wert + b.wert;
+    if (a.auto) a.wert = mal ? (b.wert ? o.wert / b.wert : NaN) : o.wert - b.wert;
+    if (b.auto) b.wert = mal ? (a.wert ? o.wert / a.wert : NaN) : o.wert - a.wert;
+    if ([o, a, b].some((c) => isNaN(c.wert) || c.wert < 0 || c.wert % 1)) return fehler(el, 'Zahl fehlt, negativ oder nicht ganz');
+    if (o.wert !== (mal ? a.wert * b.wert : a.wert + b.wert)) return fehler(el, 'FALSCH: ' + a.wert + (mal ? ' · ' : ' + ') + b.wert + ' ≠ ' + o.wert);
+    const g = parseFloat(attr(el, 'gr', '44'));
+    const r = g * 0.17, hh = g * 0.62;
+    const P = [[g / 2, r + 0.6], [r + 0.6, r + 0.6 + hh], [g - r - 0.6, r + 0.6 + hh]];
+    let inner = '<path class="hell-f" d="M' + P.map((p) => r2(p[0]) + ' ' + r2(p[1])).join(' L') + ' Z" stroke="var(--akzent)" stroke-width="0.8" stroke-linejoin="round"/>';
+    [o, a, b].forEach((c, i) => {
+      inner += '<circle cx="' + r2(P[i][0]) + '" cy="' + r2(P[i][1]) + '" r="' + r2(r) + '" fill="white" stroke="var(--tinte)" stroke-width="0.6"/>';
+      inner += txt(P[i][0], P[i][1] + 0.3, fmt(c.wert), r * (String(c.wert).length > 2 ? 0.8 : 1.0), c.luecke ? 'zahl lsg' : 'zahl');
+    });
+    el.innerHTML = svg(r2(g), r2(2 * r + hh + 1.2), inner);
+    el.classList.add('komp', 'geprueft');
+  }
+
+  // ---------------------------------------------------------------------
+  // <m-wuerfelnetz gr="30" augen="1 2 6 5 3 4" [leer]>
+  //   Reihenfolge: oben, vorne, unten, hinten, links, rechts (0 = leeres Feld).
+  //   Volle Würfel werden geprüft: Gegenseiten ergeben 7.
+  // ---------------------------------------------------------------------
+  function mWuerfelnetz(el) {
+    const s = parseFloat(attr(el, 'gr', '30'));
+    const leer = el.hasAttribute('leer');
+    const augen = leer ? [0, 0, 0, 0, 0, 0] : liste(attr(el, 'augen', '1 2 6 5 3 4')).map(zahl);
+    if (augen.length !== 6 || augen.some((v) => isNaN(v) || v < 0 || v > 6)) return fehler(el, 'augen="oben vorne unten hinten links rechts" (1–6, 0 = leer)');
+    if (augen.every((v) => v > 0) && (augen[0] + augen[2] !== 7 || augen[1] + augen[3] !== 7 || augen[4] + augen[5] !== 7)) {
+      return fehler(el, 'Gegenseiten eines Würfels ergeben immer 7 (oben+unten, vorne+hinten, links+rechts)');
+    }
+    const t = s * 0.22, o = 0.6;
+    const lage = [[1, 0], [1, 1], [1, 2], [1, 3], [0, 1], [2, 1]]; // oben vorne unten hinten links rechts
+    const X = (c) => o + c * s, Y = (r) => o + r * s;
+    let inner = '';
+    const lasche = (x1, y1, x2, y2, nx, ny) => {
+      const dx = (x2 - x1), dy = (y2 - y1);
+      const p = [[x1, y1], [x1 + dx * 0.18 + nx * t, y1 + dy * 0.18 + ny * t], [x2 - dx * 0.18 + nx * t, y2 - dy * 0.18 + ny * t], [x2, y2]];
+      return '<polygon points="' + p.map((q) => r2(q[0]) + ',' + r2(q[1])).join(' ') + '" fill="#f6f7fb" stroke="var(--tinte)" stroke-width="0.5" stroke-linejoin="round"/>';
+    };
+    // Laschen: links oben/unten, rechts oben/unten, hinten links/rechts/unten
+    inner += lasche(X(0), Y(1), X(1), Y(1), 0, -1) + lasche(X(0), Y(2), X(1), Y(2), 0, 1);
+    inner += lasche(X(2), Y(1), X(3), Y(1), 0, -1) + lasche(X(2), Y(2), X(3), Y(2), 0, 1);
+    inner += lasche(X(1), Y(3), X(1), Y(4), -1, 0) + lasche(X(2), Y(3), X(2), Y(4), 1, 0) + lasche(X(1), Y(4), X(2), Y(4), 0, 1);
+    lage.forEach(([c, r], i) => {
+      inner += rectSVG(X(c), Y(r), s, s, '', ' fill="white"');
+      if (augen[i]) for (const [px, py] of AUGEN[augen[i]]) inner += '<circle class="p1" cx="' + r2(X(c) + px * s) + '" cy="' + r2(Y(r) + py * s) + '" r="' + r2(s * 0.08) + '"/>';
+    });
+    // Kanten: innen gestrichelt (falten), außen durchgehend (schneiden)
+    const kanten = {};
+    const key = (a, b) => [a, b].sort().join('|');
+    lage.forEach(([c, r]) => {
+      const e = [[[c, r], [c + 1, r]], [[c + 1, r], [c + 1, r + 1]], [[c, r + 1], [c + 1, r + 1]], [[c, r], [c, r + 1]]];
+      for (const [p, q] of e) { const k = key(p.join(','), q.join(',')); kanten[k] = (kanten[k] || 0) + 1; }
+    });
+    const laschenKanten = ['0,1|1,1', '0,2|1,2', '2,1|3,1', '2,2|3,2', '1,3|1,4', '2,3|2,4', '1,4|2,4'];
+    for (const [k, anz] of Object.entries(kanten)) {
+      const [p, q] = k.split('|').map((v) => v.split(',').map(Number));
+      const falten = anz > 1 || laschenKanten.includes(k);
+      inner += linie(X(p[0]), Y(p[1]), X(q[0]), Y(q[1]), falten ? ' stroke="var(--tinte)" stroke-width="0.35" stroke-dasharray="1.2 0.9"' : ' stroke="var(--tinte)" stroke-width="0.6"');
+    }
+    el.innerHTML = svg(r2(3 * s + 2 * o), r2(4 * s + t + 2 * o), inner);
+    el.classList.add('komp');
+  }
+
   // ---------------------------------------------------------------------
   // Blätter und Anleitungen aufbauen
   // ---------------------------------------------------------------------
@@ -987,6 +1630,10 @@
     'm-zahlenhaus': mZahlenhaus, 'm-zahlenmauer': mZahlenmauer, 'm-zahlenstrahl': mZahlenstrahl,
     'm-rechenstrich': mRechenstrich, 'm-kaestchen': mKaestchen, 'm-spielfeld': mSpielfeld, 'm-bild': mBild,
     'm-stern': mStern, 'm-karten': mKarten,
+    'm-hundertertafel': mHundertertafel, 'm-tafelstueck': mTafelstueck, 'm-stellenwerttafel': mStellenwerttafel,
+    'm-schriftlich': mSchriftlich, 'm-punktefeld': mPunktefeld, 'm-rechendreieck': mRechendreieck, 'm-magisch': mMagisch,
+    'm-zehnerstangen': mZehnerstangen, 'm-geld': mGeld, 'm-tangram': mTangram, 'm-zauberkarte': mZauberkarte,
+    'm-familie': mFamilie, 'm-wuerfelnetz': mWuerfelnetz,
   };
 
   function start() {
