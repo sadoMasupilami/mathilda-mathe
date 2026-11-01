@@ -180,11 +180,12 @@
       <li><b>15-Spiel mit Spickzettel</b> oder als Zehnerfreunde-Schnappen (siehe Spiel).</li>
       <li><b>Muster zuerst mit Dingen legen:</b> Kugeln (blau, blau, rot, rot), Besteck (Gabel, Löffel, Löffel) oder Bausteine, dann erst zeichnen.</li>
       <li><b>Zahlen-Ketten hüpfen:</b> am Kreide-Zahlenstrahl in 2er- oder 5er-Sprüngen, rückwärts für die Minus-Ketten.</li>
+      <li><b>Große Zahlen verdoppeln:</b> In der Verdoppel-Kette auf Blatt 17-2 Zehner und Einer getrennt verdoppeln wie in Einheit 3 (Schwerer machen): 24 doppelt sind 40 und 8, also 48; 48 doppelt sind 80 und 16, also 96. Oder sie lässt das letzte Kästchen frei.</li>
       <li><b>Rätsel mit Zahlenstreifen:</b> Schreib die Zahlen 1 bis 20 auf einen Papierstreifen. Nach jedem Hinweis streicht Mathilda durch, was nicht passt.</li>
     </ul>
   </div>
 
-  <div class="kasten schwerer darf-brechen">
+  <div class="kasten schwerer darf-brechen e17-schwerkopf">
     <p class="e17-vorrat">Mathilda ist schnell, darum hier ein ganzer Vorrat. Sucht euch aus, was Spaß macht; die Lösungen stehen in Klammern.</p>
     <ol>
       <li><b>Alle magischen Quadrate finden.</b> „Wie viele verschiedene magische Quadrate kannst du mit Ass bis 9 legen?“ Erst raten, dann suchen. (8 Stück: eines viermal um eine Vierteldrehung weiterdrehen und jedes davon spiegeln. Alle haben die 5 in der Mitte und 2, 4, 6, 8 in den Ecken.) Mit dem Handspiegel aus Einheit 3 sieht sie das Spiegelbild sofort und legt es mit Karten nach.</li>
@@ -434,6 +435,8 @@
   .e17-zusammen { break-inside: avoid; }
   /* Spielkasten nicht direkt nach der Kopfzeile umbrechen */
   .e17-spielkopf > .kasten-titel, .e17-spielkopf > .spiel-meta { break-after: avoid; }
+  /* Schwerer-Vorrat beginnt auf einer neuen Seite (sonst bleibt der Titel allein unten auf Seite 7) */
+  .e17-schwerkopf { break-before: page; }
   .e17-vorrat { break-after: avoid; }
   .e17-vorrat + ol > li:first-child { break-inside: avoid; }
   .e17-tipp-loes { flex-wrap: nowrap; align-items: center; gap: 5mm; margin-top: 1mm; }
