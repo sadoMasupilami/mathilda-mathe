@@ -49,9 +49,14 @@ src/components.js              Bausteine: Zehnerfeld, Rechenweg, Rechenstrich, Z
                                Stellenwerttafel, untereinander rechnen, Punktefeld, Rechendreieck,
                                magisches Quadrat, Tangram, Zauberkarte … und Prüfungen
 src/fonts/                     Andika und Nunito (SIL Open Font License)
+bilder/motive.json             Beschreibung jedes erzeugten Bildes (Drache, Fee, Krone, Trank …)
+bilder/erzeugt/                erzeugte Bilder: Linienzeichnung zum Anmalen und Farbbild, siehe HERKUNFT.md
+werkzeuge/                     Bilder mit der Codex CLI erzeugen und aufbereiten
 build.mjs, baue.sh             Bauen
 ```
 
 ## Etwas ändern
 
 Text oder Aufgabe in `src/einheiten/NN-*.html` ändern und `./baue.sh --nur NN --png` laufen lassen. Lösungen muss man nicht nachtragen: Bausteine wie `<m-aufgabe>8 + 5 = _</m-aufgabe>` rechnen sie selbst aus und zeigen sie in der Lösungsansicht der Anleitung. Details: `vorlagen/AUTOREN-LEITFADEN.md`.
+
+Ein Bild ändern: Beschreibung in `bilder/motive.json`, dann mit der Codex CLI neu erzeugen und aufbereiten (`bilder/erzeugt/HERKUNFT.md`). `<m-bild>` zeigt die Linienzeichnung zum Anmalen, mit `farbe="ja"` das Farbbild.

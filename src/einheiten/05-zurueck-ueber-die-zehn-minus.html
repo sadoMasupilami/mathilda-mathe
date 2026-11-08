@@ -321,7 +321,7 @@
   .e05-zeichnen { align-items: center; justify-content: space-between; flex-wrap: nowrap; }
   /* Beispiel-Rechenweg: vorgegebene Zahlenbeine ohne Kästchenlinien */
   .blatt[data-einheit="5"] .rw .feld.ohne, .anleitung[data-einheit="5"] .rw .feld.ohne { background: transparent; }
-  .e05-ecke { position: absolute; right: 2mm; top: -2mm; }
+  .e05-ecke { position: absolute; right: 2mm; top: -2mm; transform: scaleX(-1); } /* hüpft nach links, also zurück */
   .e05-bsp .rw-schritte { margin-left: 14mm; }
   .e05-bsp .rw .rw-platz, .anleitung .loesung-mini .e05-bsp .rw .rw-platz { height: 4mm; }
   .e05-bsp { align-items: flex-start; column-gap: 12mm; }

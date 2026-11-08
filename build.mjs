@@ -42,9 +42,19 @@ if (nur) {
 const name = nur ? 'teil-' + nur.replace(/[^\w-]+/g, '_') : 'rechen-werkstatt';
 
 fs.mkdirSync(OUT, { recursive: true });
+// Erzeugte Bilder (bilder/erzeugt/, siehe HERKUNFT.md): { umriss: { id: '<svg …>' }, farbe: { … } } für <m-bild>
+const erzeugt = {};
+for (const art of ['umriss', 'farbe']) {
+  const ordner = path.join(WURZEL, 'bilder', 'erzeugt', art);
+  erzeugt[art] = {};
+  if (!fs.existsSync(ordner)) continue;
+  for (const d of fs.readdirSync(ordner).filter((d) => d.endsWith('.svg')).sort()) erzeugt[art][d.slice(0, -4)] = fs.readFileSync(path.join(ordner, d), 'utf8').trim();
+}
 const html =
   '<!doctype html>\n<html lang="de-AT">\n<head>\n<meta charset="utf-8">\n<title>Mathildas Rechen-Werkstatt</title>\n' +
-  '<link rel="stylesheet" href="../src/styles.css">\n<script src="../src/components.js"></script>\n</head>\n<body>\n' +
+  '<link rel="stylesheet" href="../src/styles.css">\n' +
+  '<script>window.__erzeugt = ' + JSON.stringify(erzeugt).replace(/</g, '\\u003c') + ';</script>\n' +
+  '<script src="../src/components.js"></script>\n</head>\n<body>\n' +
   teile.map((t) => '<!-- ===== ' + t + ' ===== -->\n' + fs.readFileSync(path.join(SRC, t), 'utf8')).join('\n') +
   '\n</body>\n</html>\n';
 const htmlDatei = path.join(OUT, name + '.html');

@@ -684,7 +684,7 @@
       const sonder = i === 0 || i === n - 1;
       inner += '<circle cx="' + r2(x) + '" cy="' + r2(y) + '" r="' + r2(d / 2) + '" fill="' + (sonder ? 'var(--gold-hell)' : 'white') + '" stroke="var(--tinte)" stroke-width="0.55"/>';
       inner += '<text class="zahl" x="' + r2(x) + '" y="' + r2(y + 0.4) + '" font-size="' + r2(d * 0.38) + '">' + v + '</text>';
-      if (extra[v]) inner += '<g transform="translate(' + r2(x + d * 0.18) + ' ' + r2(y - d * 0.62) + ') scale(' + r2(d * 0.45 / 100) + ')">' + (BILDER[extra[v]] || '') + '</g>';
+      if (extra[v]) inner += bildSVG(extra[v], d * 0.45, false, r2(x + d * 0.18), r2(y - d * 0.62), '') || '';
     });
     el.innerHTML = svg(r2(sp * d + (sp - 1) * ab + 2), r2(zeilen * d + (zeilen - 1) * ab + 2), inner);
     el.classList.add('komp');
@@ -746,13 +746,21 @@
     lupe: '<circle' + S + ' cx="40" cy="40" r="28"/><path fill="none" stroke="#1f2340" stroke-width="9" stroke-linecap="round" d="M62 62 L88 88"/>',
   };
   window.__bilder = BILDER;
-  function bildSVG(name, gr) {
+  // Erzeugte Bilder (bilder/erzeugt/, von build.mjs als window.__erzeugt mitgegeben): Linienzeichnung zum Anmalen (umriss)
+  // oder Farbbild (farbe). Gibt es keins, gilt die eigene Zeichnung aus BILDER.
+  const ERZEUGT = window.__erzeugt || { umriss: {}, farbe: {} };
+  // Ohne x/y ein eigenes Bild in mm, mit x/y (und einheit '') eingebettet in ein anderes SVG, z. B. das Spielfeld.
+  function bildSVG(name, gr, farbe, x, y, einheit = 'mm') {
+    const ort = (x === undefined ? '' : 'x="' + x + '" y="' + y + '" ') + 'width="' + gr + einheit + '" height="' + gr + einheit + '" ';
+    const e = ERZEUGT[farbe ? 'farbe' : 'umriss'][name] || (farbe ? ERZEUGT.umriss[name] : null);
+    if (e) return e.replace('<svg ', '<svg ' + ort);
     if (!BILDER[name]) return null;
-    return '<svg xmlns="http://www.w3.org/2000/svg" width="' + gr + 'mm" height="' + gr + 'mm" viewBox="0 0 100 100">' + BILDER[name] + '</svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" ' + ort + 'viewBox="0 0 100 100">' + BILDER[name] + '</svg>';
   }
+  // <m-bild name="drache" gr="20" [farbe="ja"]>
   function mBild(el) {
     const name = attr(el, 'name', '');
-    const s = bildSVG(name, parseFloat(attr(el, 'gr', '20')));
+    const s = bildSVG(name, parseFloat(attr(el, 'gr', '20')), attr(el, 'farbe', '') === 'ja');
     if (!s) return fehler(el, 'Unbekanntes Bild „' + name + '“. Es gibt: ' + Object.keys(BILDER).join(', '));
     el.innerHTML = s;
     el.classList.add('komp');

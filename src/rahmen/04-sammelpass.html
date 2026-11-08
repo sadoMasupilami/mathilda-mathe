@@ -42,7 +42,7 @@
     <span><i style="background: var(--block-b)"></i>Zahlen bis 100</span>
     <span><i style="background: var(--block-c)"></i>Mal & Geteilt</span>
     <span><i style="background: var(--block-d)"></i>Knobeln & Zaubern</span>
-    <span><m-bild name="medaille" gr="4.5"></m-bild>Urkunde!</span>
+    <span><m-bild name="medaille" gr="4.5" farbe="ja"></m-bild>Urkunde!</span>
   </div>
   <div class="fuss"><span>Mathildas Rechen-Werkstatt</span><span class="seitenzahl" data-ref="sammelpass"></span><span>Sammelpass</span></div>
 </section>
@@ -61,7 +61,7 @@
     g.innerHTML = einheiten.map((t, i) => {
       const n = i + 1;
       return '<div class="f" data-block="' + block(n) + '"><div class="t"><span class="nr">' + n + '</span><span>' + t.replace('&', '&amp;') + '</span></div>' +
-        (n === 10 || n === 20 ? '<span class="urk"><m-bild name="medaille" gr="7"></m-bild></span>' : '') +
+        (n === 10 || n === 20 ? '<span class="urk"><m-bild name="medaille" gr="7" farbe="ja"></m-bild></span>' : '') +
         '<div class="stempel"></div><div class="sterne"><m-stern gr="8.5"></m-stern><m-stern gr="8.5"></m-stern><m-stern gr="8.5"></m-stern></div></div>';
     }).join('');
   })();

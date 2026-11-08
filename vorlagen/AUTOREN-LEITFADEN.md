@@ -145,7 +145,7 @@ Zahlenstrahl: `breite` (mm, Standard 170), `beschriftung` = `alle | fuenfer | ze
 <m-bild name="drache" gr="20"></m-bild>
 <m-stern gr="14"></m-stern>
 ```
-Karten: Schnittlinien gestrichelt, Schere oben links. `.gross` (40 pt) und `.mittel` (24 pt) für Kartentext. Bilder (Strichzeichnungen zum Anmalen): stern, zauberstab, krone, mond, edelstein, trank, zauberhut, schloss, drache, einhorn, fee, schere, gluehbirne, eule, wuerfel, rakete, karten, ei, kreide, haken, ziel, achtung, feder, huepfen, lupe, medaille (nur für Urkunden; die Krone bedeutet immer „Profi-Aufgabe“).
+Karten: Schnittlinien gestrichelt, Schere oben links. `.gross` (40 pt) und `.mittel` (24 pt) für Kartentext. Bilder (Strichzeichnungen zum Anmalen): stern, zauberstab, krone, mond, edelstein, trank, zauberhut, schloss, drache, einhorn, fee, schere, gluehbirne, eule, wuerfel, rakete, karten, ei, kreide, haken, ziel, achtung, feder, huepfen, lupe, medaille (nur für Urkunden; die Krone bedeutet immer „Profi-Aufgabe“). Drache, Einhorn, Fee, Eule, Edelstein, Krone, Mond, Schloss, Trank, Zauberhut und Zauberstab sind erzeugte Bilder (`bilder/erzeugt/`): als Linienzeichnung zum Anmalen, mit `farbe="ja"` als Farbbild.
 
 ## 4b. Bausteine ab Einheit 6
 

@@ -1,3 +1,6 @@
 node_modules/
 out/
 .DS_Store
+
+# Rohbilder von Codex (groß, werden nach bilder/erzeugt/ verarbeitet)
+bilder/roh/
